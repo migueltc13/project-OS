@@ -1,0 +1,5 @@
+# ignore all files in tmp directory
+*
+
+# execept the .gitignore file
+!.gitignore
