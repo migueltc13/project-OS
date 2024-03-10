@@ -1,0 +1,40 @@
+\hypertarget{orchestrator_8c}{}\doxysection{src/orchestrator.c File Reference}
+\label{orchestrator_8c}\index{src/orchestrator.c@{src/orchestrator.c}}
+{\ttfamily \#include $<$unistd.\+h$>$}\newline
+{\ttfamily \#include $<$fcntl.\+h$>$}\newline
+{\ttfamily \#include $<$string.\+h$>$}\newline
+Include dependency graph for orchestrator.\+c\+:\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=261pt]{orchestrator_8c__incl}
+\end{center}
+\end{figure}
+\doxysubsection*{Functions}
+\begin{DoxyCompactItemize}
+\item 
+int \mbox{\hyperlink{orchestrator_8c_a0ddf1224851353fc92bfbff6f499fa97}{main}} (int argc, char $\ast$argv\mbox{[}$\,$\mbox{]})
+\begin{DoxyCompactList}\small\item\em Main function for the orchestrator program The orchestrator program is responsible for managing the execution of the parallel tasks. It receives the output directory, the number of parallel tasks, and the scheduling policy as arguments. This function is responsible for validating the arguments, parsing them and calling the appropriate functions to manage the parallel tasks. \end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\doxysubsection{Function Documentation}
+\mbox{\Hypertarget{orchestrator_8c_a0ddf1224851353fc92bfbff6f499fa97}\label{orchestrator_8c_a0ddf1224851353fc92bfbff6f499fa97}} 
+\index{orchestrator.c@{orchestrator.c}!main@{main}}
+\index{main@{main}!orchestrator.c@{orchestrator.c}}
+\doxysubsubsection{\texorpdfstring{main()}{main()}}
+{\footnotesize\ttfamily int main (\begin{DoxyParamCaption}\item[{int}]{argc,  }\item[{char $\ast$}]{argv\mbox{[}$\,$\mbox{]} }\end{DoxyParamCaption})}
+
+
+
+Main function for the orchestrator program The orchestrator program is responsible for managing the execution of the parallel tasks. It receives the output directory, the number of parallel tasks, and the scheduling policy as arguments. This function is responsible for validating the arguments, parsing them and calling the appropriate functions to manage the parallel tasks. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em argc} & The number of arguments \\
+\hline
+{\em argv} & The arguments \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+0 if the program runs successfully, 1 otherwise 
+\end{DoxyReturn}
