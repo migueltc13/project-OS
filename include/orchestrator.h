@@ -3,4 +3,6 @@
 
 #define SERVER_FIFO "tmp/server_fifo"
 
+#define MAX_REQUESTS 1024
+
 #endif

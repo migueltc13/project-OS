@@ -13,7 +13,7 @@
  * @param output_dir The output directory to write the task number file
  * @return The task number, or -1 if an error occurs
  */
-int get_task_nr(char *output_dir) {
+int init_task_nr(char *output_dir) {
 
     int fd = open(output_dir, O_DIRECTORY);
     if (fd < 0) {

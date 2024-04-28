@@ -11,6 +11,7 @@ struct request {
     int est_time;
     char command[MAX_CMD_SIZE];
     bool is_piped;
+    int task_nr;
 };
 
 Request *create_request(int type, int est_time, char *command, bool is_piped) {
@@ -30,6 +31,7 @@ Request *create_request(int type, int est_time, char *command, bool is_piped) {
 }
 
 /* getters */
+
 int get_type(Request *r) {
     return r->type;
 }
@@ -44,6 +46,34 @@ char *get_command(Request *r) {
 
 bool get_is_piped(Request *r) {
     return r->is_piped;
+}
+
+int get_task_nr(Request *r) {
+    return r->task_nr;
+}
+
+/* setters */
+
+void set_type(Request *r, int type) {
+    r->type = type;
+}
+
+void set_task_nr(Request *r, int task_nr) {
+    r->task_nr = task_nr;
+}
+
+/* others */
+char* type_to_string(int type) {
+    switch (type) {
+        case EXECUTE:
+            return "EXECUTE";
+        case STATUS:
+            return "STATUS";
+        case COMPLETED:
+            return "COMPLETED";
+        default:
+            return "UNKNOWN";
+    }
 }
 
 unsigned long sizeof_request() {

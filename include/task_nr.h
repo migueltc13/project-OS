@@ -3,7 +3,7 @@
 
 #define TASK_NR_FILE "task_nr.txt"
 
-int get_task_nr(char *output_dir);
+int init_task_nr(char *output_dir);
 int increment_task_nr(char *output_dir);
 
 #endif

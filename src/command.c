@@ -1,3 +1,7 @@
+// TODO remove ../include/
+#include "../include/request.h"
+#include "../include/orchestrator.h"
+
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
@@ -12,7 +16,7 @@
 
 /**
  * Parse a piped command into an array of strings
- * 
+ *
  * @param cmd The command to parse
  * @param N The number of commands in the array
  * @return An array of strings, or NULL if an error occurred
@@ -79,7 +83,7 @@ int exec_command(char* arg){
     }
 
 	string = strtok(command, " ");
-	
+
 	int i = 0;
 	while (string != NULL) {
 		exec_args[i] = string;
@@ -88,24 +92,26 @@ int exec_command(char* arg){
 	}
 
 	exec_args[i] = NULL;
-	
+
 	exec_ret = execvp(exec_args[0], exec_args);
-	
+
 	return exec_ret;
 }
 
 /**
  * Execute a command
- * @details
- * TODO count execution time
- * TODO write to file
- * 
- * @param cmd The command to execute
- * @param is_piped Whether the command is piped
- * @param task_nr The task number
+ * @details TODO
+ *
+ * @param r The request containing the command to execute, if the command is piped and the task number
+ * @param output_dir The output directory to write the task results
+ * @param start_time The time when the execute request was received
  * @return 0 if successful
  */
-int exec(char *cmd, bool is_piped, char* output_dir, int task_nr, struct timeval start_time) {
+int exec(Request *r, char *output_dir, struct timeval start_time) {
+
+    char *cmd = strdup(get_command(r));
+    bool is_piped = get_is_piped(r);
+    int task_nr = get_task_nr(r);
 
     int fd = open(output_dir, O_DIRECTORY);
     if (fd < 0) {
@@ -276,7 +282,6 @@ int exec(char *cmd, bool is_piped, char* output_dir, int task_nr, struct timeval
                     }
                 }
 
-                // TODO check if needs to be else statement here
                 // parent process
                 if (i == 0) {
                     // first command
@@ -329,6 +334,22 @@ int exec(char *cmd, bool is_piped, char* output_dir, int task_nr, struct timeval
             }
 
             close(fd_time);
+
+            // send this request to the orchestrator as completed
+            set_type(r, COMPLETED);
+
+            int fd_server = open(SERVER_FIFO, O_WRONLY);
+            if (fd_server == -1) {
+                perror("Error: couldn't open server FIFO");
+                return 1;
+            }
+
+            if (write(fd_server, r, sizeof_request()) == -1) {
+                perror("Error: couldn't write to server FIFO");
+                return 1;
+            }
+
+            close(fd_server);
 
             // TODO free commands
             _exit(0);
@@ -396,6 +417,21 @@ int exec(char *cmd, bool is_piped, char* output_dir, int task_nr, struct timeval
                 }
 
                 close(fd_time);
+
+                set_type(r, COMPLETED);
+
+                int fd_server = open(SERVER_FIFO, O_WRONLY);
+                if (fd_server == -1) {
+                    perror("Error: couldn't open server FIFO");
+                    return 1;
+                }
+
+                if (write(fd_server, r, sizeof_request()) == -1) {
+                    perror("Error: couldn't write to server FIFO");
+                    return 1;
+                }
+
+                close(fd_server);
             }
             _exit(0);
         }
