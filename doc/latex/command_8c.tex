@@ -1,0 +1,90 @@
+\hypertarget{command_8c}{}\doxysection{src/command.c File Reference}
+\label{command_8c}\index{src/command.c@{src/command.c}}
+{\ttfamily \#include $<$stdio.\+h$>$}\newline
+{\ttfamily \#include $<$stdlib.\+h$>$}\newline
+{\ttfamily \#include $<$string.\+h$>$}\newline
+{\ttfamily \#include $<$stdbool.\+h$>$}\newline
+{\ttfamily \#include $<$unistd.\+h$>$}\newline
+{\ttfamily \#include $<$fcntl.\+h$>$}\newline
+{\ttfamily \#include $<$sys/time.\+h$>$}\newline
+{\ttfamily \#include $<$sys/stat.\+h$>$}\newline
+{\ttfamily \#include $<$sys/wait.\+h$>$}\newline
+Include dependency graph for command.\+c\+:\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{command_8c__incl}
+\end{center}
+\end{figure}
+\doxysubsection*{Macros}
+\begin{DoxyCompactItemize}
+\item 
+\#define \mbox{\hyperlink{command_8c_ad14effda14501a769b3d46984d43aa00}{MAX\+\_\+\+CMDS}}~10
+\end{DoxyCompactItemize}
+\doxysubsection*{Functions}
+\begin{DoxyCompactItemize}
+\item 
+char $\ast$$\ast$ \mbox{\hyperlink{command_8c_a28efbcce7b8419b2e14f06f068134bbf}{parse\+\_\+cmd}} (char $\ast$cmd, int $\ast$N)
+\item 
+int \mbox{\hyperlink{command_8c_a4f9f0cf42417c697d2039b25b9337a9d}{exec\+\_\+command}} (char $\ast$arg)
+\item 
+int \mbox{\hyperlink{command_8c_a5e988ad739ad8db96b6940ea5c61e545}{exec}} (char $\ast$cmd, bool is\+\_\+piped, char $\ast$output\+\_\+dir, int task\+\_\+nr, struct timeval start\+\_\+time)
+\end{DoxyCompactItemize}
+
+
+\doxysubsection{Macro Definition Documentation}
+\mbox{\Hypertarget{command_8c_ad14effda14501a769b3d46984d43aa00}\label{command_8c_ad14effda14501a769b3d46984d43aa00}} 
+\index{command.c@{command.c}!MAX\_CMDS@{MAX\_CMDS}}
+\index{MAX\_CMDS@{MAX\_CMDS}!command.c@{command.c}}
+\doxysubsubsection{\texorpdfstring{MAX\_CMDS}{MAX\_CMDS}}
+{\footnotesize\ttfamily \#define MAX\+\_\+\+CMDS~10}
+
+
+
+\doxysubsection{Function Documentation}
+\mbox{\Hypertarget{command_8c_a5e988ad739ad8db96b6940ea5c61e545}\label{command_8c_a5e988ad739ad8db96b6940ea5c61e545}} 
+\index{command.c@{command.c}!exec@{exec}}
+\index{exec@{exec}!command.c@{command.c}}
+\doxysubsubsection{\texorpdfstring{exec()}{exec()}}
+{\footnotesize\ttfamily int exec (\begin{DoxyParamCaption}\item[{char $\ast$}]{cmd,  }\item[{bool}]{is\+\_\+piped,  }\item[{char $\ast$}]{output\+\_\+dir,  }\item[{int}]{task\+\_\+nr,  }\item[{struct timeval}]{start\+\_\+time }\end{DoxyParamCaption})}
+
+Execute a command
+
+TODO count execution time TODO write to file
+
+
+\begin{DoxyParams}{Parameters}
+{\em cmd} & The command to execute \\
+\hline
+{\em is\+\_\+piped} & Whether the command is piped \\
+\hline
+{\em task\+\_\+nr} & The task number \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+0 if successful 
+\end{DoxyReturn}
+\mbox{\Hypertarget{command_8c_a4f9f0cf42417c697d2039b25b9337a9d}\label{command_8c_a4f9f0cf42417c697d2039b25b9337a9d}} 
+\index{command.c@{command.c}!exec\_command@{exec\_command}}
+\index{exec\_command@{exec\_command}!command.c@{command.c}}
+\doxysubsubsection{\texorpdfstring{exec\_command()}{exec\_command()}}
+{\footnotesize\ttfamily int exec\+\_\+command (\begin{DoxyParamCaption}\item[{char $\ast$}]{arg }\end{DoxyParamCaption})}
+
+\mbox{\Hypertarget{command_8c_a28efbcce7b8419b2e14f06f068134bbf}\label{command_8c_a28efbcce7b8419b2e14f06f068134bbf}} 
+\index{command.c@{command.c}!parse\_cmd@{parse\_cmd}}
+\index{parse\_cmd@{parse\_cmd}!command.c@{command.c}}
+\doxysubsubsection{\texorpdfstring{parse\_cmd()}{parse\_cmd()}}
+{\footnotesize\ttfamily char$\ast$$\ast$ parse\+\_\+cmd (\begin{DoxyParamCaption}\item[{char $\ast$}]{cmd,  }\item[{int $\ast$}]{N }\end{DoxyParamCaption})}
+
+Parse a piped command into an array of strings
+
+
+\begin{DoxyParams}{Parameters}
+{\em cmd} & The command to parse \\
+\hline
+{\em N} & The number of commands in the array \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+An array of strings, or NULL if an error occurred 
+\end{DoxyReturn}

@@ -1,16 +1,47 @@
 \hypertarget{client_8c}{}\doxysection{src/client.c File Reference}
 \label{client_8c}\index{src/client.c@{src/client.c}}
+{\ttfamily \#include \char`\"{}../include/request.\+h\char`\"{}}\newline
+{\ttfamily \#include \char`\"{}../include/orchestrator.\+h\char`\"{}}\newline
+{\ttfamily \#include $<$stdio.\+h$>$}\newline
+{\ttfamily \#include $<$stdlib.\+h$>$}\newline
+{\ttfamily \#include $<$stdbool.\+h$>$}\newline
+{\ttfamily \#include $<$string.\+h$>$}\newline
+{\ttfamily \#include $<$unistd.\+h$>$}\newline
+{\ttfamily \#include $<$fcntl.\+h$>$}\newline
+Include dependency graph for client.\+c\+:\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{client_8c__incl}
+\end{center}
+\end{figure}
 \doxysubsection*{Functions}
 \begin{DoxyCompactItemize}
 \item 
-int \mbox{\hyperlink{client_8c_ae66f6b31b5ad750f1fe042a706a4e3d4}{main}} ()
+void \mbox{\hyperlink{client_8c_ae0f9a92af52218c2852e98510854d41c}{execute\+\_\+usage}} (char $\ast$name)
+\item 
+void \mbox{\hyperlink{client_8c_ae9b88735f737d817c8689d9bdd62a623}{status\+\_\+usage}} (char $\ast$name)
+\item 
+int \mbox{\hyperlink{client_8c_a3c04138a5bfe5d72780bb7e82a18e627}{main}} (int argc, char $\ast$$\ast$argv)
 \end{DoxyCompactItemize}
 
 
 \doxysubsection{Function Documentation}
-\mbox{\Hypertarget{client_8c_ae66f6b31b5ad750f1fe042a706a4e3d4}\label{client_8c_ae66f6b31b5ad750f1fe042a706a4e3d4}} 
+\mbox{\Hypertarget{client_8c_ae0f9a92af52218c2852e98510854d41c}\label{client_8c_ae0f9a92af52218c2852e98510854d41c}} 
+\index{client.c@{client.c}!execute\_usage@{execute\_usage}}
+\index{execute\_usage@{execute\_usage}!client.c@{client.c}}
+\doxysubsubsection{\texorpdfstring{execute\_usage()}{execute\_usage()}}
+{\footnotesize\ttfamily void execute\+\_\+usage (\begin{DoxyParamCaption}\item[{char $\ast$}]{name }\end{DoxyParamCaption})}
+
+\mbox{\Hypertarget{client_8c_a3c04138a5bfe5d72780bb7e82a18e627}\label{client_8c_a3c04138a5bfe5d72780bb7e82a18e627}} 
 \index{client.c@{client.c}!main@{main}}
 \index{main@{main}!client.c@{client.c}}
 \doxysubsubsection{\texorpdfstring{main()}{main()}}
-{\footnotesize\ttfamily int main (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+{\footnotesize\ttfamily int main (\begin{DoxyParamCaption}\item[{int}]{argc,  }\item[{char $\ast$$\ast$}]{argv }\end{DoxyParamCaption})}
+
+\mbox{\Hypertarget{client_8c_ae9b88735f737d817c8689d9bdd62a623}\label{client_8c_ae9b88735f737d817c8689d9bdd62a623}} 
+\index{client.c@{client.c}!status\_usage@{status\_usage}}
+\index{status\_usage@{status\_usage}!client.c@{client.c}}
+\doxysubsubsection{\texorpdfstring{status\_usage()}{status\_usage()}}
+{\footnotesize\ttfamily void status\+\_\+usage (\begin{DoxyParamCaption}\item[{char $\ast$}]{name }\end{DoxyParamCaption})}
 

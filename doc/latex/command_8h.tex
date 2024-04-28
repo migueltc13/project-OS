@@ -1,0 +1,47 @@
+\hypertarget{command_8h}{}\doxysection{include/command.h File Reference}
+\label{command_8h}\index{include/command.h@{include/command.h}}
+{\ttfamily \#include $<$sys/time.\+h$>$}\newline
+Include dependency graph for command.\+h\+:\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=181pt]{command_8h__incl}
+\end{center}
+\end{figure}
+This graph shows which files directly or indirectly include this file\+:\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=181pt]{command_8h__dep__incl}
+\end{center}
+\end{figure}
+\doxysubsection*{Functions}
+\begin{DoxyCompactItemize}
+\item 
+int \mbox{\hyperlink{command_8h_a5e988ad739ad8db96b6940ea5c61e545}{exec}} (char $\ast$cmd, bool is\+\_\+piped, char $\ast$output\+\_\+dir, int task\+\_\+nr, struct timeval start\+\_\+time)
+\end{DoxyCompactItemize}
+
+
+\doxysubsection{Function Documentation}
+\mbox{\Hypertarget{command_8h_a5e988ad739ad8db96b6940ea5c61e545}\label{command_8h_a5e988ad739ad8db96b6940ea5c61e545}} 
+\index{command.h@{command.h}!exec@{exec}}
+\index{exec@{exec}!command.h@{command.h}}
+\doxysubsubsection{\texorpdfstring{exec()}{exec()}}
+{\footnotesize\ttfamily int exec (\begin{DoxyParamCaption}\item[{char $\ast$}]{cmd,  }\item[{bool}]{is\+\_\+piped,  }\item[{char $\ast$}]{output\+\_\+dir,  }\item[{int}]{task\+\_\+nr,  }\item[{struct timeval}]{start\+\_\+time }\end{DoxyParamCaption})}
+
+Execute a command
+
+TODO count execution time TODO write to file
+
+
+\begin{DoxyParams}{Parameters}
+{\em cmd} & The command to execute \\
+\hline
+{\em is\+\_\+piped} & Whether the command is piped \\
+\hline
+{\em task\+\_\+nr} & The task number \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+0 if successful 
+\end{DoxyReturn}

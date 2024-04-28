@@ -1,0 +1,73 @@
+\hypertarget{request_8c}{}\doxysection{src/request.c File Reference}
+\label{request_8c}\index{src/request.c@{src/request.c}}
+{\ttfamily \#include \char`\"{}../include/request.\+h\char`\"{}}\newline
+{\ttfamily \#include $<$stdio.\+h$>$}\newline
+{\ttfamily \#include $<$stdlib.\+h$>$}\newline
+{\ttfamily \#include $<$stdbool.\+h$>$}\newline
+{\ttfamily \#include $<$string.\+h$>$}\newline
+Include dependency graph for request.\+c\+:\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{request_8c__incl}
+\end{center}
+\end{figure}
+\doxysubsection*{Classes}
+\begin{DoxyCompactItemize}
+\item 
+struct \mbox{\hyperlink{structrequest}{request}}
+\end{DoxyCompactItemize}
+\doxysubsection*{Functions}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{request_8h_a1abc891df97d2318f8fb4832a28ae63c}{Request}} $\ast$ \mbox{\hyperlink{request_8c_a59a69ba210777dfe8cf056212ad1142d}{create\+\_\+request}} (int type, int est\+\_\+time, char $\ast$command, bool is\+\_\+piped)
+\item 
+int \mbox{\hyperlink{request_8c_a9c4991d2905d6b337c2805f7ab8e54eb}{get\+\_\+type}} (\mbox{\hyperlink{request_8h_a1abc891df97d2318f8fb4832a28ae63c}{Request}} $\ast$r)
+\item 
+int \mbox{\hyperlink{request_8c_a1e0de6005457b0ad26bdff5931c8df25}{get\+\_\+est\+\_\+time}} (\mbox{\hyperlink{request_8h_a1abc891df97d2318f8fb4832a28ae63c}{Request}} $\ast$r)
+\item 
+char $\ast$ \mbox{\hyperlink{request_8c_aa86d0a88bfeae920cdc85fec9f2873ea}{get\+\_\+command}} (\mbox{\hyperlink{request_8h_a1abc891df97d2318f8fb4832a28ae63c}{Request}} $\ast$r)
+\item 
+bool \mbox{\hyperlink{request_8c_a80650d1ccea10349386f3bd50e922c32}{get\+\_\+is\+\_\+piped}} (\mbox{\hyperlink{request_8h_a1abc891df97d2318f8fb4832a28ae63c}{Request}} $\ast$r)
+\item 
+unsigned long \mbox{\hyperlink{request_8c_addf1d41d1a4004eb7da1b19870f1a607}{sizeof\+\_\+request}} ()
+\end{DoxyCompactItemize}
+
+
+\doxysubsection{Function Documentation}
+\mbox{\Hypertarget{request_8c_a59a69ba210777dfe8cf056212ad1142d}\label{request_8c_a59a69ba210777dfe8cf056212ad1142d}} 
+\index{request.c@{request.c}!create\_request@{create\_request}}
+\index{create\_request@{create\_request}!request.c@{request.c}}
+\doxysubsubsection{\texorpdfstring{create\_request()}{create\_request()}}
+{\footnotesize\ttfamily \mbox{\hyperlink{request_8h_a1abc891df97d2318f8fb4832a28ae63c}{Request}}$\ast$ create\+\_\+request (\begin{DoxyParamCaption}\item[{int}]{type,  }\item[{int}]{est\+\_\+time,  }\item[{char $\ast$}]{command,  }\item[{bool}]{is\+\_\+piped }\end{DoxyParamCaption})}
+
+\mbox{\Hypertarget{request_8c_aa86d0a88bfeae920cdc85fec9f2873ea}\label{request_8c_aa86d0a88bfeae920cdc85fec9f2873ea}} 
+\index{request.c@{request.c}!get\_command@{get\_command}}
+\index{get\_command@{get\_command}!request.c@{request.c}}
+\doxysubsubsection{\texorpdfstring{get\_command()}{get\_command()}}
+{\footnotesize\ttfamily char$\ast$ get\+\_\+command (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{request_8h_a1abc891df97d2318f8fb4832a28ae63c}{Request}} $\ast$}]{r }\end{DoxyParamCaption})}
+
+\mbox{\Hypertarget{request_8c_a1e0de6005457b0ad26bdff5931c8df25}\label{request_8c_a1e0de6005457b0ad26bdff5931c8df25}} 
+\index{request.c@{request.c}!get\_est\_time@{get\_est\_time}}
+\index{get\_est\_time@{get\_est\_time}!request.c@{request.c}}
+\doxysubsubsection{\texorpdfstring{get\_est\_time()}{get\_est\_time()}}
+{\footnotesize\ttfamily int get\+\_\+est\+\_\+time (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{request_8h_a1abc891df97d2318f8fb4832a28ae63c}{Request}} $\ast$}]{r }\end{DoxyParamCaption})}
+
+\mbox{\Hypertarget{request_8c_a80650d1ccea10349386f3bd50e922c32}\label{request_8c_a80650d1ccea10349386f3bd50e922c32}} 
+\index{request.c@{request.c}!get\_is\_piped@{get\_is\_piped}}
+\index{get\_is\_piped@{get\_is\_piped}!request.c@{request.c}}
+\doxysubsubsection{\texorpdfstring{get\_is\_piped()}{get\_is\_piped()}}
+{\footnotesize\ttfamily bool get\+\_\+is\+\_\+piped (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{request_8h_a1abc891df97d2318f8fb4832a28ae63c}{Request}} $\ast$}]{r }\end{DoxyParamCaption})}
+
+\mbox{\Hypertarget{request_8c_a9c4991d2905d6b337c2805f7ab8e54eb}\label{request_8c_a9c4991d2905d6b337c2805f7ab8e54eb}} 
+\index{request.c@{request.c}!get\_type@{get\_type}}
+\index{get\_type@{get\_type}!request.c@{request.c}}
+\doxysubsubsection{\texorpdfstring{get\_type()}{get\_type()}}
+{\footnotesize\ttfamily int get\+\_\+type (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{request_8h_a1abc891df97d2318f8fb4832a28ae63c}{Request}} $\ast$}]{r }\end{DoxyParamCaption})}
+
+\mbox{\Hypertarget{request_8c_addf1d41d1a4004eb7da1b19870f1a607}\label{request_8c_addf1d41d1a4004eb7da1b19870f1a607}} 
+\index{request.c@{request.c}!sizeof\_request@{sizeof\_request}}
+\index{sizeof\_request@{sizeof\_request}!request.c@{request.c}}
+\doxysubsubsection{\texorpdfstring{sizeof\_request()}{sizeof\_request()}}
+{\footnotesize\ttfamily unsigned long sizeof\+\_\+request (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+

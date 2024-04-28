@@ -1,4 +1,4 @@
 var searchData=
 [
-  ['main_8',['main',['../client_8c.html#ae66f6b31b5ad750f1fe042a706a4e3d4',1,'main():&#160;client.c'],['../orchestrator_8c.html#a0ddf1224851353fc92bfbff6f499fa97',1,'main(int argc, char *argv[]):&#160;orchestrator.c']]]
+  ['create_5frequest_52',['create_request',['../request_8h.html#a3e85de787d8efb28e4bd61a784642190',1,'create_request(int type, int est_time, char *command, bool is_pipe):&#160;request.c'],['../request_8c.html#a59a69ba210777dfe8cf056212ad1142d',1,'create_request(int type, int est_time, char *command, bool is_piped):&#160;request.c']]]
 ];
