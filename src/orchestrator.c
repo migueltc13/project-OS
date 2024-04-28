@@ -6,6 +6,7 @@
 
 #include <stdio.h>
 #include <stdlib.h>
+#include <string.h>
 #include <unistd.h>
 #include <fcntl.h>
 #include <sys/stat.h>
@@ -18,6 +19,13 @@ int add_request(Request *requests[], int *N, Request *r);
 int remove_request(Request *requests[], int *N, Request *r);
 
 Request *select_request(Request *requests[], int *N, int policy);
+
+int send_status(
+    char *client_fifo,
+    Request *executing[], int N_executing,
+    Request *scheduled[], int N_scheduled,
+    char *output_dir
+);
 
 /**
  * @brief Print the usage of the orchestrator program
@@ -83,23 +91,25 @@ int main(int argc, char **argv) {
         return 1;
     }
 
-    // Allocate memory for the requests arrays
+    // Arrays to store the executing and scheduled requests
     Request *executing[MAX_REQUESTS]; int N_executing = 0;
     Request *scheduled[MAX_REQUESTS]; int N_scheduled = 0;
-    Request *completed[MAX_REQUESTS]; int N_completed = 0;
+
+    Request *r;
 
     // main loop
     while (1) {
-        // check for client requests in the server FIFO TODO move this outside the loop
+        // check for client requests in the server FIFO
         int fd = open(SERVER_FIFO, O_RDONLY);
         if (fd == -1) {
             perror("Error: couldn't open server FIFO");
             return 1;
         }
 
-        // read the request
-        Request *r = malloc(sizeof_request());
+        // Allocate memory for the request
+        r = malloc(sizeof_request());
 
+        // read the request
         ssize_t bytes_read = read(fd, r, sizeof_request());
         if (bytes_read == -1) {
             perror("Error: couldn't read from server FIFO");
@@ -126,6 +136,7 @@ int main(int argc, char **argv) {
         printf("\n");
 
         int exec_ret;
+        pid_t pid;
         switch (type) {
             case EXECUTE:
                 // add the task_nr to the request
@@ -165,13 +176,39 @@ int main(int argc, char **argv) {
                 break;
 
             case STATUS:
-                // get the status of the task
-                printf("Getting status...\n");
+                // create process to execute the status command
+                pid = fork();
+                if (pid == -1) {
+                    perror("Error: couldn't create process");
+                    return 1;
+                }
+
+                if (pid == 0) {
+                    // Get client FIFO name from the request
+                    char *client_fifo = get_client_fifo(r);
+
+                    // send the status to the client FIFO
+                    int status = send_status(
+                        client_fifo,
+                        executing, N_executing,
+                        scheduled, N_scheduled,
+                        output_dir
+                    );
+                    if (status == -1) {
+                        perror("Error: couldn't send status to client");
+                        return 1;
+                    }
+
+                    printf("Sent status to client\n");
+
+                    _exit(0);
+                }
+
                 break;
 
             case COMPLETED:
                 // get the status of the task
-                printf("Task %d completed\n", get_task_nr(r));
+                printf("Task %d completed\n\n", get_task_nr(r));
 
                 // remove the request from the executing array
                 if (remove_request(executing, &N_executing, r) == -1) {
@@ -179,17 +216,10 @@ int main(int argc, char **argv) {
                     return 1;
                 }
 
-                // add the completed request to the completed array
-                if (add_request(completed, &N_completed, r) == -1) {
-                    perror("Error: couldn't add request to completed array");
-                    return 1;
-                }
-
-                break;
                 // check for scheduled tasks to run
                 Request *next = select_request(scheduled, &N_scheduled, 0);
                 if (next == NULL) {
-                    printf("\nNo scheduled tasks\n");
+                    printf("No scheduled tasks\n\n");
                     break;
                 }
 
@@ -226,6 +256,7 @@ int main(int argc, char **argv) {
         }
     }
 
+    free(r);
     return 0;
 }
 
@@ -277,4 +308,150 @@ Request *select_request(Request *requests[], int *N, int policy) {
     }
 
     return NULL;
+}
+
+int send_status(
+    char *client_fifo,
+    Request *executing[], int N_executing,
+    Request *scheduled[], int N_scheduled,
+    char *output_dir
+) {
+    int fd_client = open(client_fifo, O_WRONLY);
+    if (fd_client == -1) {
+        perror("Error: couldn't open client FIFO");
+        return 1;
+    }
+
+    int bytes_writed = 0;
+    int buf_size = MAX_CMD_SIZE + 50; // add 50 bytes for the task nr and exec time
+
+    // write executing commands
+    if (N_executing == 0) {
+        char *msg = "No tasks executing\n\n";
+        bytes_writed = write(fd_client, msg, strlen(msg));
+        if (bytes_writed == -1) {
+            perror("Error: couldn't write to client FIFO");
+            return 1;
+        }
+    }
+    else {
+        char *msg = "Executing:\n";
+        bytes_writed = write(fd_client, msg, strlen(msg));
+        if (bytes_writed == -1) {
+            perror("Error: couldn't write to client FIFO");
+            return 1;
+        }
+
+        char buffer[buf_size];
+        for (int i = 0; i < N_executing; i++) {
+            (void) snprintf(
+                buffer, buf_size, "%d %s\n",
+                get_task_nr(executing[i]),
+                get_command(executing[i])
+            );
+            bytes_writed = write(fd_client, buffer, strlen(buffer));
+            if (bytes_writed == -1) {
+                perror("Error: couldn't write to client FIFO");
+                return 1;
+            }
+        }
+
+        bytes_writed = write(fd_client, "\n", 1);
+        if (bytes_writed == -1) {
+            perror("Error: couldn't write to client FIFO");
+            return 1;
+        }
+    }
+
+    // build scheduled string
+    if (N_scheduled == 0) {
+        char *msg = "No tasks scheduled\n\n";
+        bytes_writed = write(fd_client, msg, strlen(msg));
+        if (bytes_writed == -1) {
+            perror("Error: couldn't write to client FIFO");
+            return 1;
+        }
+    }
+    else {
+        char *msg = "Scheduled:\n";
+        write(fd_client, msg, strlen(msg));
+
+        char buffer[buf_size];
+        for (int i = 0; i < N_scheduled; i++) {
+            (void) snprintf(
+                buffer, buf_size, "%d %s\n",
+                get_task_nr(scheduled[i]),
+                get_command(scheduled[i])
+            );
+            bytes_writed = write(fd_client, buffer, strlen(buffer));
+            if (bytes_writed == -1) {
+                perror("Error: couldn't write to client FIFO");
+                return 1;
+            }
+        }
+
+        bytes_writed = write(fd_client, "\n", 1);
+        if (bytes_writed == -1) {
+            perror("Error: couldn't write to client FIFO");
+            return 1;
+        }
+    }
+
+    // build completed string
+    // read completed tasks from history file
+    int history_size = strlen(output_dir) + strlen(HISTORY) + 2;
+    char history_path[history_size];
+    (void) snprintf(history_path, history_size, "%s/%s", output_dir, HISTORY);
+
+    int fd_history = open(history_path, O_RDONLY | O_CREAT, 0644);
+    if (fd_history == -1) {
+        perror("Error: couldn't open history file");
+        return -1;
+    }
+
+    char buffer[buf_size];
+    int bytes_read = read(fd_history, buffer, buf_size);
+
+    if (bytes_read == -1) {
+        perror("Error: couldn't read from history file");
+        return 1;
+    }
+
+    if (bytes_read == 0) {
+        char *msg = "No tasks completed\n";
+        bytes_writed = write(fd_client, msg, strlen(msg));
+        if (bytes_writed == -1) {
+            perror("Error: couldn't write to client FIFO");
+            return 1;
+        }
+    }
+    else {
+        char *msg = "Completed:\n";
+        bytes_writed = write(fd_client, msg, strlen(msg));
+        if (bytes_writed == -1) {
+            perror("Error: couldn't write to client FIFO");
+            return 1;
+        }
+
+        bytes_writed = write(fd_client, buffer, bytes_read);
+        if (bytes_writed == -1) {
+            perror("Error: couldn't write to client FIFO");
+            return 1;
+        }
+
+        while ((bytes_read = read(fd_history, buffer, buf_size)) > 0) {
+            bytes_writed = write(fd_client, buffer, bytes_read);
+            if (bytes_writed == -1) {
+                perror("Error: couldn't write to client FIFO");
+                return 1;
+            }
+        }
+    }
+
+    // assure that the status option doesn't interrupt other requests with:
+    // sleep(10);
+
+    close(fd_history);
+    close(fd_client);
+    return 0;
 }

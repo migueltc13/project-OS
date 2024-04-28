@@ -4,6 +4,8 @@
 #include "request.h"
 #include <sys/time.h>
 
+#define HISTORY "history"
+
 int exec(Request *r, char *output_dir, struct timeval start_time);
 
 #endif

@@ -1,4 +1,5 @@
 // TODO remove ../include/
+#include "../include/command.h"
 #include "../include/request.h"
 #include "../include/orchestrator.h"
 
@@ -120,6 +121,18 @@ int exec(Request *r, char *output_dir, struct timeval start_time) {
         return -1;
     }
     close(fd);
+
+    // get completed history file path
+    char *history_file = malloc(strlen(output_dir) + strlen(HISTORY) + 2);
+    if (history_file == NULL) {
+        perror("malloc");
+        return -1;
+    }
+
+    if (sprintf(history_file, "%s/%s", output_dir, HISTORY) < 0) {
+        perror("sprintf");
+        return -1;
+    }
 
     // create output directory for task results
     char *task_dir = malloc(strlen(output_dir) + strlen("task") + 2 + 8); // TODO max size of task number
@@ -338,6 +351,9 @@ int exec(Request *r, char *output_dir, struct timeval start_time) {
             // send this request to the orchestrator as completed
             set_type(r, COMPLETED);
 
+            // set the elapsed time in the request
+            set_time(r, elapsed_time);
+
             int fd_server = open(SERVER_FIFO, O_WRONLY);
             if (fd_server == -1) {
                 perror("Error: couldn't open server FIFO");
@@ -351,7 +367,44 @@ int exec(Request *r, char *output_dir, struct timeval start_time) {
 
             close(fd_server);
 
-            // TODO free commands
+            char *history_str = malloc(8 + strlen(cmd) + strlen(time_str) + 5); // TODO max size of task number
+            if (history_str == NULL) {
+                perror("malloc");
+                return -1;
+            }
+
+            if (sprintf(history_str, "%d %s %ld ms\n", task_nr, cmd, elapsed_time) < 0) {
+                perror("sprintf");
+                return -1;
+            }
+
+            int fd_history = open(history_file, O_WRONLY | O_APPEND | O_CREAT, 0644);
+            if (fd_history < 0) {
+                perror("Error: could not open history file\n");
+                close(fd_history);
+                return -1;
+            }
+
+            if (write(fd_history, history_str, strlen(history_str)) == -1) {
+                perror("write");
+                return -1;
+            }
+
+            close(fd_history);
+
+            free(history_str);
+            free(cmd);
+            free(history_file);
+            free(task_dir);
+            free(output_file);
+            free(error_file);
+            free(time_file);
+
+            // free commands
+            for (int i = 0; i < N; i++) {
+                free(commands[i]);
+            }
+            free(commands);
             _exit(0);
         }
     }
@@ -418,7 +471,11 @@ int exec(Request *r, char *output_dir, struct timeval start_time) {
 
                 close(fd_time);
 
+                // send this request to the orchestrator as completed
                 set_type(r, COMPLETED);
+
+                // set the elapsed time in the request
+                set_time(r, elapsed_time);
 
                 int fd_server = open(SERVER_FIFO, O_WRONLY);
                 if (fd_server == -1) {
@@ -432,6 +489,39 @@ int exec(Request *r, char *output_dir, struct timeval start_time) {
                 }
 
                 close(fd_server);
+
+                char *history_str = malloc(8 + strlen(cmd) + strlen(time_str) + 5); // TODO max size of task number
+                if (history_str == NULL) {
+                    perror("malloc");
+                    return -1;
+                }
+
+                if (sprintf(history_str, "%d %s %ld ms\n", task_nr, cmd, elapsed_time) < 0) {
+                    perror("sprintf");
+                    return -1;
+                }
+
+                int fd_history = open(history_file, O_WRONLY | O_APPEND | O_CREAT, 0644);
+                if (fd_history < 0) {
+                    perror("Error: could not open history file\n");
+                    close(fd_history);
+                    return -1;
+                }
+
+                if (write(fd_history, history_str, strlen(history_str)) == -1) {
+                    perror("write");
+                    return -1;
+                }
+
+                close(fd_history);
+
+                free(history_str);
+                free(cmd);
+                free(history_file);
+                free(task_dir);
+                free(output_file);
+                free(error_file);
+                free(time_file);
             }
             _exit(0);
         }
@@ -441,6 +531,8 @@ int exec(Request *r, char *output_dir, struct timeval start_time) {
     close(fd_err);
     close(fd_time);
 
+    free(cmd);
+    free(history_file);
     free(task_dir);
     free(output_file);
     free(error_file);

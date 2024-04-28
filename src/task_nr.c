@@ -60,6 +60,7 @@ int init_task_nr(char *output_dir) {
         close(fd);
     }
 
+    free(filename);
     return task_nr;
 }
 
@@ -116,5 +117,6 @@ int increment_task_nr(char *output_dir) {
     }
     close(fd);
 
+    free(filename);
     return task_nr;
 }

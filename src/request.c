@@ -12,6 +12,8 @@ struct request {
     char command[MAX_CMD_SIZE];
     bool is_piped;
     int task_nr;
+    char client_fifo[MAX_FIFO_SIZE];
+    long time;
 };
 
 Request *create_request(int type, int est_time, char *command, bool is_piped) {
@@ -52,6 +54,14 @@ int get_task_nr(Request *r) {
     return r->task_nr;
 }
 
+char *get_client_fifo(Request *r) {
+    return r->client_fifo;
+}
+
+long get_time(Request *r) {
+    return r->time;
+}
+
 /* setters */
 
 void set_type(Request *r, int type) {
@@ -60,6 +70,14 @@ void set_type(Request *r, int type) {
 
 void set_task_nr(Request *r, int task_nr) {
     r->task_nr = task_nr;
+}
+
+void set_client_fifo(Request *r, char *client_fifo) {
+    strcpy(r->client_fifo, client_fifo);
+}
+
+void set_time(Request *r, long time) {
+    r->time = time;
 }
 
 /* others */

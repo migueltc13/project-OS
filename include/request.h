@@ -8,6 +8,7 @@
 #define COMPLETED 2
 
 #define MAX_CMD_SIZE 300
+#define MAX_FIFO_SIZE 100
 
 typedef struct request Request;
 
@@ -23,9 +24,17 @@ bool get_is_piped(Request *r);
 
 int get_task_nr(Request *r);
 
+char *get_client_fifo(Request *r);
+
+long get_time(Request *r);
+
 void set_type(Request *r, int type);
 
 void set_task_nr(Request *r, int task_nr);
+
+void set_client_fifo(Request *r, char *client_fifo);
+
+void set_time(Request *r, long time);
 
 char* type_to_string(int type);
 

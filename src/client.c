@@ -1,4 +1,5 @@
 // TODO remove ../include/
+#include "../include/client.h"
 #include "../include/request.h"
 #include "../include/orchestrator.h"
 
@@ -8,6 +9,7 @@
 #include <string.h>
 #include <unistd.h>
 #include <fcntl.h>
+#include <sys/stat.h>
 
 void execute_usage(char *name) {
     printf("%s execute <estimated_time> <-u|-p> \"prog-a [args]\"\n", name);
@@ -84,11 +86,55 @@ int main(int argc, char **argv) {
             return 0;
         }
 
-        // TODO create request
-        // TODO send request via server FIFO
-        // TODO create FIFO to receive status response
-        // TODO read status response
-        // TODO print status response
+        // create status request
+        Request *r = create_request(STATUS, 0, "", false);
+
+        // create client FIFO
+        char *client_fifo = malloc(CLIENT_FIFO_SIZE);
+        sprintf(client_fifo, "client-%d", getpid());
+
+        (void) unlink(client_fifo);
+        if (mkfifo(client_fifo, 0644) == -1) {
+            perror("Error: couldn't create client FIFO\n");
+            return 1;
+        }
+
+        // send client FIFO in status request
+        set_client_fifo(r, client_fifo);
+
+        // send request via server FIFO
+        int fd_server = open(SERVER_FIFO, O_WRONLY);
+        if (fd_server == -1) {
+            perror("Error: couldn't open server FIFO\n");
+            return 1;
+        }
+
+        if (write(fd_server, r, sizeof_request()) == -1) {
+            perror("Error: couldn't write to server FIFO\n");
+            close(fd_server);
+            return 1;
+        }
+
+        close(fd_server);
+
+        // receive status response via client FIFO
+        int fd_client = open(client_fifo, O_RDONLY);
+        if (fd_client == -1) {
+            perror("Error: couldn't open client FIFO\n");
+            return 1;
+        }
+
+        // read and print status response
+        char buffer[BUF_SIZE];
+        size_t n;
+        while ((n = read(fd_client, buffer, BUF_SIZE)) > 0) {
+            buffer[n] = '\0';
+            printf("%s", buffer);
+        }
+
+        close(fd_client);
+        free(r);
+        free(client_fifo);
         return 0;
     }
 
