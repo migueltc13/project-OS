@@ -8,11 +8,12 @@ Include dependency graph for request.\+h\+:\nopagebreak
 \includegraphics[width=171pt]{request_8h__incl}
 \end{center}
 \end{figure}
-This graph shows which files directly or indirectly include this file\+:\nopagebreak
+This graph shows which files directly or indirectly include this file\+:
+\nopagebreak
 \begin{figure}[H]
 \begin{center}
 \leavevmode
-\includegraphics[width=348pt]{request_8h__dep__incl}
+\includegraphics[width=350pt]{request_8h__dep__incl}
 \end{center}
 \end{figure}
 \doxysubsection*{Macros}
@@ -21,6 +22,8 @@ This graph shows which files directly or indirectly include this file\+:\nopageb
 \#define \mbox{\hyperlink{request_8h_a05e20d8bc0525f94757303dd5a905a69}{EXECUTE}}~0
 \item 
 \#define \mbox{\hyperlink{request_8h_a59279bee44f34d08b3cbf3a89fb0d8d9}{STATUS}}~1
+\item 
+\#define \mbox{\hyperlink{request_8h_a22c88fdadb7d8f8417a92cdcc6232786}{COMPLETED}}~2
 \item 
 \#define \mbox{\hyperlink{request_8h_a11b2387a44dc0cf3642ddcbe0581276b}{MAX\+\_\+\+CMD\+\_\+\+SIZE}}~300
 \end{DoxyCompactItemize}
@@ -42,11 +45,25 @@ char $\ast$ \mbox{\hyperlink{request_8h_aa86d0a88bfeae920cdc85fec9f2873ea}{get\+
 \item 
 bool \mbox{\hyperlink{request_8h_a80650d1ccea10349386f3bd50e922c32}{get\+\_\+is\+\_\+piped}} (\mbox{\hyperlink{request_8h_a1abc891df97d2318f8fb4832a28ae63c}{Request}} $\ast$r)
 \item 
+int \mbox{\hyperlink{request_8h_ae6117336c44d707b4b26295ceafa466a}{get\+\_\+task\+\_\+nr}} (\mbox{\hyperlink{request_8h_a1abc891df97d2318f8fb4832a28ae63c}{Request}} $\ast$r)
+\item 
+void \mbox{\hyperlink{request_8h_a43395fb8bb232c43a0a0078501dc3b12}{set\+\_\+type}} (\mbox{\hyperlink{request_8h_a1abc891df97d2318f8fb4832a28ae63c}{Request}} $\ast$r, int type)
+\item 
+void \mbox{\hyperlink{request_8h_a42b40d38b4f2c3a1a44d907d5b4c0ae2}{set\+\_\+task\+\_\+nr}} (\mbox{\hyperlink{request_8h_a1abc891df97d2318f8fb4832a28ae63c}{Request}} $\ast$r, int task\+\_\+nr)
+\item 
+char $\ast$ \mbox{\hyperlink{request_8h_ac75498371597f92321b38bd186375df6}{type\+\_\+to\+\_\+string}} (int type)
+\item 
 unsigned long \mbox{\hyperlink{request_8h_addf1d41d1a4004eb7da1b19870f1a607}{sizeof\+\_\+request}} ()
 \end{DoxyCompactItemize}
 
 
 \doxysubsection{Macro Definition Documentation}
+\mbox{\Hypertarget{request_8h_a22c88fdadb7d8f8417a92cdcc6232786}\label{request_8h_a22c88fdadb7d8f8417a92cdcc6232786}} 
+\index{request.h@{request.h}!COMPLETED@{COMPLETED}}
+\index{COMPLETED@{COMPLETED}!request.h@{request.h}}
+\doxysubsubsection{\texorpdfstring{COMPLETED}{COMPLETED}}
+{\footnotesize\ttfamily \#define COMPLETED~2}
+
 \mbox{\Hypertarget{request_8h_a05e20d8bc0525f94757303dd5a905a69}\label{request_8h_a05e20d8bc0525f94757303dd5a905a69}} 
 \index{request.h@{request.h}!EXECUTE@{EXECUTE}}
 \index{EXECUTE@{EXECUTE}!request.h@{request.h}}
@@ -101,15 +118,39 @@ unsigned long \mbox{\hyperlink{request_8h_addf1d41d1a4004eb7da1b19870f1a607}{siz
 \doxysubsubsection{\texorpdfstring{get\_is\_piped()}{get\_is\_piped()}}
 {\footnotesize\ttfamily bool get\+\_\+is\+\_\+piped (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{request_8h_a1abc891df97d2318f8fb4832a28ae63c}{Request}} $\ast$}]{r }\end{DoxyParamCaption})}
 
+\mbox{\Hypertarget{request_8h_ae6117336c44d707b4b26295ceafa466a}\label{request_8h_ae6117336c44d707b4b26295ceafa466a}} 
+\index{request.h@{request.h}!get\_task\_nr@{get\_task\_nr}}
+\index{get\_task\_nr@{get\_task\_nr}!request.h@{request.h}}
+\doxysubsubsection{\texorpdfstring{get\_task\_nr()}{get\_task\_nr()}}
+{\footnotesize\ttfamily int get\+\_\+task\+\_\+nr (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{request_8h_a1abc891df97d2318f8fb4832a28ae63c}{Request}} $\ast$}]{r }\end{DoxyParamCaption})}
+
 \mbox{\Hypertarget{request_8h_a9c4991d2905d6b337c2805f7ab8e54eb}\label{request_8h_a9c4991d2905d6b337c2805f7ab8e54eb}} 
 \index{request.h@{request.h}!get\_type@{get\_type}}
 \index{get\_type@{get\_type}!request.h@{request.h}}
 \doxysubsubsection{\texorpdfstring{get\_type()}{get\_type()}}
 {\footnotesize\ttfamily int get\+\_\+type (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{request_8h_a1abc891df97d2318f8fb4832a28ae63c}{Request}} $\ast$}]{r }\end{DoxyParamCaption})}
 
+\mbox{\Hypertarget{request_8h_a42b40d38b4f2c3a1a44d907d5b4c0ae2}\label{request_8h_a42b40d38b4f2c3a1a44d907d5b4c0ae2}} 
+\index{request.h@{request.h}!set\_task\_nr@{set\_task\_nr}}
+\index{set\_task\_nr@{set\_task\_nr}!request.h@{request.h}}
+\doxysubsubsection{\texorpdfstring{set\_task\_nr()}{set\_task\_nr()}}
+{\footnotesize\ttfamily void set\+\_\+task\+\_\+nr (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{request_8h_a1abc891df97d2318f8fb4832a28ae63c}{Request}} $\ast$}]{r,  }\item[{int}]{task\+\_\+nr }\end{DoxyParamCaption})}
+
+\mbox{\Hypertarget{request_8h_a43395fb8bb232c43a0a0078501dc3b12}\label{request_8h_a43395fb8bb232c43a0a0078501dc3b12}} 
+\index{request.h@{request.h}!set\_type@{set\_type}}
+\index{set\_type@{set\_type}!request.h@{request.h}}
+\doxysubsubsection{\texorpdfstring{set\_type()}{set\_type()}}
+{\footnotesize\ttfamily void set\+\_\+type (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{request_8h_a1abc891df97d2318f8fb4832a28ae63c}{Request}} $\ast$}]{r,  }\item[{int}]{type }\end{DoxyParamCaption})}
+
 \mbox{\Hypertarget{request_8h_addf1d41d1a4004eb7da1b19870f1a607}\label{request_8h_addf1d41d1a4004eb7da1b19870f1a607}} 
 \index{request.h@{request.h}!sizeof\_request@{sizeof\_request}}
 \index{sizeof\_request@{sizeof\_request}!request.h@{request.h}}
 \doxysubsubsection{\texorpdfstring{sizeof\_request()}{sizeof\_request()}}
 {\footnotesize\ttfamily unsigned long sizeof\+\_\+request (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+\mbox{\Hypertarget{request_8h_ac75498371597f92321b38bd186375df6}\label{request_8h_ac75498371597f92321b38bd186375df6}} 
+\index{request.h@{request.h}!type\_to\_string@{type\_to\_string}}
+\index{type\_to\_string@{type\_to\_string}!request.h@{request.h}}
+\doxysubsubsection{\texorpdfstring{type\_to\_string()}{type\_to\_string()}}
+{\footnotesize\ttfamily char$\ast$ type\+\_\+to\+\_\+string (\begin{DoxyParamCaption}\item[{int}]{type }\end{DoxyParamCaption})}
 

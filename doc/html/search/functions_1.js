@@ -1,6 +1,4 @@
 var searchData=
 [
-  ['exec_53',['exec',['../command_8h.html#a5e988ad739ad8db96b6940ea5c61e545',1,'exec(char *cmd, bool is_piped, char *output_dir, int task_nr, struct timeval start_time):&#160;command.c'],['../command_8c.html#a5e988ad739ad8db96b6940ea5c61e545',1,'exec(char *cmd, bool is_piped, char *output_dir, int task_nr, struct timeval start_time):&#160;command.c']]],
-  ['exec_5fcommand_54',['exec_command',['../command_8c.html#a4f9f0cf42417c697d2039b25b9337a9d',1,'command.c']]],
-  ['execute_5fusage_55',['execute_usage',['../client_8c.html#ae0f9a92af52218c2852e98510854d41c',1,'client.c']]]
+  ['create_5frequest_63',['create_request',['../request_8h.html#a3e85de787d8efb28e4bd61a784642190',1,'create_request(int type, int est_time, char *command, bool is_pipe):&#160;request.c'],['../request_8c.html#a59a69ba210777dfe8cf056212ad1142d',1,'create_request(int type, int est_time, char *command, bool is_piped):&#160;request.c']]]
 ];

@@ -1,7 +1,6 @@
 var searchData=
 [
-  ['main_19',['main',['../client_8c.html#a3c04138a5bfe5d72780bb7e82a18e627',1,'main(int argc, char **argv):&#160;client.c'],['../orchestrator_8c.html#a3c04138a5bfe5d72780bb7e82a18e627',1,'main(int argc, char **argv):&#160;orchestrator.c']]],
-  ['mainpage_2edox_20',['mainpage.dox',['../mainpage_8dox.html',1,'']]],
-  ['max_5fcmd_5fsize_21',['MAX_CMD_SIZE',['../request_8h.html#a11b2387a44dc0cf3642ddcbe0581276b',1,'request.h']]],
-  ['max_5fcmds_22',['MAX_CMDS',['../command_8c.html#ad14effda14501a769b3d46984d43aa00',1,'command.c']]]
+  ['increment_5ftask_5fnr_19',['increment_task_nr',['../task__nr_8h.html#a8c036365e5319df7bd3299874a31c1ad',1,'increment_task_nr(char *output_dir):&#160;task_nr.c'],['../task__nr_8c.html#a8c036365e5319df7bd3299874a31c1ad',1,'increment_task_nr(char *output_dir):&#160;task_nr.c']]],
+  ['init_5ftask_5fnr_20',['init_task_nr',['../task__nr_8h.html#a2f9859118d66e0d6a6912f8e6b6092d0',1,'init_task_nr(char *output_dir):&#160;task_nr.c'],['../task__nr_8c.html#a2f9859118d66e0d6a6912f8e6b6092d0',1,'init_task_nr(char *output_dir):&#160;task_nr.c']]],
+  ['is_5fpiped_21',['is_piped',['../structrequest.html#a26cba1348dda26d66402995421177441',1,'request']]]
 ];

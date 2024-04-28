@@ -90,10 +90,12 @@ This graph shows which files directly or indirectly include this file:</div>
 <div class="dyncontent">
 <div class="center"><img src="request_8h__dep__incl.png" border="0" usemap="#ainclude_2request_8hdep" alt=""/></div>
 <map name="ainclude_2request_8hdep" id="ainclude_2request_8hdep">
-<area shape="rect" title=" " alt="" coords="117,5,239,32"/>
-<area shape="rect" href="client_8c.html" title=" " alt="" coords="5,80,92,107"/>
-<area shape="rect" href="orchestrator_8c.html" title=" " alt="" coords="117,80,239,107"/>
-<area shape="rect" href="request_8c.html" title=" " alt="" coords="263,80,362,107"/>
+<area shape="rect" title=" " alt="" coords="199,5,320,32"/>
+<area shape="rect" href="command_8h.html" title=" " alt="" coords="5,80,140,107"/>
+<area shape="rect" href="orchestrator_8c.html" title=" " alt="" coords="63,155,186,181"/>
+<area shape="rect" href="client_8c.html" title=" " alt="" coords="216,80,303,107"/>
+<area shape="rect" href="command_8c.html" title=" " alt="" coords="327,80,439,107"/>
+<area shape="rect" href="request_8c.html" title=" " alt="" coords="463,80,562,107"/>
 </map>
 </div>
 </div>
@@ -105,6 +107,8 @@ Macros</h2></td></tr>
 <tr class="separator:a05e20d8bc0525f94757303dd5a905a69"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a59279bee44f34d08b3cbf3a89fb0d8d9"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="request_8h.html#a59279bee44f34d08b3cbf3a89fb0d8d9">STATUS</a>&#160;&#160;&#160;1</td></tr>
 <tr class="separator:a59279bee44f34d08b3cbf3a89fb0d8d9"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a22c88fdadb7d8f8417a92cdcc6232786"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="request_8h.html#a22c88fdadb7d8f8417a92cdcc6232786">COMPLETED</a>&#160;&#160;&#160;2</td></tr>
+<tr class="separator:a22c88fdadb7d8f8417a92cdcc6232786"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a11b2387a44dc0cf3642ddcbe0581276b"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="request_8h.html#a11b2387a44dc0cf3642ddcbe0581276b">MAX_CMD_SIZE</a>&#160;&#160;&#160;300</td></tr>
 <tr class="separator:a11b2387a44dc0cf3642ddcbe0581276b"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
@@ -125,10 +129,32 @@ Functions</h2></td></tr>
 <tr class="separator:aa86d0a88bfeae920cdc85fec9f2873ea"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a80650d1ccea10349386f3bd50e922c32"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="request_8h.html#a80650d1ccea10349386f3bd50e922c32">get_is_piped</a> (<a class="el" href="request_8h.html#a1abc891df97d2318f8fb4832a28ae63c">Request</a> *r)</td></tr>
 <tr class="separator:a80650d1ccea10349386f3bd50e922c32"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ae6117336c44d707b4b26295ceafa466a"><td class="memItemLeft" align="right" valign="top">int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="request_8h.html#ae6117336c44d707b4b26295ceafa466a">get_task_nr</a> (<a class="el" href="request_8h.html#a1abc891df97d2318f8fb4832a28ae63c">Request</a> *r)</td></tr>
+<tr class="separator:ae6117336c44d707b4b26295ceafa466a"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a43395fb8bb232c43a0a0078501dc3b12"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="request_8h.html#a43395fb8bb232c43a0a0078501dc3b12">set_type</a> (<a class="el" href="request_8h.html#a1abc891df97d2318f8fb4832a28ae63c">Request</a> *r, int type)</td></tr>
+<tr class="separator:a43395fb8bb232c43a0a0078501dc3b12"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a42b40d38b4f2c3a1a44d907d5b4c0ae2"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="request_8h.html#a42b40d38b4f2c3a1a44d907d5b4c0ae2">set_task_nr</a> (<a class="el" href="request_8h.html#a1abc891df97d2318f8fb4832a28ae63c">Request</a> *r, int task_nr)</td></tr>
+<tr class="separator:a42b40d38b4f2c3a1a44d907d5b4c0ae2"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ac75498371597f92321b38bd186375df6"><td class="memItemLeft" align="right" valign="top">char *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="request_8h.html#ac75498371597f92321b38bd186375df6">type_to_string</a> (int type)</td></tr>
+<tr class="separator:ac75498371597f92321b38bd186375df6"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:addf1d41d1a4004eb7da1b19870f1a607"><td class="memItemLeft" align="right" valign="top">unsigned long&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="request_8h.html#addf1d41d1a4004eb7da1b19870f1a607">sizeof_request</a> ()</td></tr>
 <tr class="separator:addf1d41d1a4004eb7da1b19870f1a607"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <h2 class="groupheader">Macro Definition Documentation</h2>
+<a id="a22c88fdadb7d8f8417a92cdcc6232786"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a22c88fdadb7d8f8417a92cdcc6232786">&#9670;&nbsp;</a></span>COMPLETED</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">#define COMPLETED&#160;&#160;&#160;2</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+</div>
+</div>
 <a id="a05e20d8bc0525f94757303dd5a905a69"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#a05e20d8bc0525f94757303dd5a905a69">&#9670;&nbsp;</a></span>EXECUTE</h2>
 
@@ -281,6 +307,24 @@ Functions</h2></td></tr>
 
 </div>
 </div>
+<a id="ae6117336c44d707b4b26295ceafa466a"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ae6117336c44d707b4b26295ceafa466a">&#9670;&nbsp;</a></span>get_task_nr()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">int get_task_nr </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="request_8h.html#a1abc891df97d2318f8fb4832a28ae63c">Request</a> *&#160;</td>
+          <td class="paramname"><em>r</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+</div>
+</div>
 <a id="a9c4991d2905d6b337c2805f7ab8e54eb"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#a9c4991d2905d6b337c2805f7ab8e54eb">&#9670;&nbsp;</a></span>get_type()</h2>
 
@@ -293,6 +337,62 @@ Functions</h2></td></tr>
           <td class="paramtype"><a class="el" href="request_8h.html#a1abc891df97d2318f8fb4832a28ae63c">Request</a> *&#160;</td>
           <td class="paramname"><em>r</em></td><td>)</td>
           <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="a42b40d38b4f2c3a1a44d907d5b4c0ae2"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a42b40d38b4f2c3a1a44d907d5b4c0ae2">&#9670;&nbsp;</a></span>set_task_nr()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void set_task_nr </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="request_8h.html#a1abc891df97d2318f8fb4832a28ae63c">Request</a> *&#160;</td>
+          <td class="paramname"><em>r</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">int&#160;</td>
+          <td class="paramname"><em>task_nr</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="a43395fb8bb232c43a0a0078501dc3b12"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a43395fb8bb232c43a0a0078501dc3b12">&#9670;&nbsp;</a></span>set_type()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void set_type </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="request_8h.html#a1abc891df97d2318f8fb4832a28ae63c">Request</a> *&#160;</td>
+          <td class="paramname"><em>r</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">int&#160;</td>
+          <td class="paramname"><em>type</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
         </tr>
       </table>
 </div><div class="memdoc">
@@ -316,12 +416,30 @@ Functions</h2></td></tr>
 
 </div>
 </div>
+<a id="ac75498371597f92321b38bd186375df6"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ac75498371597f92321b38bd186375df6">&#9670;&nbsp;</a></span>type_to_string()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">char* type_to_string </td>
+          <td>(</td>
+          <td class="paramtype">int&#160;</td>
+          <td class="paramname"><em>type</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+</div>
+</div>
 </div><!-- contents -->
 <!-- start footer part -->
         <hr class="footer">
         <address class="footer">
             <small>
-                Generated on Sun Apr 28 2024 13:46:31 for <b>Orchestrator</b> by
+                Generated on Sun Apr 28 2024 17:59:25 for <b>Orchestrator</b> by
                 <a href="http://www.doxygen.org/index.html">
                     <img class="footer" src="doxygen.png" alt="doxygen" onerror="this.onerror=null;this.src='doxygen.svg';"/>
                 </a> 1.9.1. All rights reserved.

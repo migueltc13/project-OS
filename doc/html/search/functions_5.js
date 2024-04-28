@@ -1,4 +1,4 @@
 var searchData=
 [
-  ['orchestrator_5fusage_63',['orchestrator_usage',['../orchestrator_8c.html#a8f9d7d40e26b268401b39971b76ce127',1,'orchestrator.c']]]
+  ['main_74',['main',['../client_8c.html#a3c04138a5bfe5d72780bb7e82a18e627',1,'main(int argc, char **argv):&#160;client.c'],['../orchestrator_8c.html#a3c04138a5bfe5d72780bb7e82a18e627',1,'main(int argc, char **argv):&#160;orchestrator.c']]]
 ];

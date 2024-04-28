@@ -1,7 +1,8 @@
 var searchData=
 [
-  ['orchestrator_23',['Orchestrator',['../index.html',1,'']]],
-  ['orchestrator_2ec_24',['orchestrator.c',['../orchestrator_8c.html',1,'']]],
-  ['orchestrator_2eh_25',['orchestrator.h',['../orchestrator_8h.html',1,'']]],
-  ['orchestrator_5fusage_26',['orchestrator_usage',['../orchestrator_8c.html#a8f9d7d40e26b268401b39971b76ce127',1,'orchestrator.c']]]
+  ['main_22',['main',['../client_8c.html#a3c04138a5bfe5d72780bb7e82a18e627',1,'main(int argc, char **argv):&#160;client.c'],['../orchestrator_8c.html#a3c04138a5bfe5d72780bb7e82a18e627',1,'main(int argc, char **argv):&#160;orchestrator.c']]],
+  ['mainpage_2edox_23',['mainpage.dox',['../mainpage_8dox.html',1,'']]],
+  ['max_5fcmd_5fsize_24',['MAX_CMD_SIZE',['../request_8h.html#a11b2387a44dc0cf3642ddcbe0581276b',1,'request.h']]],
+  ['max_5fcmds_25',['MAX_CMDS',['../command_8c.html#ad14effda14501a769b3d46984d43aa00',1,'command.c']]],
+  ['max_5frequests_26',['MAX_REQUESTS',['../orchestrator_8h.html#a8fc96cee4177a369a99de7026ebeba81',1,'orchestrator.h']]]
 ];

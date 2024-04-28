@@ -16,31 +16,13 @@ Include dependency graph for task\+\_\+nr.\+c\+:\nopagebreak
 \doxysubsection*{Functions}
 \begin{DoxyCompactItemize}
 \item 
-int \mbox{\hyperlink{task__nr_8c_a189992544ddfca954b8d8e2dc570c98b}{get\+\_\+task\+\_\+nr}} (char $\ast$output\+\_\+dir)
+int \mbox{\hyperlink{task__nr_8c_a2f9859118d66e0d6a6912f8e6b6092d0}{init\+\_\+task\+\_\+nr}} (char $\ast$output\+\_\+dir)
 \begin{DoxyCompactList}\small\item\em Get the task number from the TASK\+\_\+\+NR\+\_\+\+FILE file. If the file does not exist, create it with the initial value 1. \end{DoxyCompactList}\item 
 int \mbox{\hyperlink{task__nr_8c_a8c036365e5319df7bd3299874a31c1ad}{increment\+\_\+task\+\_\+nr}} (char $\ast$output\+\_\+dir)
 \begin{DoxyCompactList}\small\item\em Increment the task number in the TASK\+\_\+\+NR\+\_\+\+FILE file. \end{DoxyCompactList}\end{DoxyCompactItemize}
 
 
 \doxysubsection{Function Documentation}
-\mbox{\Hypertarget{task__nr_8c_a189992544ddfca954b8d8e2dc570c98b}\label{task__nr_8c_a189992544ddfca954b8d8e2dc570c98b}} 
-\index{task\_nr.c@{task\_nr.c}!get\_task\_nr@{get\_task\_nr}}
-\index{get\_task\_nr@{get\_task\_nr}!task\_nr.c@{task\_nr.c}}
-\doxysubsubsection{\texorpdfstring{get\_task\_nr()}{get\_task\_nr()}}
-{\footnotesize\ttfamily int get\+\_\+task\+\_\+nr (\begin{DoxyParamCaption}\item[{char $\ast$}]{output\+\_\+dir }\end{DoxyParamCaption})}
-
-
-
-Get the task number from the TASK\+\_\+\+NR\+\_\+\+FILE file. If the file does not exist, create it with the initial value 1. 
-
-
-\begin{DoxyParams}{Parameters}
-{\em output\+\_\+dir} & The output directory to write the task number file \\
-\hline
-\end{DoxyParams}
-\begin{DoxyReturn}{Returns}
-The task number, or -\/1 if an error occurs 
-\end{DoxyReturn}
 \mbox{\Hypertarget{task__nr_8c_a8c036365e5319df7bd3299874a31c1ad}\label{task__nr_8c_a8c036365e5319df7bd3299874a31c1ad}} 
 \index{task\_nr.c@{task\_nr.c}!increment\_task\_nr@{increment\_task\_nr}}
 \index{increment\_task\_nr@{increment\_task\_nr}!task\_nr.c@{task\_nr.c}}
@@ -58,4 +40,22 @@ Increment the task number in the TASK\+\_\+\+NR\+\_\+\+FILE file.
 \end{DoxyParams}
 \begin{DoxyReturn}{Returns}
 The new incremented task number, or -\/1 if an error occurs 
+\end{DoxyReturn}
+\mbox{\Hypertarget{task__nr_8c_a2f9859118d66e0d6a6912f8e6b6092d0}\label{task__nr_8c_a2f9859118d66e0d6a6912f8e6b6092d0}} 
+\index{task\_nr.c@{task\_nr.c}!init\_task\_nr@{init\_task\_nr}}
+\index{init\_task\_nr@{init\_task\_nr}!task\_nr.c@{task\_nr.c}}
+\doxysubsubsection{\texorpdfstring{init\_task\_nr()}{init\_task\_nr()}}
+{\footnotesize\ttfamily int init\+\_\+task\+\_\+nr (\begin{DoxyParamCaption}\item[{char $\ast$}]{output\+\_\+dir }\end{DoxyParamCaption})}
+
+
+
+Get the task number from the TASK\+\_\+\+NR\+\_\+\+FILE file. If the file does not exist, create it with the initial value 1. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em output\+\_\+dir} & The output directory to write the task number file \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+The task number, or -\/1 if an error occurs 
 \end{DoxyReturn}

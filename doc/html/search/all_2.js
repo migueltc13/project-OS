@@ -1,8 +1,8 @@
 var searchData=
 [
-  ['get_5fcommand_12',['get_command',['../request_8h.html#aa86d0a88bfeae920cdc85fec9f2873ea',1,'get_command(Request *r):&#160;request.c'],['../request_8c.html#aa86d0a88bfeae920cdc85fec9f2873ea',1,'get_command(Request *r):&#160;request.c']]],
-  ['get_5fest_5ftime_13',['get_est_time',['../request_8h.html#a1e0de6005457b0ad26bdff5931c8df25',1,'get_est_time(Request *r):&#160;request.c'],['../request_8c.html#a1e0de6005457b0ad26bdff5931c8df25',1,'get_est_time(Request *r):&#160;request.c']]],
-  ['get_5fis_5fpiped_14',['get_is_piped',['../request_8h.html#a80650d1ccea10349386f3bd50e922c32',1,'get_is_piped(Request *r):&#160;request.c'],['../request_8c.html#a80650d1ccea10349386f3bd50e922c32',1,'get_is_piped(Request *r):&#160;request.c']]],
-  ['get_5ftask_5fnr_15',['get_task_nr',['../task__nr_8h.html#a189992544ddfca954b8d8e2dc570c98b',1,'get_task_nr(char *output_dir):&#160;task_nr.c'],['../task__nr_8c.html#a189992544ddfca954b8d8e2dc570c98b',1,'get_task_nr(char *output_dir):&#160;task_nr.c']]],
-  ['get_5ftype_16',['get_type',['../request_8h.html#a9c4991d2905d6b337c2805f7ab8e54eb',1,'get_type(Request *r):&#160;request.c'],['../request_8c.html#a9c4991d2905d6b337c2805f7ab8e54eb',1,'get_type(Request *r):&#160;request.c']]]
+  ['est_5ftime_9',['est_time',['../structrequest.html#a996a32952ee0e82a5142005e79e62398',1,'request']]],
+  ['exec_10',['exec',['../command_8h.html#a7c52b2573cda56b38259890b03be026e',1,'exec(Request *r, char *output_dir, struct timeval start_time):&#160;command.c'],['../command_8c.html#a7c52b2573cda56b38259890b03be026e',1,'exec(Request *r, char *output_dir, struct timeval start_time):&#160;command.c']]],
+  ['exec_5fcommand_11',['exec_command',['../command_8c.html#a4f9f0cf42417c697d2039b25b9337a9d',1,'command.c']]],
+  ['execute_12',['EXECUTE',['../request_8h.html#a05e20d8bc0525f94757303dd5a905a69',1,'request.h']]],
+  ['execute_5fusage_13',['execute_usage',['../client_8c.html#ae0f9a92af52218c2852e98510854d41c',1,'client.c']]]
 ];

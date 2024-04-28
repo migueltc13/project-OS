@@ -74,18 +74,21 @@ $(function() {
 <a href="command_8h.html">Go to the documentation of this file.</a><div class="fragment"><div class="line"><a name="l00001"></a><span class="lineno">    1</span>&#160;<span class="preprocessor">#ifndef _COMMAND_H_</span></div>
 <div class="line"><a name="l00002"></a><span class="lineno">    2</span>&#160;<span class="preprocessor">#define _COMMAND_H_</span></div>
 <div class="line"><a name="l00003"></a><span class="lineno">    3</span>&#160; </div>
-<div class="line"><a name="l00004"></a><span class="lineno">    4</span>&#160;<span class="preprocessor">#include &lt;sys/time.h&gt;</span></div>
-<div class="line"><a name="l00005"></a><span class="lineno">    5</span>&#160; </div>
-<div class="line"><a name="l00006"></a><span class="lineno">    6</span>&#160;<span class="keywordtype">int</span> <a class="code" href="command_8h.html#a5e988ad739ad8db96b6940ea5c61e545">exec</a>(<span class="keywordtype">char</span> *cmd, <span class="keywordtype">bool</span> is_piped, <span class="keywordtype">char</span>* output_dir, <span class="keywordtype">int</span> task_nr, <span class="keyword">struct</span> timeval start_time);</div>
-<div class="line"><a name="l00007"></a><span class="lineno">    7</span>&#160; </div>
-<div class="line"><a name="l00008"></a><span class="lineno">    8</span>&#160;<span class="preprocessor">#endif</span></div>
-<div class="ttc" id="acommand_8h_html_a5e988ad739ad8db96b6940ea5c61e545"><div class="ttname"><a href="command_8h.html#a5e988ad739ad8db96b6940ea5c61e545">exec</a></div><div class="ttdeci">int exec(char *cmd, bool is_piped, char *output_dir, int task_nr, struct timeval start_time)</div><div class="ttdef"><b>Definition:</b> command.c:108</div></div>
+<div class="line"><a name="l00004"></a><span class="lineno">    4</span>&#160;<span class="preprocessor">#include &quot;<a class="code" href="request_8h.html">request.h</a>&quot;</span></div>
+<div class="line"><a name="l00005"></a><span class="lineno">    5</span>&#160;<span class="preprocessor">#include &lt;sys/time.h&gt;</span></div>
+<div class="line"><a name="l00006"></a><span class="lineno">    6</span>&#160; </div>
+<div class="line"><a name="l00007"></a><span class="lineno">    7</span>&#160;<span class="keywordtype">int</span> <a class="code" href="command_8h.html#a7c52b2573cda56b38259890b03be026e">exec</a>(<a class="code" href="structrequest.html">Request</a> *r, <span class="keywordtype">char</span> *output_dir, <span class="keyword">struct</span> timeval start_time);</div>
+<div class="line"><a name="l00008"></a><span class="lineno">    8</span>&#160; </div>
+<div class="line"><a name="l00009"></a><span class="lineno">    9</span>&#160;<span class="preprocessor">#endif</span></div>
+<div class="ttc" id="acommand_8h_html_a7c52b2573cda56b38259890b03be026e"><div class="ttname"><a href="command_8h.html#a7c52b2573cda56b38259890b03be026e">exec</a></div><div class="ttdeci">int exec(Request *r, char *output_dir, struct timeval start_time)</div><div class="ttdef"><b>Definition:</b> command.c:110</div></div>
+<div class="ttc" id="arequest_8h_html"><div class="ttname"><a href="request_8h.html">request.h</a></div></div>
+<div class="ttc" id="astructrequest_html"><div class="ttname"><a href="structrequest.html">request</a></div><div class="ttdef"><b>Definition:</b> request.c:9</div></div>
 </div><!-- fragment --></div><!-- contents -->
 <!-- start footer part -->
         <hr class="footer">
         <address class="footer">
             <small>
-                Generated on Sun Apr 28 2024 13:46:31 for <b>Orchestrator</b> by
+                Generated on Sun Apr 28 2024 17:59:25 for <b>Orchestrator</b> by
                 <a href="http://www.doxygen.org/index.html">
                     <img class="footer" src="doxygen.png" alt="doxygen" onerror="this.onerror=null;this.src='doxygen.svg';"/>
                 </a> 1.9.1. All rights reserved.
