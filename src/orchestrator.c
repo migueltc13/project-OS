@@ -108,15 +108,14 @@ int main(int argc, char **argv) {
         printf("Command: %s\n", get_command(r));
         printf("Estimated time: %d\n", get_est_time(r));
         printf("%s command\n", get_is_piped(r) ? "Piped" : "Single");
+        printf("\n");
 
-        // execute the request
+        int exec_ret = 0;
         switch (get_type(r)) {
             case EXECUTE:
                 // execute the command
-                printf("Executing command...\n");
-
-                // execute the command
-                if (exec(get_command(r), get_is_piped(r), output_dir, task_nr++, start_time) == -1) {
+                exec_ret = exec(get_command(r), get_is_piped(r), output_dir, task_nr, start_time);
+                if (exec_ret == -1) {
                     perror("Error: couldn't execute command\n");
                     return 1;
                 }

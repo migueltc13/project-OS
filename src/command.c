@@ -190,26 +190,158 @@ int exec(char *cmd, bool is_piped, char* output_dir, int task_nr, struct timeval
     }
 
     if (is_piped) {
-        int N = 0;
-
-        char **commands = parse_cmd(cmd, &N);
-
-        if (commands == NULL) {
-            perror("Error parsing command");
-            return -1;
+        pid_t exec_pid = fork();
+        if (exec_pid == -1) {
+            perror("fork");
+            return 1;
         }
 
-        int pipes[N - 1][2];
+        if (exec_pid == 0) {
+            int N = 0;
 
-        for (int i = 0; i < N; i++) {
+            char **commands = parse_cmd(cmd, &N);
 
-            // create pipe for all commands except the last one
-            if (i != N - 1) {
-                if (pipe(pipes[i]) == -1) {
-                    perror("pipe");
+            if (commands == NULL) {
+                perror("Error parsing command");
+                return -1;
+            }
+
+            int pipes[N - 1][2];
+
+            for (int i = 0; i < N; i++) {
+
+                // create pipe for all commands except the last one
+                if (i != N - 1) {
+                    if (pipe(pipes[i]) == -1) {
+                        perror("pipe");
+                        return 1;
+                    }
+                }
+
+                pid_t pid = fork();
+                if (pid == -1) {
+                    perror("fork");
                     return 1;
                 }
+
+                if (pid == 0) {
+
+                    // first command
+                    if (i == 0) {
+                        close(pipes[i][STDIN_FILENO]);
+                        dup2(pipes[i][STDOUT_FILENO], STDOUT_FILENO);
+                        close(pipes[i][STDOUT_FILENO]);
+
+                        exec_command(commands[i]);
+                        perror("exec_command");
+                        _exit(1);
+                    }
+                    // last command
+                    else if (i == N - 1) {
+                        // redirect stdout to output file
+                        if (dup2(fd_out, STDOUT_FILENO) == -1) {
+                            perror("dup2");
+                            _exit(1);
+                        }
+                        close(fd_out);
+
+                        // redirect stderr to error file
+                        if (dup2(fd_err, STDERR_FILENO) == -1) {
+                            perror("dup2");
+                            _exit(1);
+                        }
+                        close(fd_err);
+
+                        close(pipes[i - 1][STDOUT_FILENO]);
+                        dup2(pipes[i - 1][STDIN_FILENO], STDIN_FILENO);
+                        close(pipes[i - 1][STDIN_FILENO]);
+
+                        exec_command(commands[i]);
+                        perror("exec_command");
+                        _exit(1);
+                    }
+                    // intermediate commands
+                    else {
+                        close(pipes[i][STDIN_FILENO]);
+                        dup2(pipes[i][STDOUT_FILENO], STDOUT_FILENO);
+                        close(pipes[i][STDOUT_FILENO]);
+
+                        close(pipes[i - 1][STDOUT_FILENO]);
+                        dup2(pipes[i - 1][STDIN_FILENO], STDIN_FILENO);
+                        close(pipes[i - 1][STDIN_FILENO]);
+
+                        exec_command(commands[i]);
+                        perror("exec_command");
+                        _exit(1);
+                    }
+                }
+
+                // TODO check if needs to be else statement here
+                // parent process
+                if (i == 0) {
+                    // first command
+                    close(pipes[i][STDOUT_FILENO]);
+                }
+                else if (i == N - 1) {
+                    // last command
+                    close(pipes[i - 1][STDIN_FILENO]);
+                }
+                else {
+                    // intermediate commands
+                    close(pipes[i - 1][STDIN_FILENO]);
+                    close(pipes[i][STDOUT_FILENO]);
+                }
             }
+            // wait for all children
+            for (int i = 0; i < N; i++) {
+
+                int status = 0;
+
+                if (wait(&status) == -1) {
+                    perror("wait");
+                    return 1;
+                }
+
+                if (WIFEXITED(status)) {
+                    if (WEXITSTATUS(status) != 0) {
+                        fprintf(stderr, "Command %d failed with status %d\n", i + 1, WEXITSTATUS(status));
+                        return 1;
+                    }
+                }
+            }
+
+            // write execution time (ms) to file
+            struct timeval end_time;
+            gettimeofday(&end_time, NULL);
+
+            long elapsed_time = (end_time.tv_sec - start_time.tv_sec) * 1000L +
+                                (end_time.tv_usec - start_time.tv_usec) / 1000L;
+
+            char time_str[20];
+            if (sprintf(time_str, "%ld ms\n", elapsed_time) < 0) {
+                perror("sprintf");
+                return 1;
+            }
+
+            if (write(fd_time, time_str, strlen(time_str)) == -1) {
+                perror("write");
+                return 1;
+            }
+
+            close(fd_time);
+
+            // TODO free commands
+            _exit(0);
+        }
+    }
+    else {
+        pid_t exec_pid = fork();
+        if (exec_pid == -1) {
+            perror("fork");
+            return 1;
+        }
+
+        if (exec_pid == 0) {
 
             pid_t pid = fork();
             if (pid == -1) {
@@ -218,122 +350,31 @@ int exec(char *cmd, bool is_piped, char* output_dir, int task_nr, struct timeval
             }
 
             if (pid == 0) {
+                // redirect stdout to output file
+                if (dup2(fd_out, STDOUT_FILENO) == -1) {
+                    perror("dup2");
+                    _exit(1);
+                }
+                close(fd_out);
 
-                // first command
-                if (i == 0) {
-                    close(pipes[i][STDIN_FILENO]);
-                    dup2(pipes[i][STDOUT_FILENO], STDOUT_FILENO);
-                    close(pipes[i][STDOUT_FILENO]);
+                // redirect stderr to error file
+                if (dup2(fd_err, STDERR_FILENO) == -1) {
+                    perror("dup2");
+                    _exit(1);
+                }
+                close(fd_err);
 
-                    exec_command(commands[i]);
+                int exec_ret = exec_command(cmd);
+                if (exec_ret == -1) {
                     perror("exec_command");
                     _exit(1);
                 }
-                // last command TODO write to file tmp/task(task_nr).out
-                else if (i == N - 1) {
-                    close(pipes[i - 1][STDOUT_FILENO]);
-                    dup2(pipes[i - 1][STDIN_FILENO], STDIN_FILENO);
-                    close(pipes[i - 1][STDIN_FILENO]);
 
-                    exec_command(commands[i]);
-                    perror("exec_command");
-                    _exit(1);
-                }
-                // intermediate commands
-                else {
-                    close(pipes[i][STDIN_FILENO]);
-                    dup2(pipes[i][STDOUT_FILENO], STDOUT_FILENO);
-                    close(pipes[i][STDOUT_FILENO]);
-
-                    close(pipes[i - 1][STDOUT_FILENO]);
-                    dup2(pipes[i - 1][STDIN_FILENO], STDIN_FILENO);
-                    close(pipes[i - 1][STDIN_FILENO]);
-
-                    exec_command(commands[i]);
-                    perror("exec_command");
-                    _exit(1);
-                }
-            }
-
-            // TODO check if needs to be else statement here
-            // parent process
-            if (i == 0) {
-                // first command
-                close(pipes[i][STDOUT_FILENO]);
-            }
-            else if (i == N - 1) {
-                // last command
-                close(pipes[i - 1][STDIN_FILENO]);
+                close(fd_out);
+                close(fd_err);
+                _exit(0);
             }
             else {
-                // intermediate commands
-                close(pipes[i - 1][STDIN_FILENO]);
-                close(pipes[i][STDOUT_FILENO]);
-            }
-        }
-
-        // wait for all children
-        for (int i = 0; i < N; i++) {
-
-            int status = 0;
-
-            if (wait(&status) == -1) {
-                perror("wait");
-                return 1;
-            }
-
-            if (WIFEXITED(status)) {
-                if (WEXITSTATUS(status) != 0) {
-                    fprintf(stderr, "Command %d failed with status %d\n", i + 1, WEXITSTATUS(status));
-                    return 1;
-                }
-            }
-        }
-
-        // TODO free commands
-    }
-    else {
-        pid_t pid = fork();
-        if (pid == -1) {
-            perror("fork");
-            return 1;
-        }
-
-        if (pid == 0) {
-            // redirect stdout to output file
-            if (dup2(fd_out, STDOUT_FILENO) == -1) {
-                perror("dup2");
-                _exit(1);
-            }
-            close(fd_out);
-
-            // redirect stderr to error file
-            if (dup2(fd_err, STDERR_FILENO) == -1) {
-                perror("dup2");
-                _exit(1);
-            }
-            close(fd_err);
-
-            int exec_ret = exec_command(cmd);
-            if (exec_ret == -1) {
-                perror("exec_command");
-                _exit(1);
-            }
-
-            close(fd_out);
-            close(fd_err);
-            _exit(0);
-        }
-        else {
-            // wait to chil process to finish in other process
-            pid_t wait_pid = fork();
-            if (wait_pid == -1) {
-                perror("fork");
-                return 1;
-            }
-
-            if (wait_pid != 0) {
-
                 (void) waitpid(pid, NULL, 0);
 
                 // write execution time (ms) to file
@@ -356,10 +397,17 @@ int exec(char *cmd, bool is_piped, char* output_dir, int task_nr, struct timeval
 
                 close(fd_time);
             }
+            _exit(0);
         }
     }
 
+    close(fd_out);
+    close(fd_err);
+    close(fd_time);
+
+    free(task_dir);
     free(output_file);
     free(error_file);
+    free(time_file);
     return 0;
 }
