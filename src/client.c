@@ -12,7 +12,7 @@
 #include <sys/stat.h>
 
 void execute_usage(char *name) {
-    printf("%s execute <estimated_time> <-u|-p> \"prog-a [args]\"\n", name);
+    printf("%s execute <estimated_time|priority> <-u|-p> \"prog-a [args]\"\n", name);
 }
 
 void status_usage(char *name) {
@@ -36,7 +36,10 @@ int main(int argc, char **argv) {
 
     // create client FIFO
     char *client_fifo = malloc(CLIENT_FIFO_SIZE);
-    sprintf(client_fifo, "client-%d", getpid());
+    if (snprintf(client_fifo, CLIENT_FIFO_SIZE, "client-%d", getpid()) == -1) {
+        perror("Error: couldn't create client FIFO name with snprintf");
+        return 1;
+    }
 
     (void) unlink(client_fifo);
     if (mkfifo(client_fifo, 0644) == -1) {
@@ -54,6 +57,11 @@ int main(int argc, char **argv) {
 
         // parse time
         int time = atoi(argv[2]);
+        if (time < 0) {
+            printf("Usage: ");
+            execute_usage(argv[0]);
+            return 0;
+        }
 
         // parse command option (single or piped)
         bool is_pided = false;
@@ -158,8 +166,7 @@ int main(int argc, char **argv) {
         char buffer[BUF_SIZE];
         size_t n;
         while ((n = read(fd_client, buffer, BUF_SIZE)) > 0) {
-            buffer[n] = '\0';
-            printf("%s", buffer);
+            write(STDOUT_FILENO, buffer, n);
         }
 
         close(fd_client);

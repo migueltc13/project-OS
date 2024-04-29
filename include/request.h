@@ -35,8 +35,12 @@ void set_task_nr(Request *r, int task_nr);
 
 void set_client_fifo(Request *r, char *client_fifo);
 
+void print_request(Request *r);
+
 char* type_to_string(int type);
 
 unsigned long sizeof_request();
+
+Request *clone_request(Request *r);
 
 #endif

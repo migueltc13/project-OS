@@ -12,6 +12,7 @@
 #include <sys/time.h>
 #include <sys/stat.h>
 #include <sys/wait.h>
+#include <errno.h>
 
 #define MAX_CMDS 10
 
@@ -151,8 +152,14 @@ int exec(Request *r, char *output_dir, struct timeval start_time) {
     }
 
     if (mkdir(task_dir, 0755) != 0) {
-        perror("Error: couldn't create task directory");
-        return -1;
+        if (errno == EEXIST) {
+            printf("Warning: overwriting task directory\n");
+            printf("This is due to inproper termination of the server\n\n");
+        }
+        else {
+            perror("Error: couldn't create task directory");
+            return -1;
+        }
     }
 
     // open output file

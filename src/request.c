@@ -8,7 +8,7 @@
 
 struct request {
     int type;
-    int est_time;
+    int est_time; // estimated time or priority
     char command[MAX_CMD_SIZE];
     bool is_piped;
     int task_nr;
@@ -74,6 +74,17 @@ void set_client_fifo(Request *r, char *client_fifo) {
 }
 
 /* others */
+void print_request(Request *r) {
+    printf("Request:\n");
+    printf("  Type: %s\n", type_to_string(r->type));
+    printf("  Estimated time: %d\n", r->est_time);
+    printf("  Command: %s\n", r->command);
+    printf("  Is piped: %s\n", r->is_piped ? "true" : "false");
+    printf("  Task number: %d\n", r->task_nr);
+    printf("  Client fifo: %s\n", r->client_fifo);
+    printf("\n");
+}
+
 char* type_to_string(int type) {
     switch (type) {
         case EXECUTE:
@@ -91,4 +102,21 @@ char* type_to_string(int type) {
 
 unsigned long sizeof_request() {
     return sizeof(Request);
+}
+
+Request *clone_request(Request *r) {
+    Request *new = malloc(sizeof(Request));
+    if (new == NULL) {
+        perror("Error: couldn't allocate memory for request in clone_request");
+        return NULL;
+    }
+
+    new->type = r->type;
+    new->est_time = r->est_time;
+    strcpy(new->command, r->command);
+    new->is_piped = r->is_piped;
+    new->task_nr = r->task_nr;
+    strcpy(new->client_fifo, r->client_fifo);
+
+    return new;
 }
