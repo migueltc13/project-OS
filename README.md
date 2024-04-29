@@ -20,6 +20,5 @@ make
 
 ## Authors
 
-- Ana Pinto - [@Pipa03](https://github.com/Pipa03)
 - Flávia Araújo - [@flaviaraujo](https://github.com/flaviaraujo)
 - Miguel Carvalho - [@migueltc13](https://github.com/migueltc13)
