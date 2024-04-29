@@ -97,8 +97,10 @@ int main(int argc, char **argv) {
 
     Request *r;
 
+    bool running = true;
+
     // main loop
-    while (1) {
+    while (running) {
         // check for client requests in the server FIFO
         int fd = open(SERVER_FIFO, O_RDONLY);
         if (fd == -1) {
@@ -266,13 +268,17 @@ int main(int argc, char **argv) {
                     return 1;
                 }
                 break;
-
+            case KILL:
+                // kill the server
+                running = false;
+                break;
             default:
                 printf("Invalid request type\n");
                 break;
         }
     }
 
+    printf("Orchestrator server is shutting down...\n");
     free(r);
     return 0;
 }

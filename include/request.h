@@ -6,6 +6,7 @@
 #define EXECUTE 0
 #define STATUS 1
 #define COMPLETED 2
+#define KILL 3
 
 #define MAX_CMD_SIZE 300
 #define MAX_FIFO_SIZE 100

@@ -19,6 +19,10 @@ void status_usage(char *name) {
     printf("%s status\n", name);
 }
 
+void kill_usage(char *name) {
+    printf("%s kill\n", name);
+}
+
 int main(int argc, char **argv) {
 
     // parse arguments
@@ -26,6 +30,7 @@ int main(int argc, char **argv) {
         printf("Usage:\n");
         execute_usage(argv[0]);
         status_usage(argv[0]);
+        kill_usage(argv[0]);
         return 0;
     }
 
@@ -173,11 +178,42 @@ int main(int argc, char **argv) {
         close(fd_client);
         free(r);
     }
+    else if (strcmp(argv[1], "kill") == 0) {
+        if (argc != 2) {
+            printf("Usage: ");
+            kill_usage(argv[0]);
+            return 0;
+        }
+
+        // create kill request
+        Request *r = create_request(KILL, 0, "", false, client_fifo);
+        if (r == NULL) {
+            perror("Error: couldn't create kill request\n");
+            return 1;
+        }
+
+        // send request via server FIFO
+        int fd = open(SERVER_FIFO, O_WRONLY);
+        if (fd == -1) {
+            perror("Error: couldn't open server FIFO\n");
+            return 1;
+        }
+
+        if (write(fd, r, sizeof_request()) == -1) {
+            perror("Error: couldn't write to server FIFO\n");
+            close(fd);
+            return 1;
+        }
+
+        close(fd);
+        free(r);
+    }
     else {
         // invalid option
         printf("Usage:\n");
         execute_usage(argv[0]);
         status_usage(argv[0]);
+        kill_usage(argv[0]);
     }
 
     (void) unlink(client_fifo);
