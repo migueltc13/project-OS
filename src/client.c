@@ -69,6 +69,10 @@ int main(int argc, char **argv) {
 
         // create request
         Request *r = create_request(EXECUTE, time, command, is_pided, client_fifo);
+        if (r == NULL) {
+            perror("Error: couldn't create status request\n");
+            return 1;
+        }
 
         // send request via server FIFO
         int fd = open(SERVER_FIFO, O_WRONLY);
@@ -128,6 +132,10 @@ int main(int argc, char **argv) {
 
         // create status request
         Request *r = create_request(STATUS, 0, "", false, client_fifo);
+        if (r == NULL) {
+            perror("Error: couldn't create status request\n");
+            return 1;
+        }
 
         // send client FIFO in status request
         set_client_fifo(r, client_fifo);
