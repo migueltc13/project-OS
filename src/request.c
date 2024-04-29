@@ -16,7 +16,7 @@ struct request {
     long time;
 };
 
-Request *create_request(int type, int est_time, char *command, bool is_piped) {
+Request *create_request(int type, int est_time, char *command, bool is_piped, char* client_fifo) {
 
     Request *request = malloc(sizeof(Request));
     if (request == NULL) {
@@ -28,6 +28,8 @@ Request *create_request(int type, int est_time, char *command, bool is_piped) {
     request->est_time = est_time;
     strcpy(request->command, command);
     request->is_piped = is_piped;
+    request->task_nr = -1;
+    strcpy(request->client_fifo, client_fifo);
 
     return request;
 }

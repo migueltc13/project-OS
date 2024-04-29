@@ -12,7 +12,7 @@
 
 typedef struct request Request;
 
-Request *create_request(int type, int est_time, char *command, bool is_pipe);
+Request *create_request(int type, int est_time, char *command, bool is_pipe, char *client_fifo);
 
 int get_type(Request *r);
 

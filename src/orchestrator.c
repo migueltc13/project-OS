@@ -166,6 +166,23 @@ int main(int argc, char **argv) {
                     return 1;
                 }
 
+                // send the task number via client FIFO
+                char *client_fifo = get_client_fifo(r);
+                int fd_client = open(client_fifo, O_WRONLY);
+                if (fd_client == -1) {
+                    perror("Error: couldn't open client FIFO");
+                    return 1;
+                }
+
+                char buffer[10];
+                int bytes_writed = snprintf(buffer, 10, "%d", task_nr);
+                if (write(fd_client, buffer, bytes_writed) == -1) {
+                    perror("Error: couldn't write to client FIFO");
+                    return 1;
+                }
+
+                close(fd_client);
+
                 // increment the task number
                 task_nr = increment_task_nr(output_dir);
                 if (task_nr == -1) {

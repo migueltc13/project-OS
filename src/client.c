@@ -29,6 +29,16 @@ int main(int argc, char **argv) {
         return 0;
     }
 
+    // create client FIFO
+    char *client_fifo = malloc(CLIENT_FIFO_SIZE);
+    sprintf(client_fifo, "client-%d", getpid());
+
+    (void) unlink(client_fifo);
+    if (mkfifo(client_fifo, 0644) == -1) {
+        perror("Error: couldn't create client FIFO\n");
+        return 1;
+    }
+
     // parse execute option
     if (strcmp(argv[1], "execute") == 0) {
         if (argc < 5) {
@@ -58,7 +68,7 @@ int main(int argc, char **argv) {
         char *command = argv[4];
 
         // create request
-        Request *r = create_request(EXECUTE, time, command, is_pided);
+        Request *r = create_request(EXECUTE, time, command, is_pided, client_fifo);
 
         // send request via server FIFO
         int fd = open(SERVER_FIFO, O_WRONLY);
@@ -74,12 +84,42 @@ int main(int argc, char **argv) {
         }
 
         close(fd);
+
+        // receive task number via client FIFO
+        int fd_client = open(client_fifo, O_RDONLY);
+        if (fd_client == -1) {
+            perror("Error: couldn't open client FIFO\n");
+            return 1;
+        }
+
+        // read and print task number
+        char *msg = "Task ";
+        if (write(STDOUT_FILENO, msg, strlen(msg)) == -1) {
+            perror("Error: couldn't write to stdout\n");
+            close(fd_client);
+            return 1;
+        }
+
+        char buffer[BUF_SIZE];
+        size_t n;
+        while ((n = read(fd_client, buffer, BUF_SIZE)) > 0) {
+            buffer[n] = '\0';
+            write(STDOUT_FILENO, buffer, n);
+        }
+
+        close(fd_client);
+
+        msg = " received\n";
+        if (write(STDOUT_FILENO, msg, strlen(msg)) == -1) {
+            perror("Error: couldn't write to stdout\n");
+            return 1;
+        }
+
         free(r);
-        return 0;
     }
 
     // parse status option
-    if (strcmp(argv[1], "status") == 0) {
+    else if (strcmp(argv[1], "status") == 0) {
         if (argc != 2) {
             printf("Usage: ");
             status_usage(argv[0]);
@@ -87,17 +127,7 @@ int main(int argc, char **argv) {
         }
 
         // create status request
-        Request *r = create_request(STATUS, 0, "", false);
-
-        // create client FIFO
-        char *client_fifo = malloc(CLIENT_FIFO_SIZE);
-        sprintf(client_fifo, "client-%d", getpid());
-
-        (void) unlink(client_fifo);
-        if (mkfifo(client_fifo, 0644) == -1) {
-            perror("Error: couldn't create client FIFO\n");
-            return 1;
-        }
+        Request *r = create_request(STATUS, 0, "", false, client_fifo);
 
         // send client FIFO in status request
         set_client_fifo(r, client_fifo);
@@ -134,13 +164,15 @@ int main(int argc, char **argv) {
 
         close(fd_client);
         free(r);
-        free(client_fifo);
-        return 0;
+    }
+    else {
+        // invalid option
+        printf("Usage:\n");
+        execute_usage(argv[0]);
+        status_usage(argv[0]);
     }
 
-    // invalid option
-    printf("Usage:\n");
-    execute_usage(argv[0]);
-    status_usage(argv[0]);
+    (void) unlink(client_fifo);
+    free(client_fifo);
     return 0;
 }
