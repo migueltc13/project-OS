@@ -11,8 +11,6 @@
 #include <fcntl.h>
 #include <sys/stat.h>
 #include <sys/time.h>
-// #include <stdlib.h>
-
 
 int add_request(Request *requests[], int *N, Request *r);
 
@@ -68,13 +66,31 @@ int main(int argc, char **argv) {
     // Get the number of parallel tasks
     int tasks = atoi(argv[2]);
 
-    // Get the scheduling policy if it exists
-    /* char *sched_policy = NULL;
-    if (argc > 3) {
-        sched_policy = argv[3];
-    } */
+    // Set the default scheduling policy
+    int policy = DEFAULT_POLICY;
 
-    printf("Orchestrator server is running...\n");
+    // Get the scheduling policy if it was provided
+    if (argc > 3) {
+        char *policy_buffer = argv[3];
+        // parse the scheduling policy to an int
+        if (strcmp(policy_buffer, "FCFS") == 0) {
+            policy = FCFS;
+        }
+        else if (strcmp(policy_buffer, "SJF") == 0) {
+            policy = SJF;
+        }
+        else if (strcmp(policy_buffer, "PES") == 0) {
+            policy = PES;
+        }
+        else {
+            printf("Error: invalid scheduling policy\n");
+            return 1;
+        }
+        printf("Scheduling policy: %s\n", policy_buffer);
+    }
+    else {
+        printf("Using default scheduling policy: FCFS\n");
+    }
 
     // create the server FIFO
     (void) unlink(SERVER_FIFO);
@@ -96,6 +112,8 @@ int main(int argc, char **argv) {
     Request *scheduled[MAX_REQUESTS]; int N_scheduled = 0;
 
     Request *r;
+
+    printf("Orchestrator server is running...\n");
 
     bool running = true;
 
@@ -144,41 +162,59 @@ int main(int argc, char **argv) {
                 // add the task_nr to the request
                 set_task_nr(r, task_nr);
 
-                if (N_executing > tasks) {
+                bool toSched = (N_executing >= tasks);
+                if (toSched) {
                     // schedule the request
                     if (add_request(scheduled, &N_scheduled, r) == -1) {
                         perror("Error: couldn't add request to scheduled array");
                         return 1;
                     }
-                    break;
+                    printf("Task %d scheduled\n\n", task_nr);
+                }
+                else {
+                    // execute the request
+                    printf("Task %d executing\n\n", task_nr);
+
+                    // add the request to the executing array
+                    if (add_request(executing, &N_executing, r) == -1) {
+                        perror("Error: couldn't add request to executing array");
+                        return 1;
+                    }
+
+                    // execute the command
+                    exec_ret = exec(r, output_dir, start_time);
+                    if (exec_ret == -1) {
+                        perror("Error: couldn't execute command");
+                        return 1;
+                    }
                 }
 
-                // execute the request
+                // create message to send to client
+                // const int msg_size = 15 + 8 + 2; // TODO message size
+                char msg[15 + 8 + 2]; // TODO
 
-                // add the request to the executing array
-                if (add_request(executing, &N_executing, r) == -1) {
-                    perror("Error: couldn't add request to executing array");
-                    return 1;
+                int bytes_writed = snprintf(
+                    msg, 15 + 8 + 2, // TODO
+                    "%s task %d",
+                    toSched ? "Scheduled" : "Executing",
+                    task_nr
+                );
+
+                if (bytes_writed < 0) {
+                    perror("Error: Couldn't create message to client");
+                    return -1;
                 }
 
-                // execute the command
-                exec_ret = exec(r, output_dir, start_time);
-                if (exec_ret == -1) {
-                    perror("Error: couldn't execute command");
-                    return 1;
-                }
-
-                // send the task number via client FIFO
+                // send message with task number via client FIFO
                 char *client_fifo = get_client_fifo(r);
+
                 int fd_client = open(client_fifo, O_WRONLY);
                 if (fd_client == -1) {
                     perror("Error: couldn't open client FIFO");
                     return 1;
                 }
 
-                char buffer[10];
-                int bytes_writed = snprintf(buffer, 10, "%d", task_nr);
-                if (write(fd_client, buffer, bytes_writed) == -1) {
+                if (write(fd_client, msg, bytes_writed) == -1) {
                     perror("Error: couldn't write to client FIFO");
                     return 1;
                 }
@@ -236,7 +272,12 @@ int main(int argc, char **argv) {
                 }
 
                 // check for scheduled tasks to run
-                Request *next = select_request(scheduled, &N_scheduled, 0);
+                if (N_scheduled == 0) {
+                    printf("No scheduled tasks\n\n");
+                    break;
+                }
+
+                Request *next = select_request(scheduled, &N_scheduled, policy);
                 if (next == NULL) {
                     printf("No scheduled tasks\n\n");
                     break;
@@ -273,7 +314,7 @@ int main(int argc, char **argv) {
                 running = false;
                 break;
             default:
-                printf("Invalid request type\n");
+                printf("Unknown request type\n");
                 break;
         }
     }
@@ -308,29 +349,34 @@ int remove_request(Request *requests[], int *N, Request *r) {
     return -1;
 }
 
-/* policies:
- * 0: FIFO - First In First Out
- * 1: SJF  - Shortest Job First
- * 2: RR   - Round Robin
- */
-Request *select_request(Request *requests[], int *N, int policy) {
-    // TODO implement scheduling policy
+Request *select_request(Request *scheduled[], int *N, int policy) {
+
+    Request *r = NULL;
+
     switch (policy) {
-        case 0:
-            // FIFO
+        case FCFS:
+            // returns the first scheduled request
+            r = scheduled[0];
             break;
-        case 1:
-            // SJF
-            break;
-        case 2:
-            // RR
+        case SJF:
+        case PES:
+            // returns the request with the smallest estimated time / priority
+            r = scheduled[0];
+            int min_est_time = get_est_time(r);
+
+            for (int i = 0; i < *N; i++) {
+                if (get_est_time(scheduled[i]) < min_est_time) {
+                    r = scheduled[i];
+                    min_est_time = get_est_time(r);
+                }
+            }
             break;
         default:
-            (*N) = 0;
-            return requests[0];
+            printf("Unknown scheduling policy.\n");
+            break;
     }
 
-    return NULL;
+    return r;
 }
 
 int send_status(

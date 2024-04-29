@@ -101,14 +101,7 @@ int main(int argc, char **argv) {
             return 1;
         }
 
-        // read and print task number
-        char *msg = "Task ";
-        if (write(STDOUT_FILENO, msg, strlen(msg)) == -1) {
-            perror("Error: couldn't write to stdout");
-            close(fd_client);
-            return 1;
-        }
-
+        // read and write server message
         char buffer[BUF_SIZE];
         size_t n;
         while ((n = read(fd_client, buffer, BUF_SIZE)) > 0) {
@@ -117,12 +110,6 @@ int main(int argc, char **argv) {
         }
 
         close(fd_client);
-
-        msg = " received\n";
-        if (write(STDOUT_FILENO, msg, strlen(msg)) == -1) {
-            perror("Error: couldn't write to stdout");
-            return 1;
-        }
 
         free(r);
     }
