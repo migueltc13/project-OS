@@ -17,7 +17,7 @@ int init_task_nr(char *output_dir) {
 
     int fd = open(output_dir, O_DIRECTORY);
     if (fd < 0) {
-        perror("Error: output directory does not exist\n");
+        perror("Error: output directory does not exist");
         close(fd);
         return -1;
     }
@@ -32,12 +32,12 @@ int init_task_nr(char *output_dir) {
     if (access(filename, F_OK) == -1) {
         int fd = open(filename, O_CREAT | O_WRONLY, 0644);
         if (fd < 0) {
-            perror("Error: could not create task number file\n");
+            perror("Error: couldn't create task number file");
             close(fd);
             return -1;
         }
         if (write(fd, &task_nr, sizeof(int)) == -1) {
-            perror("Error: could not write to task number file\n");
+            perror("Error: couldn't write to task number file");
             close(fd);
             return -1;
         }
@@ -47,13 +47,13 @@ int init_task_nr(char *output_dir) {
         // read the task number from the file
         fd = open(filename, O_RDONLY);
         if (fd < 0) {
-            perror("Error: could not open task number file\n");
+            perror("Error: couldn't open task number file");
             close(fd);
             return -1;
         }
 
         if (read(fd, &task_nr, sizeof(int)) == -1) {
-            perror("Error: could not read from task number file\n");
+            perror("Error: couldn't read from task number file");
             close(fd);
             return -1;
         }
@@ -73,7 +73,7 @@ int increment_task_nr(char *output_dir) {
 
     int fd = open(output_dir, O_DIRECTORY);
     if (fd < 0) {
-        perror("Error: output directory doesn't exist\n");
+        perror("Error: output directory doesn't exist");
         close(fd);
         return -1;
     }
@@ -87,13 +87,13 @@ int increment_task_nr(char *output_dir) {
     int task_nr = 1;
     fd = open(filename, O_RDONLY);
     if (fd < 0) {
-        perror("Error: couldn't open task number file\n");
+        perror("Error: couldn't open task number file");
         close(fd);
         return -1;
     }
 
     if (read(fd, &task_nr, sizeof(int)) == -1) {
-        perror("Error: couldn't read from task number file\n");
+        perror("Error: couldn't read from task number file");
         close(fd);
         return -1;
     }
@@ -105,13 +105,13 @@ int increment_task_nr(char *output_dir) {
     // write the new task number to the file
     fd = open(filename, O_WRONLY);
     if (fd < 0) {
-        perror("Error: couldn't open task number file\n");
+        perror("Error: couldn't open task number file");
         close(fd);
         return -1;
     }
 
     if (write(fd, &task_nr, sizeof(int)) == -1) {
-        perror("Error: couldn't write to task number file\n");
+        perror("Error: couldn't write to task number file");
         close(fd);
         return -1;
     }

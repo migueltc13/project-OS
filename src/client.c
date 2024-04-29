@@ -40,7 +40,7 @@ int main(int argc, char **argv) {
 
     (void) unlink(client_fifo);
     if (mkfifo(client_fifo, 0644) == -1) {
-        perror("Error: couldn't create client FIFO\n");
+        perror("Error: couldn't create client FIFO");
         return 1;
     }
 
@@ -75,19 +75,19 @@ int main(int argc, char **argv) {
         // create request
         Request *r = create_request(EXECUTE, time, command, is_pided, client_fifo);
         if (r == NULL) {
-            perror("Error: couldn't create status request\n");
+            perror("Error: couldn't create status request");
             return 1;
         }
 
         // send request via server FIFO
         int fd = open(SERVER_FIFO, O_WRONLY);
         if (fd == -1) {
-            perror("Error: couldn't open server FIFO\n");
+            perror("Error: couldn't open server FIFO");
             return 1;
         }
 
         if (write(fd, r, sizeof_request()) == -1) {
-            perror("Error: couldn't write to server FIFO\n");
+            perror("Error: couldn't write to server FIFO");
             close(fd);
             return 1;
         }
@@ -97,14 +97,14 @@ int main(int argc, char **argv) {
         // receive task number via client FIFO
         int fd_client = open(client_fifo, O_RDONLY);
         if (fd_client == -1) {
-            perror("Error: couldn't open client FIFO\n");
+            perror("Error: couldn't open client FIFO");
             return 1;
         }
 
         // read and print task number
         char *msg = "Task ";
         if (write(STDOUT_FILENO, msg, strlen(msg)) == -1) {
-            perror("Error: couldn't write to stdout\n");
+            perror("Error: couldn't write to stdout");
             close(fd_client);
             return 1;
         }
@@ -120,7 +120,7 @@ int main(int argc, char **argv) {
 
         msg = " received\n";
         if (write(STDOUT_FILENO, msg, strlen(msg)) == -1) {
-            perror("Error: couldn't write to stdout\n");
+            perror("Error: couldn't write to stdout");
             return 1;
         }
 
@@ -138,7 +138,7 @@ int main(int argc, char **argv) {
         // create status request
         Request *r = create_request(STATUS, 0, "", false, client_fifo);
         if (r == NULL) {
-            perror("Error: couldn't create status request\n");
+            perror("Error: couldn't create status request");
             return 1;
         }
 
@@ -148,12 +148,12 @@ int main(int argc, char **argv) {
         // send request via server FIFO
         int fd_server = open(SERVER_FIFO, O_WRONLY);
         if (fd_server == -1) {
-            perror("Error: couldn't open server FIFO\n");
+            perror("Error: couldn't open server FIFO");
             return 1;
         }
 
         if (write(fd_server, r, sizeof_request()) == -1) {
-            perror("Error: couldn't write to server FIFO\n");
+            perror("Error: couldn't write to server FIFO");
             close(fd_server);
             return 1;
         }
@@ -163,7 +163,7 @@ int main(int argc, char **argv) {
         // receive status response via client FIFO
         int fd_client = open(client_fifo, O_RDONLY);
         if (fd_client == -1) {
-            perror("Error: couldn't open client FIFO\n");
+            perror("Error: couldn't open client FIFO");
             return 1;
         }
 
@@ -188,19 +188,19 @@ int main(int argc, char **argv) {
         // create kill request
         Request *r = create_request(KILL, 0, "", false, client_fifo);
         if (r == NULL) {
-            perror("Error: couldn't create kill request\n");
+            perror("Error: couldn't create kill request");
             return 1;
         }
 
         // send request via server FIFO
         int fd = open(SERVER_FIFO, O_WRONLY);
         if (fd == -1) {
-            perror("Error: couldn't open server FIFO\n");
+            perror("Error: couldn't open server FIFO");
             return 1;
         }
 
         if (write(fd, r, sizeof_request()) == -1) {
-            perror("Error: couldn't write to server FIFO\n");
+            perror("Error: couldn't write to server FIFO");
             close(fd);
             return 1;
         }
