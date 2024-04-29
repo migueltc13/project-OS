@@ -19,7 +19,7 @@ Request *create_request(int type, int est_time, char *command, bool is_piped, ch
 
     Request *request = malloc(sizeof(Request));
     if (request == NULL) {
-        perror("malloc");
+        perror("Error: couldn't allocate memory for request in create_request");
         return NULL;
     }
 
@@ -82,6 +82,8 @@ char* type_to_string(int type) {
             return "STATUS";
         case COMPLETED:
             return "COMPLETED";
+        case KILL:
+            return "KILL";
         default:
             return "UNKNOWN";
     }
