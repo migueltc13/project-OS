@@ -39,4 +39,6 @@ char* type_to_string(int type);
 
 unsigned long sizeof_request();
 
+Request *clone_request(Request *r);
+
 #endif

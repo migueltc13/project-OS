@@ -36,7 +36,10 @@ int main(int argc, char **argv) {
 
     // create client FIFO
     char *client_fifo = malloc(CLIENT_FIFO_SIZE);
-    sprintf(client_fifo, "client-%d", getpid());
+    if (snprintf(client_fifo, CLIENT_FIFO_SIZE, "client-%d", getpid()) == -1) {
+        perror("Error: couldn't create client FIFO name with snprintf");
+        return 1;
+    }
 
     (void) unlink(client_fifo);
     if (mkfifo(client_fifo, 0644) == -1) {
@@ -158,8 +161,7 @@ int main(int argc, char **argv) {
         char buffer[BUF_SIZE];
         size_t n;
         while ((n = read(fd_client, buffer, BUF_SIZE)) > 0) {
-            buffer[n] = '\0';
-            printf("%s", buffer);
+            write(STDOUT_FILENO, buffer, n);
         }
 
         close(fd_client);

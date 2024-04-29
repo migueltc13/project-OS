@@ -92,3 +92,20 @@ char* type_to_string(int type) {
 unsigned long sizeof_request() {
     return sizeof(Request);
 }
+
+Request *clone_request(Request *r) {
+    Request *new = malloc(sizeof(Request));
+    if (new == NULL) {
+        perror("Error: couldn't allocate memory for request in clone_request");
+        return NULL;
+    }
+
+    new->type = r->type;
+    new->est_time = r->est_time;
+    strcpy(new->command, r->command);
+    new->is_piped = r->is_piped;
+    new->task_nr = r->task_nr;
+    strcpy(new->client_fifo, r->client_fifo);
+
+    return new;
+}

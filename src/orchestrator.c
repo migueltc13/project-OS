@@ -111,8 +111,6 @@ int main(int argc, char **argv) {
     Request *executing[MAX_REQUESTS]; int N_executing = 0;
     Request *scheduled[MAX_REQUESTS]; int N_scheduled = 0;
 
-    Request *r;
-
     printf("Orchestrator server is running...\n");
 
     bool running = true;
@@ -127,7 +125,7 @@ int main(int argc, char **argv) {
         }
 
         // Allocate memory for the request
-        r = malloc(sizeof_request());
+        Request *r = malloc(sizeof_request());
 
         // read the request
         ssize_t bytes_read = read(fd, r, sizeof_request());
@@ -302,6 +300,8 @@ int main(int argc, char **argv) {
                     return 1;
                 }
 
+                free(next);
+
                 // increment the task number
                 task_nr = increment_task_nr(output_dir);
                 if (task_nr == -1) {
@@ -317,10 +317,18 @@ int main(int argc, char **argv) {
                 printf("Unknown request type\n");
                 break;
         }
+        free(r);
     }
 
     printf("Orchestrator server is shutting down...\n");
-    free(r);
+
+    // cleanup
+    for (int i = 0; i < N_executing; i++) {
+        free(executing[i]);
+    }
+    for (int i = 0; i < N_scheduled; i++) {
+        free(scheduled[i]);
+    }
     return 0;
 }
 
@@ -330,13 +338,15 @@ int add_request(Request *requests[], int *N, Request *r) {
         return -1;
     }
 
-    requests[(*N)++] = r;
+    requests[(*N)++] = clone_request(r);
     return 0;
 }
 
 int remove_request(Request *requests[], int *N, Request *r) {
     for (int i = 0; i < *N; i++) {
         if (get_task_nr(requests[i]) == get_task_nr(r)) {
+
+            free(requests[i]);
             for (int j = i; j < *N - 1; j++) {
                 requests[j] = requests[j + 1];
             }
@@ -376,7 +386,7 @@ Request *select_request(Request *scheduled[], int *N, int policy) {
             break;
     }
 
-    return r;
+    return clone_request(r);
 }
 
 int send_status(
