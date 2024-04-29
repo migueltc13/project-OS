@@ -351,9 +351,6 @@ int exec(Request *r, char *output_dir, struct timeval start_time) {
             // send this request to the orchestrator as completed
             set_type(r, COMPLETED);
 
-            // set the elapsed time in the request
-            set_time(r, elapsed_time);
-
             int fd_server = open(SERVER_FIFO, O_WRONLY);
             if (fd_server == -1) {
                 perror("Error: couldn't open server FIFO");
@@ -473,9 +470,6 @@ int exec(Request *r, char *output_dir, struct timeval start_time) {
 
                 // send this request to the orchestrator as completed
                 set_type(r, COMPLETED);
-
-                // set the elapsed time in the request
-                set_time(r, elapsed_time);
 
                 int fd_server = open(SERVER_FIFO, O_WRONLY);
                 if (fd_server == -1) {

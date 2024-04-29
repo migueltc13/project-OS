@@ -34,8 +34,6 @@ void set_task_nr(Request *r, int task_nr);
 
 void set_client_fifo(Request *r, char *client_fifo);
 
-void set_time(Request *r, long time);
-
 char* type_to_string(int type);
 
 unsigned long sizeof_request();
