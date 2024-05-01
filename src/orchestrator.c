@@ -88,7 +88,7 @@ int main(int argc, char **argv) {
     }
 
     // Get the number of parallel tasks
-    int tasks = atoi(argv[2]);
+    const int tasks = atoi(argv[2]);
     if (tasks <= 0) {
         printf("Error: invalid number of parallel tasks\n");
         return 1;
@@ -136,7 +136,7 @@ int main(int argc, char **argv) {
     }
 
     // Arrays to store the executing and scheduled requests
-    Request *executing[MAX_REQUESTS]; int N_executing = 0; // TODO malloc
+    Request *executing[tasks]; int N_executing = 0; // TODO malloc
     Request *scheduled[MAX_REQUESTS]; int N_scheduled = 0; // TODO realloc
 
     printf("Orchestrator server is running...\n");
@@ -237,6 +237,7 @@ int main(int argc, char **argv) {
 
         // free the request
         free(r);
+
     }
     printf("Orchestrator server is shutting down...\n");
 
@@ -330,14 +331,30 @@ int handle_execute(Request *r,
     // add the task_nr to the request
     set_task_nr(r, *task_nr);
 
+    // get the client FIFO name
+    char *client_fifo = get_client_fifo(r);
+
     bool toSched = (*N_executing >= tasks);
     if (toSched) {
         // schedule the request
         printf("Task %d scheduled\n\n", *task_nr);
 
         if (add_request(scheduled, N_scheduled, r) == -1) {
-            perror("Error: couldn't add request to scheduled array");
-            return -1;
+            char *msg = "Critical: max number of scheduled tasks reached";
+            printf("%s\n", msg);
+            int fd_client = open(client_fifo, O_WRONLY);
+            if (fd_client == -1) {
+                perror("Error: couldn't open client FIFO");
+                return -1;
+            }
+
+            if (write(fd_client, msg, strlen(msg)) == -1) {
+                perror("Error: couldn't write to client FIFO");
+                return -1;
+            }
+
+            close(fd_client);
+            return 0;
         }
     }
     else {
@@ -375,8 +392,6 @@ int handle_execute(Request *r,
     }
 
     // send message with task number via client FIFO
-    char *client_fifo = get_client_fifo(r);
-
     int fd_client = open(client_fifo, O_WRONLY);
     if (fd_client == -1) {
         perror("Error: couldn't open client FIFO");
