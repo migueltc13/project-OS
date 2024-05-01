@@ -3,7 +3,7 @@
 
 #define TASK_NR_STRING_SIZE 8
 
-int load_task_nr(char *output_dir);
-int save_task_nr(int task_nr, char *output_dir);
+unsigned int load_task_nr(char *output_dir);
+unsigned int save_task_nr(unsigned int task_nr, char *output_dir);
 
 #endif

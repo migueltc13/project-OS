@@ -13,7 +13,7 @@ struct request {
     int est_time; // estimated time or priority
     char command[MAX_CMD_SIZE];
     bool is_piped;
-    int task_nr;
+    unsigned int task_nr;
     char client_fifo[CLIENT_FIFO_SIZE];
 };
 
@@ -29,7 +29,7 @@ Request *create_request(int type, int est_time, char *command, bool is_piped, ch
     request->est_time = est_time;
     strcpy(request->command, command);
     request->is_piped = is_piped;
-    request->task_nr = -1;
+    request->task_nr = 0; // 0 isn't a valid task number
     strcpy(request->client_fifo, client_fifo);
 
     return request;
@@ -53,7 +53,7 @@ bool get_is_piped(Request *r) {
     return r->is_piped;
 }
 
-int get_task_nr(Request *r) {
+unsigned int get_task_nr(Request *r) {
     return r->task_nr;
 }
 
@@ -67,7 +67,7 @@ void set_type(Request *r, int type) {
     r->type = type;
 }
 
-void set_task_nr(Request *r, int task_nr) {
+void set_task_nr(Request *r, unsigned int task_nr) {
     r->task_nr = task_nr;
 }
 

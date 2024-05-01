@@ -29,8 +29,8 @@ Request *select_request(Request *requests[], int N, int policy);
 int handle_execute(Request *r,
                    Request *executing[], int *N_executing,
                    Request *scheduled[], int *N_scheduled,
-                   char *output_dir, int tasks,
-                   int *task_nr, struct timeval start_time);
+                   char *output_dir, unsigned int tasks,
+                   unsigned int *task_nr, struct timeval start_time);
 
 int handle_status(Request *r,
                   Request *executing[], int N_executing,
@@ -88,7 +88,7 @@ int main(int argc, char **argv) {
     }
 
     // Get the number of parallel tasks
-    const int tasks = atoi(argv[2]);
+    const unsigned int tasks = atoi(argv[2]);
     if (tasks <= 0) {
         printf("Error: invalid number of parallel tasks\n");
         return 1;
@@ -129,8 +129,8 @@ int main(int argc, char **argv) {
     }
 
     // Get the task number
-    int task_nr = load_task_nr(output_dir);
-    if (task_nr == -1) {
+    unsigned int task_nr = load_task_nr(output_dir);
+    if (task_nr == 0) {
         perror("Error: couldn't get task number");
         return 1;
     }
@@ -192,7 +192,9 @@ int main(int argc, char **argv) {
                                             output_dir, tasks,
                                             &task_nr, start_time);
                     if (status == -1) {
-                        save_task_nr(task_nr, output_dir);
+                        if (save_task_nr(task_nr, output_dir) == 0) {
+                            perror("Error: couldn't save task number");
+                        }
                         clean_up_all(fd, r,
                                      executing, N_executing,
                                      scheduled, N_scheduled);
@@ -206,7 +208,9 @@ int main(int argc, char **argv) {
                                            scheduled, N_scheduled,
                                            output_dir);
                     if (status == -1) {
-                        save_task_nr(task_nr, output_dir);
+                        if (save_task_nr(task_nr, output_dir) == 0) {
+                            perror("Error: couldn't save task number");
+                        }
                         clean_up_all(fd, r,
                                      executing, N_executing,
                                      scheduled, N_scheduled);
@@ -221,7 +225,9 @@ int main(int argc, char **argv) {
                                               output_dir, policy,
                                               start_time);
                     if (status == -1) {
-                        save_task_nr(task_nr, output_dir);
+                        if (save_task_nr(task_nr, output_dir) == 0) {
+                            perror("Error: couldn't save task number");
+                        }
                         clean_up_all(fd, r,
                                      executing, N_executing,
                                      scheduled, N_scheduled);
@@ -246,12 +252,15 @@ int main(int argc, char **argv) {
 
     printf("Orchestrator server is shutting down...\n");
 
-    // save the task number
-    save_task_nr(task_nr, output_dir);
-
     // cleanup
     clean_up(executing, N_executing,
              scheduled, N_scheduled);
+
+    // save the task number
+    if (save_task_nr(task_nr, output_dir) == 0) {
+        perror("Error: couldn't save task number");
+        return 1;
+    }
 
     return 0;
 }
@@ -339,8 +348,8 @@ Request *select_request(Request *scheduled[], int N, int policy) {
 int handle_execute(Request *r,
                    Request *executing[], int *N_executing,
                    Request *scheduled[], int *N_scheduled,
-                   char *output_dir, int tasks,
-                   int *task_nr, struct timeval start_time) {
+                   char *output_dir, unsigned int tasks,
+                   unsigned int *task_nr, struct timeval start_time) {
     // add the task_nr to the request
     set_task_nr(r, *task_nr);
 

@@ -16,14 +16,14 @@ char* get_task_nr_filename(char *output_dir);
  * If the file does not exist, create it with the initial value 1.
  * Used by the orchestrator to load the task number when starting.
  * @param output_dir The output directory to write the task number file
- * @return The task number, or -1 if an error occurs
+ * @return The task number, or 0 if an error occurs
  */
-int load_task_nr(char *output_dir) {
+unsigned int load_task_nr(char *output_dir) {
 
     char *filename = get_task_nr_filename(output_dir);
     if (filename == NULL) {
         perror("Error: couldn't get task number filename");
-        return -1;
+        return 0;
     }
 
     // If the task number file doesn't exist,
@@ -34,14 +34,14 @@ int load_task_nr(char *output_dir) {
         if (fd == -1) {
             perror("Error: couldn't create task number file");
             free(filename);
-            return -1;
+            return 0;
         }
 
         if (write(fd, &task_nr, sizeof(int)) == -1) {
             perror("Error: couldn't write to task number file");
             (void) close(fd);
             free(filename);
-            return -1;
+            return 0;
         }
 
         (void) close(fd);
@@ -52,14 +52,14 @@ int load_task_nr(char *output_dir) {
         if (fd == -1) {
             perror("Error: couldn't open task number file");
             free(filename);
-            return -1;
+            return 0;
         }
 
         if (read(fd, &task_nr, sizeof(int)) == -1) {
             perror("Error: couldn't read from task number file");
             (void) close(fd);
             free(filename);
-            return -1;
+            return 0;
         }
 
         (void) close(fd);
@@ -74,14 +74,14 @@ int load_task_nr(char *output_dir) {
  * Used by the orchestrator to save the task number before exiting.
  * @param task_nr The task number to save
  * @param output_dir The output directory to write the task number file
- * @return The task number, or -1 if an error occurs
+ * @return The task number, or 0 if an error occurs
  */
-int save_task_nr(int task_nr, char *output_dir) {
+unsigned int save_task_nr(unsigned int task_nr, char *output_dir) {
 
     char *filename = get_task_nr_filename(output_dir);
     if (filename == NULL) {
         perror("Error: couldn't get task number filename");
-        return -1;
+        return 0;
     }
 
     // write the new task number
@@ -89,14 +89,14 @@ int save_task_nr(int task_nr, char *output_dir) {
     if (fd == -1) {
         perror("Error: couldn't open task number file");
         free(filename);
-        return -1;
+        return 0;
     }
 
-    if (write(fd, &task_nr, sizeof(int)) == -1) {
+    if (write(fd, &task_nr, sizeof(unsigned int)) == -1) {
         perror("Error: couldn't write to task number file");
         (void) close(fd);
         free(filename);
-        return -1;
+        return 0;
     }
     (void) close(fd);
 

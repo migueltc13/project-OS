@@ -22,7 +22,7 @@ char *get_command(Request *r);
 
 bool get_is_piped(Request *r);
 
-int get_task_nr(Request *r);
+unsigned int get_task_nr(Request *r);
 
 char *get_client_fifo(Request *r);
 
@@ -30,7 +30,7 @@ long get_time(Request *r);
 
 void set_type(Request *r, int type);
 
-void set_task_nr(Request *r, int task_nr);
+void set_task_nr(Request *r, unsigned int task_nr);
 
 void set_client_fifo(Request *r, char *client_fifo);
 
