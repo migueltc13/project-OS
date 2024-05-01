@@ -238,7 +238,6 @@ int main(int argc, char **argv) {
         // free the request
         free(r);
     }
-
     printf("Orchestrator server is shutting down...\n");
 
     // save the task number
@@ -247,6 +246,15 @@ int main(int argc, char **argv) {
     // cleanup
     clean_up(executing, N_executing,
              scheduled, N_scheduled);
+
+    // cleanup
+    for (int i = 0; i < N_executing; i++) {
+        free(executing[i]);
+    }
+    for (int i = 0; i < N_scheduled; i++) {
+        free(scheduled[i]);
+    }
+
     return 0;
 }
 
