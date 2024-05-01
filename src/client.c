@@ -1,7 +1,7 @@
 // TODO remove ../include/
-#include "../include/client.h"
+#include "../include/client.h" // CLIENT_FIFO_SIZE macro
 #include "../include/request.h"
-#include "../include/orchestrator.h"
+#include "../include/orchestrator.h"  // SERVER_FIFO macro
 
 #include <stdio.h>
 #include <stdlib.h>
@@ -11,17 +11,13 @@
 #include <fcntl.h>
 #include <sys/stat.h>
 
-void execute_usage(char *name) {
-    printf("%s execute <estimated_time|priority> <-u|-p> \"prog-a [args]\"\n", name);
-}
+#define BUF_SIZE 4096
 
-void status_usage(char *name) {
-    printf("%s status\n", name);
-}
+void execute_usage(char *name);
 
-void kill_usage(char *name) {
-    printf("%s kill\n", name);
-}
+void status_usage(char *name);
+
+void kill_usage(char *name);
 
 int main(int argc, char **argv) {
 
@@ -221,4 +217,16 @@ int main(int argc, char **argv) {
     (void) unlink(client_fifo);
     free(client_fifo);
     return 0;
+}
+
+void execute_usage(char *name) {
+    printf("%s execute <estimated_time|priority> <-u|-p> \"prog-a [args]\"\n", name);
+}
+
+void status_usage(char *name) {
+    printf("%s status\n", name);
+}
+
+void kill_usage(char *name) {
+    printf("%s kill\n", name);
 }

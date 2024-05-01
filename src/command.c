@@ -2,6 +2,7 @@
 #include "../include/command.h"
 #include "../include/request.h"
 #include "../include/orchestrator.h"
+#include "../include/task_nr.h"  // task number size macro
 
 #include <stdio.h>
 #include <stdlib.h>
@@ -14,7 +15,12 @@
 #include <sys/wait.h>
 #include <errno.h>
 
-#define MAX_CMDS 10
+#define MAX_ARGS MAX_CMD_SIZE
+
+#define TASK_PREFIX_NAME "task"
+#define OUTPUT_NAME      "out"
+#define ERROR_NAME       "err"
+#define TIME_NAME        "time"
 
 /**
  * Parse a piped command into an array of strings
@@ -73,7 +79,7 @@ char** parse_cmd(char *cmd, int *N) {
 
 int exec_command(char* arg){
 
-	char *exec_args[MAX_CMDS];
+	char *exec_args[MAX_ARGS];
 
 	char *string;
 	int exec_ret = 0;
@@ -128,25 +134,25 @@ int exec(Request *r, char *output_dir, struct timeval start_time) {
     close(fd);
 
     // get completed history file path
-    char *history_file = malloc(strlen(output_dir) + strlen(HISTORY) + 2);
+    char *history_file = malloc(strlen(output_dir) + strlen(HISTORY_NAME) + 2); // +2 for '/' and '\0'
     if (history_file == NULL) {
         perror("Error: couldn't allocate memory for history file path");
         return -1;
     }
 
-    if (sprintf(history_file, "%s/%s", output_dir, HISTORY) < 0) {
+    if (sprintf(history_file, "%s/%s", output_dir, HISTORY_NAME) < 0) {
         perror("Error: couldn't create history file path with sprintf");
         return -1;
     }
 
     // create output directory for task results
-    char *task_dir = malloc(strlen(output_dir) + strlen("task") + 2 + 8); // TODO max size of task number
+    char *task_dir = malloc(strlen(output_dir) + strlen(TASK_PREFIX_NAME) + TASK_NR_STRING_SIZE + 2); // +2 for '/' and '\0'
     if (task_dir == NULL) {
         perror("Error: couldn't allocate memory for task directory");
         return -1;
     }
 
-    if (sprintf(task_dir, "%s/task%d", output_dir, task_nr) < 0) {
+    if (sprintf(task_dir, "%s/%s%d", output_dir, TASK_PREFIX_NAME, task_nr) < 0) {
         perror("Error: couldn't create task directory with sprintf");
         return -1;
     }
@@ -163,13 +169,13 @@ int exec(Request *r, char *output_dir, struct timeval start_time) {
     }
 
     // open output file
-    char *output_file = malloc(strlen(task_dir) + 3 + 2);
+    char *output_file = malloc(strlen(task_dir) + strlen(OUTPUT_NAME) + 2); // +2 for '/' and '\0'
     if (output_file == NULL) {
         perror("Error: couldn't allocate memory for output file");
         return -1;
     }
 
-    if (sprintf(output_file, "%s/out", task_dir) < 0) {
+    if (sprintf(output_file, "%s/%s", task_dir, OUTPUT_NAME) < 0) {
         perror("Error: couldn't create output file path with sprintf");
         return -1;
     }
@@ -182,13 +188,13 @@ int exec(Request *r, char *output_dir, struct timeval start_time) {
     }
 
     // open error file
-    char *error_file = malloc(strlen(task_dir) + 3 + 2);
+    char *error_file = malloc(strlen(task_dir) + strlen(ERROR_NAME) + 2); // +2 for '/' and '\0'
     if (error_file == NULL) {
         perror("Error: couldn't allocate memory for error file path");
         return -1;
     }
 
-    if (sprintf(error_file, "%s/err", task_dir) < 0) {
+    if (sprintf(error_file, "%s/%s", task_dir, ERROR_NAME) < 0) {
         perror("Error: couldn't create error file path with sprintf");
         return -1;
     }
@@ -201,13 +207,13 @@ int exec(Request *r, char *output_dir, struct timeval start_time) {
     }
 
     // open execution time file
-    char *time_file = malloc(strlen(task_dir) + 4 + 2);
+    char *time_file = malloc(strlen(task_dir) + strlen(TIME_NAME) + 2); // +2 for '/' and '\0'
     if (time_file == NULL) {
         perror("Error: couldn't allocate memory for time file path");
         return -1;
     }
 
-    if (sprintf(time_file, "%s/time", task_dir) < 0) {
+    if (sprintf(time_file, "%s/%s", task_dir, TIME_NAME) < 0) {
         perror("Error: couldn't create time file path with sprintf");
         return -1;
     }
@@ -375,7 +381,8 @@ int exec(Request *r, char *output_dir, struct timeval start_time) {
 
             close(fd_server);
 
-            char *history_str = malloc(8 + strlen(cmd) + strlen(time_str) + 5); // TODO max size of task number
+            // 7 = 3 spaces + 2 chars + 1 new line + 1 null
+            char *history_str = malloc(TASK_NR_STRING_SIZE + strlen(cmd) + strlen(time_str) + 7);
             if (history_str == NULL) {
                 perror("Error: couldn't allocate memory for history string");
                 return -1;
@@ -496,7 +503,8 @@ int exec(Request *r, char *output_dir, struct timeval start_time) {
 
                 close(fd_server);
 
-                char *history_str = malloc(8 + strlen(cmd) + strlen(time_str) + 5); // TODO max size of task number
+                // 7 = 3 spaces + 2 chars + 1 new line + 1 null
+                char *history_str = malloc(TASK_NR_STRING_SIZE + strlen(cmd) + strlen(time_str) + 7);
                 if (history_str == NULL) {
                     perror("Error: couldn't allocate memory for history string");
                     return -1;

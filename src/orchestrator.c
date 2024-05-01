@@ -12,10 +12,17 @@
 #include <sys/stat.h>
 #include <sys/time.h>
 
-
+// Default scheduling policy
 #define DEFAULT_POLICY FCFS
+
+// Max number of scheduled requests
 #define MAX_SCHEDULED_REQUESTS 1024
 
+// Macros for buffer sizes
+#define EXEC_TIME_STRING_SIZE 16
+#define EXECUTE_MSG_SIZE (24 + TASK_NR_STRING_SIZE)
+
+void orchestrator_usage(char *name);
 
 int add_request(Request *requests[], int *N, int max, Request *r);
 
@@ -38,7 +45,7 @@ int handle_completed(Request *r,
                      Request *executing[], int *N_executing,
                      Request *scheduled[], int *N_scheduled,
                      char *output_dir, int policy,
-                     int *task_nr, struct timeval start_time);
+                     struct timeval start_time);
 
 int send_status(char *client_fifo,
                 Request *executing[], int N_executing,
@@ -51,14 +58,6 @@ void clean_up(Request *executing[], int N_executing,
 void clean_up_all(int fd, Request *r,
                   Request *executing[], int N_executing,
                   Request *scheduled[], int N_scheduled);
-
-/**
- * @brief Print the usage of the orchestrator program
- * @param name The name of the program
- */
-void orchestrator_usage(char *name) {
-    printf("Usage: %s <output_dir> <parallel_tasks> [sched_policy]\n", name);
-}
 
 /**
  * @brief Main function for the orchestrator program
@@ -219,7 +218,7 @@ int main(int argc, char **argv) {
                                               executing, &N_executing,
                                               scheduled, &N_scheduled,
                                               output_dir, policy,
-                                              &task_nr, start_time);
+                                              start_time);
                     if (status == -1) {
                         save_task_nr(task_nr, output_dir);
                         clean_up_all(fd, r,
@@ -254,6 +253,14 @@ int main(int argc, char **argv) {
              scheduled, N_scheduled);
 
     return 0;
+}
+
+/**
+ * @brief Print the usage of the orchestrator program
+ * @param name The name of the program
+ */
+void orchestrator_usage(char *name) {
+    printf("Usage: %s <output_dir> <parallel_tasks> [sched_policy]\n", name);
 }
 
 int add_request(Request *requests[], int *N, int max, Request *r) {
@@ -336,17 +343,20 @@ int handle_execute(Request *r,
     // add the task_nr to the request
     set_task_nr(r, *task_nr);
 
+    // increment the task number
+    (*task_nr)++;
+
     // get the client FIFO name
     char *client_fifo = get_client_fifo(r);
 
     bool toSched = (*N_executing >= tasks);
     if (toSched) {
         // schedule the request
-        printf("Task %d scheduled\n\n", *task_nr);
+        printf("Task %d scheduled\n\n", get_task_nr(r));
 
         if (add_request(scheduled, N_scheduled, MAX_SCHEDULED_REQUESTS, r) == -1) {
-            char *msg = "Critical: max number of scheduled tasks reached";
-            printf("%s\n", msg);
+            char *msg = "Critical: max number of scheduled tasks reached\n";
+            printf("%s", msg);
             int fd_client = open(client_fifo, O_WRONLY);
             if (fd_client == -1) {
                 perror("Error: couldn't open client FIFO");
@@ -364,7 +374,7 @@ int handle_execute(Request *r,
     }
     else {
         // execute the request
-        printf("Task %d executing\n\n", *task_nr);
+        printf("Task %d executing\n\n", get_task_nr(r));
 
         // add the request to the executing array
         if (add_request(executing, N_executing, tasks, r) == -1) {
@@ -381,17 +391,14 @@ int handle_execute(Request *r,
     }
 
     // create message to send to client
-    const int msg_size = 15 + 8 + 2; // TODO define message size
-    char msg[msg_size];
+    char msg[EXECUTE_MSG_SIZE];
 
-    int bytes_writed = snprintf(
-        msg, msg_size,
-        "%s task %d\n",
-        toSched ? "Scheduled" : "Executing",
-        *task_nr
-    );
+    int bytes_writed = snprintf(msg, EXECUTE_MSG_SIZE,
+                                "%s task %d\n",
+                                toSched ? "Scheduled" : "Executing",
+                                get_task_nr(r));
 
-    if (bytes_writed < 0) {
+    if (bytes_writed < 0 || bytes_writed >= EXECUTE_MSG_SIZE) {
         perror("Error: Couldn't create message to client");
         return -1;
     }
@@ -411,7 +418,6 @@ int handle_execute(Request *r,
     close(fd_client);
 
     // increment the task number
-    (*task_nr)++;
     return 0;
 }
 
@@ -441,7 +447,6 @@ int handle_status(Request *r,
             return -1;
         }
 
-        // printf("Sent status to client\n");
         _exit(0);
     }
     return 0;
@@ -451,7 +456,7 @@ int handle_completed(Request *r,
                      Request *executing[], int *N_executing,
                      Request *scheduled[], int *N_scheduled,
                      char *output_dir, int policy,
-                     int *task_nr, struct timeval start_time) {
+                     struct timeval start_time) {
     // get the status of the task
     printf("Task %d completed\n\n", get_task_nr(r));
 
@@ -489,8 +494,6 @@ int handle_completed(Request *r,
 
     free(next);
 
-    // increment the task number
-    (*task_nr)++;
     return 0;
 }
 
@@ -505,9 +508,9 @@ int send_status(char *client_fifo,
     }
 
     int bytes_writed = 0;
-    int buf_size = MAX_CMD_SIZE + 50; // TODO add 50 bytes for the task nr and exec time
+    const int buf_size = MAX_CMD_SIZE + TASK_NR_STRING_SIZE + EXEC_TIME_STRING_SIZE;
 
-    // write executing commands
+    // write executing requests
     if (N_executing == 0) {
         char *msg = "No tasks executing\n\n";
         bytes_writed = write(fd_client, msg, strlen(msg));
@@ -543,7 +546,7 @@ int send_status(char *client_fifo,
         }
     }
 
-    // build scheduled string
+    // write scheduled requests
     if (N_scheduled == 0) {
         char *msg = "No tasks scheduled\n\n";
         bytes_writed = write(fd_client, msg, strlen(msg));
@@ -578,11 +581,19 @@ int send_status(char *client_fifo,
         }
     }
 
-    // build completed string
-    // read completed tasks from history file
-    int history_size = strlen(output_dir) + strlen(HISTORY) + 2;
+    // write completed requests by reading it from the history file
+    int history_size = strlen(output_dir) + strlen(HISTORY_NAME) + 2; // +2 for '/' and '\0'
     char history_path[history_size];
-    (void) snprintf(history_path, history_size, "%s/%s", output_dir, HISTORY); // TODO check snprintf return value
+    bytes_writed = snprintf(history_path, history_size,
+                            "%s/%s",
+                            output_dir,
+                            HISTORY_NAME);
+    if (bytes_writed < 0 || bytes_writed >= history_size) {
+        perror("Error: couldn't create history file path");
+        return -1;
+    }
+
+    // TODO CHECK FOR SPRINTF ERRORS
 
     int fd_history = open(history_path, O_RDONLY | O_CREAT, 0644);
     if (fd_history == -1) {

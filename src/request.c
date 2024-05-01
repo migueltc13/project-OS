@@ -1,6 +1,7 @@
 // TODO remove ../include/
 #include "../include/request.h"
-#include "../include/orchestrator.h" // policy constants
+#include "../include/client.h" // MAX_FIFO_SIZE macro
+#include "../include/orchestrator.h" // policy macros
 
 #include <stdio.h>
 #include <stdlib.h>
@@ -13,7 +14,7 @@ struct request {
     char command[MAX_CMD_SIZE];
     bool is_piped;
     int task_nr;
-    char client_fifo[MAX_FIFO_SIZE];
+    char client_fifo[CLIENT_FIFO_SIZE];
 };
 
 Request *create_request(int type, int est_time, char *command, bool is_piped, char* client_fifo) {

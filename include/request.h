@@ -9,7 +9,6 @@
 #define KILL 3
 
 #define MAX_CMD_SIZE 300
-#define MAX_FIFO_SIZE 100
 
 typedef struct request Request;
 
