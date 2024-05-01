@@ -12,7 +12,12 @@
 #include <sys/stat.h>
 #include <sys/time.h>
 
-int add_request(Request *requests[], int *N, Request *r);
+
+#define DEFAULT_POLICY FCFS
+#define MAX_SCHEDULED_REQUESTS 1024
+
+
+int add_request(Request *requests[], int *N, int max, Request *r);
 
 int remove_request(Request *requests[], int *N, Request *r);
 
@@ -136,8 +141,8 @@ int main(int argc, char **argv) {
     }
 
     // Arrays to store the executing and scheduled requests
-    Request *executing[tasks]; int N_executing = 0; // TODO malloc
-    Request *scheduled[MAX_REQUESTS]; int N_scheduled = 0; // TODO realloc
+    Request *executing[tasks]; int N_executing = 0;
+    Request *scheduled[MAX_SCHEDULED_REQUESTS]; int N_scheduled = 0;
 
     printf("Orchestrator server is running...\n");
 
@@ -176,7 +181,7 @@ int main(int argc, char **argv) {
 
             // print the request information
             if (type == EXECUTE)
-                print_request(r);
+                print_request(r, policy);
 
             int status;
             switch (type) {
@@ -251,8 +256,8 @@ int main(int argc, char **argv) {
     return 0;
 }
 
-int add_request(Request *requests[], int *N, Request *r) {
-    if (*N == MAX_REQUESTS) {
+int add_request(Request *requests[], int *N, int max, Request *r) {
+    if (*N >= max) {
         // requests array is full
         return -1;
     }
@@ -339,7 +344,7 @@ int handle_execute(Request *r,
         // schedule the request
         printf("Task %d scheduled\n\n", *task_nr);
 
-        if (add_request(scheduled, N_scheduled, r) == -1) {
+        if (add_request(scheduled, N_scheduled, MAX_SCHEDULED_REQUESTS, r) == -1) {
             char *msg = "Critical: max number of scheduled tasks reached";
             printf("%s\n", msg);
             int fd_client = open(client_fifo, O_WRONLY);
@@ -362,7 +367,7 @@ int handle_execute(Request *r,
         printf("Task %d executing\n\n", *task_nr);
 
         // add the request to the executing array
-        if (add_request(executing, N_executing, r) == -1) {
+        if (add_request(executing, N_executing, tasks, r) == -1) {
             perror("Error: couldn't add request to executing array");
             return -1;
         }
@@ -470,7 +475,7 @@ int handle_completed(Request *r,
     }
 
     // add the request to the executing array
-    if (add_request(executing, N_executing, next) == -1) {
+    if (add_request(executing, N_executing, MAX_SCHEDULED_REQUESTS, next) == -1) {
         perror("Error: couldn't add request to executing array");
         return -1;
     }

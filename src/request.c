@@ -1,5 +1,6 @@
 // TODO remove ../include/
 #include "../include/request.h"
+#include "../include/orchestrator.h" // policy constants
 
 #include <stdio.h>
 #include <stdlib.h>
@@ -74,10 +75,19 @@ void set_client_fifo(Request *r, char *client_fifo) {
 }
 
 /* others */
-void print_request(Request *r) {
+void print_request(Request *r, int policy) {
     printf("Request:\n");
     printf("  Type: %s\n", type_to_string(r->type));
-    printf("  Estimated time: %d\n", r->est_time);
+    switch (policy) {
+        case SJF:
+            printf("  Estimated time: %d\n", r->est_time);
+            break;
+        case PES:
+            printf("  Priority: %d\n", r->est_time);
+            break;
+        default: // FCFS
+            break;
+    }
     printf("  Command: %s\n", r->command);
     printf("  Is piped: %s\n", r->is_piped ? "true" : "false");
     printf("  Task number: %d\n", r->task_nr);

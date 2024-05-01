@@ -35,7 +35,7 @@ void set_task_nr(Request *r, int task_nr);
 
 void set_client_fifo(Request *r, char *client_fifo);
 
-void print_request(Request *r);
+void print_request(Request *r, int policy);
 
 char* type_to_string(int type);
 
