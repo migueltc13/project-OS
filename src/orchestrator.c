@@ -247,14 +247,6 @@ int main(int argc, char **argv) {
     clean_up(executing, N_executing,
              scheduled, N_scheduled);
 
-    // cleanup
-    for (int i = 0; i < N_executing; i++) {
-        free(executing[i]);
-    }
-    for (int i = 0; i < N_scheduled; i++) {
-        free(scheduled[i]);
-    }
-
     return 0;
 }
 
