@@ -32,7 +32,13 @@ int main(int argc, char **argv) {
 
     // create client FIFO
     char *client_fifo = malloc(CLIENT_FIFO_SIZE);
-    if (snprintf(client_fifo, CLIENT_FIFO_SIZE, "client-%d", getpid()) == -1) {
+    if (client_fifo == NULL) {
+        perror("Error: couldn't allocate memory for client FIFO name");
+        return 1;
+    }
+
+    int result = snprintf(client_fifo, CLIENT_FIFO_SIZE, "client-%d", getpid());
+    if (result < 0 || result >= CLIENT_FIFO_SIZE) {
         perror("Error: couldn't create client FIFO name with snprintf");
         return 1;
     }
@@ -92,11 +98,11 @@ int main(int argc, char **argv) {
 
         if (write(fd, r, sizeof_request()) == -1) {
             perror("Error: couldn't write to server FIFO");
-            close(fd);
+            (void) close(fd);
             return 1;
         }
 
-        close(fd);
+        (void) close(fd);
 
         // receive task number via client FIFO
         int fd_client = open(client_fifo, O_RDONLY);
@@ -112,12 +118,12 @@ int main(int argc, char **argv) {
             buffer[n] = '\0';
             if (write(STDOUT_FILENO, buffer, n) == -1) {
                 perror("Error: couldn't write to stdout");
-                close(fd_client);
+                (void) close(fd_client);
                 return 1;
             }
         }
 
-        close(fd_client);
+        (void) close(fd_client);
 
         free(r);
     }
@@ -149,11 +155,11 @@ int main(int argc, char **argv) {
 
         if (write(fd_server, r, sizeof_request()) == -1) {
             perror("Error: couldn't write to server FIFO");
-            close(fd_server);
+            (void) close(fd_server);
             return 1;
         }
 
-        close(fd_server);
+        (void) close(fd_server);
 
         // receive status response via client FIFO
         int fd_client = open(client_fifo, O_RDONLY);
@@ -168,12 +174,12 @@ int main(int argc, char **argv) {
         while ((n = read(fd_client, buffer, BUF_SIZE)) > 0) {
             if (write(STDOUT_FILENO, buffer, n) == -1) {
                 perror("Error: couldn't write to stdout");
-                close(fd_client);
+                (void) close(fd_client);
                 return 1;
             }
         }
 
-        close(fd_client);
+        (void) close(fd_client);
         free(r);
     }
     else if (strcmp(argv[1], "kill") == 0) {
@@ -199,11 +205,11 @@ int main(int argc, char **argv) {
 
         if (write(fd, r, sizeof_request()) == -1) {
             perror("Error: couldn't write to server FIFO");
-            close(fd);
+            (void) close(fd);
             return 1;
         }
 
-        close(fd);
+        (void) close(fd);
         free(r);
     }
     else {

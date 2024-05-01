@@ -36,13 +36,15 @@ int load_task_nr(char *output_dir) {
             free(filename);
             return -1;
         }
+
         if (write(fd, &task_nr, sizeof(int)) == -1) {
             perror("Error: couldn't write to task number file");
-            close(fd);
+            (void) close(fd);
             free(filename);
             return -1;
         }
-        close(fd);
+
+        (void) close(fd);
     }
     else {
         // read the task number from the file
@@ -55,11 +57,12 @@ int load_task_nr(char *output_dir) {
 
         if (read(fd, &task_nr, sizeof(int)) == -1) {
             perror("Error: couldn't read from task number file");
-            close(fd);
+            (void) close(fd);
             free(filename);
             return -1;
         }
-        close(fd);
+
+        (void) close(fd);
     }
 
     free(filename);
@@ -83,7 +86,7 @@ int save_task_nr(int task_nr, char *output_dir) {
 
     // write the new task number
     int fd = open(filename, O_WRONLY);
-    if (fd < 0) {
+    if (fd == -1) {
         perror("Error: couldn't open task number file");
         free(filename);
         return -1;
@@ -91,11 +94,11 @@ int save_task_nr(int task_nr, char *output_dir) {
 
     if (write(fd, &task_nr, sizeof(int)) == -1) {
         perror("Error: couldn't write to task number file");
-        close(fd);
+        (void) close(fd);
         free(filename);
         return -1;
     }
-    close(fd);
+    (void) close(fd);
 
     free(filename);
     return task_nr;

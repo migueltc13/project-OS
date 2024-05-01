@@ -18,10 +18,6 @@
 // Max number of scheduled requests
 #define MAX_SCHEDULED_REQUESTS 1024
 
-// Macros for buffer sizes
-#define EXEC_TIME_STRING_SIZE 16
-#define EXECUTE_MSG_SIZE (24 + TASK_NR_STRING_SIZE)
-
 void orchestrator_usage(char *name);
 
 int add_request(Request *requests[], int *N, int max, Request *r);
@@ -159,6 +155,11 @@ int main(int argc, char **argv) {
 
         // Allocate memory for the request
         Request *r = malloc(sizeof_request());
+        if (r == NULL) {
+            perror("Error: couldn't allocate memory for request");
+            (void) close(fd);
+            return 1;
+        }
 
         // read the request
         ssize_t bytes_read = 0;
@@ -166,7 +167,7 @@ int main(int argc, char **argv) {
 
             if (bytes_read == -1) {
                 perror("Error: couldn't read from server FIFO");
-                close(fd);
+                (void) close(fd);
                 return 1;
             }
 
@@ -237,12 +238,12 @@ int main(int argc, char **argv) {
             }
         }
         // close the server FIFO
-        close(fd);
+        (void) close(fd);
 
         // free the request
         free(r);
-
     }
+
     printf("Orchestrator server is shutting down...\n");
 
     // save the task number
@@ -368,7 +369,7 @@ int handle_execute(Request *r,
                 return -1;
             }
 
-            close(fd_client);
+            (void) close(fd_client);
             return 0;
         }
     }
@@ -397,7 +398,6 @@ int handle_execute(Request *r,
                                 "%s task %d\n",
                                 toSched ? "Scheduled" : "Executing",
                                 get_task_nr(r));
-
     if (bytes_writed < 0 || bytes_writed >= EXECUTE_MSG_SIZE) {
         perror("Error: Couldn't create message to client");
         return -1;
@@ -415,7 +415,7 @@ int handle_execute(Request *r,
         return -1;
     }
 
-    close(fd_client);
+    (void) close(fd_client);
 
     // increment the task number
     return 0;
@@ -529,9 +529,13 @@ int send_status(char *client_fifo,
 
         char buffer[buf_size];
         for (int i = 0; i < N_executing; i++) {
-            (void) snprintf(buffer, buf_size, "%d %s\n",
-                            get_task_nr(executing[i]),
-                            get_command(executing[i]));
+            bytes_writed = snprintf(buffer, buf_size, "%d %s\n",
+                                    get_task_nr(executing[i]),
+                                    get_command(executing[i]));
+            if (bytes_writed < 0 || bytes_writed >= buf_size) {
+                perror("Error: couldn't create message to client");
+                return -1;
+            }
             bytes_writed = write(fd_client, buffer, strlen(buffer));
             if (bytes_writed == -1) {
                 perror("Error: couldn't write to client FIFO");
@@ -564,9 +568,13 @@ int send_status(char *client_fifo,
 
         char buffer[buf_size];
         for (int i = 0; i < N_scheduled; i++) {
-            (void) snprintf(buffer, buf_size, "%d %s\n",
-                            get_task_nr(scheduled[i]),
-                            get_command(scheduled[i]));
+            int bytes_writed = snprintf(buffer, buf_size, "%d %s\n",
+                                        get_task_nr(scheduled[i]),
+                                        get_command(scheduled[i]));
+            if (bytes_writed < 0 || bytes_writed >= buf_size) {
+                perror("Error: couldn't create message to client");
+                return -1;
+            }
             bytes_writed = write(fd_client, buffer, strlen(buffer));
             if (bytes_writed == -1) {
                 perror("Error: couldn't write to client FIFO");
@@ -592,8 +600,6 @@ int send_status(char *client_fifo,
         perror("Error: couldn't create history file path");
         return -1;
     }
-
-    // TODO CHECK FOR SPRINTF ERRORS
 
     int fd_history = open(history_path, O_RDONLY | O_CREAT, 0644);
     if (fd_history == -1) {
@@ -644,8 +650,8 @@ int send_status(char *client_fifo,
     // interrupt other requests with:
     // sleep(10);
 
-    close(fd_history);
-    close(fd_client);
+    (void) close(fd_history);
+    (void) close(fd_client);
     return 0;
 }
 
@@ -662,7 +668,7 @@ void clean_up(Request *executing[], int N_executing,
 void clean_up_all(int fd, Request *r,
                   Request *executing[], int N_executing,
                   Request *scheduled[], int N_scheduled) {
-    close(fd);
+    (void) close(fd);
     free(r);
     clean_up(executing, N_executing,
              scheduled, N_scheduled);
