@@ -114,7 +114,11 @@ int main(int argc, char **argv) {
         size_t n;
         while ((n = read(fd_client, buffer, BUF_SIZE)) > 0) {
             buffer[n] = '\0';
-            write(STDOUT_FILENO, buffer, n);
+            if (write(STDOUT_FILENO, buffer, n) == -1) {
+                perror("Error: couldn't write to stdout");
+                close(fd_client);
+                return 1;
+            }
         }
 
         close(fd_client);
@@ -166,7 +170,11 @@ int main(int argc, char **argv) {
         char buffer[BUF_SIZE];
         size_t n;
         while ((n = read(fd_client, buffer, BUF_SIZE)) > 0) {
-            write(STDOUT_FILENO, buffer, n);
+            if (write(STDOUT_FILENO, buffer, n) == -1) {
+                perror("Error: couldn't write to stdout");
+                close(fd_client);
+                return 1;
+            }
         }
 
         close(fd_client);

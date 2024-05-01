@@ -549,7 +549,10 @@ int send_status(char *client_fifo,
     }
     else {
         char *msg = "Scheduled:\n";
-        write(fd_client, msg, strlen(msg));
+        if (write(fd_client, msg, strlen(msg)) == -1) {
+            perror("Error: couldn't write to client FIFO");
+            return -1;
+        }
 
         char buffer[buf_size];
         for (int i = 0; i < N_scheduled; i++) {
