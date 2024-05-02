@@ -57,12 +57,14 @@ int main(int argc, char **argv) {
     int result = snprintf(client_fifo, CLIENT_FIFO_SIZE, "client-%d", getpid());
     if (result < 0 || result >= CLIENT_FIFO_SIZE) {
         perror("Error: couldn't create client FIFO name with snprintf");
+        free(client_fifo);
         return 1;
     }
 
     (void) unlink(client_fifo);
     if (mkfifo(client_fifo, 0644) == -1) {
         perror("Error: couldn't create client FIFO");
+        free(client_fifo);
         return 1;
     }
 
@@ -71,6 +73,8 @@ int main(int argc, char **argv) {
         if (argc < 5) {
             printf("Usage: ");
             execute_usage(argv[0]);
+            free(client_fifo);
+            (void) unlink(client_fifo);
             return 0;
         }
 
@@ -79,6 +83,8 @@ int main(int argc, char **argv) {
         if (time < 0) {
             printf("Usage: ");
             execute_usage(argv[0]);
+            free(client_fifo);
+            (void) unlink(client_fifo);
             return 0;
         }
 
@@ -93,6 +99,8 @@ int main(int argc, char **argv) {
         else {
             printf("Usage: ");
             execute_usage(argv[0]);
+            free(client_fifo);
+            (void) unlink(client_fifo);
             return 0;
         }
 
@@ -103,6 +111,8 @@ int main(int argc, char **argv) {
         Request *r = create_request(EXECUTE, time, command, is_pided, client_fifo);
         if (r == NULL) {
             perror("Error: couldn't create status request");
+            free(client_fifo);
+            (void) unlink(client_fifo);
             return 1;
         }
 
@@ -110,12 +120,18 @@ int main(int argc, char **argv) {
         int fd = open(SERVER_FIFO, O_WRONLY);
         if (fd == -1) {
             perror("Error: couldn't open server FIFO");
+            free(r);
+            free(client_fifo);
+            (void) unlink(client_fifo);
             return 1;
         }
 
         if (write(fd, r, sizeof_request()) == -1) {
             perror("Error: couldn't write to server FIFO");
             (void) close(fd);
+            free(r);
+            free(client_fifo);
+            (void) unlink(client_fifo);
             return 1;
         }
 
@@ -125,10 +141,13 @@ int main(int argc, char **argv) {
         int fd_client = open(client_fifo, O_RDONLY);
         if (fd_client == -1) {
             perror("Error: couldn't open client FIFO");
+            free(r);
+            free(client_fifo);
+            (void) unlink(client_fifo);
             return 1;
         }
 
-        // read and write server message
+        // read and write the server message
         char buffer[BUF_SIZE];
         size_t n;
         while ((n = read(fd_client, buffer, BUF_SIZE)) > 0) {
@@ -136,6 +155,9 @@ int main(int argc, char **argv) {
             if (write(STDOUT_FILENO, buffer, n) == -1) {
                 perror("Error: couldn't write to stdout");
                 (void) close(fd_client);
+                free(r);
+                free(client_fifo);
+                (void) unlink(client_fifo);
                 return 1;
             }
         }
@@ -150,6 +172,8 @@ int main(int argc, char **argv) {
         if (argc != 2) {
             printf("Usage: ");
             status_usage(argv[0]);
+            free(client_fifo);
+            (void) unlink(client_fifo);
             return 0;
         }
 
@@ -157,6 +181,8 @@ int main(int argc, char **argv) {
         Request *r = create_request(STATUS, 0, "", false, client_fifo);
         if (r == NULL) {
             perror("Error: couldn't create status request");
+            free(client_fifo);
+            (void) unlink(client_fifo);
             return 1;
         }
 
@@ -167,12 +193,18 @@ int main(int argc, char **argv) {
         int fd_server = open(SERVER_FIFO, O_WRONLY);
         if (fd_server == -1) {
             perror("Error: couldn't open server FIFO");
+            free(r);
+            free(client_fifo);
+            (void) unlink(client_fifo);
             return 1;
         }
 
         if (write(fd_server, r, sizeof_request()) == -1) {
             perror("Error: couldn't write to server FIFO");
             (void) close(fd_server);
+            free(r);
+            free(client_fifo);
+            (void) unlink(client_fifo);
             return 1;
         }
 
@@ -182,6 +214,9 @@ int main(int argc, char **argv) {
         int fd_client = open(client_fifo, O_RDONLY);
         if (fd_client == -1) {
             perror("Error: couldn't open client FIFO");
+            free(r);
+            free(client_fifo);
+            (void) unlink(client_fifo);
             return 1;
         }
 
@@ -192,6 +227,9 @@ int main(int argc, char **argv) {
             if (write(STDOUT_FILENO, buffer, n) == -1) {
                 perror("Error: couldn't write to stdout");
                 (void) close(fd_client);
+                free(r);
+                free(client_fifo);
+                (void) unlink(client_fifo);
                 return 1;
             }
         }
@@ -203,6 +241,8 @@ int main(int argc, char **argv) {
         if (argc != 2) {
             printf("Usage: ");
             kill_usage(argv[0]);
+            free(client_fifo);
+            (void) unlink(client_fifo);
             return 0;
         }
 
@@ -210,6 +250,8 @@ int main(int argc, char **argv) {
         Request *r = create_request(KILL, 0, "", false, client_fifo);
         if (r == NULL) {
             perror("Error: couldn't create kill request");
+            free(client_fifo);
+            (void) unlink(client_fifo);
             return 1;
         }
 
@@ -217,12 +259,18 @@ int main(int argc, char **argv) {
         int fd = open(SERVER_FIFO, O_WRONLY);
         if (fd == -1) {
             perror("Error: couldn't open server FIFO");
+            free(r);
+            free(client_fifo);
+            (void) unlink(client_fifo);
             return 1;
         }
 
         if (write(fd, r, sizeof_request()) == -1) {
             perror("Error: couldn't write to server FIFO");
             (void) close(fd);
+            free(r);
+            free(client_fifo);
+            (void) unlink(client_fifo);
             return 1;
         }
 
