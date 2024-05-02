@@ -49,7 +49,7 @@ char** parse_cmd(char *cmd, int *N) {
     char *token = strtok(cmd, "|");
     int i = 0;
     while (token != NULL) {
-        // Remove leading and trailing whitespaces from each command TODO add new line
+        // Remove leading and trailing whitespaces from each command
         while (*token == ' ' || *token == '\t') {
             token++;
         }
@@ -60,7 +60,7 @@ char** parse_cmd(char *cmd, int *N) {
         }
 
         // Allocate memory for each command string
-        commands[i] = malloc((len + 1) * sizeof(char));
+        commands[i] = malloc(len + 1);
         if (commands[i] == NULL) {
             perror("Error: couldn't allocate memory for piped command");
             return NULL;
@@ -402,15 +402,17 @@ int exec(Request *r, char *output_dir, struct timeval start_time) {
 
             (void) close(fd_server);
 
+            char *full_cmd = strdup(get_command(r));
+
             // 7 = 3 spaces + 2 chars + 1 new line + 1 null
-            int history_str_size = TASK_NR_STRING_SIZE + strlen(cmd) + strlen(time_str) + 7;
+            int history_str_size = TASK_NR_STRING_SIZE + strlen(full_cmd) + strlen(time_str) + 7;
             char *history_str = malloc(history_str_size);
             if (history_str == NULL) {
                 perror("Error: couldn't allocate memory for history string");
                 return -1;
             }
 
-            result = snprintf(history_str, history_str_size, "%d %s %ld ms\n", task_nr, cmd, elapsed_time);
+            result = snprintf(history_str, history_str_size, "%d %s %ld ms\n", task_nr, full_cmd, elapsed_time);
             if (result < 0 || result >= history_str_size) {
                 perror("Error: couldn't create history string with snprintf");
                 return -1;

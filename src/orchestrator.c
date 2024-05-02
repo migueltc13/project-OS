@@ -359,7 +359,7 @@ int handle_execute(Request *r,
     // get the client FIFO name
     char *client_fifo = get_client_fifo(r);
 
-    bool toSched = (*N_executing >= tasks);
+    bool toSched = (*N_executing >= (int) tasks);
     if (toSched) {
         // schedule the request
         printf("Task %d scheduled\n\n", get_task_nr(r));
