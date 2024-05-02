@@ -1,35 +1,68 @@
 // TODO remove ../include/
 #include "../include/command.h"
-#include "../include/request.h"
 #include "../include/orchestrator.h"
 #include "../include/task_nr.h"  // task number size macro
 
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
-#include <stdbool.h>
 #include <unistd.h>
 #include <fcntl.h>
-#include <sys/time.h>
+#include <errno.h>
 #include <sys/stat.h>
 #include <sys/wait.h>
-#include <errno.h>
 
+/** @brief The max number of arguments in a command. **/
 #define MAX_ARGS MAX_CMD_SIZE
 
+/** @brief The max size of the error message. **/
+#define ERROR_MSG_SIZE MAX_CMD_SIZE + 100
+
+/** @brief The prefix name for the task directories. **/
 #define TASK_PREFIX_NAME "task"
-#define OUTPUT_NAME      "out"
-#define ERROR_NAME       "err"
-#define TIME_NAME        "time"
+
+/** @brief The name of the output file. **/
+#define OUTPUT_NAME "out"
+
+/** @brief The name of the error file. **/
+#define ERROR_NAME "err"
+
+/** @brief The name of the time file. **/
+#define TIME_NAME "time"
 
 /**
- * Parse a piped command into an array of strings
+ * @brief Parse a piped command into an array of single commands.
  *
- * @param cmd The command to parse
+ * @details Used in the function @ref exec to parse a piped command
+ * into an array of single commands.
+ *
+ * It also strips leading and trailing whitespaces from each command,
+ * see the sencond and third example below.
+ *
+ * It also can handle quoted strings, as demonstrated in the third example.
+ *
+ * It can handle new lines as it's possible to have a command with
+ * multiple lines, see the fourth example.
+ *
+ * Examples:
+ * @code
+ * - "ls -l | cat" -> ["ls -l", "cat"]
+ *
+ * - "  ls -l |  cat  " -> ["ls -l", "cat"]
+ *
+ * - "echo \"Hello   World\" |cat    " -> ["echo \"Hello   World\"", "cat"]
+ *
+ * - "echo \"Hello\\nWorld\" | cat\\n\\n" -> ["echo \"HelloWorld\"", "cat"]
+ * @endcode
+ *
+ * Note: Uncomment the last for loop in this function to print the
+ * resulting array of single commands.
+ *
+ * @param cmd The piped command to parse
  * @param N The number of commands in the array
  * @return An array of strings, or NULL if an error occurred
  */
-char** parse_cmd(char *cmd, int *N) {
+char** parse_cmd_pipes(char *cmd, int *N) {
     // Count the number of pipes to determine the number of commands
     *N = 1; // At least one command
     for (char *c = cmd; *c != '\0'; c++) {
@@ -50,11 +83,11 @@ char** parse_cmd(char *cmd, int *N) {
     int i = 0;
     while (token != NULL) {
         // Remove leading and trailing whitespaces from each command
-        while (*token == ' ' || *token == '\t') {
+        while (*token == ' ' || *token == '\t' || *token == '\n') {
             token++;
         }
         size_t len = strlen(token);
-        while (len > 0 && (token[len - 1] == ' ' || token[len - 1] == '\t')) {
+        while (len > 0 && (token[len - 1] == ' ' || token[len - 1] == '\t' || token[len - 1] == '\n')) {
             token[len - 1] = '\0';
             len--;
         }
@@ -74,20 +107,59 @@ char** parse_cmd(char *cmd, int *N) {
         i++;
     }
 
+    // print the array of single commands
+    /*
+    for (int j = 0; j < *N; j++) {
+        printf("Command %d: \"%s\"\n", j + 1, commands[j]);
+    }
+    */
+
     return commands;
 }
 
-int exec_command(char* arg){
+void write_error(char *cmd_name) {
+    char *msg = malloc(ERROR_MSG_SIZE);
 
-	char *exec_args[MAX_ARGS];
+    // check errors using errno
+    if (errno == ENOENT) {
+        int result = snprintf(msg, ERROR_MSG_SIZE, "%s: not found\n", cmd_name);
+        if (result < 0 || result >= ERROR_MSG_SIZE) {
+            perror("Error: couldn't create error message with snprintf");
+        }
+        if (write(STDERR_FILENO, msg, strlen(msg)) == -1) {
+            perror("Error: couldn't write to stderr");
+        }
+    }
+    else if (errno == EACCES) {
+        int result = snprintf(msg, ERROR_MSG_SIZE, "%s: permission denied\n", cmd_name);
+        if (result < 0 || result >= ERROR_MSG_SIZE) {
+            perror("Error: couldn't create error message with snprintf");
+        }
+        if (write(STDERR_FILENO, msg, strlen(msg)) == -1) {
+            perror("Error: couldn't write to stderr");
+        }
+    }
+    else if (errno == EINVAL) {
+        perror("Error: invalid argument");
+        int result = snprintf(msg, ERROR_MSG_SIZE, "%s: invalid argument\n", cmd_name);
+        if (result < 0 || result >= ERROR_MSG_SIZE) {
+            perror("Error: couldn't create error message with snprintf");
+        }
+    }
+
+    free(msg);
+}
+
+char** parse_cmd(char* arg) {
+
+	char **exec_args = malloc(MAX_ARGS * sizeof(char*));
 
 	char *string;
-	int exec_ret = 0;
 
 	char* command = strdup(arg);
     if (command == NULL) {
-        perror("Error: couldn't allocate memory for command in exec_command");
-        return -1;
+        perror("Error: couldn't allocate memory for command in parse_cmd");
+        return NULL;
     }
 
 	string = strtok(command, " ");
@@ -100,10 +172,7 @@ int exec_command(char* arg){
 	}
 
 	exec_args[i] = NULL;
-
-	exec_ret = execvp(exec_args[0], exec_args);
-
-	return exec_ret;
+    return exec_args;
 }
 
 /**
@@ -207,7 +276,7 @@ int exec(Request *r, char *output_dir, struct timeval start_time) {
         return -1;
     }
 
-    int fd_err = open(error_file, O_WRONLY | O_CREAT, 0644);
+    int fd_err = open(error_file, O_WRONLY | O_CREAT | O_APPEND, 0644);
     if (fd_err == -1) {
         perror("Error: couldn't open error file");
         return -1;
@@ -234,17 +303,17 @@ int exec(Request *r, char *output_dir, struct timeval start_time) {
     }
 
     if (is_piped) {
+
         pid_t exec_pid = fork();
         if (exec_pid == -1) {
             perror("Error: couldn't fork");
-            return 1;
+            return -1;
         }
 
         if (exec_pid == 0) {
             int N = 0;
 
-            char **commands = parse_cmd(cmd, &N);
-
+            char **commands = parse_cmd_pipes(cmd, &N);
             if (commands == NULL) {
                 perror("Error: couldn't parse piped commands");
                 return -1;
@@ -258,14 +327,14 @@ int exec(Request *r, char *output_dir, struct timeval start_time) {
                 if (i != N - 1) {
                     if (pipe(pipes[i]) == -1) {
                         perror("Error: couldn't create pipe");
-                        return 1;
+                        return -1;
                     }
                 }
 
                 pid_t pid = fork();
                 if (pid == -1) {
                     perror("Error: couldn't fork");
-                    return 1;
+                    return -1;
                 }
 
                 if (pid == 0) {
@@ -275,64 +344,92 @@ int exec(Request *r, char *output_dir, struct timeval start_time) {
                         (void) close(pipes[i][STDIN_FILENO]);
                         if (dup2(pipes[i][STDOUT_FILENO], STDOUT_FILENO) == -1) {
                             perror("Error: couldn't redirect stdout to pipe");
-                            _exit(1);
+                            _exit(i + 1);
                         }
                         (void) close(pipes[i][STDOUT_FILENO]);
 
-                        exec_command(commands[i]);
-                        perror("Error: couldn't execute command");
-                        _exit(1);
+                        // redirect stderr to error file
+                        if (dup2(fd_err, STDERR_FILENO) == -1) {
+                            perror("Error: couldn't redirect stderr to error file");
+                            _exit(i + 1);
+                        }
+                        (void) close(fd_err);
+
+                        char **exec_args = parse_cmd(commands[i]);
+                        int exec_ret = execvp(exec_args[0], exec_args);
+                        if (exec_ret == -1) {
+                            write_error(exec_args[0]);
+                            // perror("Error: couldn't execute command");
+                            _exit(i + 1);
+                        }
+                        free(exec_args);
                     }
                     // last command
                     else if (i == N - 1) {
                         // redirect stdout to output file
                         if (dup2(fd_out, STDOUT_FILENO) == -1) {
                             perror("Error: couldn't redirect stdout to output file");
-                            _exit(1);
+                            _exit(i + 1);
                         }
                         (void) close(fd_out);
-
-                        // redirect stderr to error file
-                        if (dup2(fd_err, STDERR_FILENO) == -1) {
-                            perror("Error: couldn't redirect stderr to error file");
-                            _exit(1);
-                        }
-                        (void) close(fd_err);
 
                         (void) close(pipes[i - 1][STDOUT_FILENO]);
                         if (dup2(pipes[i - 1][STDIN_FILENO], STDIN_FILENO) == -1) {
                             perror("Error: couldn't redirect stdin to pipe");
-                            _exit(1);
+                            _exit(i + 1);
                         }
                         (void) close(pipes[i - 1][STDIN_FILENO]);
 
-                        exec_command(commands[i]);
-                        perror("Error: couldn't execute command");
-                        _exit(1);
+                        // redirect stderr to error file
+                        if (dup2(fd_err, STDERR_FILENO) == -1) {
+                            perror("Error: couldn't redirect stderr to error file");
+                            _exit(i + 1);
+                        }
+                        (void) close(fd_err);
+
+                        char **exec_args = parse_cmd(commands[i]);
+                        int exec_ret = execvp(exec_args[0], exec_args);
+                        if (exec_ret == -1) {
+                            write_error(exec_args[0]);
+                            // perror("Error: couldn't execute command");
+                            _exit(i + 1);
+                        }
+                        free(exec_args);
                     }
                     // intermediate commands
                     else {
                         (void) close(pipes[i][STDIN_FILENO]);
                         if (dup2(pipes[i][STDOUT_FILENO], STDOUT_FILENO) == -1) {
                             perror("Error: couldn't redirect stdout to pipe");
-                            _exit(1);
+                            _exit(i + 1);
                         }
                         (void) close(pipes[i][STDOUT_FILENO]);
 
                         (void) close(pipes[i - 1][STDOUT_FILENO]);
                         if (dup2(pipes[i - 1][STDIN_FILENO], STDIN_FILENO) == -1) {
                             perror("Error: couldn't redirect stdin to pipe");
-                            _exit(1);
+                            _exit(i + 1);
                         }
                         (void) close(pipes[i - 1][STDIN_FILENO]);
 
-                        exec_command(commands[i]);
-                        perror("Error: couldn't execute command");
-                        _exit(1);
+                        // redirect stderr to error file
+                        if (dup2(fd_err, STDERR_FILENO) == -1) {
+                            perror("Error: couldn't redirect stderr to error file");
+                            _exit(i + 1);
+                        }
+                        (void) close(fd_err);
+
+                        char **exec_args = parse_cmd(commands[i]);
+                        int exec_ret = execvp(exec_args[0], exec_args);
+                        if (exec_ret == -1) {
+                            write_error(exec_args[0]);
+                            // perror("Error: couldn't execute command");
+                            _exit(i + 1);
+                        }
+                        free(exec_args);
                     }
                 }
 
-                // parent process
                 if (i == 0) {
                     // first command
                     (void) close(pipes[i][STDOUT_FILENO]);
@@ -351,16 +448,23 @@ int exec(Request *r, char *output_dir, struct timeval start_time) {
             for (int i = 0; i < N; i++) {
 
                 int status = 0;
-
-                if (wait(&status) == -1) {
-                    perror("Error: couldn't wait for child process");
-                    return 1;
-                }
+                (void) wait(&status);
 
                 if (WIFEXITED(status)) {
                     if (WEXITSTATUS(status) != 0) {
-                        fprintf(stderr, "Command %d failed with status %d\n", i + 1, WEXITSTATUS(status));
-                        return 1;
+                        char *msg = malloc(MAX_CMD_SIZE);
+                        int result = snprintf(msg,
+                                              MAX_CMD_SIZE,
+                                              "Task %d piped command %d failed\n\n",
+                                              task_nr,
+                                              WEXITSTATUS(status));
+                        if (result < 0 || result >= MAX_CMD_SIZE) {
+                            perror("Error: couldn't create error message with snprintf");
+                        }
+                        if (write(STDERR_FILENO, msg, strlen(msg)) == -1) {
+                            perror("Error: couldn't write to error file");
+                        }
+                        free(msg);
                     }
                 }
             }
@@ -376,12 +480,12 @@ int exec(Request *r, char *output_dir, struct timeval start_time) {
             result = snprintf(time_str, EXEC_TIME_STRING_SIZE, "%ld ms\n", elapsed_time);
             if (result < 0 || result >= EXEC_TIME_STRING_SIZE) {
                 perror("Error: couldn't create time string with snprintf");
-                return 1;
+                return -1;
             }
 
             if (write(fd_time, time_str, strlen(time_str)) == -1) {
                 perror("Error: couldn't write to time file");
-                return 1;
+                return -1;
             }
 
             (void) close(fd_time);
@@ -392,12 +496,12 @@ int exec(Request *r, char *output_dir, struct timeval start_time) {
             int fd_server = open(SERVER_FIFO, O_WRONLY);
             if (fd_server == -1) {
                 perror("Error: couldn't open server FIFO");
-                return 1;
+                return -1;
             }
 
             if (write(fd_server, r, sizeof_request()) == -1) {
                 perror("Error: couldn't write to server FIFO");
-                return 1;
+                return -1;
             }
 
             (void) close(fd_server);
@@ -451,7 +555,7 @@ int exec(Request *r, char *output_dir, struct timeval start_time) {
         pid_t exec_pid = fork();
         if (exec_pid == -1) {
             perror("Error: couldn't fork");
-            return 1;
+            return -1;
         }
 
         if (exec_pid == 0) {
@@ -459,7 +563,7 @@ int exec(Request *r, char *output_dir, struct timeval start_time) {
             pid_t pid = fork();
             if (pid == -1) {
                 perror("Error: couldn't fork");
-                return 1;
+                return -1;
             }
 
             if (pid == 0) {
@@ -477,19 +581,19 @@ int exec(Request *r, char *output_dir, struct timeval start_time) {
                 }
                 (void) close(fd_err);
 
-                int exec_ret = exec_command(cmd);
-                if (exec_ret == -1) {
-                    perror("Error: couldn't execute command");
+                char **exec_args = parse_cmd(cmd);
+                int exec_ret = execvp(exec_args[0], exec_args);
+                if (exec_ret != 0) {
+                    write_error(exec_args[0]);
+                    // perror("Error: couldn't execute command");
                     _exit(1);
                 }
 
-                (void) close(fd_out);
-                (void) close(fd_err);
+                free(exec_args);
                 _exit(0);
             }
             else {
-                // TODO check for error
-                (void) waitpid(pid, NULL, 0);
+                (void) wait(NULL);
 
                 // write execution time (ms) to file
                 struct timeval end_time;
@@ -503,7 +607,7 @@ int exec(Request *r, char *output_dir, struct timeval start_time) {
                 result = snprintf(time_str, EXEC_TIME_STRING_SIZE, "%ld ms\n", elapsed_time);
                 if (result < 0 || result >= EXEC_TIME_STRING_SIZE) {
                     perror("Error: couldn't create time string with snprintf");
-                    return 1;
+                    return -1;
                 }
 
                 if (write(fd_time, time_str, strlen(time_str)) == -1) {
@@ -519,12 +623,12 @@ int exec(Request *r, char *output_dir, struct timeval start_time) {
                 int fd_server = open(SERVER_FIFO, O_WRONLY);
                 if (fd_server == -1) {
                     perror("Error: couldn't open server FIFO");
-                    return 1;
+                    return -1;
                 }
 
                 if (write(fd_server, r, sizeof_request()) == -1) {
                     perror("Error: couldn't write to server FIFO");
-                    return 1;
+                    return -1;
                 }
 
                 (void) close(fd_server);
