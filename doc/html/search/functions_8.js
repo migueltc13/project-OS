@@ -1,4 +1,4 @@
 var searchData=
 [
-  ['remove_5frequest_77',['remove_request',['../orchestrator_8c.html#a66ab3dff8457488ea9e155c0f33197d1',1,'orchestrator.c']]]
+  ['orchestrator_5fusage_112',['orchestrator_usage',['../orchestrator_8c.html#a8f9d7d40e26b268401b39971b76ce127',1,'orchestrator.c']]]
 ];

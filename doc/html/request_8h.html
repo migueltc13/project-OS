@@ -90,12 +90,12 @@ This graph shows which files directly or indirectly include this file:</div>
 <div class="dyncontent">
 <div class="center"><img src="request_8h__dep__incl.png" border="0" usemap="#ainclude_2request_8hdep" alt=""/></div>
 <map name="ainclude_2request_8hdep" id="ainclude_2request_8hdep">
-<area shape="rect" title=" " alt="" coords="199,5,320,32"/>
-<area shape="rect" href="command_8h.html" title=" " alt="" coords="5,80,140,107"/>
-<area shape="rect" href="orchestrator_8c.html" title=" " alt="" coords="63,155,186,181"/>
-<area shape="rect" href="client_8c.html" title=" " alt="" coords="216,80,303,107"/>
-<area shape="rect" href="command_8c.html" title=" " alt="" coords="327,80,439,107"/>
-<area shape="rect" href="request_8c.html" title=" " alt="" coords="463,80,562,107"/>
+<area shape="rect" title=" " alt="" coords="206,5,327,32"/>
+<area shape="rect" href="command_8h.html" title=" " alt="" coords="65,80,199,107"/>
+<area shape="rect" href="client_8c.html" title=" " alt="" coords="223,80,310,107"/>
+<area shape="rect" href="request_8c.html" title=" " alt="" coords="335,80,433,107"/>
+<area shape="rect" href="command_8c.html" title=" " alt="" coords="5,155,117,181"/>
+<area shape="rect" href="orchestrator_8c.html" title=" " alt="" coords="141,155,264,181"/>
 </map>
 </div>
 </div>
@@ -104,12 +104,19 @@ This graph shows which files directly or indirectly include this file:</div>
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="define-members"></a>
 Macros</h2></td></tr>
 <tr class="memitem:a05e20d8bc0525f94757303dd5a905a69"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="request_8h.html#a05e20d8bc0525f94757303dd5a905a69">EXECUTE</a>&#160;&#160;&#160;0</td></tr>
+<tr class="memdesc:a05e20d8bc0525f94757303dd5a905a69"><td class="mdescLeft">&#160;</td><td class="mdescRight">Execute request code.  <a href="request_8h.html#a05e20d8bc0525f94757303dd5a905a69">More...</a><br /></td></tr>
 <tr class="separator:a05e20d8bc0525f94757303dd5a905a69"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a59279bee44f34d08b3cbf3a89fb0d8d9"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="request_8h.html#a59279bee44f34d08b3cbf3a89fb0d8d9">STATUS</a>&#160;&#160;&#160;1</td></tr>
+<tr class="memdesc:a59279bee44f34d08b3cbf3a89fb0d8d9"><td class="mdescLeft">&#160;</td><td class="mdescRight">Status request code.  <a href="request_8h.html#a59279bee44f34d08b3cbf3a89fb0d8d9">More...</a><br /></td></tr>
 <tr class="separator:a59279bee44f34d08b3cbf3a89fb0d8d9"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a22c88fdadb7d8f8417a92cdcc6232786"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="request_8h.html#a22c88fdadb7d8f8417a92cdcc6232786">COMPLETED</a>&#160;&#160;&#160;2</td></tr>
+<tr class="memdesc:a22c88fdadb7d8f8417a92cdcc6232786"><td class="mdescLeft">&#160;</td><td class="mdescRight">Completed request code.  <a href="request_8h.html#a22c88fdadb7d8f8417a92cdcc6232786">More...</a><br /></td></tr>
 <tr class="separator:a22c88fdadb7d8f8417a92cdcc6232786"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a9d385e974a49598d267af81de5a33838"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="request_8h.html#a9d385e974a49598d267af81de5a33838">KILL</a>&#160;&#160;&#160;3</td></tr>
+<tr class="memdesc:a9d385e974a49598d267af81de5a33838"><td class="mdescLeft">&#160;</td><td class="mdescRight">Kill request code.  <a href="request_8h.html#a9d385e974a49598d267af81de5a33838">More...</a><br /></td></tr>
+<tr class="separator:a9d385e974a49598d267af81de5a33838"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a11b2387a44dc0cf3642ddcbe0581276b"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="request_8h.html#a11b2387a44dc0cf3642ddcbe0581276b">MAX_CMD_SIZE</a>&#160;&#160;&#160;300</td></tr>
+<tr class="memdesc:a11b2387a44dc0cf3642ddcbe0581276b"><td class="mdescLeft">&#160;</td><td class="mdescRight">Maximum size of the command string.  <a href="request_8h.html#a11b2387a44dc0cf3642ddcbe0581276b">More...</a><br /></td></tr>
 <tr class="separator:a11b2387a44dc0cf3642ddcbe0581276b"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="typedef-members"></a>
@@ -119,28 +126,84 @@ Typedefs</h2></td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="func-members"></a>
 Functions</h2></td></tr>
-<tr class="memitem:a3e85de787d8efb28e4bd61a784642190"><td class="memItemLeft" align="right" valign="top"><a class="el" href="request_8h.html#a1abc891df97d2318f8fb4832a28ae63c">Request</a> *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="request_8h.html#a3e85de787d8efb28e4bd61a784642190">create_request</a> (int type, int est_time, char *command, bool is_pipe)</td></tr>
-<tr class="separator:a3e85de787d8efb28e4bd61a784642190"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ab4cb76d84eca459d1b80c7b1a1741192"><td class="memItemLeft" align="right" valign="top"><a class="el" href="request_8h.html#a1abc891df97d2318f8fb4832a28ae63c">Request</a> *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="request_8h.html#ab4cb76d84eca459d1b80c7b1a1741192">create_request</a> (int type, int est_time, char *command, bool is_pipe, char *client_fifo)</td></tr>
+<tr class="memdesc:ab4cb76d84eca459d1b80c7b1a1741192"><td class="mdescLeft">&#160;</td><td class="mdescRight">Creates a new request.  <a href="request_8h.html#ab4cb76d84eca459d1b80c7b1a1741192">More...</a><br /></td></tr>
+<tr class="separator:ab4cb76d84eca459d1b80c7b1a1741192"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a9c4991d2905d6b337c2805f7ab8e54eb"><td class="memItemLeft" align="right" valign="top">int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="request_8h.html#a9c4991d2905d6b337c2805f7ab8e54eb">get_type</a> (<a class="el" href="request_8h.html#a1abc891df97d2318f8fb4832a28ae63c">Request</a> *r)</td></tr>
+<tr class="memdesc:a9c4991d2905d6b337c2805f7ab8e54eb"><td class="mdescLeft">&#160;</td><td class="mdescRight">Get the type of the request.  <a href="request_8h.html#a9c4991d2905d6b337c2805f7ab8e54eb">More...</a><br /></td></tr>
 <tr class="separator:a9c4991d2905d6b337c2805f7ab8e54eb"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a1e0de6005457b0ad26bdff5931c8df25"><td class="memItemLeft" align="right" valign="top">int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="request_8h.html#a1e0de6005457b0ad26bdff5931c8df25">get_est_time</a> (<a class="el" href="request_8h.html#a1abc891df97d2318f8fb4832a28ae63c">Request</a> *r)</td></tr>
+<tr class="memdesc:a1e0de6005457b0ad26bdff5931c8df25"><td class="mdescLeft">&#160;</td><td class="mdescRight">Get the estimated time or priority of the request.  <a href="request_8h.html#a1e0de6005457b0ad26bdff5931c8df25">More...</a><br /></td></tr>
 <tr class="separator:a1e0de6005457b0ad26bdff5931c8df25"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:aa86d0a88bfeae920cdc85fec9f2873ea"><td class="memItemLeft" align="right" valign="top">char *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="request_8h.html#aa86d0a88bfeae920cdc85fec9f2873ea">get_command</a> (<a class="el" href="request_8h.html#a1abc891df97d2318f8fb4832a28ae63c">Request</a> *r)</td></tr>
+<tr class="memdesc:aa86d0a88bfeae920cdc85fec9f2873ea"><td class="mdescLeft">&#160;</td><td class="mdescRight">Get the command to be executed.  <a href="request_8h.html#aa86d0a88bfeae920cdc85fec9f2873ea">More...</a><br /></td></tr>
 <tr class="separator:aa86d0a88bfeae920cdc85fec9f2873ea"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a80650d1ccea10349386f3bd50e922c32"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="request_8h.html#a80650d1ccea10349386f3bd50e922c32">get_is_piped</a> (<a class="el" href="request_8h.html#a1abc891df97d2318f8fb4832a28ae63c">Request</a> *r)</td></tr>
+<tr class="memdesc:a80650d1ccea10349386f3bd50e922c32"><td class="mdescLeft">&#160;</td><td class="mdescRight">Get the boolean indicating if the command is piped.  <a href="request_8h.html#a80650d1ccea10349386f3bd50e922c32">More...</a><br /></td></tr>
 <tr class="separator:a80650d1ccea10349386f3bd50e922c32"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ae6117336c44d707b4b26295ceafa466a"><td class="memItemLeft" align="right" valign="top">int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="request_8h.html#ae6117336c44d707b4b26295ceafa466a">get_task_nr</a> (<a class="el" href="request_8h.html#a1abc891df97d2318f8fb4832a28ae63c">Request</a> *r)</td></tr>
-<tr class="separator:ae6117336c44d707b4b26295ceafa466a"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a58d2abe06be3a5d8cb4d9022fbd4c8a1"><td class="memItemLeft" align="right" valign="top">unsigned int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="request_8h.html#a58d2abe06be3a5d8cb4d9022fbd4c8a1">get_task_nr</a> (<a class="el" href="request_8h.html#a1abc891df97d2318f8fb4832a28ae63c">Request</a> *r)</td></tr>
+<tr class="memdesc:a58d2abe06be3a5d8cb4d9022fbd4c8a1"><td class="mdescLeft">&#160;</td><td class="mdescRight">Get the task number of the request.  <a href="request_8h.html#a58d2abe06be3a5d8cb4d9022fbd4c8a1">More...</a><br /></td></tr>
+<tr class="separator:a58d2abe06be3a5d8cb4d9022fbd4c8a1"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ac05bcc015d6cf87329df236bc939728b"><td class="memItemLeft" align="right" valign="top">char *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="request_8h.html#ac05bcc015d6cf87329df236bc939728b">get_client_fifo</a> (<a class="el" href="request_8h.html#a1abc891df97d2318f8fb4832a28ae63c">Request</a> *r)</td></tr>
+<tr class="memdesc:ac05bcc015d6cf87329df236bc939728b"><td class="mdescLeft">&#160;</td><td class="mdescRight">Get the client FIFO name to send the response to the client.  <a href="request_8h.html#ac05bcc015d6cf87329df236bc939728b">More...</a><br /></td></tr>
+<tr class="separator:ac05bcc015d6cf87329df236bc939728b"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a48f7b60dd732c8c07add076d589ec6bd"><td class="memItemLeft" align="right" valign="top">long&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="request_8h.html#a48f7b60dd732c8c07add076d589ec6bd">get_time</a> (<a class="el" href="request_8h.html#a1abc891df97d2318f8fb4832a28ae63c">Request</a> *r)</td></tr>
+<tr class="separator:a48f7b60dd732c8c07add076d589ec6bd"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a43395fb8bb232c43a0a0078501dc3b12"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="request_8h.html#a43395fb8bb232c43a0a0078501dc3b12">set_type</a> (<a class="el" href="request_8h.html#a1abc891df97d2318f8fb4832a28ae63c">Request</a> *r, int type)</td></tr>
+<tr class="memdesc:a43395fb8bb232c43a0a0078501dc3b12"><td class="mdescLeft">&#160;</td><td class="mdescRight">Set the type of the request.  <a href="request_8h.html#a43395fb8bb232c43a0a0078501dc3b12">More...</a><br /></td></tr>
 <tr class="separator:a43395fb8bb232c43a0a0078501dc3b12"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a42b40d38b4f2c3a1a44d907d5b4c0ae2"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="request_8h.html#a42b40d38b4f2c3a1a44d907d5b4c0ae2">set_task_nr</a> (<a class="el" href="request_8h.html#a1abc891df97d2318f8fb4832a28ae63c">Request</a> *r, int task_nr)</td></tr>
-<tr class="separator:a42b40d38b4f2c3a1a44d907d5b4c0ae2"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a7786a63a5691ed30bd79f97ce01a9b01"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="request_8h.html#a7786a63a5691ed30bd79f97ce01a9b01">set_task_nr</a> (<a class="el" href="request_8h.html#a1abc891df97d2318f8fb4832a28ae63c">Request</a> *r, unsigned int task_nr)</td></tr>
+<tr class="memdesc:a7786a63a5691ed30bd79f97ce01a9b01"><td class="mdescLeft">&#160;</td><td class="mdescRight">Set the task number of the request.  <a href="request_8h.html#a7786a63a5691ed30bd79f97ce01a9b01">More...</a><br /></td></tr>
+<tr class="separator:a7786a63a5691ed30bd79f97ce01a9b01"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a1f928df22f66bb6be9e75d13a2d08fe5"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="request_8h.html#a1f928df22f66bb6be9e75d13a2d08fe5">set_client_fifo</a> (<a class="el" href="request_8h.html#a1abc891df97d2318f8fb4832a28ae63c">Request</a> *r, char *client_fifo)</td></tr>
+<tr class="memdesc:a1f928df22f66bb6be9e75d13a2d08fe5"><td class="mdescLeft">&#160;</td><td class="mdescRight">Set the client FIFO name to send the response to the client.  <a href="request_8h.html#a1f928df22f66bb6be9e75d13a2d08fe5">More...</a><br /></td></tr>
+<tr class="separator:a1f928df22f66bb6be9e75d13a2d08fe5"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a8949a3eb2d229765f225fccdfdc95dc2"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="request_8h.html#a8949a3eb2d229765f225fccdfdc95dc2">print_request</a> (<a class="el" href="request_8h.html#a1abc891df97d2318f8fb4832a28ae63c">Request</a> *r, int policy)</td></tr>
+<tr class="memdesc:a8949a3eb2d229765f225fccdfdc95dc2"><td class="mdescLeft">&#160;</td><td class="mdescRight">Print the request.  <a href="request_8h.html#a8949a3eb2d229765f225fccdfdc95dc2">More...</a><br /></td></tr>
+<tr class="separator:a8949a3eb2d229765f225fccdfdc95dc2"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ac75498371597f92321b38bd186375df6"><td class="memItemLeft" align="right" valign="top">char *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="request_8h.html#ac75498371597f92321b38bd186375df6">type_to_string</a> (int type)</td></tr>
+<tr class="memdesc:ac75498371597f92321b38bd186375df6"><td class="mdescLeft">&#160;</td><td class="mdescRight">Convert the type of the request to a string.  <a href="request_8h.html#ac75498371597f92321b38bd186375df6">More...</a><br /></td></tr>
 <tr class="separator:ac75498371597f92321b38bd186375df6"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:addf1d41d1a4004eb7da1b19870f1a607"><td class="memItemLeft" align="right" valign="top">unsigned long&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="request_8h.html#addf1d41d1a4004eb7da1b19870f1a607">sizeof_request</a> ()</td></tr>
+<tr class="memdesc:addf1d41d1a4004eb7da1b19870f1a607"><td class="mdescLeft">&#160;</td><td class="mdescRight">Get the size of the request.  <a href="request_8h.html#addf1d41d1a4004eb7da1b19870f1a607">More...</a><br /></td></tr>
 <tr class="separator:addf1d41d1a4004eb7da1b19870f1a607"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ad5f65b4ecf295f03488b3b73ea095aa3"><td class="memItemLeft" align="right" valign="top"><a class="el" href="request_8h.html#a1abc891df97d2318f8fb4832a28ae63c">Request</a> *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="request_8h.html#ad5f65b4ecf295f03488b3b73ea095aa3">clone_request</a> (<a class="el" href="request_8h.html#a1abc891df97d2318f8fb4832a28ae63c">Request</a> *r)</td></tr>
+<tr class="memdesc:ad5f65b4ecf295f03488b3b73ea095aa3"><td class="mdescLeft">&#160;</td><td class="mdescRight">Clone a request.  <a href="request_8h.html#ad5f65b4ecf295f03488b3b73ea095aa3">More...</a><br /></td></tr>
+<tr class="separator:ad5f65b4ecf295f03488b3b73ea095aa3"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <h2 class="groupheader">Macro Definition Documentation</h2>
+<a id="a05e20d8bc0525f94757303dd5a905a69"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a05e20d8bc0525f94757303dd5a905a69">&#9670;&nbsp;</a></span>EXECUTE</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">#define EXECUTE&#160;&#160;&#160;0</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Execute request code. </p>
+
+</div>
+</div>
+<a id="a59279bee44f34d08b3cbf3a89fb0d8d9"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a59279bee44f34d08b3cbf3a89fb0d8d9">&#9670;&nbsp;</a></span>STATUS</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">#define STATUS&#160;&#160;&#160;1</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Status request code. </p>
+
+</div>
+</div>
 <a id="a22c88fdadb7d8f8417a92cdcc6232786"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#a22c88fdadb7d8f8417a92cdcc6232786">&#9670;&nbsp;</a></span>COMPLETED</h2>
 
@@ -153,19 +216,23 @@ Functions</h2></td></tr>
       </table>
 </div><div class="memdoc">
 
+<p>Completed request code. </p>
+
 </div>
 </div>
-<a id="a05e20d8bc0525f94757303dd5a905a69"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a05e20d8bc0525f94757303dd5a905a69">&#9670;&nbsp;</a></span>EXECUTE</h2>
+<a id="a9d385e974a49598d267af81de5a33838"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a9d385e974a49598d267af81de5a33838">&#9670;&nbsp;</a></span>KILL</h2>
 
 <div class="memitem">
 <div class="memproto">
       <table class="memname">
         <tr>
-          <td class="memname">#define EXECUTE&#160;&#160;&#160;0</td>
+          <td class="memname">#define KILL&#160;&#160;&#160;3</td>
         </tr>
       </table>
 </div><div class="memdoc">
+
+<p>Kill request code. </p>
 
 </div>
 </div>
@@ -181,19 +248,7 @@ Functions</h2></td></tr>
       </table>
 </div><div class="memdoc">
 
-</div>
-</div>
-<a id="a59279bee44f34d08b3cbf3a89fb0d8d9"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a59279bee44f34d08b3cbf3a89fb0d8d9">&#9670;&nbsp;</a></span>STATUS</h2>
-
-<div class="memitem">
-<div class="memproto">
-      <table class="memname">
-        <tr>
-          <td class="memname">#define STATUS&#160;&#160;&#160;1</td>
-        </tr>
-      </table>
-</div><div class="memdoc">
+<p>Maximum size of the command string. </p>
 
 </div>
 </div>
@@ -213,8 +268,8 @@ Functions</h2></td></tr>
 </div>
 </div>
 <h2 class="groupheader">Function Documentation</h2>
-<a id="a3e85de787d8efb28e4bd61a784642190"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a3e85de787d8efb28e4bd61a784642190">&#9670;&nbsp;</a></span>create_request()</h2>
+<a id="ab4cb76d84eca459d1b80c7b1a1741192"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ab4cb76d84eca459d1b80c7b1a1741192">&#9670;&nbsp;</a></span>create_request()</h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -241,7 +296,13 @@ Functions</h2></td></tr>
           <td class="paramkey"></td>
           <td></td>
           <td class="paramtype">bool&#160;</td>
-          <td class="paramname"><em>is_pipe</em>&#160;</td>
+          <td class="paramname"><em>is_piped</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">char *&#160;</td>
+          <td class="paramname"><em>client_fifo</em>&#160;</td>
         </tr>
         <tr>
           <td></td>
@@ -251,77 +312,33 @@ Functions</h2></td></tr>
       </table>
 </div><div class="memdoc">
 
-</div>
-</div>
-<a id="aa86d0a88bfeae920cdc85fec9f2873ea"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#aa86d0a88bfeae920cdc85fec9f2873ea">&#9670;&nbsp;</a></span>get_command()</h2>
-
-<div class="memitem">
-<div class="memproto">
-      <table class="memname">
-        <tr>
-          <td class="memname">char* get_command </td>
-          <td>(</td>
-          <td class="paramtype"><a class="el" href="request_8h.html#a1abc891df97d2318f8fb4832a28ae63c">Request</a> *&#160;</td>
-          <td class="paramname"><em>r</em></td><td>)</td>
-          <td></td>
-        </tr>
-      </table>
-</div><div class="memdoc">
-
-</div>
-</div>
-<a id="a1e0de6005457b0ad26bdff5931c8df25"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a1e0de6005457b0ad26bdff5931c8df25">&#9670;&nbsp;</a></span>get_est_time()</h2>
-
-<div class="memitem">
-<div class="memproto">
-      <table class="memname">
-        <tr>
-          <td class="memname">int get_est_time </td>
-          <td>(</td>
-          <td class="paramtype"><a class="el" href="request_8h.html#a1abc891df97d2318f8fb4832a28ae63c">Request</a> *&#160;</td>
-          <td class="paramname"><em>r</em></td><td>)</td>
-          <td></td>
-        </tr>
-      </table>
-</div><div class="memdoc">
-
-</div>
-</div>
-<a id="a80650d1ccea10349386f3bd50e922c32"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a80650d1ccea10349386f3bd50e922c32">&#9670;&nbsp;</a></span>get_is_piped()</h2>
-
-<div class="memitem">
-<div class="memproto">
-      <table class="memname">
-        <tr>
-          <td class="memname">bool get_is_piped </td>
-          <td>(</td>
-          <td class="paramtype"><a class="el" href="request_8h.html#a1abc891df97d2318f8fb4832a28ae63c">Request</a> *&#160;</td>
-          <td class="paramname"><em>r</em></td><td>)</td>
-          <td></td>
-        </tr>
-      </table>
-</div><div class="memdoc">
-
-</div>
-</div>
-<a id="ae6117336c44d707b4b26295ceafa466a"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#ae6117336c44d707b4b26295ceafa466a">&#9670;&nbsp;</a></span>get_task_nr()</h2>
-
-<div class="memitem">
-<div class="memproto">
-      <table class="memname">
-        <tr>
-          <td class="memname">int get_task_nr </td>
-          <td>(</td>
-          <td class="paramtype"><a class="el" href="request_8h.html#a1abc891df97d2318f8fb4832a28ae63c">Request</a> *&#160;</td>
-          <td class="paramname"><em>r</em></td><td>)</td>
-          <td></td>
-        </tr>
-      </table>
-</div><div class="memdoc">
+<p>Creates a new request. </p>
+<p>Allocates memory for a new request and initializes it with the given parameters.</p>
+<p>It initializes the task number with 0, which is not a valid task number.</p>
+<p>For the creation of a status request, the</p><dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">est_time</td><td>should be <code>0</code>, as it is not used, as well as the</td></tr>
+    <tr><td class="paramname">command</td><td>should be <code>NULL</code> and</td></tr>
+    <tr><td class="paramname">is_piped</td><td>should be <code>false</code>.</td></tr>
+  </table>
+  </dd>
+</dl>
+<p>Example of the creation of an execute request: </p><div class="fragment"><div class="line"><a class="code" href="structrequest.html">Request</a> *execute_request = <a class="code" href="request_8h.html#ab4cb76d84eca459d1b80c7b1a1741192">create_request</a>(<a class="code" href="request_8h.html#a05e20d8bc0525f94757303dd5a905a69">EXECUTE</a>, 12, <span class="stringliteral">&quot;ls -l | cat&quot;</span>, <span class="keyword">true</span>, <span class="stringliteral">&quot;client-1234&quot;</span>);</div>
+<div class="ttc" id="arequest_8h_html_a05e20d8bc0525f94757303dd5a905a69"><div class="ttname"><a href="request_8h.html#a05e20d8bc0525f94757303dd5a905a69">EXECUTE</a></div><div class="ttdeci">#define EXECUTE</div><div class="ttdoc">Execute request code.</div><div class="ttdef"><b>Definition:</b> request.h:9</div></div>
+<div class="ttc" id="arequest_8h_html_ab4cb76d84eca459d1b80c7b1a1741192"><div class="ttname"><a href="request_8h.html#ab4cb76d84eca459d1b80c7b1a1741192">create_request</a></div><div class="ttdeci">Request * create_request(int type, int est_time, char *command, bool is_pipe, char *client_fifo)</div><div class="ttdoc">Creates a new request.</div><div class="ttdef"><b>Definition:</b> request.c:73</div></div>
+<div class="ttc" id="astructrequest_html"><div class="ttname"><a href="structrequest.html">request</a></div><div class="ttdoc">The request struct.</div><div class="ttdef"><b>Definition:</b> request.c:36</div></div>
+</div><!-- fragment --><p>Example of the creation of a status request: </p><div class="fragment"><div class="line"><a class="code" href="structrequest.html">Request</a> *status_request = <a class="code" href="request_8h.html#ab4cb76d84eca459d1b80c7b1a1741192">create_request</a>(<a class="code" href="request_8h.html#a59279bee44f34d08b3cbf3a89fb0d8d9">STATUS</a>, 0, NULL, <span class="keyword">false</span>, <span class="stringliteral">&quot;client-1234&quot;</span>);</div>
+<div class="ttc" id="arequest_8h_html_a59279bee44f34d08b3cbf3a89fb0d8d9"><div class="ttname"><a href="request_8h.html#a59279bee44f34d08b3cbf3a89fb0d8d9">STATUS</a></div><div class="ttdeci">#define STATUS</div><div class="ttdoc">Status request code.</div><div class="ttdef"><b>Definition:</b> request.h:12</div></div>
+</div><!-- fragment --><p><b>The caller is responsible for freeing the returned request by this function.</b> </p><dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">type</td><td>the type of the request </td></tr>
+    <tr><td class="paramname">est_time</td><td>the estimated time or priority of the request </td></tr>
+    <tr><td class="paramname">command</td><td>the command to be executed </td></tr>
+    <tr><td class="paramname">is_piped</td><td>a boolean indicating if the command is piped </td></tr>
+    <tr><td class="paramname">client_fifo</td><td>the client FIFO name to send the response to the client </td></tr>
+  </table>
+  </dd>
+</dl>
 
 </div>
 </div>
@@ -341,30 +358,164 @@ Functions</h2></td></tr>
       </table>
 </div><div class="memdoc">
 
+<p>Get the type of the request. </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">r</td><td>The request to get the type from </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Returns</dt><dd>The type of the request </dd></dl>
+
 </div>
 </div>
-<a id="a42b40d38b4f2c3a1a44d907d5b4c0ae2"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a42b40d38b4f2c3a1a44d907d5b4c0ae2">&#9670;&nbsp;</a></span>set_task_nr()</h2>
+<a id="a1e0de6005457b0ad26bdff5931c8df25"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a1e0de6005457b0ad26bdff5931c8df25">&#9670;&nbsp;</a></span>get_est_time()</h2>
 
 <div class="memitem">
 <div class="memproto">
       <table class="memname">
         <tr>
-          <td class="memname">void set_task_nr </td>
+          <td class="memname">int get_est_time </td>
           <td>(</td>
           <td class="paramtype"><a class="el" href="request_8h.html#a1abc891df97d2318f8fb4832a28ae63c">Request</a> *&#160;</td>
-          <td class="paramname"><em>r</em>, </td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
+          <td class="paramname"><em>r</em></td><td>)</td>
           <td></td>
-          <td class="paramtype">int&#160;</td>
-          <td class="paramname"><em>task_nr</em>&#160;</td>
         </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Get the estimated time or priority of the request. </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">r</td><td>The request to get the estimated time or priority from </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Returns</dt><dd>The estimated time or priority of the request </dd></dl>
+
+</div>
+</div>
+<a id="aa86d0a88bfeae920cdc85fec9f2873ea"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#aa86d0a88bfeae920cdc85fec9f2873ea">&#9670;&nbsp;</a></span>get_command()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
         <tr>
+          <td class="memname">char* get_command </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="request_8h.html#a1abc891df97d2318f8fb4832a28ae63c">Request</a> *&#160;</td>
+          <td class="paramname"><em>r</em></td><td>)</td>
           <td></td>
-          <td>)</td>
-          <td></td><td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Get the command to be executed. </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">r</td><td>The request to get the command from </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Returns</dt><dd>The command to be executed </dd></dl>
+
+</div>
+</div>
+<a id="a80650d1ccea10349386f3bd50e922c32"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a80650d1ccea10349386f3bd50e922c32">&#9670;&nbsp;</a></span>get_is_piped()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">bool get_is_piped </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="request_8h.html#a1abc891df97d2318f8fb4832a28ae63c">Request</a> *&#160;</td>
+          <td class="paramname"><em>r</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Get the boolean indicating if the command is piped. </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">r</td><td>The request to get the is_piped from </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Returns</dt><dd>The boolean indicating if the command is piped </dd></dl>
+
+</div>
+</div>
+<a id="a58d2abe06be3a5d8cb4d9022fbd4c8a1"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a58d2abe06be3a5d8cb4d9022fbd4c8a1">&#9670;&nbsp;</a></span>get_task_nr()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">unsigned int get_task_nr </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="request_8h.html#a1abc891df97d2318f8fb4832a28ae63c">Request</a> *&#160;</td>
+          <td class="paramname"><em>r</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Get the task number of the request. </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">r</td><td>The request to get the task number from </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Returns</dt><dd>The task number of the request </dd></dl>
+
+</div>
+</div>
+<a id="ac05bcc015d6cf87329df236bc939728b"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ac05bcc015d6cf87329df236bc939728b">&#9670;&nbsp;</a></span>get_client_fifo()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">char* get_client_fifo </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="request_8h.html#a1abc891df97d2318f8fb4832a28ae63c">Request</a> *&#160;</td>
+          <td class="paramname"><em>r</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Get the client FIFO name to send the response to the client. </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">r</td><td>The request to get the client FIFO name from </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Returns</dt><dd>The client FIFO name to send the response to the client </dd></dl>
+
+</div>
+</div>
+<a id="a48f7b60dd732c8c07add076d589ec6bd"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a48f7b60dd732c8c07add076d589ec6bd">&#9670;&nbsp;</a></span>get_time()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">long get_time </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="request_8h.html#a1abc891df97d2318f8fb4832a28ae63c">Request</a> *&#160;</td>
+          <td class="paramname"><em>r</em></td><td>)</td>
+          <td></td>
         </tr>
       </table>
 </div><div class="memdoc">
@@ -397,22 +548,127 @@ Functions</h2></td></tr>
       </table>
 </div><div class="memdoc">
 
+<p>Set the type of the request. </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">r</td><td>The request to set the type </td></tr>
+    <tr><td class="paramname">type</td><td>The type to set </td></tr>
+  </table>
+  </dd>
+</dl>
+
 </div>
 </div>
-<a id="addf1d41d1a4004eb7da1b19870f1a607"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#addf1d41d1a4004eb7da1b19870f1a607">&#9670;&nbsp;</a></span>sizeof_request()</h2>
+<a id="a7786a63a5691ed30bd79f97ce01a9b01"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a7786a63a5691ed30bd79f97ce01a9b01">&#9670;&nbsp;</a></span>set_task_nr()</h2>
 
 <div class="memitem">
 <div class="memproto">
       <table class="memname">
         <tr>
-          <td class="memname">unsigned long sizeof_request </td>
+          <td class="memname">void set_task_nr </td>
           <td>(</td>
-          <td class="paramname"></td><td>)</td>
+          <td class="paramtype"><a class="el" href="request_8h.html#a1abc891df97d2318f8fb4832a28ae63c">Request</a> *&#160;</td>
+          <td class="paramname"><em>r</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
           <td></td>
+          <td class="paramtype">unsigned int&#160;</td>
+          <td class="paramname"><em>task_nr</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
         </tr>
       </table>
 </div><div class="memdoc">
+
+<p>Set the task number of the request. </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">r</td><td>The request to set the task number </td></tr>
+    <tr><td class="paramname">task_nr</td><td>The task number to set </td></tr>
+  </table>
+  </dd>
+</dl>
+
+</div>
+</div>
+<a id="a1f928df22f66bb6be9e75d13a2d08fe5"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a1f928df22f66bb6be9e75d13a2d08fe5">&#9670;&nbsp;</a></span>set_client_fifo()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void set_client_fifo </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="request_8h.html#a1abc891df97d2318f8fb4832a28ae63c">Request</a> *&#160;</td>
+          <td class="paramname"><em>r</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">char *&#160;</td>
+          <td class="paramname"><em>client_fifo</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Set the client FIFO name to send the response to the client. </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">r</td><td>The request to set the client FIFO name </td></tr>
+    <tr><td class="paramname">client_fifo</td><td>The client FIFO name to set </td></tr>
+  </table>
+  </dd>
+</dl>
+
+</div>
+</div>
+<a id="a8949a3eb2d229765f225fccdfdc95dc2"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a8949a3eb2d229765f225fccdfdc95dc2">&#9670;&nbsp;</a></span>print_request()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void print_request </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="request_8h.html#a1abc891df97d2318f8fb4832a28ae63c">Request</a> *&#160;</td>
+          <td class="paramname"><em>r</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">int&#160;</td>
+          <td class="paramname"><em>policy</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Print the request. </p>
+<p>Prints the request attributes to the standard output.</p>
+<p>Based on the policy being used, it prints the estimated time or the priority.</p>
+<p>Is the policy is FCFS, it doesn't print either the estimated time or the priority. </p><dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">r</td><td>The request to print </td></tr>
+    <tr><td class="paramname">policy</td><td>The policy being used </td></tr>
+  </table>
+  </dd>
+</dl>
 
 </div>
 </div>
@@ -432,6 +688,66 @@ Functions</h2></td></tr>
       </table>
 </div><div class="memdoc">
 
+<p>Convert the type of the request to a string. </p>
+<p>Possible types are <a class="el" href="request_8h.html#a05e20d8bc0525f94757303dd5a905a69">EXECUTE</a>, <a class="el" href="request_8h.html#a59279bee44f34d08b3cbf3a89fb0d8d9">STATUS</a>, <a class="el" href="request_8h.html#a22c88fdadb7d8f8417a92cdcc6232786">COMPLETED</a> and <a class="el" href="request_8h.html#a9d385e974a49598d267af81de5a33838">KILL</a>. </p><dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">type</td><td>The type of the request </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Returns</dt><dd>The string representation of the type of the request </dd></dl>
+
+</div>
+</div>
+<a id="addf1d41d1a4004eb7da1b19870f1a607"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#addf1d41d1a4004eb7da1b19870f1a607">&#9670;&nbsp;</a></span>sizeof_request()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">unsigned long sizeof_request </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Get the size of the request. </p>
+<p>Used due to the fact that the <a class="el" href="request_8h.html#a1abc891df97d2318f8fb4832a28ae63c">Request</a> struct is not visible to other modules, so</p><div class="fragment"><div class="line"><span class="keyword">sizeof</span>(<a class="code" href="request_8h.html#a1abc891df97d2318f8fb4832a28ae63c">Request</a>) </div>
+<div class="ttc" id="arequest_8h_html_a1abc891df97d2318f8fb4832a28ae63c"><div class="ttname"><a href="request_8h.html#a1abc891df97d2318f8fb4832a28ae63c">Request</a></div><div class="ttdeci">struct request Request</div><div class="ttdef"><b>Definition:</b> request.h:23</div></div>
+</div><!-- fragment --><p> wouldn't give the correct size of the struct. </p><dl class="section return"><dt>Returns</dt><dd>The size of the Request struct </dd></dl>
+
+</div>
+</div>
+<a id="ad5f65b4ecf295f03488b3b73ea095aa3"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ad5f65b4ecf295f03488b3b73ea095aa3">&#9670;&nbsp;</a></span>clone_request()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="request_8h.html#a1abc891df97d2318f8fb4832a28ae63c">Request</a>* clone_request </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="request_8h.html#a1abc891df97d2318f8fb4832a28ae63c">Request</a> *&#160;</td>
+          <td class="paramname"><em>r</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Clone a request. </p>
+<p>Allocates memory for a new request and initializes it with the attributes of the given request.</p>
+<p>Used in the <a class="el" href="orchestrator_8c.html">orchestrator.c</a> to clone a request before adding it to the executing or scheduled array.</p>
+<p><b>The caller is responsible for freeing the returned request by this function.</b> </p><dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">r</td><td>The request to clone </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Returns</dt><dd>The cloned request </dd></dl>
+
 </div>
 </div>
 </div><!-- contents -->
@@ -439,7 +755,7 @@ Functions</h2></td></tr>
         <hr class="footer">
         <address class="footer">
             <small>
-                Generated on Sun Apr 28 2024 17:59:25 for <b>Orchestrator</b> by
+                Generated on Thu May 2 2024 18:34:12 for <b>Orchestrator</b> by
                 <a href="http://www.doxygen.org/index.html">
                     <img class="footer" src="doxygen.png" alt="doxygen" onerror="this.onerror=null;this.src='doxygen.svg';"/>
                 </a> 1.9.1. All rights reserved.

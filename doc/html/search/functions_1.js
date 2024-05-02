@@ -1,4 +1,7 @@
 var searchData=
 [
-  ['create_5frequest_63',['create_request',['../request_8h.html#a3e85de787d8efb28e4bd61a784642190',1,'create_request(int type, int est_time, char *command, bool is_pipe):&#160;request.c'],['../request_8c.html#a59a69ba210777dfe8cf056212ad1142d',1,'create_request(int type, int est_time, char *command, bool is_piped):&#160;request.c']]]
+  ['clean_5fup_91',['clean_up',['../orchestrator_8c.html#aae029597704c5273943390688cb2d0ec',1,'orchestrator.c']]],
+  ['clean_5fup_5fall_92',['clean_up_all',['../orchestrator_8c.html#a0ffc5219a04dffcd16480b6c51111b67',1,'orchestrator.c']]],
+  ['clone_5frequest_93',['clone_request',['../request_8h.html#ad5f65b4ecf295f03488b3b73ea095aa3',1,'clone_request(Request *r):&#160;request.c'],['../request_8c.html#ad5f65b4ecf295f03488b3b73ea095aa3',1,'clone_request(Request *r):&#160;request.c']]],
+  ['create_5frequest_94',['create_request',['../request_8h.html#ab4cb76d84eca459d1b80c7b1a1741192',1,'create_request(int type, int est_time, char *command, bool is_pipe, char *client_fifo):&#160;request.c'],['../request_8c.html#a96b9942bf26bd4b5458e0e393d8af806',1,'create_request(int type, int est_time, char *command, bool is_piped, char *client_fifo):&#160;request.c']]]
 ];

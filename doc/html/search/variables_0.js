@@ -1,4 +1,5 @@
 var searchData=
 [
-  ['command_84',['command',['../structrequest.html#a9a3579f20bd904d17dd72471654d0045',1,'request']]]
+  ['client_5ffifo_125',['client_fifo',['../structrequest.html#a3e985f54b26b9c100b8348657c112d12',1,'request']]],
+  ['command_126',['command',['../structrequest.html#ad818e4f42262f8b9c17e17d07357e617',1,'request']]]
 ];

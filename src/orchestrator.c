@@ -1,7 +1,6 @@
 // TODO remove ../include/
 #include "../include/orchestrator.h"
 #include "../include/task_nr.h"
-#include "../include/request.h"
 #include "../include/command.h"
 
 #include <stdio.h>
@@ -10,12 +9,11 @@
 #include <unistd.h>
 #include <fcntl.h>
 #include <sys/stat.h>
-#include <sys/time.h>
 
-// Default scheduling policy
-#define DEFAULT_POLICY FCFS
+/** @brief Default scheduling policy **/
+#define DEFAULT_POLICY SJF
 
-// Max number of scheduled requests
+/** @brief Max number of scheduled requests **/
 #define MAX_SCHEDULED_REQUESTS 1024
 
 void orchestrator_usage(char *name);
@@ -56,19 +54,79 @@ void clean_up_all(int fd, Request *r,
                   Request *scheduled[], int N_scheduled);
 
 /**
- * @brief Main function for the orchestrator program
- * The orchestrator program is responsible for managing the execution of the parallel tasks.
- * It receives the output directory, the number of parallel tasks, and the scheduling policy as arguments.
- * This function is responsible for validating the arguments, parsing them and
- * calling the appropriate functions to manage the parallel tasks.
+ * @brief Main function for the orchestrator server program.
+ *
+ * @details
+ * The orchestrator program is responsible of:
+ * \li **parsing the command-line interface arguments**;
+ * \li **creating the server FIFO** based on the @ref SERVER_FIFO macro;
+ * \li **receiving and handling client requests** sent via the server FIFO;
+ * \li **sending the appropriate responses** to the clients via their
+ * respective FIFOs;
+ *
+ * It receives the output directory, the number of parallel
+ * tasks, and, optionally, the scheduling policy as arguments.
+ *
+ * If the output directory doesn't exist, it will be created.
+ *
+ * If the number of parallel tasks is not provided or is less
+ * than or equal to zero, the program will print an error message
+ * and exit.
+ *
+ * If the scheduling policy is not provided, the default policy
+ * is applied via the @ref DEFAULT_POLICY macro.
+ *
+ * It's responsable for executing or scheduling requests with type
+ * @ref EXECUTE sent from the clients. If the max number of parallel
+ * tasks is reached, the request will be scheduled. Based on this
+ * action, the orchestrator program will send a response to the client
+ * with the task number and the status of the request - either executing
+ * or scheduled.
+ *
+ * @see handle_execute
+ *
+ * Once a command finnish his execution, the orchestrator program
+ * will receive a request with type @ref COMPLETED sent from the parent
+ * process of the child process that executed command, and will execute
+ * next available scheduled request, if any exists, based on the
+ * scheduling policy applied.
+ *
+ * @see handle_completed
+ *
+ * The orchestrator program can also receive requests with type
+ * @ref STATUS from the clients, to check the status of the executing,
+ * scheduled and completed requests. The response will be sent via
+ * the client FIFO.
+ *
+ * @see handle_status
+ *
+ * The orchestrator program can also receive requests with type
+ * @ref KILL from the clients, to shutdown the server.
+ *
+ * When the orchestrator program is shutting down, it will save the
+ * task number to a file in the output directory (see @ref save_task_nr),
+ * close the open FIFOs file descriptors, and free the memory
+ * allocated for the executing and scheduled requests using the @ref clean_up
+ * function.
+ *
+ * If any of the orchestrator components or called functions fail, the
+ * program will print an error message, clean up the memory and close file
+ * descriptors using the @ref clean_up_all function, and return 1.
+ *
+ * The orchestrator program will run until it receives a request
+ * with type @ref KILL from a client, or until it receives a signal
+ * to terminate or interrupt the program.
+ *
  * @param argc The number of arguments
  * @param argv The arguments
- * @return 0 if the program runs successfully
+ * @return 0 if the program runs successfully, 1 otherwise
  */
 int main(int argc, char **argv) {
 
     // Validate the number of arguments
-    if (argc < 3) {
+    // min: 2 (output_dir, parallel_tasks)
+    // max: 3 (output_dir, parallel_tasks, sched_policy)
+    if (argc < 3 || argc > 4) {
         orchestrator_usage(argv[0]);
         return 0;
     }
@@ -89,7 +147,11 @@ int main(int argc, char **argv) {
 
     // Get the number of parallel tasks
     const unsigned int tasks = atoi(argv[2]);
-    if (tasks <= 0) {
+
+    printf("Number of parallel tasks: %d\n", tasks);
+
+    if ((int) tasks <= 0) {
+        orchestrator_usage(argv[0]);
         printf("Error: invalid number of parallel tasks\n");
         return 1;
     }
@@ -98,7 +160,7 @@ int main(int argc, char **argv) {
     int policy = DEFAULT_POLICY;
 
     // Get the scheduling policy if any was provided
-    if (argc > 3) {
+    if (argc == 4) {
         char *policy_buffer = argv[3];
         // parse the scheduling policy to an int
         if (strcmp(policy_buffer, "FCFS") == 0) {
@@ -120,9 +182,10 @@ int main(int argc, char **argv) {
         printf("Using default scheduling policy: FCFS\n");
     }
 
-    // create the server FIFO
+    // unlink the server FIFO if it exists
     (void) unlink(SERVER_FIFO);
 
+    // create the server FIFO
     if (mkfifo(SERVER_FIFO, 0644) == -1) {
         perror("Error: couldn't create server FIFO");
         return 1;
@@ -132,6 +195,7 @@ int main(int argc, char **argv) {
     unsigned int task_nr = load_task_nr(output_dir);
     if (task_nr == 0) {
         perror("Error: couldn't get task number");
+        (void) unlink(SERVER_FIFO);
         return 1;
     }
 
@@ -150,6 +214,7 @@ int main(int argc, char **argv) {
         int fd = open(SERVER_FIFO, O_RDONLY);
         if (fd == -1) {
             perror("Error: couldn't open server FIFO");
+            (void) unlink(SERVER_FIFO);
             return 1;
         }
 
@@ -158,6 +223,7 @@ int main(int argc, char **argv) {
         if (r == NULL) {
             perror("Error: couldn't allocate memory for request");
             (void) close(fd);
+            (void) unlink(SERVER_FIFO);
             return 1;
         }
 
@@ -168,6 +234,7 @@ int main(int argc, char **argv) {
             if (bytes_read == -1) {
                 perror("Error: couldn't read from server FIFO");
                 (void) close(fd);
+                (void) unlink(SERVER_FIFO);
                 return 1;
             }
 
@@ -198,6 +265,7 @@ int main(int argc, char **argv) {
                         clean_up_all(fd, r,
                                      executing, N_executing,
                                      scheduled, N_scheduled);
+                        (void) unlink(SERVER_FIFO);
                         return 1;
                     }
                     break;
@@ -214,6 +282,7 @@ int main(int argc, char **argv) {
                         clean_up_all(fd, r,
                                      executing, N_executing,
                                      scheduled, N_scheduled);
+                        (void) unlink(SERVER_FIFO);
                         return 1;
                     }
                     break;
@@ -231,6 +300,7 @@ int main(int argc, char **argv) {
                         clean_up_all(fd, r,
                                      executing, N_executing,
                                      scheduled, N_scheduled);
+                        (void) unlink(SERVER_FIFO);
                         return 1;
                     }
                     break;
@@ -262,17 +332,33 @@ int main(int argc, char **argv) {
         return 1;
     }
 
+    // unlink server FIFO
+    (void) unlink(SERVER_FIFO);
+
     return 0;
 }
 
 /**
- * @brief Print the usage of the orchestrator program
- * @param name The name of the program
+ * @brief Print the usage of the orchestrator server executable.
+ * @param name The name of the orchestrator server executable
  */
 void orchestrator_usage(char *name) {
     printf("Usage: %s <output_dir> <parallel_tasks> [sched_policy]\n", name);
 }
 
+/**
+ * @brief Add a request to the requests array.
+ *
+ * @details If the array is full, the function will return -1.
+ *
+ * Used to add requests to the executing and scheduled arrays.
+ *
+ * @param requests The array of requests
+ * @param N The number of requests in the array
+ * @param max The max number of requests in the array
+ * @param r The request to add
+ * @return 0 if the request was added successfully, -1 otherwise
+ */
 int add_request(Request *requests[], int *N, int max, Request *r) {
     if (*N >= max) {
         // requests array is full
@@ -283,6 +369,19 @@ int add_request(Request *requests[], int *N, int max, Request *r) {
     return 0;
 }
 
+/**
+ * @brief Remove a request from the requests array.
+ *
+ * @details If the request is not found in the array,
+ * the function will return -1.
+ *
+ * Used to remove requests from the executing and scheduled arrays.
+ *
+ * @param requests The array of requests
+ * @param N The number of requests in the array
+ * @param r The request to remove
+ * @return 0 if the request was removed successfully, -1 otherwise
+ */
 int remove_request(Request *requests[], int *N, Request *r) {
     for (int i = 0; i < *N; i++) {
         if (get_task_nr(requests[i]) == get_task_nr(r)) {
@@ -300,6 +399,26 @@ int remove_request(Request *requests[], int *N, Request *r) {
     return -1;
 }
 
+/**
+ * @brief Select a request from the requests array based on the
+ * scheduling policy.
+ *
+ * @details The function will return `NULL` if the array is empty.
+ *
+ * The function will return the first scheduled request
+ * if the scheduling policy is @ref FCFS.
+ *
+ * The function will return the request with the smallest estimated time
+ * if the scheduling policy is @ref SJF.
+ *
+ * The function will return the request with the highest priority
+ * if the scheduling policy is @ref PES.
+ *
+ * @param requests The array of requests
+ * @param N The number of requests in the array
+ * @param policy The scheduling policy applied
+ * @return The selected request
+ */
 Request *select_request(Request *scheduled[], int N, int policy) {
 
     Request *r = NULL;
@@ -345,6 +464,30 @@ Request *select_request(Request *scheduled[], int N, int policy) {
     return clone_request(r);
 }
 
+/**
+ * @brief Handle the execute request sent by a client.
+ *
+ * @details The function will execute the request if the number of
+ * executing requests is less than the max number of parallel tasks,
+ * otherwise the request will be scheduled.
+ *
+ * The function will send a message to the client with the task number
+ * and the status of the request - either executing or scheduled.
+ *
+ * It uses the function @ref exec to execute the command, defined in
+ * @ref command.c.
+ *
+ * @param r The request to execute
+ * @param executing The array of executing requests
+ * @param N_executing The number of executing requests
+ * @param scheduled The array of scheduled requests
+ * @param N_scheduled The number of scheduled requests
+ * @param output_dir The output directory
+ * @param tasks The max number of parallel tasks
+ * @param task_nr The task number
+ * @param start_time The start time of the request
+ * @return 0 if the request was executed or scheduled successfully, -1 otherwise
+ */
 int handle_execute(Request *r,
                    Request *executing[], int *N_executing,
                    Request *scheduled[], int *N_scheduled,
@@ -430,6 +573,29 @@ int handle_execute(Request *r,
     return 0;
 }
 
+/**
+ * @brief Handle the status request sent by a client.
+ *
+ * @details The function will send the status of the executing,
+ * scheduled and completed requests to the client via the client
+ * FIFO located in the request.
+ *
+ * This functions creates a process to send the status to the
+ * respective client, this way other clients can still send
+ * requests to the server and receive responses.
+ *
+ * It uses the history file (@ref HISTORY_NAME) to get the
+ * completed requests, and the function @ref send_status to
+ * send the status to the client.
+ *
+ * @param r The request to handle
+ * @param executing The array of executing requests
+ * @param N_executing The number of executing requests
+ * @param scheduled The array of scheduled requests
+ * @param N_scheduled The number of scheduled requests
+ * @param output_dir The output directory
+ * @return 0 if the status was sent successfully, -1 otherwise
+ */
 int handle_status(Request *r,
                   Request *executing[], int N_executing,
                   Request *scheduled[], int N_scheduled,
@@ -461,6 +627,35 @@ int handle_status(Request *r,
     return 0;
 }
 
+/**
+ * @brief Handle the completed request sent by the parent process
+ * of the child process that executed the command.
+ *
+ * @details The function will remove the request from the executing
+ * array and check for scheduled requests to run.
+ *
+ * If there are scheduled requests, the function will remove the
+ * request from the scheduled array, add it to the executing array,
+ * and execute the command.
+ *
+ * If there's a available scheduled request, the function will send
+ * a message to the client with the task number and the status of
+ * the request - either executing or scheduled.
+ *
+ * It uses the function @ref exec to execute the command, defined in
+ * @ref command.c, and the function @ref select_request to select
+ * the next scheduled request, if any exists, to execute.
+ *
+ * @param r The request to handle
+ * @param executing The array of executing requests
+ * @param N_executing The number of executing requests
+ * @param scheduled The array of scheduled requests
+ * @param N_scheduled The number of scheduled requests
+ * @param output_dir The output directory
+ * @param policy The scheduling policy applied
+ * @param start_time The start time of the request
+ * @return 0 if the request was handled successfully, -1 otherwise
+ */
 int handle_completed(Request *r,
                      Request *executing[], int *N_executing,
                      Request *scheduled[], int *N_scheduled,
@@ -506,6 +701,26 @@ int handle_completed(Request *r,
     return 0;
 }
 
+/**
+ * @brief Send the status of the executing, scheduled and completed
+ * requests to the client via the client FIFO that sent the status
+ * request.
+ *
+ * @details The function is used by the @ref handle_status function
+ * as an auxiliary function to send the status to the client.
+ *
+ * @see handle_status
+ *
+ * @param client_fifo The client FIFO name to send the status response
+ * to the client
+ * @param executing The array of executing requests
+ * @param N_executing The number of executing requests
+ * @param scheduled The array of scheduled requests
+ * @param N_scheduled The number of scheduled requests
+ * @param output_dir The output directory to get the history file in
+ * in order to get and send the completed requests
+ * @return 0 if the status was sent successfully, -1 otherwise
+ */
 int send_status(char *client_fifo,
                 Request *executing[], int N_executing,
                 Request *scheduled[], int N_scheduled,
@@ -664,6 +879,15 @@ int send_status(char *client_fifo,
     return 0;
 }
 
+/**
+ * @brief Free the memory allocated for the executing and scheduled
+ * requests.
+ *
+ * @param executing The array of executing requests
+ * @param N_executing The number of executing requests
+ * @param scheduled The array of scheduled requests
+ * @param N_scheduled The number of scheduled requests
+ */
 void clean_up(Request *executing[], int N_executing,
               Request *scheduled[], int N_scheduled) {
     for (int i = 0; i < N_executing; i++) {
@@ -674,6 +898,20 @@ void clean_up(Request *executing[], int N_executing,
     }
 }
 
+/**
+ * @brief Free the memory allocated for the executing and scheduled
+ * requests, close the server FIFO file descriptor, and free the
+ * memory allocated for the request.
+ *
+ * @see clean_up
+ *
+ * @param fd The server FIFO file descriptor
+ * @param r The request to free
+ * @param executing The array of executing requests
+ * @param N_executing The number of executing requests
+ * @param scheduled The array of scheduled requests
+ * @param N_scheduled The number of scheduled requests
+ */
 void clean_up_all(int fd, Request *r,
                   Request *executing[], int N_executing,
                   Request *scheduled[], int N_scheduled) {

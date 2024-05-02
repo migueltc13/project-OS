@@ -1,4 +1,5 @@
 <map id="include/command.h" name="include/command.h">
-<area shape="rect" id="node1" title=" " alt="" coords="5,5,140,32"/>
-<area shape="rect" id="node2" href="$orchestrator_8c.html" title=" " alt="" coords="11,80,134,107"/>
+<area shape="rect" id="node1" title=" " alt="" coords="65,5,199,32"/>
+<area shape="rect" id="node2" href="$command_8c.html" title=" " alt="" coords="5,80,117,107"/>
+<area shape="rect" id="node3" href="$orchestrator_8c.html" title=" " alt="" coords="141,80,264,107"/>
 </map>

@@ -1,18 +1,17 @@
 \hypertarget{command_8c}{}\doxysection{src/command.c File Reference}
 \label{command_8c}\index{src/command.c@{src/command.c}}
-{\ttfamily \#include \char`\"{}../include/request.\+h\char`\"{}}\newline
+{\ttfamily \#include \char`\"{}../include/command.\+h\char`\"{}}\newline
 {\ttfamily \#include \char`\"{}../include/orchestrator.\+h\char`\"{}}\newline
+{\ttfamily \#include \char`\"{}../include/task\+\_\+nr.\+h\char`\"{}}\newline
 {\ttfamily \#include $<$stdio.\+h$>$}\newline
 {\ttfamily \#include $<$stdlib.\+h$>$}\newline
 {\ttfamily \#include $<$string.\+h$>$}\newline
-{\ttfamily \#include $<$stdbool.\+h$>$}\newline
 {\ttfamily \#include $<$unistd.\+h$>$}\newline
 {\ttfamily \#include $<$fcntl.\+h$>$}\newline
-{\ttfamily \#include $<$sys/time.\+h$>$}\newline
+{\ttfamily \#include $<$errno.\+h$>$}\newline
 {\ttfamily \#include $<$sys/stat.\+h$>$}\newline
 {\ttfamily \#include $<$sys/wait.\+h$>$}\newline
-Include dependency graph for command.\+c\+:
-\nopagebreak
+Include dependency graph for command.\+c\+:\nopagebreak
 \begin{figure}[H]
 \begin{center}
 \leavevmode
@@ -22,13 +21,21 @@ Include dependency graph for command.\+c\+:
 \doxysubsection*{Macros}
 \begin{DoxyCompactItemize}
 \item 
-\#define \mbox{\hyperlink{command_8c_ad14effda14501a769b3d46984d43aa00}{MAX\+\_\+\+CMDS}}~10
-\end{DoxyCompactItemize}
+\#define \mbox{\hyperlink{command_8c_a29b7451465deac204c5f7cb1f9c6e1fc}{MAX\+\_\+\+ARGS}}~\mbox{\hyperlink{request_8h_a11b2387a44dc0cf3642ddcbe0581276b}{MAX\+\_\+\+CMD\+\_\+\+SIZE}}
+\begin{DoxyCompactList}\small\item\em The max number of arguments in a command. \end{DoxyCompactList}\item 
+\#define \mbox{\hyperlink{command_8c_aac3a2c91b0e41aa91f485480817b7a02}{TASK\+\_\+\+PREFIX\+\_\+\+NAME}}~\char`\"{}task\char`\"{}
+\begin{DoxyCompactList}\small\item\em The prefix name for the task directories. \end{DoxyCompactList}\item 
+\#define \mbox{\hyperlink{command_8c_a2a9e71d817d8ed2fa28ce7c7174f403e}{OUTPUT\+\_\+\+NAME}}~\char`\"{}out\char`\"{}
+\begin{DoxyCompactList}\small\item\em The name of the output file. \end{DoxyCompactList}\item 
+\#define \mbox{\hyperlink{command_8c_a5c3d9acd67ec01c64586edc0046dbde6}{ERROR\+\_\+\+NAME}}~\char`\"{}err\char`\"{}
+\begin{DoxyCompactList}\small\item\em The name of the error file. \end{DoxyCompactList}\item 
+\#define \mbox{\hyperlink{command_8c_a8ebe81095ed8d1416071e2403de02de9}{TIME\+\_\+\+NAME}}~\char`\"{}time\char`\"{}
+\begin{DoxyCompactList}\small\item\em The name of the time file. \end{DoxyCompactList}\end{DoxyCompactItemize}
 \doxysubsection*{Functions}
 \begin{DoxyCompactItemize}
 \item 
 char $\ast$$\ast$ \mbox{\hyperlink{command_8c_a28efbcce7b8419b2e14f06f068134bbf}{parse\+\_\+cmd}} (char $\ast$cmd, int $\ast$N)
-\item 
+\begin{DoxyCompactList}\small\item\em Parse a piped command into an array of single commands. \end{DoxyCompactList}\item 
 int \mbox{\hyperlink{command_8c_a4f9f0cf42417c697d2039b25b9337a9d}{exec\+\_\+command}} (char $\ast$arg)
 \item 
 int \mbox{\hyperlink{command_8c_a7c52b2573cda56b38259890b03be026e}{exec}} (\mbox{\hyperlink{request_8h_a1abc891df97d2318f8fb4832a28ae63c}{Request}} $\ast$r, char $\ast$output\+\_\+dir, struct timeval start\+\_\+time)
@@ -36,15 +43,108 @@ int \mbox{\hyperlink{command_8c_a7c52b2573cda56b38259890b03be026e}{exec}} (\mbox
 
 
 \doxysubsection{Macro Definition Documentation}
-\mbox{\Hypertarget{command_8c_ad14effda14501a769b3d46984d43aa00}\label{command_8c_ad14effda14501a769b3d46984d43aa00}} 
-\index{command.c@{command.c}!MAX\_CMDS@{MAX\_CMDS}}
-\index{MAX\_CMDS@{MAX\_CMDS}!command.c@{command.c}}
-\doxysubsubsection{\texorpdfstring{MAX\_CMDS}{MAX\_CMDS}}
-{\footnotesize\ttfamily \#define MAX\+\_\+\+CMDS~10}
+\mbox{\Hypertarget{command_8c_a29b7451465deac204c5f7cb1f9c6e1fc}\label{command_8c_a29b7451465deac204c5f7cb1f9c6e1fc}} 
+\index{command.c@{command.c}!MAX\_ARGS@{MAX\_ARGS}}
+\index{MAX\_ARGS@{MAX\_ARGS}!command.c@{command.c}}
+\doxysubsubsection{\texorpdfstring{MAX\_ARGS}{MAX\_ARGS}}
+{\footnotesize\ttfamily \#define MAX\+\_\+\+ARGS~\mbox{\hyperlink{request_8h_a11b2387a44dc0cf3642ddcbe0581276b}{MAX\+\_\+\+CMD\+\_\+\+SIZE}}}
+
+
+
+The max number of arguments in a command. 
+
+\mbox{\Hypertarget{command_8c_aac3a2c91b0e41aa91f485480817b7a02}\label{command_8c_aac3a2c91b0e41aa91f485480817b7a02}} 
+\index{command.c@{command.c}!TASK\_PREFIX\_NAME@{TASK\_PREFIX\_NAME}}
+\index{TASK\_PREFIX\_NAME@{TASK\_PREFIX\_NAME}!command.c@{command.c}}
+\doxysubsubsection{\texorpdfstring{TASK\_PREFIX\_NAME}{TASK\_PREFIX\_NAME}}
+{\footnotesize\ttfamily \#define TASK\+\_\+\+PREFIX\+\_\+\+NAME~\char`\"{}task\char`\"{}}
+
+
+
+The prefix name for the task directories. 
+
+\mbox{\Hypertarget{command_8c_a2a9e71d817d8ed2fa28ce7c7174f403e}\label{command_8c_a2a9e71d817d8ed2fa28ce7c7174f403e}} 
+\index{command.c@{command.c}!OUTPUT\_NAME@{OUTPUT\_NAME}}
+\index{OUTPUT\_NAME@{OUTPUT\_NAME}!command.c@{command.c}}
+\doxysubsubsection{\texorpdfstring{OUTPUT\_NAME}{OUTPUT\_NAME}}
+{\footnotesize\ttfamily \#define OUTPUT\+\_\+\+NAME~\char`\"{}out\char`\"{}}
+
+
+
+The name of the output file. 
+
+\mbox{\Hypertarget{command_8c_a5c3d9acd67ec01c64586edc0046dbde6}\label{command_8c_a5c3d9acd67ec01c64586edc0046dbde6}} 
+\index{command.c@{command.c}!ERROR\_NAME@{ERROR\_NAME}}
+\index{ERROR\_NAME@{ERROR\_NAME}!command.c@{command.c}}
+\doxysubsubsection{\texorpdfstring{ERROR\_NAME}{ERROR\_NAME}}
+{\footnotesize\ttfamily \#define ERROR\+\_\+\+NAME~\char`\"{}err\char`\"{}}
+
+
+
+The name of the error file. 
+
+\mbox{\Hypertarget{command_8c_a8ebe81095ed8d1416071e2403de02de9}\label{command_8c_a8ebe81095ed8d1416071e2403de02de9}} 
+\index{command.c@{command.c}!TIME\_NAME@{TIME\_NAME}}
+\index{TIME\_NAME@{TIME\_NAME}!command.c@{command.c}}
+\doxysubsubsection{\texorpdfstring{TIME\_NAME}{TIME\_NAME}}
+{\footnotesize\ttfamily \#define TIME\+\_\+\+NAME~\char`\"{}time\char`\"{}}
+
+
+
+The name of the time file. 
 
 
 
 \doxysubsection{Function Documentation}
+\mbox{\Hypertarget{command_8c_a28efbcce7b8419b2e14f06f068134bbf}\label{command_8c_a28efbcce7b8419b2e14f06f068134bbf}} 
+\index{command.c@{command.c}!parse\_cmd@{parse\_cmd}}
+\index{parse\_cmd@{parse\_cmd}!command.c@{command.c}}
+\doxysubsubsection{\texorpdfstring{parse\_cmd()}{parse\_cmd()}}
+{\footnotesize\ttfamily char$\ast$$\ast$ parse\+\_\+cmd (\begin{DoxyParamCaption}\item[{char $\ast$}]{cmd,  }\item[{int $\ast$}]{N }\end{DoxyParamCaption})}
+
+
+
+Parse a piped command into an array of single commands. 
+
+Used in the function \mbox{\hyperlink{command_8c_a7c52b2573cda56b38259890b03be026e}{exec}} to parse a piped command into an array of single commands.
+
+It also strips leading and trailing whitespaces from each command, see the sencond and third example below.
+
+It also can handle quoted strings, as demonstrated in the third example.
+
+It can handle new lines as it\textquotesingle{}s possible to have a command with multiple lines, see the fourth example.
+
+Examples\+: 
+\begin{DoxyCode}{0}
+\DoxyCodeLine{-\/ \textcolor{stringliteral}{"{}ls -\/l | cat"{}} -\/> [\textcolor{stringliteral}{"{}ls -\/l"{}}, \textcolor{stringliteral}{"{}cat"{}}]}
+\DoxyCodeLine{}
+\DoxyCodeLine{-\/ \textcolor{stringliteral}{"{}  ls -\/l |  cat  "{}} -\/> [\textcolor{stringliteral}{"{}ls -\/l"{}}, \textcolor{stringliteral}{"{}cat"{}}]}
+\DoxyCodeLine{}
+\DoxyCodeLine{-\/ \textcolor{stringliteral}{"{}echo \(\backslash\)"{}Hello  World\(\backslash\)"{} |cat    "{}} -\/> [\textcolor{stringliteral}{"{}echo \(\backslash\)"{}Hello  World\(\backslash\)"{}"{}}, \textcolor{stringliteral}{"{}cat"{}}]}
+\DoxyCodeLine{}
+\DoxyCodeLine{-\/ \textcolor{stringliteral}{"{}echo \(\backslash\)"{}Hello\(\backslash\)\(\backslash\)nWorld\(\backslash\)"{} | cat\(\backslash\)\(\backslash\)n\(\backslash\)\(\backslash\)n"{}} -\/> [\textcolor{stringliteral}{"{}echo \(\backslash\)"{}HelloWorld\(\backslash\)"{}"{}}, \textcolor{stringliteral}{"{}cat"{}}]}
+
+\end{DoxyCode}
+
+
+Note\+: Uncomment the last for loop in this function to print the resulting array of single commands.
+
+
+\begin{DoxyParams}{Parameters}
+{\em cmd} & The piped command to parse \\
+\hline
+{\em N} & The number of commands in the array \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+An array of strings, or NULL if an error occurred 
+\end{DoxyReturn}
+\mbox{\Hypertarget{command_8c_a4f9f0cf42417c697d2039b25b9337a9d}\label{command_8c_a4f9f0cf42417c697d2039b25b9337a9d}} 
+\index{command.c@{command.c}!exec\_command@{exec\_command}}
+\index{exec\_command@{exec\_command}!command.c@{command.c}}
+\doxysubsubsection{\texorpdfstring{exec\_command()}{exec\_command()}}
+{\footnotesize\ttfamily int exec\+\_\+command (\begin{DoxyParamCaption}\item[{char $\ast$}]{arg }\end{DoxyParamCaption})}
+
 \mbox{\Hypertarget{command_8c_a7c52b2573cda56b38259890b03be026e}\label{command_8c_a7c52b2573cda56b38259890b03be026e}} 
 \index{command.c@{command.c}!exec@{exec}}
 \index{exec@{exec}!command.c@{command.c}}
@@ -66,28 +166,4 @@ TODO
 \end{DoxyParams}
 \begin{DoxyReturn}{Returns}
 0 if successful 
-\end{DoxyReturn}
-\mbox{\Hypertarget{command_8c_a4f9f0cf42417c697d2039b25b9337a9d}\label{command_8c_a4f9f0cf42417c697d2039b25b9337a9d}} 
-\index{command.c@{command.c}!exec\_command@{exec\_command}}
-\index{exec\_command@{exec\_command}!command.c@{command.c}}
-\doxysubsubsection{\texorpdfstring{exec\_command()}{exec\_command()}}
-{\footnotesize\ttfamily int exec\+\_\+command (\begin{DoxyParamCaption}\item[{char $\ast$}]{arg }\end{DoxyParamCaption})}
-
-\mbox{\Hypertarget{command_8c_a28efbcce7b8419b2e14f06f068134bbf}\label{command_8c_a28efbcce7b8419b2e14f06f068134bbf}} 
-\index{command.c@{command.c}!parse\_cmd@{parse\_cmd}}
-\index{parse\_cmd@{parse\_cmd}!command.c@{command.c}}
-\doxysubsubsection{\texorpdfstring{parse\_cmd()}{parse\_cmd()}}
-{\footnotesize\ttfamily char$\ast$$\ast$ parse\+\_\+cmd (\begin{DoxyParamCaption}\item[{char $\ast$}]{cmd,  }\item[{int $\ast$}]{N }\end{DoxyParamCaption})}
-
-Parse a piped command into an array of strings
-
-
-\begin{DoxyParams}{Parameters}
-{\em cmd} & The command to parse \\
-\hline
-{\em N} & The number of commands in the array \\
-\hline
-\end{DoxyParams}
-\begin{DoxyReturn}{Returns}
-An array of strings, or NULL if an error occurred 
 \end{DoxyReturn}

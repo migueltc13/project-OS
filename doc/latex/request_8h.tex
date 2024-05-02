@@ -8,8 +8,7 @@ Include dependency graph for request.\+h\+:\nopagebreak
 \includegraphics[width=171pt]{request_8h__incl}
 \end{center}
 \end{figure}
-This graph shows which files directly or indirectly include this file\+:
-\nopagebreak
+This graph shows which files directly or indirectly include this file\+:\nopagebreak
 \begin{figure}[H]
 \begin{center}
 \leavevmode
@@ -20,13 +19,15 @@ This graph shows which files directly or indirectly include this file\+:
 \begin{DoxyCompactItemize}
 \item 
 \#define \mbox{\hyperlink{request_8h_a05e20d8bc0525f94757303dd5a905a69}{EXECUTE}}~0
-\item 
+\begin{DoxyCompactList}\small\item\em Execute request code. \end{DoxyCompactList}\item 
 \#define \mbox{\hyperlink{request_8h_a59279bee44f34d08b3cbf3a89fb0d8d9}{STATUS}}~1
-\item 
+\begin{DoxyCompactList}\small\item\em Status request code. \end{DoxyCompactList}\item 
 \#define \mbox{\hyperlink{request_8h_a22c88fdadb7d8f8417a92cdcc6232786}{COMPLETED}}~2
-\item 
+\begin{DoxyCompactList}\small\item\em Completed request code. \end{DoxyCompactList}\item 
+\#define \mbox{\hyperlink{request_8h_a9d385e974a49598d267af81de5a33838}{KILL}}~3
+\begin{DoxyCompactList}\small\item\em Kill request code. \end{DoxyCompactList}\item 
 \#define \mbox{\hyperlink{request_8h_a11b2387a44dc0cf3642ddcbe0581276b}{MAX\+\_\+\+CMD\+\_\+\+SIZE}}~300
-\end{DoxyCompactItemize}
+\begin{DoxyCompactList}\small\item\em Maximum size of the command string. \end{DoxyCompactList}\end{DoxyCompactItemize}
 \doxysubsection*{Typedefs}
 \begin{DoxyCompactItemize}
 \item 
@@ -35,40 +36,78 @@ typedef struct \mbox{\hyperlink{structrequest}{request}} \mbox{\hyperlink{reques
 \doxysubsection*{Functions}
 \begin{DoxyCompactItemize}
 \item 
-\mbox{\hyperlink{request_8h_a1abc891df97d2318f8fb4832a28ae63c}{Request}} $\ast$ \mbox{\hyperlink{request_8h_a3e85de787d8efb28e4bd61a784642190}{create\+\_\+request}} (int type, int est\+\_\+time, char $\ast$command, bool is\+\_\+pipe)
-\item 
+\mbox{\hyperlink{request_8h_a1abc891df97d2318f8fb4832a28ae63c}{Request}} $\ast$ \mbox{\hyperlink{request_8h_ab4cb76d84eca459d1b80c7b1a1741192}{create\+\_\+request}} (int type, int est\+\_\+time, char $\ast$command, bool is\+\_\+pipe, char $\ast$client\+\_\+fifo)
+\begin{DoxyCompactList}\small\item\em Creates a new request. \end{DoxyCompactList}\item 
 int \mbox{\hyperlink{request_8h_a9c4991d2905d6b337c2805f7ab8e54eb}{get\+\_\+type}} (\mbox{\hyperlink{request_8h_a1abc891df97d2318f8fb4832a28ae63c}{Request}} $\ast$r)
-\item 
+\begin{DoxyCompactList}\small\item\em Get the type of the request. \end{DoxyCompactList}\item 
 int \mbox{\hyperlink{request_8h_a1e0de6005457b0ad26bdff5931c8df25}{get\+\_\+est\+\_\+time}} (\mbox{\hyperlink{request_8h_a1abc891df97d2318f8fb4832a28ae63c}{Request}} $\ast$r)
-\item 
+\begin{DoxyCompactList}\small\item\em Get the estimated time or priority of the request. \end{DoxyCompactList}\item 
 char $\ast$ \mbox{\hyperlink{request_8h_aa86d0a88bfeae920cdc85fec9f2873ea}{get\+\_\+command}} (\mbox{\hyperlink{request_8h_a1abc891df97d2318f8fb4832a28ae63c}{Request}} $\ast$r)
-\item 
+\begin{DoxyCompactList}\small\item\em Get the command to be executed. \end{DoxyCompactList}\item 
 bool \mbox{\hyperlink{request_8h_a80650d1ccea10349386f3bd50e922c32}{get\+\_\+is\+\_\+piped}} (\mbox{\hyperlink{request_8h_a1abc891df97d2318f8fb4832a28ae63c}{Request}} $\ast$r)
-\item 
-int \mbox{\hyperlink{request_8h_ae6117336c44d707b4b26295ceafa466a}{get\+\_\+task\+\_\+nr}} (\mbox{\hyperlink{request_8h_a1abc891df97d2318f8fb4832a28ae63c}{Request}} $\ast$r)
+\begin{DoxyCompactList}\small\item\em Get the boolean indicating if the command is piped. \end{DoxyCompactList}\item 
+unsigned int \mbox{\hyperlink{request_8h_a58d2abe06be3a5d8cb4d9022fbd4c8a1}{get\+\_\+task\+\_\+nr}} (\mbox{\hyperlink{request_8h_a1abc891df97d2318f8fb4832a28ae63c}{Request}} $\ast$r)
+\begin{DoxyCompactList}\small\item\em Get the task number of the request. \end{DoxyCompactList}\item 
+char $\ast$ \mbox{\hyperlink{request_8h_ac05bcc015d6cf87329df236bc939728b}{get\+\_\+client\+\_\+fifo}} (\mbox{\hyperlink{request_8h_a1abc891df97d2318f8fb4832a28ae63c}{Request}} $\ast$r)
+\begin{DoxyCompactList}\small\item\em Get the client FIFO name to send the response to the client. \end{DoxyCompactList}\item 
+long \mbox{\hyperlink{request_8h_a48f7b60dd732c8c07add076d589ec6bd}{get\+\_\+time}} (\mbox{\hyperlink{request_8h_a1abc891df97d2318f8fb4832a28ae63c}{Request}} $\ast$r)
 \item 
 void \mbox{\hyperlink{request_8h_a43395fb8bb232c43a0a0078501dc3b12}{set\+\_\+type}} (\mbox{\hyperlink{request_8h_a1abc891df97d2318f8fb4832a28ae63c}{Request}} $\ast$r, int type)
-\item 
-void \mbox{\hyperlink{request_8h_a42b40d38b4f2c3a1a44d907d5b4c0ae2}{set\+\_\+task\+\_\+nr}} (\mbox{\hyperlink{request_8h_a1abc891df97d2318f8fb4832a28ae63c}{Request}} $\ast$r, int task\+\_\+nr)
-\item 
+\begin{DoxyCompactList}\small\item\em Set the type of the request. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{request_8h_a7786a63a5691ed30bd79f97ce01a9b01}{set\+\_\+task\+\_\+nr}} (\mbox{\hyperlink{request_8h_a1abc891df97d2318f8fb4832a28ae63c}{Request}} $\ast$r, unsigned int task\+\_\+nr)
+\begin{DoxyCompactList}\small\item\em Set the task number of the request. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{request_8h_a1f928df22f66bb6be9e75d13a2d08fe5}{set\+\_\+client\+\_\+fifo}} (\mbox{\hyperlink{request_8h_a1abc891df97d2318f8fb4832a28ae63c}{Request}} $\ast$r, char $\ast$client\+\_\+fifo)
+\begin{DoxyCompactList}\small\item\em Set the client FIFO name to send the response to the client. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{request_8h_a8949a3eb2d229765f225fccdfdc95dc2}{print\+\_\+request}} (\mbox{\hyperlink{request_8h_a1abc891df97d2318f8fb4832a28ae63c}{Request}} $\ast$r, int policy)
+\begin{DoxyCompactList}\small\item\em Print the request. \end{DoxyCompactList}\item 
 char $\ast$ \mbox{\hyperlink{request_8h_ac75498371597f92321b38bd186375df6}{type\+\_\+to\+\_\+string}} (int type)
-\item 
+\begin{DoxyCompactList}\small\item\em Convert the type of the request to a string. \end{DoxyCompactList}\item 
 unsigned long \mbox{\hyperlink{request_8h_addf1d41d1a4004eb7da1b19870f1a607}{sizeof\+\_\+request}} ()
-\end{DoxyCompactItemize}
+\begin{DoxyCompactList}\small\item\em Get the size of the request. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{request_8h_a1abc891df97d2318f8fb4832a28ae63c}{Request}} $\ast$ \mbox{\hyperlink{request_8h_ad5f65b4ecf295f03488b3b73ea095aa3}{clone\+\_\+request}} (\mbox{\hyperlink{request_8h_a1abc891df97d2318f8fb4832a28ae63c}{Request}} $\ast$r)
+\begin{DoxyCompactList}\small\item\em Clone a request. \end{DoxyCompactList}\end{DoxyCompactItemize}
 
 
 \doxysubsection{Macro Definition Documentation}
+\mbox{\Hypertarget{request_8h_a05e20d8bc0525f94757303dd5a905a69}\label{request_8h_a05e20d8bc0525f94757303dd5a905a69}} 
+\index{request.h@{request.h}!EXECUTE@{EXECUTE}}
+\index{EXECUTE@{EXECUTE}!request.h@{request.h}}
+\doxysubsubsection{\texorpdfstring{EXECUTE}{EXECUTE}}
+{\footnotesize\ttfamily \#define EXECUTE~0}
+
+
+
+Execute request code. 
+
+\mbox{\Hypertarget{request_8h_a59279bee44f34d08b3cbf3a89fb0d8d9}\label{request_8h_a59279bee44f34d08b3cbf3a89fb0d8d9}} 
+\index{request.h@{request.h}!STATUS@{STATUS}}
+\index{STATUS@{STATUS}!request.h@{request.h}}
+\doxysubsubsection{\texorpdfstring{STATUS}{STATUS}}
+{\footnotesize\ttfamily \#define STATUS~1}
+
+
+
+Status request code. 
+
 \mbox{\Hypertarget{request_8h_a22c88fdadb7d8f8417a92cdcc6232786}\label{request_8h_a22c88fdadb7d8f8417a92cdcc6232786}} 
 \index{request.h@{request.h}!COMPLETED@{COMPLETED}}
 \index{COMPLETED@{COMPLETED}!request.h@{request.h}}
 \doxysubsubsection{\texorpdfstring{COMPLETED}{COMPLETED}}
 {\footnotesize\ttfamily \#define COMPLETED~2}
 
-\mbox{\Hypertarget{request_8h_a05e20d8bc0525f94757303dd5a905a69}\label{request_8h_a05e20d8bc0525f94757303dd5a905a69}} 
-\index{request.h@{request.h}!EXECUTE@{EXECUTE}}
-\index{EXECUTE@{EXECUTE}!request.h@{request.h}}
-\doxysubsubsection{\texorpdfstring{EXECUTE}{EXECUTE}}
-{\footnotesize\ttfamily \#define EXECUTE~0}
+
+
+Completed request code. 
+
+\mbox{\Hypertarget{request_8h_a9d385e974a49598d267af81de5a33838}\label{request_8h_a9d385e974a49598d267af81de5a33838}} 
+\index{request.h@{request.h}!KILL@{KILL}}
+\index{KILL@{KILL}!request.h@{request.h}}
+\doxysubsubsection{\texorpdfstring{KILL}{KILL}}
+{\footnotesize\ttfamily \#define KILL~3}
+
+
+
+Kill request code. 
 
 \mbox{\Hypertarget{request_8h_a11b2387a44dc0cf3642ddcbe0581276b}\label{request_8h_a11b2387a44dc0cf3642ddcbe0581276b}} 
 \index{request.h@{request.h}!MAX\_CMD\_SIZE@{MAX\_CMD\_SIZE}}
@@ -76,11 +115,9 @@ unsigned long \mbox{\hyperlink{request_8h_addf1d41d1a4004eb7da1b19870f1a607}{siz
 \doxysubsubsection{\texorpdfstring{MAX\_CMD\_SIZE}{MAX\_CMD\_SIZE}}
 {\footnotesize\ttfamily \#define MAX\+\_\+\+CMD\+\_\+\+SIZE~300}
 
-\mbox{\Hypertarget{request_8h_a59279bee44f34d08b3cbf3a89fb0d8d9}\label{request_8h_a59279bee44f34d08b3cbf3a89fb0d8d9}} 
-\index{request.h@{request.h}!STATUS@{STATUS}}
-\index{STATUS@{STATUS}!request.h@{request.h}}
-\doxysubsubsection{\texorpdfstring{STATUS}{STATUS}}
-{\footnotesize\ttfamily \#define STATUS~1}
+
+
+Maximum size of the command string. 
 
 
 
@@ -94,47 +131,169 @@ unsigned long \mbox{\hyperlink{request_8h_addf1d41d1a4004eb7da1b19870f1a607}{siz
 
 
 \doxysubsection{Function Documentation}
-\mbox{\Hypertarget{request_8h_a3e85de787d8efb28e4bd61a784642190}\label{request_8h_a3e85de787d8efb28e4bd61a784642190}} 
+\mbox{\Hypertarget{request_8h_ab4cb76d84eca459d1b80c7b1a1741192}\label{request_8h_ab4cb76d84eca459d1b80c7b1a1741192}} 
 \index{request.h@{request.h}!create\_request@{create\_request}}
 \index{create\_request@{create\_request}!request.h@{request.h}}
 \doxysubsubsection{\texorpdfstring{create\_request()}{create\_request()}}
-{\footnotesize\ttfamily \mbox{\hyperlink{request_8h_a1abc891df97d2318f8fb4832a28ae63c}{Request}}$\ast$ create\+\_\+request (\begin{DoxyParamCaption}\item[{int}]{type,  }\item[{int}]{est\+\_\+time,  }\item[{char $\ast$}]{command,  }\item[{bool}]{is\+\_\+pipe }\end{DoxyParamCaption})}
+{\footnotesize\ttfamily \mbox{\hyperlink{request_8h_a1abc891df97d2318f8fb4832a28ae63c}{Request}}$\ast$ create\+\_\+request (\begin{DoxyParamCaption}\item[{int}]{type,  }\item[{int}]{est\+\_\+time,  }\item[{char $\ast$}]{command,  }\item[{bool}]{is\+\_\+piped,  }\item[{char $\ast$}]{client\+\_\+fifo }\end{DoxyParamCaption})}
 
-\mbox{\Hypertarget{request_8h_aa86d0a88bfeae920cdc85fec9f2873ea}\label{request_8h_aa86d0a88bfeae920cdc85fec9f2873ea}} 
-\index{request.h@{request.h}!get\_command@{get\_command}}
-\index{get\_command@{get\_command}!request.h@{request.h}}
-\doxysubsubsection{\texorpdfstring{get\_command()}{get\_command()}}
-{\footnotesize\ttfamily char$\ast$ get\+\_\+command (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{request_8h_a1abc891df97d2318f8fb4832a28ae63c}{Request}} $\ast$}]{r }\end{DoxyParamCaption})}
 
-\mbox{\Hypertarget{request_8h_a1e0de6005457b0ad26bdff5931c8df25}\label{request_8h_a1e0de6005457b0ad26bdff5931c8df25}} 
-\index{request.h@{request.h}!get\_est\_time@{get\_est\_time}}
-\index{get\_est\_time@{get\_est\_time}!request.h@{request.h}}
-\doxysubsubsection{\texorpdfstring{get\_est\_time()}{get\_est\_time()}}
-{\footnotesize\ttfamily int get\+\_\+est\+\_\+time (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{request_8h_a1abc891df97d2318f8fb4832a28ae63c}{Request}} $\ast$}]{r }\end{DoxyParamCaption})}
 
-\mbox{\Hypertarget{request_8h_a80650d1ccea10349386f3bd50e922c32}\label{request_8h_a80650d1ccea10349386f3bd50e922c32}} 
-\index{request.h@{request.h}!get\_is\_piped@{get\_is\_piped}}
-\index{get\_is\_piped@{get\_is\_piped}!request.h@{request.h}}
-\doxysubsubsection{\texorpdfstring{get\_is\_piped()}{get\_is\_piped()}}
-{\footnotesize\ttfamily bool get\+\_\+is\+\_\+piped (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{request_8h_a1abc891df97d2318f8fb4832a28ae63c}{Request}} $\ast$}]{r }\end{DoxyParamCaption})}
+Creates a new request. 
 
-\mbox{\Hypertarget{request_8h_ae6117336c44d707b4b26295ceafa466a}\label{request_8h_ae6117336c44d707b4b26295ceafa466a}} 
-\index{request.h@{request.h}!get\_task\_nr@{get\_task\_nr}}
-\index{get\_task\_nr@{get\_task\_nr}!request.h@{request.h}}
-\doxysubsubsection{\texorpdfstring{get\_task\_nr()}{get\_task\_nr()}}
-{\footnotesize\ttfamily int get\+\_\+task\+\_\+nr (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{request_8h_a1abc891df97d2318f8fb4832a28ae63c}{Request}} $\ast$}]{r }\end{DoxyParamCaption})}
+Allocates memory for a new request and initializes it with the given parameters.
 
+It initializes the task number with 0, which is not a valid task number.
+
+For the creation of a status request, the
+\begin{DoxyParams}{Parameters}
+{\em est\+\_\+time} & should be {\ttfamily 0}, as it is not used, as well as the\\
+\hline
+{\em command} & should be {\ttfamily NULL} and\\
+\hline
+{\em is\+\_\+piped} & should be {\ttfamily false}.\\
+\hline
+\end{DoxyParams}
+Example of the creation of an execute request\+: 
+\begin{DoxyCode}{0}
+\DoxyCodeLine{\mbox{\hyperlink{structrequest}{Request}} *execute\_request = \mbox{\hyperlink{request_8h_ab4cb76d84eca459d1b80c7b1a1741192}{create\_request}}(\mbox{\hyperlink{request_8h_a05e20d8bc0525f94757303dd5a905a69}{EXECUTE}}, 12, \textcolor{stringliteral}{"{}ls -\/l | cat"{}}, \textcolor{keyword}{true}, \textcolor{stringliteral}{"{}client-\/1234"{}});}
+
+\end{DoxyCode}
+
+
+Example of the creation of a status request\+: 
+\begin{DoxyCode}{0}
+\DoxyCodeLine{\mbox{\hyperlink{structrequest}{Request}} *status\_request = \mbox{\hyperlink{request_8h_ab4cb76d84eca459d1b80c7b1a1741192}{create\_request}}(\mbox{\hyperlink{request_8h_a59279bee44f34d08b3cbf3a89fb0d8d9}{STATUS}}, 0, NULL, \textcolor{keyword}{false}, \textcolor{stringliteral}{"{}client-\/1234"{}});}
+
+\end{DoxyCode}
+
+
+{\bfseries{The caller is responsible for freeing the returned request by this function.}} 
+\begin{DoxyParams}{Parameters}
+{\em type} & the type of the request \\
+\hline
+{\em est\+\_\+time} & the estimated time or priority of the request \\
+\hline
+{\em command} & the command to be executed \\
+\hline
+{\em is\+\_\+piped} & a boolean indicating if the command is piped \\
+\hline
+{\em client\+\_\+fifo} & the client FIFO name to send the response to the client \\
+\hline
+\end{DoxyParams}
 \mbox{\Hypertarget{request_8h_a9c4991d2905d6b337c2805f7ab8e54eb}\label{request_8h_a9c4991d2905d6b337c2805f7ab8e54eb}} 
 \index{request.h@{request.h}!get\_type@{get\_type}}
 \index{get\_type@{get\_type}!request.h@{request.h}}
 \doxysubsubsection{\texorpdfstring{get\_type()}{get\_type()}}
 {\footnotesize\ttfamily int get\+\_\+type (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{request_8h_a1abc891df97d2318f8fb4832a28ae63c}{Request}} $\ast$}]{r }\end{DoxyParamCaption})}
 
-\mbox{\Hypertarget{request_8h_a42b40d38b4f2c3a1a44d907d5b4c0ae2}\label{request_8h_a42b40d38b4f2c3a1a44d907d5b4c0ae2}} 
-\index{request.h@{request.h}!set\_task\_nr@{set\_task\_nr}}
-\index{set\_task\_nr@{set\_task\_nr}!request.h@{request.h}}
-\doxysubsubsection{\texorpdfstring{set\_task\_nr()}{set\_task\_nr()}}
-{\footnotesize\ttfamily void set\+\_\+task\+\_\+nr (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{request_8h_a1abc891df97d2318f8fb4832a28ae63c}{Request}} $\ast$}]{r,  }\item[{int}]{task\+\_\+nr }\end{DoxyParamCaption})}
+
+
+Get the type of the request. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em r} & The request to get the type from \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+The type of the request 
+\end{DoxyReturn}
+\mbox{\Hypertarget{request_8h_a1e0de6005457b0ad26bdff5931c8df25}\label{request_8h_a1e0de6005457b0ad26bdff5931c8df25}} 
+\index{request.h@{request.h}!get\_est\_time@{get\_est\_time}}
+\index{get\_est\_time@{get\_est\_time}!request.h@{request.h}}
+\doxysubsubsection{\texorpdfstring{get\_est\_time()}{get\_est\_time()}}
+{\footnotesize\ttfamily int get\+\_\+est\+\_\+time (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{request_8h_a1abc891df97d2318f8fb4832a28ae63c}{Request}} $\ast$}]{r }\end{DoxyParamCaption})}
+
+
+
+Get the estimated time or priority of the request. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em r} & The request to get the estimated time or priority from \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+The estimated time or priority of the request 
+\end{DoxyReturn}
+\mbox{\Hypertarget{request_8h_aa86d0a88bfeae920cdc85fec9f2873ea}\label{request_8h_aa86d0a88bfeae920cdc85fec9f2873ea}} 
+\index{request.h@{request.h}!get\_command@{get\_command}}
+\index{get\_command@{get\_command}!request.h@{request.h}}
+\doxysubsubsection{\texorpdfstring{get\_command()}{get\_command()}}
+{\footnotesize\ttfamily char$\ast$ get\+\_\+command (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{request_8h_a1abc891df97d2318f8fb4832a28ae63c}{Request}} $\ast$}]{r }\end{DoxyParamCaption})}
+
+
+
+Get the command to be executed. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em r} & The request to get the command from \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+The command to be executed 
+\end{DoxyReturn}
+\mbox{\Hypertarget{request_8h_a80650d1ccea10349386f3bd50e922c32}\label{request_8h_a80650d1ccea10349386f3bd50e922c32}} 
+\index{request.h@{request.h}!get\_is\_piped@{get\_is\_piped}}
+\index{get\_is\_piped@{get\_is\_piped}!request.h@{request.h}}
+\doxysubsubsection{\texorpdfstring{get\_is\_piped()}{get\_is\_piped()}}
+{\footnotesize\ttfamily bool get\+\_\+is\+\_\+piped (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{request_8h_a1abc891df97d2318f8fb4832a28ae63c}{Request}} $\ast$}]{r }\end{DoxyParamCaption})}
+
+
+
+Get the boolean indicating if the command is piped. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em r} & The request to get the is\+\_\+piped from \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+The boolean indicating if the command is piped 
+\end{DoxyReturn}
+\mbox{\Hypertarget{request_8h_a58d2abe06be3a5d8cb4d9022fbd4c8a1}\label{request_8h_a58d2abe06be3a5d8cb4d9022fbd4c8a1}} 
+\index{request.h@{request.h}!get\_task\_nr@{get\_task\_nr}}
+\index{get\_task\_nr@{get\_task\_nr}!request.h@{request.h}}
+\doxysubsubsection{\texorpdfstring{get\_task\_nr()}{get\_task\_nr()}}
+{\footnotesize\ttfamily unsigned int get\+\_\+task\+\_\+nr (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{request_8h_a1abc891df97d2318f8fb4832a28ae63c}{Request}} $\ast$}]{r }\end{DoxyParamCaption})}
+
+
+
+Get the task number of the request. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em r} & The request to get the task number from \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+The task number of the request 
+\end{DoxyReturn}
+\mbox{\Hypertarget{request_8h_ac05bcc015d6cf87329df236bc939728b}\label{request_8h_ac05bcc015d6cf87329df236bc939728b}} 
+\index{request.h@{request.h}!get\_client\_fifo@{get\_client\_fifo}}
+\index{get\_client\_fifo@{get\_client\_fifo}!request.h@{request.h}}
+\doxysubsubsection{\texorpdfstring{get\_client\_fifo()}{get\_client\_fifo()}}
+{\footnotesize\ttfamily char$\ast$ get\+\_\+client\+\_\+fifo (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{request_8h_a1abc891df97d2318f8fb4832a28ae63c}{Request}} $\ast$}]{r }\end{DoxyParamCaption})}
+
+
+
+Get the client FIFO name to send the response to the client. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em r} & The request to get the client FIFO name from \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+The client FIFO name to send the response to the client 
+\end{DoxyReturn}
+\mbox{\Hypertarget{request_8h_a48f7b60dd732c8c07add076d589ec6bd}\label{request_8h_a48f7b60dd732c8c07add076d589ec6bd}} 
+\index{request.h@{request.h}!get\_time@{get\_time}}
+\index{get\_time@{get\_time}!request.h@{request.h}}
+\doxysubsubsection{\texorpdfstring{get\_time()}{get\_time()}}
+{\footnotesize\ttfamily long get\+\_\+time (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{request_8h_a1abc891df97d2318f8fb4832a28ae63c}{Request}} $\ast$}]{r }\end{DoxyParamCaption})}
 
 \mbox{\Hypertarget{request_8h_a43395fb8bb232c43a0a0078501dc3b12}\label{request_8h_a43395fb8bb232c43a0a0078501dc3b12}} 
 \index{request.h@{request.h}!set\_type@{set\_type}}
@@ -142,15 +301,127 @@ unsigned long \mbox{\hyperlink{request_8h_addf1d41d1a4004eb7da1b19870f1a607}{siz
 \doxysubsubsection{\texorpdfstring{set\_type()}{set\_type()}}
 {\footnotesize\ttfamily void set\+\_\+type (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{request_8h_a1abc891df97d2318f8fb4832a28ae63c}{Request}} $\ast$}]{r,  }\item[{int}]{type }\end{DoxyParamCaption})}
 
-\mbox{\Hypertarget{request_8h_addf1d41d1a4004eb7da1b19870f1a607}\label{request_8h_addf1d41d1a4004eb7da1b19870f1a607}} 
-\index{request.h@{request.h}!sizeof\_request@{sizeof\_request}}
-\index{sizeof\_request@{sizeof\_request}!request.h@{request.h}}
-\doxysubsubsection{\texorpdfstring{sizeof\_request()}{sizeof\_request()}}
-{\footnotesize\ttfamily unsigned long sizeof\+\_\+request (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
 
+
+Set the type of the request. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em r} & The request to set the type \\
+\hline
+{\em type} & The type to set \\
+\hline
+\end{DoxyParams}
+\mbox{\Hypertarget{request_8h_a7786a63a5691ed30bd79f97ce01a9b01}\label{request_8h_a7786a63a5691ed30bd79f97ce01a9b01}} 
+\index{request.h@{request.h}!set\_task\_nr@{set\_task\_nr}}
+\index{set\_task\_nr@{set\_task\_nr}!request.h@{request.h}}
+\doxysubsubsection{\texorpdfstring{set\_task\_nr()}{set\_task\_nr()}}
+{\footnotesize\ttfamily void set\+\_\+task\+\_\+nr (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{request_8h_a1abc891df97d2318f8fb4832a28ae63c}{Request}} $\ast$}]{r,  }\item[{unsigned int}]{task\+\_\+nr }\end{DoxyParamCaption})}
+
+
+
+Set the task number of the request. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em r} & The request to set the task number \\
+\hline
+{\em task\+\_\+nr} & The task number to set \\
+\hline
+\end{DoxyParams}
+\mbox{\Hypertarget{request_8h_a1f928df22f66bb6be9e75d13a2d08fe5}\label{request_8h_a1f928df22f66bb6be9e75d13a2d08fe5}} 
+\index{request.h@{request.h}!set\_client\_fifo@{set\_client\_fifo}}
+\index{set\_client\_fifo@{set\_client\_fifo}!request.h@{request.h}}
+\doxysubsubsection{\texorpdfstring{set\_client\_fifo()}{set\_client\_fifo()}}
+{\footnotesize\ttfamily void set\+\_\+client\+\_\+fifo (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{request_8h_a1abc891df97d2318f8fb4832a28ae63c}{Request}} $\ast$}]{r,  }\item[{char $\ast$}]{client\+\_\+fifo }\end{DoxyParamCaption})}
+
+
+
+Set the client FIFO name to send the response to the client. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em r} & The request to set the client FIFO name \\
+\hline
+{\em client\+\_\+fifo} & The client FIFO name to set \\
+\hline
+\end{DoxyParams}
+\mbox{\Hypertarget{request_8h_a8949a3eb2d229765f225fccdfdc95dc2}\label{request_8h_a8949a3eb2d229765f225fccdfdc95dc2}} 
+\index{request.h@{request.h}!print\_request@{print\_request}}
+\index{print\_request@{print\_request}!request.h@{request.h}}
+\doxysubsubsection{\texorpdfstring{print\_request()}{print\_request()}}
+{\footnotesize\ttfamily void print\+\_\+request (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{request_8h_a1abc891df97d2318f8fb4832a28ae63c}{Request}} $\ast$}]{r,  }\item[{int}]{policy }\end{DoxyParamCaption})}
+
+
+
+Print the request. 
+
+Prints the request attributes to the standard output.
+
+Based on the policy being used, it prints the estimated time or the priority.
+
+Is the policy is FCFS, it doesn\textquotesingle{}t print either the estimated time or the priority. 
+\begin{DoxyParams}{Parameters}
+{\em r} & The request to print \\
+\hline
+{\em policy} & The policy being used \\
+\hline
+\end{DoxyParams}
 \mbox{\Hypertarget{request_8h_ac75498371597f92321b38bd186375df6}\label{request_8h_ac75498371597f92321b38bd186375df6}} 
 \index{request.h@{request.h}!type\_to\_string@{type\_to\_string}}
 \index{type\_to\_string@{type\_to\_string}!request.h@{request.h}}
 \doxysubsubsection{\texorpdfstring{type\_to\_string()}{type\_to\_string()}}
 {\footnotesize\ttfamily char$\ast$ type\+\_\+to\+\_\+string (\begin{DoxyParamCaption}\item[{int}]{type }\end{DoxyParamCaption})}
 
+
+
+Convert the type of the request to a string. 
+
+Possible types are \mbox{\hyperlink{request_8h_a05e20d8bc0525f94757303dd5a905a69}{EXECUTE}}, \mbox{\hyperlink{request_8h_a59279bee44f34d08b3cbf3a89fb0d8d9}{STATUS}}, \mbox{\hyperlink{request_8h_a22c88fdadb7d8f8417a92cdcc6232786}{COMPLETED}} and \mbox{\hyperlink{request_8h_a9d385e974a49598d267af81de5a33838}{KILL}}. 
+\begin{DoxyParams}{Parameters}
+{\em type} & The type of the request \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+The string representation of the type of the request 
+\end{DoxyReturn}
+\mbox{\Hypertarget{request_8h_addf1d41d1a4004eb7da1b19870f1a607}\label{request_8h_addf1d41d1a4004eb7da1b19870f1a607}} 
+\index{request.h@{request.h}!sizeof\_request@{sizeof\_request}}
+\index{sizeof\_request@{sizeof\_request}!request.h@{request.h}}
+\doxysubsubsection{\texorpdfstring{sizeof\_request()}{sizeof\_request()}}
+{\footnotesize\ttfamily unsigned long sizeof\+\_\+request (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+
+
+Get the size of the request. 
+
+Used due to the fact that the \mbox{\hyperlink{request_8h_a1abc891df97d2318f8fb4832a28ae63c}{Request}} struct is not visible to other modules, so
+\begin{DoxyCode}{0}
+\DoxyCodeLine{\textcolor{keyword}{sizeof}(\mbox{\hyperlink{request_8h_a1abc891df97d2318f8fb4832a28ae63c}{Request}}) }
+
+\end{DoxyCode}
+ wouldn\textquotesingle{}t give the correct size of the struct. \begin{DoxyReturn}{Returns}
+The size of the Request struct 
+\end{DoxyReturn}
+\mbox{\Hypertarget{request_8h_ad5f65b4ecf295f03488b3b73ea095aa3}\label{request_8h_ad5f65b4ecf295f03488b3b73ea095aa3}} 
+\index{request.h@{request.h}!clone\_request@{clone\_request}}
+\index{clone\_request@{clone\_request}!request.h@{request.h}}
+\doxysubsubsection{\texorpdfstring{clone\_request()}{clone\_request()}}
+{\footnotesize\ttfamily \mbox{\hyperlink{request_8h_a1abc891df97d2318f8fb4832a28ae63c}{Request}}$\ast$ clone\+\_\+request (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{request_8h_a1abc891df97d2318f8fb4832a28ae63c}{Request}} $\ast$}]{r }\end{DoxyParamCaption})}
+
+
+
+Clone a request. 
+
+Allocates memory for a new request and initializes it with the attributes of the given request.
+
+Used in the \mbox{\hyperlink{orchestrator_8c}{orchestrator.\+c}} to clone a request before adding it to the executing or scheduled array.
+
+{\bfseries{The caller is responsible for freeing the returned request by this function.}} 
+\begin{DoxyParams}{Parameters}
+{\em r} & The request to clone \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+The cloned request 
+\end{DoxyReturn}

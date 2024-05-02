@@ -1,0 +1,14 @@
+\hypertarget{_2home_2z0d1ac_2UMinho_223_124_22_xC2_xBA_01Semestre_2SO_2project_2src_2request_8c-example}{}\doxysection{/home/z0d1ac/\+UMinho/23\+:24/2º Semestre/\+SO/project/src/request.\+c}
+Creates a new request. Allocates memory for a new request and initializes it with the given parameters.
+
+It initializes the task number with 0, which is not a valid task number.
+
+For the creation of a status request, the estimated time should be 0, as it is not used, as well as the command should be NULL and is\+\_\+piped parameters should be false.
+
+Request $\ast$execute\+\_\+request = create\+\_\+request(EXECUTE, 10, \char`\"{}ls -\/l\char`\"{}, false, \char`\"{}client-\/1234\char`\"{}); Request $\ast$status\+\_\+request = create\+\_\+request(STATUS, 0, NULL, false, \char`\"{}client-\/1234\char`\"{});
+
+
+\begin{DoxyCodeInclude}{0}
+
+\end{DoxyCodeInclude}
+º \mbox{\hyperlink{request_8c}{Semestre/\+SO/project/src/request.\+c}} 

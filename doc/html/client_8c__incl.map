@@ -1,11 +1,13 @@
 <map id="src/client.c" name="src/client.c">
-<area shape="rect" id="node1" title=" " alt="" coords="427,5,514,32"/>
-<area shape="rect" id="node2" href="$request_8h.html" title=" " alt="" coords="5,80,139,107"/>
-<area shape="rect" id="node3" title=" " alt="" coords="87,155,161,181"/>
-<area shape="rect" id="node4" href="$orchestrator_8h.html" title=" " alt="" coords="214,80,373,107"/>
-<area shape="rect" id="node5" title=" " alt="" coords="397,80,459,107"/>
-<area shape="rect" id="node6" title=" " alt="" coords="483,80,547,107"/>
-<area shape="rect" id="node7" title=" " alt="" coords="571,80,637,107"/>
-<area shape="rect" id="node8" title=" " alt="" coords="661,80,729,107"/>
-<area shape="rect" id="node9" title=" " alt="" coords="753,80,812,107"/>
+<area shape="rect" id="node1" title=" " alt="" coords="565,5,652,32"/>
+<area shape="rect" id="node2" href="$client_8h.html" title=" " alt="" coords="5,80,127,107"/>
+<area shape="rect" id="node3" href="$orchestrator_8h.html" title=" " alt="" coords="151,80,309,107"/>
+<area shape="rect" id="node4" href="$request_8h.html" title=" " alt="" coords="334,80,467,107"/>
+<area shape="rect" id="node6" title=" " alt="" coords="491,80,553,107"/>
+<area shape="rect" id="node7" title=" " alt="" coords="577,80,641,107"/>
+<area shape="rect" id="node8" title=" " alt="" coords="665,80,731,107"/>
+<area shape="rect" id="node9" title=" " alt="" coords="755,80,823,107"/>
+<area shape="rect" id="node10" title=" " alt="" coords="847,80,906,107"/>
+<area shape="rect" id="node11" title=" " alt="" coords="930,80,1010,107"/>
+<area shape="rect" id="node5" title=" " alt="" coords="363,155,438,181"/>
 </map>

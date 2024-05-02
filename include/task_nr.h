@@ -1,6 +1,7 @@
 #ifndef _TASK_NR_H_
 #define _TASK_NR_H_
 
+/** @brief Maximum size of the task number string **/
 #define TASK_NR_STRING_SIZE 8
 
 unsigned int load_task_nr(char *output_dir);

@@ -1,16 +1,16 @@
 // TODO remove ../include/
 #include "../include/client.h" // CLIENT_FIFO_SIZE macro
-#include "../include/request.h"
 #include "../include/orchestrator.h"  // SERVER_FIFO macro
+#include "../include/request.h"
 
 #include <stdio.h>
 #include <stdlib.h>
-#include <stdbool.h>
 #include <string.h>
 #include <unistd.h>
 #include <fcntl.h>
 #include <sys/stat.h>
 
+/** @brief The size of the buffer to read from the FIFO. */
 #define BUF_SIZE 4096
 
 void execute_usage(char *name);
@@ -19,6 +19,23 @@ void status_usage(char *name);
 
 void kill_usage(char *name);
 
+/**
+ * @brief The main function of the client program.
+ * @details The client program is responsible for sending requests
+ * to the server.
+ *
+ * The client program can execute a command, check the status of
+ * the executing, scheduled and completed requests, or kill the server.
+ *
+ * It's responsable for parsing the arguments and sending the
+ * requests to the server program via the server FIFO.
+ *
+ * The status and execute options require the creation of a client
+ * FIFO to receive the server response.
+ * @param argc the number of arguments
+ * @param argv the arguments
+ * @return 0 if the program executed successfully, 1 otherwise
+ */
 int main(int argc, char **argv) {
 
     // parse arguments
@@ -225,14 +242,26 @@ int main(int argc, char **argv) {
     return 0;
 }
 
+/**
+ * @brief Print usage for the execute option.
+ * @param name the name of the client executable
+ */
 void execute_usage(char *name) {
     printf("%s execute <estimated_time|priority> <-u|-p> \"prog-a [args]\"\n", name);
 }
 
+/**
+ * @brief Print usage for the status option.
+ * @param name the name of the client executable
+ */
 void status_usage(char *name) {
     printf("%s status\n", name);
 }
 
+/**
+ * @brief Print usage for the kill option.
+ * @param name the name of the client executable
+ */
 void kill_usage(char *name) {
     printf("%s kill\n", name);
 }

@@ -68,6 +68,7 @@ $(function() {
 </div><!-- top -->
 <div class="header">
   <div class="summary">
+<a href="#define-members">Macros</a> &#124;
 <a href="#func-members">Functions</a>  </div>
   <div class="headertitle">
 <div class="title">orchestrator.c File Reference</div>  </div>
@@ -75,52 +76,141 @@ $(function() {
 <div class="contents">
 <div class="textblock"><code>#include &quot;<a class="el" href="orchestrator_8h_source.html">../include/orchestrator.h</a>&quot;</code><br />
 <code>#include &quot;<a class="el" href="task__nr_8h_source.html">../include/task_nr.h</a>&quot;</code><br />
-<code>#include &quot;<a class="el" href="request_8h_source.html">../include/request.h</a>&quot;</code><br />
 <code>#include &quot;<a class="el" href="command_8h_source.html">../include/command.h</a>&quot;</code><br />
 <code>#include &lt;stdio.h&gt;</code><br />
 <code>#include &lt;stdlib.h&gt;</code><br />
+<code>#include &lt;string.h&gt;</code><br />
 <code>#include &lt;unistd.h&gt;</code><br />
 <code>#include &lt;fcntl.h&gt;</code><br />
 <code>#include &lt;sys/stat.h&gt;</code><br />
-<code>#include &lt;sys/time.h&gt;</code><br />
 </div><div class="textblock"><div class="dynheader">
 Include dependency graph for orchestrator.c:</div>
 <div class="dyncontent">
 <div class="center"><img src="orchestrator_8c__incl.png" border="0" usemap="#asrc_2orchestrator_8c" alt=""/></div>
 <map name="asrc_2orchestrator_8c" id="asrc_2orchestrator_8c">
-<area shape="rect" title=" " alt="" coords="551,5,674,32"/>
+<area shape="rect" title=" " alt="" coords="571,5,694,32"/>
 <area shape="rect" href="orchestrator_8h.html" title=" " alt="" coords="5,80,164,107"/>
 <area shape="rect" href="task__nr_8h.html" title=" " alt="" coords="188,80,320,107"/>
-<area shape="rect" href="request_8h.html" title=" " alt="" coords="335,155,469,181"/>
-<area shape="rect" href="command_8h.html" title=" " alt="" coords="395,80,542,107"/>
-<area shape="rect" title=" " alt="" coords="515,155,598,181"/>
-<area shape="rect" title=" " alt="" coords="617,80,678,107"/>
-<area shape="rect" title=" " alt="" coords="702,80,766,107"/>
-<area shape="rect" title=" " alt="" coords="791,80,859,107"/>
-<area shape="rect" title=" " alt="" coords="883,80,942,107"/>
-<area shape="rect" title=" " alt="" coords="966,80,1046,107"/>
-<area shape="rect" title=" " alt="" coords="365,229,439,256"/>
+<area shape="rect" href="command_8h.html" title=" " alt="" coords="345,80,491,107"/>
+<area shape="rect" title=" " alt="" coords="515,80,577,107"/>
+<area shape="rect" title=" " alt="" coords="601,80,665,107"/>
+<area shape="rect" title=" " alt="" coords="689,80,755,107"/>
+<area shape="rect" title=" " alt="" coords="779,80,847,107"/>
+<area shape="rect" title=" " alt="" coords="871,80,930,107"/>
+<area shape="rect" title=" " alt="" coords="954,80,1034,107"/>
+<area shape="rect" href="request_8h.html" title=" " alt="" coords="328,155,404,181"/>
+<area shape="rect" title=" " alt="" coords="429,155,511,181"/>
+<area shape="rect" title=" " alt="" coords="329,229,403,256"/>
 </map>
 </div>
 </div><table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="define-members"></a>
+Macros</h2></td></tr>
+<tr class="memitem:a67972eda1492b6dac2f752c3a5731e7d"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="orchestrator_8c.html#a67972eda1492b6dac2f752c3a5731e7d">DEFAULT_POLICY</a>&#160;&#160;&#160;<a class="el" href="orchestrator_8h.html#a8f305279bfbdda53600808829a4de17d">SJF</a></td></tr>
+<tr class="memdesc:a67972eda1492b6dac2f752c3a5731e7d"><td class="mdescLeft">&#160;</td><td class="mdescRight">Default scheduling policy.  <a href="orchestrator_8c.html#a67972eda1492b6dac2f752c3a5731e7d">More...</a><br /></td></tr>
+<tr class="separator:a67972eda1492b6dac2f752c3a5731e7d"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ab3cce5fdf02c2817672b8e9f241fbdaa"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="orchestrator_8c.html#ab3cce5fdf02c2817672b8e9f241fbdaa">MAX_SCHEDULED_REQUESTS</a>&#160;&#160;&#160;1024</td></tr>
+<tr class="memdesc:ab3cce5fdf02c2817672b8e9f241fbdaa"><td class="mdescLeft">&#160;</td><td class="mdescRight">Max number of scheduled requests.  <a href="orchestrator_8c.html#ab3cce5fdf02c2817672b8e9f241fbdaa">More...</a><br /></td></tr>
+<tr class="separator:ab3cce5fdf02c2817672b8e9f241fbdaa"><td class="memSeparator" colspan="2">&#160;</td></tr>
+</table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="func-members"></a>
 Functions</h2></td></tr>
-<tr class="memitem:adf276128d48ce4b94c314092bc512d55"><td class="memItemLeft" align="right" valign="top">int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="orchestrator_8c.html#adf276128d48ce4b94c314092bc512d55">add_request</a> (<a class="el" href="request_8h.html#a1abc891df97d2318f8fb4832a28ae63c">Request</a> *requests[], int *N, <a class="el" href="request_8h.html#a1abc891df97d2318f8fb4832a28ae63c">Request</a> *r)</td></tr>
-<tr class="separator:adf276128d48ce4b94c314092bc512d55"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a66ab3dff8457488ea9e155c0f33197d1"><td class="memItemLeft" align="right" valign="top">int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="orchestrator_8c.html#a66ab3dff8457488ea9e155c0f33197d1">remove_request</a> (<a class="el" href="request_8h.html#a1abc891df97d2318f8fb4832a28ae63c">Request</a> *requests[], int *N, <a class="el" href="request_8h.html#a1abc891df97d2318f8fb4832a28ae63c">Request</a> *r)</td></tr>
-<tr class="separator:a66ab3dff8457488ea9e155c0f33197d1"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ae4cde9f2b12cfc7e862a1ba47e2e27bd"><td class="memItemLeft" align="right" valign="top"><a class="el" href="request_8h.html#a1abc891df97d2318f8fb4832a28ae63c">Request</a> *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="orchestrator_8c.html#ae4cde9f2b12cfc7e862a1ba47e2e27bd">select_request</a> (<a class="el" href="request_8h.html#a1abc891df97d2318f8fb4832a28ae63c">Request</a> *requests[], int *N, int policy)</td></tr>
-<tr class="separator:ae4cde9f2b12cfc7e862a1ba47e2e27bd"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a8f9d7d40e26b268401b39971b76ce127"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="orchestrator_8c.html#a8f9d7d40e26b268401b39971b76ce127">orchestrator_usage</a> (char *name)</td></tr>
-<tr class="memdesc:a8f9d7d40e26b268401b39971b76ce127"><td class="mdescLeft">&#160;</td><td class="mdescRight">Print the usage of the orchestrator program.  <a href="orchestrator_8c.html#a8f9d7d40e26b268401b39971b76ce127">More...</a><br /></td></tr>
+<tr class="memdesc:a8f9d7d40e26b268401b39971b76ce127"><td class="mdescLeft">&#160;</td><td class="mdescRight">Print the usage of the orchestrator server executable.  <a href="orchestrator_8c.html#a8f9d7d40e26b268401b39971b76ce127">More...</a><br /></td></tr>
 <tr class="separator:a8f9d7d40e26b268401b39971b76ce127"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a3627a291d53f61274605390ff944df32"><td class="memItemLeft" align="right" valign="top">int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="orchestrator_8c.html#a3627a291d53f61274605390ff944df32">add_request</a> (<a class="el" href="request_8h.html#a1abc891df97d2318f8fb4832a28ae63c">Request</a> *requests[], int *N, int max, <a class="el" href="request_8h.html#a1abc891df97d2318f8fb4832a28ae63c">Request</a> *r)</td></tr>
+<tr class="memdesc:a3627a291d53f61274605390ff944df32"><td class="mdescLeft">&#160;</td><td class="mdescRight">Add a request to the requests array.  <a href="orchestrator_8c.html#a3627a291d53f61274605390ff944df32">More...</a><br /></td></tr>
+<tr class="separator:a3627a291d53f61274605390ff944df32"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a66ab3dff8457488ea9e155c0f33197d1"><td class="memItemLeft" align="right" valign="top">int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="orchestrator_8c.html#a66ab3dff8457488ea9e155c0f33197d1">remove_request</a> (<a class="el" href="request_8h.html#a1abc891df97d2318f8fb4832a28ae63c">Request</a> *requests[], int *N, <a class="el" href="request_8h.html#a1abc891df97d2318f8fb4832a28ae63c">Request</a> *r)</td></tr>
+<tr class="memdesc:a66ab3dff8457488ea9e155c0f33197d1"><td class="mdescLeft">&#160;</td><td class="mdescRight">Remove a request from the requests array.  <a href="orchestrator_8c.html#a66ab3dff8457488ea9e155c0f33197d1">More...</a><br /></td></tr>
+<tr class="separator:a66ab3dff8457488ea9e155c0f33197d1"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a516606ae6b0f07be66d2e72f75f4e89b"><td class="memItemLeft" align="right" valign="top"><a class="el" href="request_8h.html#a1abc891df97d2318f8fb4832a28ae63c">Request</a> *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="orchestrator_8c.html#a516606ae6b0f07be66d2e72f75f4e89b">select_request</a> (<a class="el" href="request_8h.html#a1abc891df97d2318f8fb4832a28ae63c">Request</a> *scheduled[], int N, int policy)</td></tr>
+<tr class="memdesc:a516606ae6b0f07be66d2e72f75f4e89b"><td class="mdescLeft">&#160;</td><td class="mdescRight">Select a request from the requests array based on the scheduling policy.  <a href="orchestrator_8c.html#a516606ae6b0f07be66d2e72f75f4e89b">More...</a><br /></td></tr>
+<tr class="separator:a516606ae6b0f07be66d2e72f75f4e89b"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ac4d92856ad4e907c14868ed1f7ff44bf"><td class="memItemLeft" align="right" valign="top">int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="orchestrator_8c.html#ac4d92856ad4e907c14868ed1f7ff44bf">handle_execute</a> (<a class="el" href="request_8h.html#a1abc891df97d2318f8fb4832a28ae63c">Request</a> *r, <a class="el" href="request_8h.html#a1abc891df97d2318f8fb4832a28ae63c">Request</a> *executing[], int *N_executing, <a class="el" href="request_8h.html#a1abc891df97d2318f8fb4832a28ae63c">Request</a> *scheduled[], int *N_scheduled, char *output_dir, unsigned int tasks, unsigned int *task_nr, struct timeval start_time)</td></tr>
+<tr class="memdesc:ac4d92856ad4e907c14868ed1f7ff44bf"><td class="mdescLeft">&#160;</td><td class="mdescRight">Handle the execute request sent by a client.  <a href="orchestrator_8c.html#ac4d92856ad4e907c14868ed1f7ff44bf">More...</a><br /></td></tr>
+<tr class="separator:ac4d92856ad4e907c14868ed1f7ff44bf"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a12cf4e6bb84230934157efc1c7b37326"><td class="memItemLeft" align="right" valign="top">int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="orchestrator_8c.html#a12cf4e6bb84230934157efc1c7b37326">handle_status</a> (<a class="el" href="request_8h.html#a1abc891df97d2318f8fb4832a28ae63c">Request</a> *r, <a class="el" href="request_8h.html#a1abc891df97d2318f8fb4832a28ae63c">Request</a> *executing[], int N_executing, <a class="el" href="request_8h.html#a1abc891df97d2318f8fb4832a28ae63c">Request</a> *scheduled[], int N_scheduled, char *output_dir)</td></tr>
+<tr class="memdesc:a12cf4e6bb84230934157efc1c7b37326"><td class="mdescLeft">&#160;</td><td class="mdescRight">Handle the status request sent by a client.  <a href="orchestrator_8c.html#a12cf4e6bb84230934157efc1c7b37326">More...</a><br /></td></tr>
+<tr class="separator:a12cf4e6bb84230934157efc1c7b37326"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ac762ba1a08298dc06ace6084b58963ea"><td class="memItemLeft" align="right" valign="top">int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="orchestrator_8c.html#ac762ba1a08298dc06ace6084b58963ea">handle_completed</a> (<a class="el" href="request_8h.html#a1abc891df97d2318f8fb4832a28ae63c">Request</a> *r, <a class="el" href="request_8h.html#a1abc891df97d2318f8fb4832a28ae63c">Request</a> *executing[], int *N_executing, <a class="el" href="request_8h.html#a1abc891df97d2318f8fb4832a28ae63c">Request</a> *scheduled[], int *N_scheduled, char *output_dir, int policy, struct timeval start_time)</td></tr>
+<tr class="memdesc:ac762ba1a08298dc06ace6084b58963ea"><td class="mdescLeft">&#160;</td><td class="mdescRight">Handle the completed request sent by the parent process of the child process that executed the command.  <a href="orchestrator_8c.html#ac762ba1a08298dc06ace6084b58963ea">More...</a><br /></td></tr>
+<tr class="separator:ac762ba1a08298dc06ace6084b58963ea"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a92b568074f1b5c1d6d982814e56af12f"><td class="memItemLeft" align="right" valign="top">int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="orchestrator_8c.html#a92b568074f1b5c1d6d982814e56af12f">send_status</a> (char *client_fifo, <a class="el" href="request_8h.html#a1abc891df97d2318f8fb4832a28ae63c">Request</a> *executing[], int N_executing, <a class="el" href="request_8h.html#a1abc891df97d2318f8fb4832a28ae63c">Request</a> *scheduled[], int N_scheduled, char *output_dir)</td></tr>
+<tr class="memdesc:a92b568074f1b5c1d6d982814e56af12f"><td class="mdescLeft">&#160;</td><td class="mdescRight">Send the status of the executing, scheduled and completed requests to the client via the client FIFO that sent the status request.  <a href="orchestrator_8c.html#a92b568074f1b5c1d6d982814e56af12f">More...</a><br /></td></tr>
+<tr class="separator:a92b568074f1b5c1d6d982814e56af12f"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aae029597704c5273943390688cb2d0ec"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="orchestrator_8c.html#aae029597704c5273943390688cb2d0ec">clean_up</a> (<a class="el" href="request_8h.html#a1abc891df97d2318f8fb4832a28ae63c">Request</a> *executing[], int N_executing, <a class="el" href="request_8h.html#a1abc891df97d2318f8fb4832a28ae63c">Request</a> *scheduled[], int N_scheduled)</td></tr>
+<tr class="memdesc:aae029597704c5273943390688cb2d0ec"><td class="mdescLeft">&#160;</td><td class="mdescRight">Free the memory allocated for the executing and scheduled requests.  <a href="orchestrator_8c.html#aae029597704c5273943390688cb2d0ec">More...</a><br /></td></tr>
+<tr class="separator:aae029597704c5273943390688cb2d0ec"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a0ffc5219a04dffcd16480b6c51111b67"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="orchestrator_8c.html#a0ffc5219a04dffcd16480b6c51111b67">clean_up_all</a> (int fd, <a class="el" href="request_8h.html#a1abc891df97d2318f8fb4832a28ae63c">Request</a> *r, <a class="el" href="request_8h.html#a1abc891df97d2318f8fb4832a28ae63c">Request</a> *executing[], int N_executing, <a class="el" href="request_8h.html#a1abc891df97d2318f8fb4832a28ae63c">Request</a> *scheduled[], int N_scheduled)</td></tr>
+<tr class="memdesc:a0ffc5219a04dffcd16480b6c51111b67"><td class="mdescLeft">&#160;</td><td class="mdescRight">Free the memory allocated for the executing and scheduled requests, close the server FIFO file descriptor, and free the memory allocated for the request.  <a href="orchestrator_8c.html#a0ffc5219a04dffcd16480b6c51111b67">More...</a><br /></td></tr>
+<tr class="separator:a0ffc5219a04dffcd16480b6c51111b67"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a3c04138a5bfe5d72780bb7e82a18e627"><td class="memItemLeft" align="right" valign="top">int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="orchestrator_8c.html#a3c04138a5bfe5d72780bb7e82a18e627">main</a> (int argc, char **argv)</td></tr>
-<tr class="memdesc:a3c04138a5bfe5d72780bb7e82a18e627"><td class="mdescLeft">&#160;</td><td class="mdescRight">Main function for the orchestrator program The orchestrator program is responsible for managing the execution of the parallel tasks. It receives the output directory, the number of parallel tasks, and the scheduling policy as arguments. This function is responsible for validating the arguments, parsing them and calling the appropriate functions to manage the parallel tasks.  <a href="orchestrator_8c.html#a3c04138a5bfe5d72780bb7e82a18e627">More...</a><br /></td></tr>
+<tr class="memdesc:a3c04138a5bfe5d72780bb7e82a18e627"><td class="mdescLeft">&#160;</td><td class="mdescRight">Main function for the orchestrator server program.  <a href="orchestrator_8c.html#a3c04138a5bfe5d72780bb7e82a18e627">More...</a><br /></td></tr>
 <tr class="separator:a3c04138a5bfe5d72780bb7e82a18e627"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
+<h2 class="groupheader">Macro Definition Documentation</h2>
+<a id="a67972eda1492b6dac2f752c3a5731e7d"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a67972eda1492b6dac2f752c3a5731e7d">&#9670;&nbsp;</a></span>DEFAULT_POLICY</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">#define DEFAULT_POLICY&#160;&#160;&#160;<a class="el" href="orchestrator_8h.html#a8f305279bfbdda53600808829a4de17d">SJF</a></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Default scheduling policy. </p>
+
+</div>
+</div>
+<a id="ab3cce5fdf02c2817672b8e9f241fbdaa"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ab3cce5fdf02c2817672b8e9f241fbdaa">&#9670;&nbsp;</a></span>MAX_SCHEDULED_REQUESTS</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">#define MAX_SCHEDULED_REQUESTS&#160;&#160;&#160;1024</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Max number of scheduled requests. </p>
+
+</div>
+</div>
 <h2 class="groupheader">Function Documentation</h2>
-<a id="adf276128d48ce4b94c314092bc512d55"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#adf276128d48ce4b94c314092bc512d55">&#9670;&nbsp;</a></span>add_request()</h2>
+<a id="a8f9d7d40e26b268401b39971b76ce127"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a8f9d7d40e26b268401b39971b76ce127">&#9670;&nbsp;</a></span>orchestrator_usage()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void orchestrator_usage </td>
+          <td>(</td>
+          <td class="paramtype">char *&#160;</td>
+          <td class="paramname"><em>name</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Print the usage of the orchestrator server executable. </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">name</td><td>The name of the orchestrator server executable </td></tr>
+  </table>
+  </dd>
+</dl>
+
+</div>
+</div>
+<a id="a3627a291d53f61274605390ff944df32"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a3627a291d53f61274605390ff944df32">&#9670;&nbsp;</a></span>add_request()</h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -140,6 +230,12 @@ Functions</h2></td></tr>
         <tr>
           <td class="paramkey"></td>
           <td></td>
+          <td class="paramtype">int&#160;</td>
+          <td class="paramname"><em>max</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
           <td class="paramtype"><a class="el" href="request_8h.html#a1abc891df97d2318f8fb4832a28ae63c">Request</a> *&#160;</td>
           <td class="paramname"><em>r</em>&#160;</td>
         </tr>
@@ -151,69 +247,19 @@ Functions</h2></td></tr>
       </table>
 </div><div class="memdoc">
 
-</div>
-</div>
-<a id="a3c04138a5bfe5d72780bb7e82a18e627"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a3c04138a5bfe5d72780bb7e82a18e627">&#9670;&nbsp;</a></span>main()</h2>
-
-<div class="memitem">
-<div class="memproto">
-      <table class="memname">
-        <tr>
-          <td class="memname">int main </td>
-          <td>(</td>
-          <td class="paramtype">int&#160;</td>
-          <td class="paramname"><em>argc</em>, </td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
-          <td></td>
-          <td class="paramtype">char **&#160;</td>
-          <td class="paramname"><em>argv</em>&#160;</td>
-        </tr>
-        <tr>
-          <td></td>
-          <td>)</td>
-          <td></td><td></td>
-        </tr>
-      </table>
-</div><div class="memdoc">
-
-<p>Main function for the orchestrator program The orchestrator program is responsible for managing the execution of the parallel tasks. It receives the output directory, the number of parallel tasks, and the scheduling policy as arguments. This function is responsible for validating the arguments, parsing them and calling the appropriate functions to manage the parallel tasks. </p>
+<p>Add a request to the requests array. </p>
+<p>If the array is full, the function will return -1.</p>
+<p>Used to add requests to the executing and scheduled arrays.</p>
 <dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
-    <tr><td class="paramname">argc</td><td>The number of arguments </td></tr>
-    <tr><td class="paramname">argv</td><td>The arguments </td></tr>
+    <tr><td class="paramname">requests</td><td>The array of requests </td></tr>
+    <tr><td class="paramname">N</td><td>The number of requests in the array </td></tr>
+    <tr><td class="paramname">max</td><td>The max number of requests in the array </td></tr>
+    <tr><td class="paramname">r</td><td>The request to add </td></tr>
   </table>
   </dd>
 </dl>
-<dl class="section return"><dt>Returns</dt><dd>0 if the program runs successfully </dd></dl>
-
-</div>
-</div>
-<a id="a8f9d7d40e26b268401b39971b76ce127"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a8f9d7d40e26b268401b39971b76ce127">&#9670;&nbsp;</a></span>orchestrator_usage()</h2>
-
-<div class="memitem">
-<div class="memproto">
-      <table class="memname">
-        <tr>
-          <td class="memname">void orchestrator_usage </td>
-          <td>(</td>
-          <td class="paramtype">char *&#160;</td>
-          <td class="paramname"><em>name</em></td><td>)</td>
-          <td></td>
-        </tr>
-      </table>
-</div><div class="memdoc">
-
-<p>Print the usage of the orchestrator program. </p>
-<dl class="params"><dt>Parameters</dt><dd>
-  <table class="params">
-    <tr><td class="paramname">name</td><td>The name of the program </td></tr>
-  </table>
-  </dd>
-</dl>
+<dl class="section return"><dt>Returns</dt><dd>0 if the request was added successfully, -1 otherwise </dd></dl>
 
 </div>
 </div>
@@ -249,10 +295,23 @@ Functions</h2></td></tr>
       </table>
 </div><div class="memdoc">
 
+<p>Remove a request from the requests array. </p>
+<p>If the request is not found in the array, the function will return -1.</p>
+<p>Used to remove requests from the executing and scheduled arrays.</p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">requests</td><td>The array of requests </td></tr>
+    <tr><td class="paramname">N</td><td>The number of requests in the array </td></tr>
+    <tr><td class="paramname">r</td><td>The request to remove </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Returns</dt><dd>0 if the request was removed successfully, -1 otherwise </dd></dl>
+
 </div>
 </div>
-<a id="ae4cde9f2b12cfc7e862a1ba47e2e27bd"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#ae4cde9f2b12cfc7e862a1ba47e2e27bd">&#9670;&nbsp;</a></span>select_request()</h2>
+<a id="a516606ae6b0f07be66d2e72f75f4e89b"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a516606ae6b0f07be66d2e72f75f4e89b">&#9670;&nbsp;</a></span>select_request()</h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -261,12 +320,12 @@ Functions</h2></td></tr>
           <td class="memname"><a class="el" href="request_8h.html#a1abc891df97d2318f8fb4832a28ae63c">Request</a> * select_request </td>
           <td>(</td>
           <td class="paramtype"><a class="el" href="request_8h.html#a1abc891df97d2318f8fb4832a28ae63c">Request</a> *&#160;</td>
-          <td class="paramname"><em>requests</em>[], </td>
+          <td class="paramname"><em>scheduled</em>[], </td>
         </tr>
         <tr>
           <td class="paramkey"></td>
           <td></td>
-          <td class="paramtype">int *&#160;</td>
+          <td class="paramtype">int&#160;</td>
           <td class="paramname"><em>N</em>, </td>
         </tr>
         <tr>
@@ -283,6 +342,507 @@ Functions</h2></td></tr>
       </table>
 </div><div class="memdoc">
 
+<p>Select a request from the requests array based on the scheduling policy. </p>
+<p>The function will return <code>NULL</code> if the array is empty.</p>
+<p>The function will return the first scheduled request if the scheduling policy is <a class="el" href="orchestrator_8h.html#a018a73a637d463c5eaf3db6e2462c498">FCFS</a>.</p>
+<p>The function will return the request with the smallest estimated time if the scheduling policy is <a class="el" href="orchestrator_8h.html#a8f305279bfbdda53600808829a4de17d">SJF</a>.</p>
+<p>The function will return the request with the highest priority if the scheduling policy is <a class="el" href="orchestrator_8h.html#af4565ab18ff1cc5db0e44ef213fdc112">PES</a>.</p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">requests</td><td>The array of requests </td></tr>
+    <tr><td class="paramname">N</td><td>The number of requests in the array </td></tr>
+    <tr><td class="paramname">policy</td><td>The scheduling policy applied </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Returns</dt><dd>The selected request </dd></dl>
+
+</div>
+</div>
+<a id="ac4d92856ad4e907c14868ed1f7ff44bf"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ac4d92856ad4e907c14868ed1f7ff44bf">&#9670;&nbsp;</a></span>handle_execute()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">int handle_execute </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="request_8h.html#a1abc891df97d2318f8fb4832a28ae63c">Request</a> *&#160;</td>
+          <td class="paramname"><em>r</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="el" href="request_8h.html#a1abc891df97d2318f8fb4832a28ae63c">Request</a> *&#160;</td>
+          <td class="paramname"><em>executing</em>[], </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">int *&#160;</td>
+          <td class="paramname"><em>N_executing</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="el" href="request_8h.html#a1abc891df97d2318f8fb4832a28ae63c">Request</a> *&#160;</td>
+          <td class="paramname"><em>scheduled</em>[], </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">int *&#160;</td>
+          <td class="paramname"><em>N_scheduled</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">char *&#160;</td>
+          <td class="paramname"><em>output_dir</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">unsigned int&#160;</td>
+          <td class="paramname"><em>tasks</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">unsigned int *&#160;</td>
+          <td class="paramname"><em>task_nr</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">struct timeval&#160;</td>
+          <td class="paramname"><em>start_time</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Handle the execute request sent by a client. </p>
+<p>The function will execute the request if the number of executing requests is less than the max number of parallel tasks, otherwise the request will be scheduled.</p>
+<p>The function will send a message to the client with the task number and the status of the request - either executing or scheduled.</p>
+<p>It uses the function <a class="el" href="command_8c.html#a7c52b2573cda56b38259890b03be026e">exec</a> to execute the command, defined in <a class="el" href="command_8c.html">command.c</a>.</p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">r</td><td>The request to execute </td></tr>
+    <tr><td class="paramname">executing</td><td>The array of executing requests </td></tr>
+    <tr><td class="paramname">N_executing</td><td>The number of executing requests </td></tr>
+    <tr><td class="paramname">scheduled</td><td>The array of scheduled requests </td></tr>
+    <tr><td class="paramname">N_scheduled</td><td>The number of scheduled requests </td></tr>
+    <tr><td class="paramname">output_dir</td><td>The output directory </td></tr>
+    <tr><td class="paramname">tasks</td><td>The max number of parallel tasks </td></tr>
+    <tr><td class="paramname">task_nr</td><td>The task number </td></tr>
+    <tr><td class="paramname">start_time</td><td>The start time of the request </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Returns</dt><dd>0 if the request was executed or scheduled successfully, -1 otherwise </dd></dl>
+
+</div>
+</div>
+<a id="a12cf4e6bb84230934157efc1c7b37326"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a12cf4e6bb84230934157efc1c7b37326">&#9670;&nbsp;</a></span>handle_status()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">int handle_status </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="request_8h.html#a1abc891df97d2318f8fb4832a28ae63c">Request</a> *&#160;</td>
+          <td class="paramname"><em>r</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="el" href="request_8h.html#a1abc891df97d2318f8fb4832a28ae63c">Request</a> *&#160;</td>
+          <td class="paramname"><em>executing</em>[], </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">int&#160;</td>
+          <td class="paramname"><em>N_executing</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="el" href="request_8h.html#a1abc891df97d2318f8fb4832a28ae63c">Request</a> *&#160;</td>
+          <td class="paramname"><em>scheduled</em>[], </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">int&#160;</td>
+          <td class="paramname"><em>N_scheduled</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">char *&#160;</td>
+          <td class="paramname"><em>output_dir</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Handle the status request sent by a client. </p>
+<p>The function will send the status of the executing, scheduled and completed requests to the client via the client FIFO located in the request.</p>
+<p>This functions creates a process to send the status to the respective client, this way other clients can still send requests to the server and receive responses.</p>
+<p>It uses the history file (<a class="el" href="command_8h.html#a937f20aeca8cb1f294ad9b68340fb2d1">HISTORY_NAME</a>) to get the completed requests, and the function <a class="el" href="orchestrator_8c.html#a92b568074f1b5c1d6d982814e56af12f">send_status</a> to send the status to the client.</p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">r</td><td>The request to handle </td></tr>
+    <tr><td class="paramname">executing</td><td>The array of executing requests </td></tr>
+    <tr><td class="paramname">N_executing</td><td>The number of executing requests </td></tr>
+    <tr><td class="paramname">scheduled</td><td>The array of scheduled requests </td></tr>
+    <tr><td class="paramname">N_scheduled</td><td>The number of scheduled requests </td></tr>
+    <tr><td class="paramname">output_dir</td><td>The output directory </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Returns</dt><dd>0 if the status was sent successfully, -1 otherwise </dd></dl>
+
+</div>
+</div>
+<a id="ac762ba1a08298dc06ace6084b58963ea"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ac762ba1a08298dc06ace6084b58963ea">&#9670;&nbsp;</a></span>handle_completed()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">int handle_completed </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="request_8h.html#a1abc891df97d2318f8fb4832a28ae63c">Request</a> *&#160;</td>
+          <td class="paramname"><em>r</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="el" href="request_8h.html#a1abc891df97d2318f8fb4832a28ae63c">Request</a> *&#160;</td>
+          <td class="paramname"><em>executing</em>[], </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">int *&#160;</td>
+          <td class="paramname"><em>N_executing</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="el" href="request_8h.html#a1abc891df97d2318f8fb4832a28ae63c">Request</a> *&#160;</td>
+          <td class="paramname"><em>scheduled</em>[], </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">int *&#160;</td>
+          <td class="paramname"><em>N_scheduled</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">char *&#160;</td>
+          <td class="paramname"><em>output_dir</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">int&#160;</td>
+          <td class="paramname"><em>policy</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">struct timeval&#160;</td>
+          <td class="paramname"><em>start_time</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Handle the completed request sent by the parent process of the child process that executed the command. </p>
+<p>The function will remove the request from the executing array and check for scheduled requests to run.</p>
+<p>If there are scheduled requests, the function will remove the request from the scheduled array, add it to the executing array, and execute the command.</p>
+<p>If there's a available scheduled request, the function will send a message to the client with the task number and the status of the request - either executing or scheduled.</p>
+<p>It uses the function <a class="el" href="command_8c.html#a7c52b2573cda56b38259890b03be026e">exec</a> to execute the command, defined in <a class="el" href="command_8c.html">command.c</a>, and the function <a class="el" href="orchestrator_8c.html#a516606ae6b0f07be66d2e72f75f4e89b">select_request</a> to select the next scheduled request, if any exists, to execute.</p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">r</td><td>The request to handle </td></tr>
+    <tr><td class="paramname">executing</td><td>The array of executing requests </td></tr>
+    <tr><td class="paramname">N_executing</td><td>The number of executing requests </td></tr>
+    <tr><td class="paramname">scheduled</td><td>The array of scheduled requests </td></tr>
+    <tr><td class="paramname">N_scheduled</td><td>The number of scheduled requests </td></tr>
+    <tr><td class="paramname">output_dir</td><td>The output directory </td></tr>
+    <tr><td class="paramname">policy</td><td>The scheduling policy applied </td></tr>
+    <tr><td class="paramname">start_time</td><td>The start time of the request </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Returns</dt><dd>0 if the request was handled successfully, -1 otherwise </dd></dl>
+
+</div>
+</div>
+<a id="a92b568074f1b5c1d6d982814e56af12f"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a92b568074f1b5c1d6d982814e56af12f">&#9670;&nbsp;</a></span>send_status()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">int send_status </td>
+          <td>(</td>
+          <td class="paramtype">char *&#160;</td>
+          <td class="paramname"><em>client_fifo</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="el" href="request_8h.html#a1abc891df97d2318f8fb4832a28ae63c">Request</a> *&#160;</td>
+          <td class="paramname"><em>executing</em>[], </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">int&#160;</td>
+          <td class="paramname"><em>N_executing</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="el" href="request_8h.html#a1abc891df97d2318f8fb4832a28ae63c">Request</a> *&#160;</td>
+          <td class="paramname"><em>scheduled</em>[], </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">int&#160;</td>
+          <td class="paramname"><em>N_scheduled</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">char *&#160;</td>
+          <td class="paramname"><em>output_dir</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Send the status of the executing, scheduled and completed requests to the client via the client FIFO that sent the status request. </p>
+<p>The function is used by the <a class="el" href="orchestrator_8c.html#a12cf4e6bb84230934157efc1c7b37326">handle_status</a> function as an auxiliary function to send the status to the client.</p>
+<dl class="section see"><dt>See also</dt><dd><a class="el" href="orchestrator_8c.html#a12cf4e6bb84230934157efc1c7b37326" title="Handle the status request sent by a client.">handle_status</a></dd></dl>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">client_fifo</td><td>The client FIFO name to send the status response to the client </td></tr>
+    <tr><td class="paramname">executing</td><td>The array of executing requests </td></tr>
+    <tr><td class="paramname">N_executing</td><td>The number of executing requests </td></tr>
+    <tr><td class="paramname">scheduled</td><td>The array of scheduled requests </td></tr>
+    <tr><td class="paramname">N_scheduled</td><td>The number of scheduled requests </td></tr>
+    <tr><td class="paramname">output_dir</td><td>The output directory to get the history file in in order to get and send the completed requests </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Returns</dt><dd>0 if the status was sent successfully, -1 otherwise </dd></dl>
+
+</div>
+</div>
+<a id="aae029597704c5273943390688cb2d0ec"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#aae029597704c5273943390688cb2d0ec">&#9670;&nbsp;</a></span>clean_up()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void clean_up </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="request_8h.html#a1abc891df97d2318f8fb4832a28ae63c">Request</a> *&#160;</td>
+          <td class="paramname"><em>executing</em>[], </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">int&#160;</td>
+          <td class="paramname"><em>N_executing</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="el" href="request_8h.html#a1abc891df97d2318f8fb4832a28ae63c">Request</a> *&#160;</td>
+          <td class="paramname"><em>scheduled</em>[], </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">int&#160;</td>
+          <td class="paramname"><em>N_scheduled</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Free the memory allocated for the executing and scheduled requests. </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">executing</td><td>The array of executing requests </td></tr>
+    <tr><td class="paramname">N_executing</td><td>The number of executing requests </td></tr>
+    <tr><td class="paramname">scheduled</td><td>The array of scheduled requests </td></tr>
+    <tr><td class="paramname">N_scheduled</td><td>The number of scheduled requests </td></tr>
+  </table>
+  </dd>
+</dl>
+
+</div>
+</div>
+<a id="a0ffc5219a04dffcd16480b6c51111b67"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a0ffc5219a04dffcd16480b6c51111b67">&#9670;&nbsp;</a></span>clean_up_all()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void clean_up_all </td>
+          <td>(</td>
+          <td class="paramtype">int&#160;</td>
+          <td class="paramname"><em>fd</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="el" href="request_8h.html#a1abc891df97d2318f8fb4832a28ae63c">Request</a> *&#160;</td>
+          <td class="paramname"><em>r</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="el" href="request_8h.html#a1abc891df97d2318f8fb4832a28ae63c">Request</a> *&#160;</td>
+          <td class="paramname"><em>executing</em>[], </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">int&#160;</td>
+          <td class="paramname"><em>N_executing</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="el" href="request_8h.html#a1abc891df97d2318f8fb4832a28ae63c">Request</a> *&#160;</td>
+          <td class="paramname"><em>scheduled</em>[], </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">int&#160;</td>
+          <td class="paramname"><em>N_scheduled</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Free the memory allocated for the executing and scheduled requests, close the server FIFO file descriptor, and free the memory allocated for the request. </p>
+<dl class="section see"><dt>See also</dt><dd><a class="el" href="orchestrator_8c.html#aae029597704c5273943390688cb2d0ec" title="Free the memory allocated for the executing and scheduled requests.">clean_up</a></dd></dl>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">fd</td><td>The server FIFO file descriptor </td></tr>
+    <tr><td class="paramname">r</td><td>The request to free </td></tr>
+    <tr><td class="paramname">executing</td><td>The array of executing requests </td></tr>
+    <tr><td class="paramname">N_executing</td><td>The number of executing requests </td></tr>
+    <tr><td class="paramname">scheduled</td><td>The array of scheduled requests </td></tr>
+    <tr><td class="paramname">N_scheduled</td><td>The number of scheduled requests </td></tr>
+  </table>
+  </dd>
+</dl>
+
+</div>
+</div>
+<a id="a3c04138a5bfe5d72780bb7e82a18e627"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a3c04138a5bfe5d72780bb7e82a18e627">&#9670;&nbsp;</a></span>main()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">int main </td>
+          <td>(</td>
+          <td class="paramtype">int&#160;</td>
+          <td class="paramname"><em>argc</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">char **&#160;</td>
+          <td class="paramname"><em>argv</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Main function for the orchestrator server program. </p>
+<p>The orchestrator program is responsible of: </p><ul>
+<li><b>parsing the command-line interface arguments</b>; </li>
+<li><b>creating the server FIFO</b> based on the <a class="el" href="orchestrator_8h.html#a52e236925828d1955a9ac01efdd8705d">SERVER_FIFO</a> macro; </li>
+<li><b>receiving and handling client requests</b> sent via the server FIFO; </li>
+<li><b>sending the appropriate responses</b> to the clients via their respective FIFOs;</li>
+</ul>
+<p>It receives the output directory, the number of parallel tasks, and, optionally, the scheduling policy as arguments.</p>
+<p>If the output directory doesn't exist, it will be created.</p>
+<p>If the number of parallel tasks is not provided or is less than or equal to zero, the program will print an error message and exit.</p>
+<p>If the scheduling policy is not provided, the default policy is applied via the <a class="el" href="orchestrator_8c.html#a67972eda1492b6dac2f752c3a5731e7d">DEFAULT_POLICY</a> macro.</p>
+<p>It's responsable for executing or scheduling requests with type <a class="el" href="request_8h.html#a05e20d8bc0525f94757303dd5a905a69">EXECUTE</a> sent from the clients. If the max number of parallel tasks is reached, the request will be scheduled. Based on this action, the orchestrator program will send a response to the client with the task number and the status of the request - either executing or scheduled.</p>
+<dl class="section see"><dt>See also</dt><dd><a class="el" href="orchestrator_8c.html#ac4d92856ad4e907c14868ed1f7ff44bf" title="Handle the execute request sent by a client.">handle_execute</a></dd></dl>
+<p>Once a command finnish his execution, the orchestrator program will receive a request with type <a class="el" href="request_8h.html#a22c88fdadb7d8f8417a92cdcc6232786">COMPLETED</a> sent from the parent process of the child process that executed command, and will execute next available scheduled request, if any exists, based on the scheduling policy applied.</p>
+<dl class="section see"><dt>See also</dt><dd><a class="el" href="orchestrator_8c.html#ac762ba1a08298dc06ace6084b58963ea" title="Handle the completed request sent by the parent process of the child process that executed the comman...">handle_completed</a></dd></dl>
+<p>The orchestrator program can also receive requests with type <a class="el" href="request_8h.html#a59279bee44f34d08b3cbf3a89fb0d8d9">STATUS</a> from the clients, to check the status of the executing, scheduled and completed requests. The response will be sent via the client FIFO.</p>
+<dl class="section see"><dt>See also</dt><dd><a class="el" href="orchestrator_8c.html#a12cf4e6bb84230934157efc1c7b37326" title="Handle the status request sent by a client.">handle_status</a></dd></dl>
+<p>The orchestrator program can also receive requests with type <a class="el" href="request_8h.html#a9d385e974a49598d267af81de5a33838">KILL</a> from the clients, to shutdown the server.</p>
+<p>When the orchestrator program is shutting down, it will save the task number to a file in the output directory (see <a class="el" href="task__nr_8c.html#a2b92d71aa300221c997ed16e94e1b47c">save_task_nr</a>), close the open FIFOs file descriptors, and free the memory allocated for the executing and scheduled requests using the <a class="el" href="orchestrator_8c.html#aae029597704c5273943390688cb2d0ec">clean_up</a> function.</p>
+<p>If any of the orchestrator components or called functions fail, the program will print an error message, clean up the memory and close file descriptors using the <a class="el" href="orchestrator_8c.html#a0ffc5219a04dffcd16480b6c51111b67">clean_up_all</a> function, and return 1.</p>
+<p>The orchestrator program will run until it receives a request with type <a class="el" href="request_8h.html#a9d385e974a49598d267af81de5a33838">KILL</a> from a client, or until it receives a signal to terminate or interrupt the program.</p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">argc</td><td>The number of arguments </td></tr>
+    <tr><td class="paramname">argv</td><td>The arguments </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Returns</dt><dd>0 if the program runs successfully, 1 otherwise </dd></dl>
+
 </div>
 </div>
 </div><!-- contents -->
@@ -290,7 +850,7 @@ Functions</h2></td></tr>
         <hr class="footer">
         <address class="footer">
             <small>
-                Generated on Sun Apr 28 2024 17:59:25 for <b>Orchestrator</b> by
+                Generated on Thu May 2 2024 18:34:12 for <b>Orchestrator</b> by
                 <a href="http://www.doxygen.org/index.html">
                     <img class="footer" src="doxygen.png" alt="doxygen" onerror="this.onerror=null;this.src='doxygen.svg';"/>
                 </a> 1.9.1. All rights reserved.

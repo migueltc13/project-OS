@@ -1,13 +1,14 @@
 \hypertarget{client_8c}{}\doxysection{src/client.c File Reference}
 \label{client_8c}\index{src/client.c@{src/client.c}}
-{\ttfamily \#include \char`\"{}../include/request.\+h\char`\"{}}\newline
+{\ttfamily \#include \char`\"{}../include/client.\+h\char`\"{}}\newline
 {\ttfamily \#include \char`\"{}../include/orchestrator.\+h\char`\"{}}\newline
+{\ttfamily \#include \char`\"{}../include/request.\+h\char`\"{}}\newline
 {\ttfamily \#include $<$stdio.\+h$>$}\newline
 {\ttfamily \#include $<$stdlib.\+h$>$}\newline
-{\ttfamily \#include $<$stdbool.\+h$>$}\newline
 {\ttfamily \#include $<$string.\+h$>$}\newline
 {\ttfamily \#include $<$unistd.\+h$>$}\newline
 {\ttfamily \#include $<$fcntl.\+h$>$}\newline
+{\ttfamily \#include $<$sys/stat.\+h$>$}\newline
 Include dependency graph for client.\+c\+:\nopagebreak
 \begin{figure}[H]
 \begin{center}
@@ -15,15 +16,35 @@ Include dependency graph for client.\+c\+:\nopagebreak
 \includegraphics[width=350pt]{client_8c__incl}
 \end{center}
 \end{figure}
+\doxysubsection*{Macros}
+\begin{DoxyCompactItemize}
+\item 
+\#define \mbox{\hyperlink{client_8c_a6821bafc3c88dfb2e433a095df9940c6}{BUF\+\_\+\+SIZE}}~4096
+\begin{DoxyCompactList}\small\item\em The size of the buffer to read from the FIFO. \end{DoxyCompactList}\end{DoxyCompactItemize}
 \doxysubsection*{Functions}
 \begin{DoxyCompactItemize}
 \item 
 void \mbox{\hyperlink{client_8c_ae0f9a92af52218c2852e98510854d41c}{execute\+\_\+usage}} (char $\ast$name)
-\item 
+\begin{DoxyCompactList}\small\item\em Print usage for the execute option. \end{DoxyCompactList}\item 
 void \mbox{\hyperlink{client_8c_ae9b88735f737d817c8689d9bdd62a623}{status\+\_\+usage}} (char $\ast$name)
-\item 
+\begin{DoxyCompactList}\small\item\em Print usage for the status option. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{client_8c_a9f841f5d88f509480ce20bc1ec1fc21f}{kill\+\_\+usage}} (char $\ast$name)
+\begin{DoxyCompactList}\small\item\em Print usage for the kill option. \end{DoxyCompactList}\item 
 int \mbox{\hyperlink{client_8c_a3c04138a5bfe5d72780bb7e82a18e627}{main}} (int argc, char $\ast$$\ast$argv)
-\end{DoxyCompactItemize}
+\begin{DoxyCompactList}\small\item\em The main function of the client program. \end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\doxysubsection{Macro Definition Documentation}
+\mbox{\Hypertarget{client_8c_a6821bafc3c88dfb2e433a095df9940c6}\label{client_8c_a6821bafc3c88dfb2e433a095df9940c6}} 
+\index{client.c@{client.c}!BUF\_SIZE@{BUF\_SIZE}}
+\index{BUF\_SIZE@{BUF\_SIZE}!client.c@{client.c}}
+\doxysubsubsection{\texorpdfstring{BUF\_SIZE}{BUF\_SIZE}}
+{\footnotesize\ttfamily \#define BUF\+\_\+\+SIZE~4096}
+
+
+
+The size of the buffer to read from the FIFO. 
+
 
 
 \doxysubsection{Function Documentation}
@@ -33,15 +54,68 @@ int \mbox{\hyperlink{client_8c_a3c04138a5bfe5d72780bb7e82a18e627}{main}} (int ar
 \doxysubsubsection{\texorpdfstring{execute\_usage()}{execute\_usage()}}
 {\footnotesize\ttfamily void execute\+\_\+usage (\begin{DoxyParamCaption}\item[{char $\ast$}]{name }\end{DoxyParamCaption})}
 
-\mbox{\Hypertarget{client_8c_a3c04138a5bfe5d72780bb7e82a18e627}\label{client_8c_a3c04138a5bfe5d72780bb7e82a18e627}} 
-\index{client.c@{client.c}!main@{main}}
-\index{main@{main}!client.c@{client.c}}
-\doxysubsubsection{\texorpdfstring{main()}{main()}}
-{\footnotesize\ttfamily int main (\begin{DoxyParamCaption}\item[{int}]{argc,  }\item[{char $\ast$$\ast$}]{argv }\end{DoxyParamCaption})}
 
+
+Print usage for the execute option. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em name} & the name of the client executable \\
+\hline
+\end{DoxyParams}
 \mbox{\Hypertarget{client_8c_ae9b88735f737d817c8689d9bdd62a623}\label{client_8c_ae9b88735f737d817c8689d9bdd62a623}} 
 \index{client.c@{client.c}!status\_usage@{status\_usage}}
 \index{status\_usage@{status\_usage}!client.c@{client.c}}
 \doxysubsubsection{\texorpdfstring{status\_usage()}{status\_usage()}}
 {\footnotesize\ttfamily void status\+\_\+usage (\begin{DoxyParamCaption}\item[{char $\ast$}]{name }\end{DoxyParamCaption})}
 
+
+
+Print usage for the status option. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em name} & the name of the client executable \\
+\hline
+\end{DoxyParams}
+\mbox{\Hypertarget{client_8c_a9f841f5d88f509480ce20bc1ec1fc21f}\label{client_8c_a9f841f5d88f509480ce20bc1ec1fc21f}} 
+\index{client.c@{client.c}!kill\_usage@{kill\_usage}}
+\index{kill\_usage@{kill\_usage}!client.c@{client.c}}
+\doxysubsubsection{\texorpdfstring{kill\_usage()}{kill\_usage()}}
+{\footnotesize\ttfamily void kill\+\_\+usage (\begin{DoxyParamCaption}\item[{char $\ast$}]{name }\end{DoxyParamCaption})}
+
+
+
+Print usage for the kill option. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em name} & the name of the client executable \\
+\hline
+\end{DoxyParams}
+\mbox{\Hypertarget{client_8c_a3c04138a5bfe5d72780bb7e82a18e627}\label{client_8c_a3c04138a5bfe5d72780bb7e82a18e627}} 
+\index{client.c@{client.c}!main@{main}}
+\index{main@{main}!client.c@{client.c}}
+\doxysubsubsection{\texorpdfstring{main()}{main()}}
+{\footnotesize\ttfamily int main (\begin{DoxyParamCaption}\item[{int}]{argc,  }\item[{char $\ast$$\ast$}]{argv }\end{DoxyParamCaption})}
+
+
+
+The main function of the client program. 
+
+The client program is responsible for sending requests to the server.
+
+The client program can execute a command, check the status of the executing, scheduled and completed requests, or kill the server.
+
+It\textquotesingle{}s responsable for parsing the arguments and sending the requests to the server program via the server FIFO.
+
+The status and execute options require the creation of a client FIFO to receive the server response. 
+\begin{DoxyParams}{Parameters}
+{\em argc} & the number of arguments \\
+\hline
+{\em argv} & the arguments \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+0 if the program executed successfully, 1 otherwise 
+\end{DoxyReturn}

@@ -1,5 +1,6 @@
 var searchData=
 [
-  ['increment_5ftask_5fnr_72',['increment_task_nr',['../task__nr_8h.html#a8c036365e5319df7bd3299874a31c1ad',1,'increment_task_nr(char *output_dir):&#160;task_nr.c'],['../task__nr_8c.html#a8c036365e5319df7bd3299874a31c1ad',1,'increment_task_nr(char *output_dir):&#160;task_nr.c']]],
-  ['init_5ftask_5fnr_73',['init_task_nr',['../task__nr_8h.html#a2f9859118d66e0d6a6912f8e6b6092d0',1,'init_task_nr(char *output_dir):&#160;task_nr.c'],['../task__nr_8c.html#a2f9859118d66e0d6a6912f8e6b6092d0',1,'init_task_nr(char *output_dir):&#160;task_nr.c']]]
+  ['handle_5fcompleted_106',['handle_completed',['../orchestrator_8c.html#ac762ba1a08298dc06ace6084b58963ea',1,'orchestrator.c']]],
+  ['handle_5fexecute_107',['handle_execute',['../orchestrator_8c.html#ac4d92856ad4e907c14868ed1f7ff44bf',1,'orchestrator.c']]],
+  ['handle_5fstatus_108',['handle_status',['../orchestrator_8c.html#a12cf4e6bb84230934157efc1c7b37326',1,'orchestrator.c']]]
 ];

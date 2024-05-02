@@ -13,49 +13,95 @@ Include dependency graph for task\+\_\+nr.\+c\+:\nopagebreak
 \includegraphics[width=350pt]{task__nr_8c__incl}
 \end{center}
 \end{figure}
+\doxysubsection*{Macros}
+\begin{DoxyCompactItemize}
+\item 
+\#define \mbox{\hyperlink{task__nr_8c_a292a25d0dfe0e36b6dbfb52c83e67cb6}{TASK\+\_\+\+NR\+\_\+\+FILENAME}}~\char`\"{}task\+\_\+number\char`\"{}
+\begin{DoxyCompactList}\small\item\em The filename of the task number file. \end{DoxyCompactList}\end{DoxyCompactItemize}
 \doxysubsection*{Functions}
 \begin{DoxyCompactItemize}
 \item 
-int \mbox{\hyperlink{task__nr_8c_a2f9859118d66e0d6a6912f8e6b6092d0}{init\+\_\+task\+\_\+nr}} (char $\ast$output\+\_\+dir)
-\begin{DoxyCompactList}\small\item\em Get the task number from the TASK\+\_\+\+NR\+\_\+\+FILE file. If the file does not exist, create it with the initial value 1. \end{DoxyCompactList}\item 
-int \mbox{\hyperlink{task__nr_8c_a8c036365e5319df7bd3299874a31c1ad}{increment\+\_\+task\+\_\+nr}} (char $\ast$output\+\_\+dir)
-\begin{DoxyCompactList}\small\item\em Increment the task number in the TASK\+\_\+\+NR\+\_\+\+FILE file. \end{DoxyCompactList}\end{DoxyCompactItemize}
+char $\ast$ \mbox{\hyperlink{task__nr_8c_a9029b656f9adcb7485052b3edfaa0e23}{get\+\_\+task\+\_\+nr\+\_\+filename}} (char $\ast$output\+\_\+dir)
+\begin{DoxyCompactList}\small\item\em Get the filename of the task number file in the output directory. \end{DoxyCompactList}\item 
+unsigned int \mbox{\hyperlink{task__nr_8c_acade4944550011e33781d7feb097cd86}{load\+\_\+task\+\_\+nr}} (char $\ast$output\+\_\+dir)
+\begin{DoxyCompactList}\small\item\em Load the task number from the file in the output directory. \end{DoxyCompactList}\item 
+unsigned int \mbox{\hyperlink{task__nr_8c_a2b92d71aa300221c997ed16e94e1b47c}{save\+\_\+task\+\_\+nr}} (unsigned int task\+\_\+nr, char $\ast$output\+\_\+dir)
+\begin{DoxyCompactList}\small\item\em Save the task number to the file in the output directory. \end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\doxysubsection{Macro Definition Documentation}
+\mbox{\Hypertarget{task__nr_8c_a292a25d0dfe0e36b6dbfb52c83e67cb6}\label{task__nr_8c_a292a25d0dfe0e36b6dbfb52c83e67cb6}} 
+\index{task\_nr.c@{task\_nr.c}!TASK\_NR\_FILENAME@{TASK\_NR\_FILENAME}}
+\index{TASK\_NR\_FILENAME@{TASK\_NR\_FILENAME}!task\_nr.c@{task\_nr.c}}
+\doxysubsubsection{\texorpdfstring{TASK\_NR\_FILENAME}{TASK\_NR\_FILENAME}}
+{\footnotesize\ttfamily \#define TASK\+\_\+\+NR\+\_\+\+FILENAME~\char`\"{}task\+\_\+number\char`\"{}}
+
+
+
+The filename of the task number file. 
+
 
 
 \doxysubsection{Function Documentation}
-\mbox{\Hypertarget{task__nr_8c_a8c036365e5319df7bd3299874a31c1ad}\label{task__nr_8c_a8c036365e5319df7bd3299874a31c1ad}} 
-\index{task\_nr.c@{task\_nr.c}!increment\_task\_nr@{increment\_task\_nr}}
-\index{increment\_task\_nr@{increment\_task\_nr}!task\_nr.c@{task\_nr.c}}
-\doxysubsubsection{\texorpdfstring{increment\_task\_nr()}{increment\_task\_nr()}}
-{\footnotesize\ttfamily int increment\+\_\+task\+\_\+nr (\begin{DoxyParamCaption}\item[{char $\ast$}]{output\+\_\+dir }\end{DoxyParamCaption})}
+\mbox{\Hypertarget{task__nr_8c_a9029b656f9adcb7485052b3edfaa0e23}\label{task__nr_8c_a9029b656f9adcb7485052b3edfaa0e23}} 
+\index{task\_nr.c@{task\_nr.c}!get\_task\_nr\_filename@{get\_task\_nr\_filename}}
+\index{get\_task\_nr\_filename@{get\_task\_nr\_filename}!task\_nr.c@{task\_nr.c}}
+\doxysubsubsection{\texorpdfstring{get\_task\_nr\_filename()}{get\_task\_nr\_filename()}}
+{\footnotesize\ttfamily char $\ast$ get\+\_\+task\+\_\+nr\+\_\+filename (\begin{DoxyParamCaption}\item[{char $\ast$}]{output\+\_\+dir }\end{DoxyParamCaption})}
 
 
 
-Increment the task number in the TASK\+\_\+\+NR\+\_\+\+FILE file. 
+Get the filename of the task number file in the output directory. 
 
+The task number filename is defined in the \mbox{\hyperlink{task__nr_8c_a292a25d0dfe0e36b6dbfb52c83e67cb6}{TASK\+\_\+\+NR\+\_\+\+FILENAME}} macro.
 
+Used both by \mbox{\hyperlink{task__nr_8c_acade4944550011e33781d7feb097cd86}{load\+\_\+task\+\_\+nr}} and \mbox{\hyperlink{task__nr_8c_a2b92d71aa300221c997ed16e94e1b47c}{save\+\_\+task\+\_\+nr}} as an auxiliary function.
+
+{\bfseries{The caller is responsible for freeing the returned string by this function.}} 
 \begin{DoxyParams}{Parameters}
-{\em output\+\_\+dir} & The output directory to write the task number file \\
+{\em output\+\_\+dir} & The output directory to append the task number filename \\
 \hline
 \end{DoxyParams}
 \begin{DoxyReturn}{Returns}
-The new incremented task number, or -\/1 if an error occurs 
+The filename of the task number file, or NULL if an error occurs 
 \end{DoxyReturn}
-\mbox{\Hypertarget{task__nr_8c_a2f9859118d66e0d6a6912f8e6b6092d0}\label{task__nr_8c_a2f9859118d66e0d6a6912f8e6b6092d0}} 
-\index{task\_nr.c@{task\_nr.c}!init\_task\_nr@{init\_task\_nr}}
-\index{init\_task\_nr@{init\_task\_nr}!task\_nr.c@{task\_nr.c}}
-\doxysubsubsection{\texorpdfstring{init\_task\_nr()}{init\_task\_nr()}}
-{\footnotesize\ttfamily int init\+\_\+task\+\_\+nr (\begin{DoxyParamCaption}\item[{char $\ast$}]{output\+\_\+dir }\end{DoxyParamCaption})}
+\mbox{\Hypertarget{task__nr_8c_acade4944550011e33781d7feb097cd86}\label{task__nr_8c_acade4944550011e33781d7feb097cd86}} 
+\index{task\_nr.c@{task\_nr.c}!load\_task\_nr@{load\_task\_nr}}
+\index{load\_task\_nr@{load\_task\_nr}!task\_nr.c@{task\_nr.c}}
+\doxysubsubsection{\texorpdfstring{load\_task\_nr()}{load\_task\_nr()}}
+{\footnotesize\ttfamily unsigned int load\+\_\+task\+\_\+nr (\begin{DoxyParamCaption}\item[{char $\ast$}]{output\+\_\+dir }\end{DoxyParamCaption})}
 
 
 
-Get the task number from the TASK\+\_\+\+NR\+\_\+\+FILE file. If the file does not exist, create it with the initial value 1. 
+Load the task number from the file in the output directory. 
 
+If the file does not exist, create it with the initial value 1.
 
+Used by the \mbox{\hyperlink{orchestrator_8c}{orchestrator.\+c}} to load the task number when starting. 
 \begin{DoxyParams}{Parameters}
+{\em output\+\_\+dir} & The output directory to load the task number file \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+The task number, or 0 if an error occurs 
+\end{DoxyReturn}
+\mbox{\Hypertarget{task__nr_8c_a2b92d71aa300221c997ed16e94e1b47c}\label{task__nr_8c_a2b92d71aa300221c997ed16e94e1b47c}} 
+\index{task\_nr.c@{task\_nr.c}!save\_task\_nr@{save\_task\_nr}}
+\index{save\_task\_nr@{save\_task\_nr}!task\_nr.c@{task\_nr.c}}
+\doxysubsubsection{\texorpdfstring{save\_task\_nr()}{save\_task\_nr()}}
+{\footnotesize\ttfamily unsigned int save\+\_\+task\+\_\+nr (\begin{DoxyParamCaption}\item[{unsigned int}]{task\+\_\+nr,  }\item[{char $\ast$}]{output\+\_\+dir }\end{DoxyParamCaption})}
+
+
+
+Save the task number to the file in the output directory. 
+
+Used by the \mbox{\hyperlink{orchestrator_8c}{orchestrator.\+c}} to save the task number before exiting. 
+\begin{DoxyParams}{Parameters}
+{\em task\+\_\+nr} & The task number to save \\
+\hline
 {\em output\+\_\+dir} & The output directory to write the task number file \\
 \hline
 \end{DoxyParams}
 \begin{DoxyReturn}{Returns}
-The task number, or -\/1 if an error occurs 
+The task number, or 0 if an error occurs 
 \end{DoxyReturn}

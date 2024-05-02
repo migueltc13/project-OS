@@ -1,52 +1,70 @@
 \hypertarget{structrequest}{}\doxysection{request Struct Reference}
 \label{structrequest}\index{request@{request}}
+
+
+The request struct.  
+
+
 \doxysubsection*{Public Attributes}
 \begin{DoxyCompactItemize}
 \item 
-int \mbox{\hyperlink{structrequest_ae8c6631a7b607ae96097d87c60b65c8e}{type}}
+int \mbox{\hyperlink{structrequest_af89224dfd76f07868577d055782673f1}{type}}
 \item 
-int \mbox{\hyperlink{structrequest_a996a32952ee0e82a5142005e79e62398}{est\+\_\+time}}
+int \mbox{\hyperlink{structrequest_abe63f2e2a4a34fa5be28cfef793f5343}{est\+\_\+time}}
 \item 
-char \mbox{\hyperlink{structrequest_a9a3579f20bd904d17dd72471654d0045}{command}} \mbox{[}\mbox{\hyperlink{request_8h_a11b2387a44dc0cf3642ddcbe0581276b}{MAX\+\_\+\+CMD\+\_\+\+SIZE}}\mbox{]}
+char \mbox{\hyperlink{structrequest_ad818e4f42262f8b9c17e17d07357e617}{command}} \mbox{[}\mbox{\hyperlink{request_8h_a11b2387a44dc0cf3642ddcbe0581276b}{MAX\+\_\+\+CMD\+\_\+\+SIZE}}\mbox{]}
 \item 
-bool \mbox{\hyperlink{structrequest_a26cba1348dda26d66402995421177441}{is\+\_\+piped}}
+bool \mbox{\hyperlink{structrequest_ac3c9a47cfd6cf25717fb5202466b23e9}{is\+\_\+piped}}
 \item 
-int \mbox{\hyperlink{structrequest_a96ceb98caf3f06e21c9d396cc75c2c03}{task\+\_\+nr}}
+unsigned int \mbox{\hyperlink{structrequest_af0f04cda8a4152adfd9a6c51e273a9e5}{task\+\_\+nr}}
+\item 
+char \mbox{\hyperlink{structrequest_a3e985f54b26b9c100b8348657c112d12}{client\+\_\+fifo}} \mbox{[}\mbox{\hyperlink{client_8h_a87c9594967aba9050cd620893e2ebcd5}{CLIENT\+\_\+\+FIFO\+\_\+\+SIZE}}\mbox{]}
 \end{DoxyCompactItemize}
 
 
+\doxysubsection{Detailed Description}
+The request struct. 
+
+The request struct represents a request sent by the client, or a request sent by the executor to the \mbox{\hyperlink{orchestrator_8c}{orchestrator.\+c}}, marking commands as completed. 
+
 \doxysubsection{Member Data Documentation}
-\mbox{\Hypertarget{structrequest_a9a3579f20bd904d17dd72471654d0045}\label{structrequest_a9a3579f20bd904d17dd72471654d0045}} 
-\index{request@{request}!command@{command}}
-\index{command@{command}!request@{request}}
-\doxysubsubsection{\texorpdfstring{command}{command}}
-{\footnotesize\ttfamily char request\+::command\mbox{[}\mbox{\hyperlink{request_8h_a11b2387a44dc0cf3642ddcbe0581276b}{MAX\+\_\+\+CMD\+\_\+\+SIZE}}\mbox{]}}
-
-\mbox{\Hypertarget{structrequest_a996a32952ee0e82a5142005e79e62398}\label{structrequest_a996a32952ee0e82a5142005e79e62398}} 
-\index{request@{request}!est\_time@{est\_time}}
-\index{est\_time@{est\_time}!request@{request}}
-\doxysubsubsection{\texorpdfstring{est\_time}{est\_time}}
-{\footnotesize\ttfamily int request\+::est\+\_\+time}
-
-\mbox{\Hypertarget{structrequest_a26cba1348dda26d66402995421177441}\label{structrequest_a26cba1348dda26d66402995421177441}} 
-\index{request@{request}!is\_piped@{is\_piped}}
-\index{is\_piped@{is\_piped}!request@{request}}
-\doxysubsubsection{\texorpdfstring{is\_piped}{is\_piped}}
-{\footnotesize\ttfamily bool request\+::is\+\_\+piped}
-
-\mbox{\Hypertarget{structrequest_a96ceb98caf3f06e21c9d396cc75c2c03}\label{structrequest_a96ceb98caf3f06e21c9d396cc75c2c03}} 
-\index{request@{request}!task\_nr@{task\_nr}}
-\index{task\_nr@{task\_nr}!request@{request}}
-\doxysubsubsection{\texorpdfstring{task\_nr}{task\_nr}}
-{\footnotesize\ttfamily int request\+::task\+\_\+nr}
-
-\mbox{\Hypertarget{structrequest_ae8c6631a7b607ae96097d87c60b65c8e}\label{structrequest_ae8c6631a7b607ae96097d87c60b65c8e}} 
+\mbox{\Hypertarget{structrequest_af89224dfd76f07868577d055782673f1}\label{structrequest_af89224dfd76f07868577d055782673f1}} 
 \index{request@{request}!type@{type}}
 \index{type@{type}!request@{request}}
 \doxysubsubsection{\texorpdfstring{type}{type}}
-{\footnotesize\ttfamily int request\+::type}
+{\footnotesize\ttfamily request\+::type}
 
+The type of the request. \mbox{\Hypertarget{structrequest_abe63f2e2a4a34fa5be28cfef793f5343}\label{structrequest_abe63f2e2a4a34fa5be28cfef793f5343}} 
+\index{request@{request}!est\_time@{est\_time}}
+\index{est\_time@{est\_time}!request@{request}}
+\doxysubsubsection{\texorpdfstring{est\_time}{est\_time}}
+{\footnotesize\ttfamily request\+::est\+\_\+time}
 
+The estimated time or the priority of the request, based on the policy being used int the \mbox{\hyperlink{orchestrator_8c}{orchestrator.\+c}} server. \mbox{\Hypertarget{structrequest_ad818e4f42262f8b9c17e17d07357e617}\label{structrequest_ad818e4f42262f8b9c17e17d07357e617}} 
+\index{request@{request}!command@{command}}
+\index{command@{command}!request@{request}}
+\doxysubsubsection{\texorpdfstring{command}{command}}
+{\footnotesize\ttfamily request\+::command}
+
+The command to be executed or marked as completed. \mbox{\Hypertarget{structrequest_ac3c9a47cfd6cf25717fb5202466b23e9}\label{structrequest_ac3c9a47cfd6cf25717fb5202466b23e9}} 
+\index{request@{request}!is\_piped@{is\_piped}}
+\index{is\_piped@{is\_piped}!request@{request}}
+\doxysubsubsection{\texorpdfstring{is\_piped}{is\_piped}}
+{\footnotesize\ttfamily request\+::is\+\_\+piped}
+
+A boolean indicating if the command is piped. \mbox{\Hypertarget{structrequest_af0f04cda8a4152adfd9a6c51e273a9e5}\label{structrequest_af0f04cda8a4152adfd9a6c51e273a9e5}} 
+\index{request@{request}!task\_nr@{task\_nr}}
+\index{task\_nr@{task\_nr}!request@{request}}
+\doxysubsubsection{\texorpdfstring{task\_nr}{task\_nr}}
+{\footnotesize\ttfamily request\+::task\+\_\+nr}
+
+The task number of the request. \mbox{\Hypertarget{structrequest_a3e985f54b26b9c100b8348657c112d12}\label{structrequest_a3e985f54b26b9c100b8348657c112d12}} 
+\index{request@{request}!client\_fifo@{client\_fifo}}
+\index{client\_fifo@{client\_fifo}!request@{request}}
+\doxysubsubsection{\texorpdfstring{client\_fifo}{client\_fifo}}
+{\footnotesize\ttfamily request\+::client\+\_\+fifo}
+
+The client FIFO name to send the response to the client. 
 
 The documentation for this struct was generated from the following file\+:\begin{DoxyCompactItemize}
 \item 

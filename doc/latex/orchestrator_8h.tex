@@ -1,7 +1,6 @@
 \hypertarget{orchestrator_8h}{}\doxysection{include/orchestrator.h File Reference}
 \label{orchestrator_8h}\index{include/orchestrator.h@{include/orchestrator.h}}
-This graph shows which files directly or indirectly include this file\+:
-\nopagebreak
+This graph shows which files directly or indirectly include this file\+:\nopagebreak
 \begin{figure}[H]
 \begin{center}
 \leavevmode
@@ -11,22 +10,78 @@ This graph shows which files directly or indirectly include this file\+:
 \doxysubsection*{Macros}
 \begin{DoxyCompactItemize}
 \item 
-\#define \mbox{\hyperlink{orchestrator_8h_a52e236925828d1955a9ac01efdd8705d}{SERVER\+\_\+\+FIFO}}~\char`\"{}tmp/server\+\_\+fifo\char`\"{}
-\item 
-\#define \mbox{\hyperlink{orchestrator_8h_a8fc96cee4177a369a99de7026ebeba81}{MAX\+\_\+\+REQUESTS}}~1024
-\end{DoxyCompactItemize}
+\#define \mbox{\hyperlink{orchestrator_8h_a52e236925828d1955a9ac01efdd8705d}{SERVER\+\_\+\+FIFO}}~\char`\"{}server\+\_\+fifo\char`\"{}
+\begin{DoxyCompactList}\small\item\em Name of the server fifo. \end{DoxyCompactList}\item 
+\#define \mbox{\hyperlink{orchestrator_8h_a018a73a637d463c5eaf3db6e2462c498}{FCFS}}~0
+\begin{DoxyCompactList}\small\item\em First Come First Serve. \end{DoxyCompactList}\item 
+\#define \mbox{\hyperlink{orchestrator_8h_a8f305279bfbdda53600808829a4de17d}{SJF}}~1
+\begin{DoxyCompactList}\small\item\em Shortest Job First. \end{DoxyCompactList}\item 
+\#define \mbox{\hyperlink{orchestrator_8h_af4565ab18ff1cc5db0e44ef213fdc112}{PES}}~2
+\begin{DoxyCompactList}\small\item\em Priority Escalonation Scheduling. \end{DoxyCompactList}\item 
+\#define \mbox{\hyperlink{orchestrator_8h_ab15dfcbb2b79df95324bc1343a6ee5cc}{EXEC\+\_\+\+TIME\+\_\+\+STRING\+\_\+\+SIZE}}~16
+\begin{DoxyCompactList}\small\item\em Maximum size of the execution time string. \end{DoxyCompactList}\item 
+\#define \mbox{\hyperlink{orchestrator_8h_ab701aba5df7094f4ab50812ac9ec1db8}{EXECUTE\+\_\+\+MSG\+\_\+\+SIZE}}~(24 + \mbox{\hyperlink{task__nr_8h_a262cbbd48971df895c37434c9022a4ce}{TASK\+\_\+\+NR\+\_\+\+STRING\+\_\+\+SIZE}})
+\begin{DoxyCompactList}\small\item\em Maximum size of the execute message transmitted between the orchestrator and the client. \end{DoxyCompactList}\end{DoxyCompactItemize}
 
 
 \doxysubsection{Macro Definition Documentation}
-\mbox{\Hypertarget{orchestrator_8h_a8fc96cee4177a369a99de7026ebeba81}\label{orchestrator_8h_a8fc96cee4177a369a99de7026ebeba81}} 
-\index{orchestrator.h@{orchestrator.h}!MAX\_REQUESTS@{MAX\_REQUESTS}}
-\index{MAX\_REQUESTS@{MAX\_REQUESTS}!orchestrator.h@{orchestrator.h}}
-\doxysubsubsection{\texorpdfstring{MAX\_REQUESTS}{MAX\_REQUESTS}}
-{\footnotesize\ttfamily \#define MAX\+\_\+\+REQUESTS~1024}
-
 \mbox{\Hypertarget{orchestrator_8h_a52e236925828d1955a9ac01efdd8705d}\label{orchestrator_8h_a52e236925828d1955a9ac01efdd8705d}} 
 \index{orchestrator.h@{orchestrator.h}!SERVER\_FIFO@{SERVER\_FIFO}}
 \index{SERVER\_FIFO@{SERVER\_FIFO}!orchestrator.h@{orchestrator.h}}
 \doxysubsubsection{\texorpdfstring{SERVER\_FIFO}{SERVER\_FIFO}}
-{\footnotesize\ttfamily \#define SERVER\+\_\+\+FIFO~\char`\"{}tmp/server\+\_\+fifo\char`\"{}}
+{\footnotesize\ttfamily \#define SERVER\+\_\+\+FIFO~\char`\"{}server\+\_\+fifo\char`\"{}}
+
+
+
+Name of the server fifo. 
+
+\mbox{\Hypertarget{orchestrator_8h_a018a73a637d463c5eaf3db6e2462c498}\label{orchestrator_8h_a018a73a637d463c5eaf3db6e2462c498}} 
+\index{orchestrator.h@{orchestrator.h}!FCFS@{FCFS}}
+\index{FCFS@{FCFS}!orchestrator.h@{orchestrator.h}}
+\doxysubsubsection{\texorpdfstring{FCFS}{FCFS}}
+{\footnotesize\ttfamily \#define FCFS~0}
+
+
+
+First Come First Serve. 
+
+\mbox{\Hypertarget{orchestrator_8h_a8f305279bfbdda53600808829a4de17d}\label{orchestrator_8h_a8f305279bfbdda53600808829a4de17d}} 
+\index{orchestrator.h@{orchestrator.h}!SJF@{SJF}}
+\index{SJF@{SJF}!orchestrator.h@{orchestrator.h}}
+\doxysubsubsection{\texorpdfstring{SJF}{SJF}}
+{\footnotesize\ttfamily \#define SJF~1}
+
+
+
+Shortest Job First. 
+
+\mbox{\Hypertarget{orchestrator_8h_af4565ab18ff1cc5db0e44ef213fdc112}\label{orchestrator_8h_af4565ab18ff1cc5db0e44ef213fdc112}} 
+\index{orchestrator.h@{orchestrator.h}!PES@{PES}}
+\index{PES@{PES}!orchestrator.h@{orchestrator.h}}
+\doxysubsubsection{\texorpdfstring{PES}{PES}}
+{\footnotesize\ttfamily \#define PES~2}
+
+
+
+Priority Escalonation Scheduling. 
+
+\mbox{\Hypertarget{orchestrator_8h_ab15dfcbb2b79df95324bc1343a6ee5cc}\label{orchestrator_8h_ab15dfcbb2b79df95324bc1343a6ee5cc}} 
+\index{orchestrator.h@{orchestrator.h}!EXEC\_TIME\_STRING\_SIZE@{EXEC\_TIME\_STRING\_SIZE}}
+\index{EXEC\_TIME\_STRING\_SIZE@{EXEC\_TIME\_STRING\_SIZE}!orchestrator.h@{orchestrator.h}}
+\doxysubsubsection{\texorpdfstring{EXEC\_TIME\_STRING\_SIZE}{EXEC\_TIME\_STRING\_SIZE}}
+{\footnotesize\ttfamily \#define EXEC\+\_\+\+TIME\+\_\+\+STRING\+\_\+\+SIZE~16}
+
+
+
+Maximum size of the execution time string. 
+
+\mbox{\Hypertarget{orchestrator_8h_ab701aba5df7094f4ab50812ac9ec1db8}\label{orchestrator_8h_ab701aba5df7094f4ab50812ac9ec1db8}} 
+\index{orchestrator.h@{orchestrator.h}!EXECUTE\_MSG\_SIZE@{EXECUTE\_MSG\_SIZE}}
+\index{EXECUTE\_MSG\_SIZE@{EXECUTE\_MSG\_SIZE}!orchestrator.h@{orchestrator.h}}
+\doxysubsubsection{\texorpdfstring{EXECUTE\_MSG\_SIZE}{EXECUTE\_MSG\_SIZE}}
+{\footnotesize\ttfamily \#define EXECUTE\+\_\+\+MSG\+\_\+\+SIZE~(24 + \mbox{\hyperlink{task__nr_8h_a262cbbd48971df895c37434c9022a4ce}{TASK\+\_\+\+NR\+\_\+\+STRING\+\_\+\+SIZE}})}
+
+
+
+Maximum size of the execute message transmitted between the orchestrator and the client. 
 

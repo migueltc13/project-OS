@@ -1,0 +1,14 @@
+\hypertarget{Request-example}{}\doxysection{Request}
+Creates a new request. Allocates memory for a new request and initializes it with the given parameters.
+
+It initializes the task number with 0, which is not a valid task number.
+
+For the creation of a status request, the estimated time should be 0, as it is not used, as well as the command should be NULL and is\+\_\+piped parameters should be false.
+
+$\ast$request = create\+\_\+request(EXECUTE, 10, \char`\"{}ls -\/l\char`\"{}, false, \char`\"{}client-\/1234\char`\"{});
+
+
+\begin{DoxyCodeInclude}{0}
+
+\end{DoxyCodeInclude}
+ 

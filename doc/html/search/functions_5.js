@@ -1,4 +1,4 @@
 var searchData=
 [
-  ['main_74',['main',['../client_8c.html#a3c04138a5bfe5d72780bb7e82a18e627',1,'main(int argc, char **argv):&#160;client.c'],['../orchestrator_8c.html#a3c04138a5bfe5d72780bb7e82a18e627',1,'main(int argc, char **argv):&#160;orchestrator.c']]]
+  ['kill_5fusage_109',['kill_usage',['../client_8c.html#a9f841f5d88f509480ce20bc1ec1fc21f',1,'client.c']]]
 ];

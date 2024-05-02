@@ -1,4 +1,4 @@
 var searchData=
 [
-  ['type_5fto_5fstring_83',['type_to_string',['../request_8h.html#ac75498371597f92321b38bd186375df6',1,'type_to_string(int type):&#160;request.c'],['../request_8c.html#ac75498371597f92321b38bd186375df6',1,'type_to_string(int type):&#160;request.c']]]
+  ['remove_5frequest_115',['remove_request',['../orchestrator_8c.html#a66ab3dff8457488ea9e155c0f33197d1',1,'orchestrator.c']]]
 ];

@@ -3,11 +3,21 @@
 
 #include <stdbool.h>
 
+// Request types
+
+/** @brief Execute request code **/
 #define EXECUTE 0
+
+/** @brief Status request code **/
 #define STATUS 1
+
+/** @brief Completed request code **/
 #define COMPLETED 2
+
+/** @brief Kill request code **/
 #define KILL 3
 
+/** @brief Maximum size of the command string **/
 #define MAX_CMD_SIZE 300
 
 typedef struct request Request;

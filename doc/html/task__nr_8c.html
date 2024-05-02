@@ -68,6 +68,7 @@ $(function() {
 </div><!-- top -->
 <div class="header">
   <div class="summary">
+<a href="#define-members">Macros</a> &#124;
 <a href="#func-members">Functions</a>  </div>
   <div class="headertitle">
 <div class="title">task_nr.c File Reference</div>  </div>
@@ -94,24 +95,50 @@ Include dependency graph for task_nr.c:</div>
 </map>
 </div>
 </div><table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="define-members"></a>
+Macros</h2></td></tr>
+<tr class="memitem:a292a25d0dfe0e36b6dbfb52c83e67cb6"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="task__nr_8c.html#a292a25d0dfe0e36b6dbfb52c83e67cb6">TASK_NR_FILENAME</a>&#160;&#160;&#160;&quot;task_number&quot;</td></tr>
+<tr class="memdesc:a292a25d0dfe0e36b6dbfb52c83e67cb6"><td class="mdescLeft">&#160;</td><td class="mdescRight">The filename of the task number file.  <a href="task__nr_8c.html#a292a25d0dfe0e36b6dbfb52c83e67cb6">More...</a><br /></td></tr>
+<tr class="separator:a292a25d0dfe0e36b6dbfb52c83e67cb6"><td class="memSeparator" colspan="2">&#160;</td></tr>
+</table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="func-members"></a>
 Functions</h2></td></tr>
-<tr class="memitem:a2f9859118d66e0d6a6912f8e6b6092d0"><td class="memItemLeft" align="right" valign="top">int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="task__nr_8c.html#a2f9859118d66e0d6a6912f8e6b6092d0">init_task_nr</a> (char *output_dir)</td></tr>
-<tr class="memdesc:a2f9859118d66e0d6a6912f8e6b6092d0"><td class="mdescLeft">&#160;</td><td class="mdescRight">Get the task number from the TASK_NR_FILE file. If the file does not exist, create it with the initial value 1.  <a href="task__nr_8c.html#a2f9859118d66e0d6a6912f8e6b6092d0">More...</a><br /></td></tr>
-<tr class="separator:a2f9859118d66e0d6a6912f8e6b6092d0"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a8c036365e5319df7bd3299874a31c1ad"><td class="memItemLeft" align="right" valign="top">int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="task__nr_8c.html#a8c036365e5319df7bd3299874a31c1ad">increment_task_nr</a> (char *output_dir)</td></tr>
-<tr class="memdesc:a8c036365e5319df7bd3299874a31c1ad"><td class="mdescLeft">&#160;</td><td class="mdescRight">Increment the task number in the TASK_NR_FILE file.  <a href="task__nr_8c.html#a8c036365e5319df7bd3299874a31c1ad">More...</a><br /></td></tr>
-<tr class="separator:a8c036365e5319df7bd3299874a31c1ad"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a9029b656f9adcb7485052b3edfaa0e23"><td class="memItemLeft" align="right" valign="top">char *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="task__nr_8c.html#a9029b656f9adcb7485052b3edfaa0e23">get_task_nr_filename</a> (char *output_dir)</td></tr>
+<tr class="memdesc:a9029b656f9adcb7485052b3edfaa0e23"><td class="mdescLeft">&#160;</td><td class="mdescRight">Get the filename of the task number file in the output directory.  <a href="task__nr_8c.html#a9029b656f9adcb7485052b3edfaa0e23">More...</a><br /></td></tr>
+<tr class="separator:a9029b656f9adcb7485052b3edfaa0e23"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:acade4944550011e33781d7feb097cd86"><td class="memItemLeft" align="right" valign="top">unsigned int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="task__nr_8c.html#acade4944550011e33781d7feb097cd86">load_task_nr</a> (char *output_dir)</td></tr>
+<tr class="memdesc:acade4944550011e33781d7feb097cd86"><td class="mdescLeft">&#160;</td><td class="mdescRight">Load the task number from the file in the output directory.  <a href="task__nr_8c.html#acade4944550011e33781d7feb097cd86">More...</a><br /></td></tr>
+<tr class="separator:acade4944550011e33781d7feb097cd86"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a2b92d71aa300221c997ed16e94e1b47c"><td class="memItemLeft" align="right" valign="top">unsigned int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="task__nr_8c.html#a2b92d71aa300221c997ed16e94e1b47c">save_task_nr</a> (unsigned int task_nr, char *output_dir)</td></tr>
+<tr class="memdesc:a2b92d71aa300221c997ed16e94e1b47c"><td class="mdescLeft">&#160;</td><td class="mdescRight">Save the task number to the file in the output directory.  <a href="task__nr_8c.html#a2b92d71aa300221c997ed16e94e1b47c">More...</a><br /></td></tr>
+<tr class="separator:a2b92d71aa300221c997ed16e94e1b47c"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
+<h2 class="groupheader">Macro Definition Documentation</h2>
+<a id="a292a25d0dfe0e36b6dbfb52c83e67cb6"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a292a25d0dfe0e36b6dbfb52c83e67cb6">&#9670;&nbsp;</a></span>TASK_NR_FILENAME</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">#define TASK_NR_FILENAME&#160;&#160;&#160;&quot;task_number&quot;</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>The filename of the task number file. </p>
+
+</div>
+</div>
 <h2 class="groupheader">Function Documentation</h2>
-<a id="a8c036365e5319df7bd3299874a31c1ad"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a8c036365e5319df7bd3299874a31c1ad">&#9670;&nbsp;</a></span>increment_task_nr()</h2>
+<a id="a9029b656f9adcb7485052b3edfaa0e23"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a9029b656f9adcb7485052b3edfaa0e23">&#9670;&nbsp;</a></span>get_task_nr_filename()</h2>
 
 <div class="memitem">
 <div class="memproto">
       <table class="memname">
         <tr>
-          <td class="memname">int increment_task_nr </td>
+          <td class="memname">char * get_task_nr_filename </td>
           <td>(</td>
           <td class="paramtype">char *&#160;</td>
           <td class="paramname"><em>output_dir</em></td><td>)</td>
@@ -120,25 +147,27 @@ Functions</h2></td></tr>
       </table>
 </div><div class="memdoc">
 
-<p>Increment the task number in the TASK_NR_FILE file. </p>
-<dl class="params"><dt>Parameters</dt><dd>
+<p>Get the filename of the task number file in the output directory. </p>
+<p>The task number filename is defined in the <a class="el" href="task__nr_8c.html#a292a25d0dfe0e36b6dbfb52c83e67cb6">TASK_NR_FILENAME</a> macro.</p>
+<p>Used both by <a class="el" href="task__nr_8c.html#acade4944550011e33781d7feb097cd86">load_task_nr</a> and <a class="el" href="task__nr_8c.html#a2b92d71aa300221c997ed16e94e1b47c">save_task_nr</a> as an auxiliary function.</p>
+<p><b>The caller is responsible for freeing the returned string by this function.</b> </p><dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
-    <tr><td class="paramname">output_dir</td><td>The output directory to write the task number file </td></tr>
+    <tr><td class="paramname">output_dir</td><td>The output directory to append the task number filename </td></tr>
   </table>
   </dd>
 </dl>
-<dl class="section return"><dt>Returns</dt><dd>The new incremented task number, or -1 if an error occurs </dd></dl>
+<dl class="section return"><dt>Returns</dt><dd>The filename of the task number file, or NULL if an error occurs </dd></dl>
 
 </div>
 </div>
-<a id="a2f9859118d66e0d6a6912f8e6b6092d0"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a2f9859118d66e0d6a6912f8e6b6092d0">&#9670;&nbsp;</a></span>init_task_nr()</h2>
+<a id="acade4944550011e33781d7feb097cd86"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#acade4944550011e33781d7feb097cd86">&#9670;&nbsp;</a></span>load_task_nr()</h2>
 
 <div class="memitem">
 <div class="memproto">
       <table class="memname">
         <tr>
-          <td class="memname">int init_task_nr </td>
+          <td class="memname">unsigned int load_task_nr </td>
           <td>(</td>
           <td class="paramtype">char *&#160;</td>
           <td class="paramname"><em>output_dir</em></td><td>)</td>
@@ -147,14 +176,53 @@ Functions</h2></td></tr>
       </table>
 </div><div class="memdoc">
 
-<p>Get the task number from the TASK_NR_FILE file. If the file does not exist, create it with the initial value 1. </p>
-<dl class="params"><dt>Parameters</dt><dd>
+<p>Load the task number from the file in the output directory. </p>
+<p>If the file does not exist, create it with the initial value 1.</p>
+<p>Used by the <a class="el" href="orchestrator_8c.html">orchestrator.c</a> to load the task number when starting. </p><dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
+    <tr><td class="paramname">output_dir</td><td>The output directory to load the task number file </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Returns</dt><dd>The task number, or 0 if an error occurs </dd></dl>
+
+</div>
+</div>
+<a id="a2b92d71aa300221c997ed16e94e1b47c"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a2b92d71aa300221c997ed16e94e1b47c">&#9670;&nbsp;</a></span>save_task_nr()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">unsigned int save_task_nr </td>
+          <td>(</td>
+          <td class="paramtype">unsigned int&#160;</td>
+          <td class="paramname"><em>task_nr</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">char *&#160;</td>
+          <td class="paramname"><em>output_dir</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Save the task number to the file in the output directory. </p>
+<p>Used by the <a class="el" href="orchestrator_8c.html">orchestrator.c</a> to save the task number before exiting. </p><dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">task_nr</td><td>The task number to save </td></tr>
     <tr><td class="paramname">output_dir</td><td>The output directory to write the task number file </td></tr>
   </table>
   </dd>
 </dl>
-<dl class="section return"><dt>Returns</dt><dd>The task number, or -1 if an error occurs </dd></dl>
+<dl class="section return"><dt>Returns</dt><dd>The task number, or 0 if an error occurs </dd></dl>
 
 </div>
 </div>
@@ -163,7 +231,7 @@ Functions</h2></td></tr>
         <hr class="footer">
         <address class="footer">
             <small>
-                Generated on Sun Apr 28 2024 17:59:25 for <b>Orchestrator</b> by
+                Generated on Thu May 2 2024 18:34:12 for <b>Orchestrator</b> by
                 <a href="http://www.doxygen.org/index.html">
                     <img class="footer" src="doxygen.png" alt="doxygen" onerror="this.onerror=null;this.src='doxygen.svg';"/>
                 </a> 1.9.1. All rights reserved.

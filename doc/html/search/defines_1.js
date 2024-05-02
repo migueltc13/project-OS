@@ -1,4 +1,5 @@
 var searchData=
 [
-  ['execute_92',['EXECUTE',['../request_8h.html#a05e20d8bc0525f94757303dd5a905a69',1,'request.h']]]
+  ['client_5ffifo_5fsize_133',['CLIENT_FIFO_SIZE',['../client_8h.html#a87c9594967aba9050cd620893e2ebcd5',1,'client.h']]],
+  ['completed_134',['COMPLETED',['../request_8h.html#a22c88fdadb7d8f8417a92cdcc6232786',1,'request.h']]]
 ];

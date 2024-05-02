@@ -1,4 +1,4 @@
 var searchData=
 [
-  ['parse_5fcmd_76',['parse_cmd',['../command_8c.html#a28efbcce7b8419b2e14f06f068134bbf',1,'command.c']]]
+  ['main_111',['main',['../client_8c.html#a3c04138a5bfe5d72780bb7e82a18e627',1,'main(int argc, char **argv):&#160;client.c'],['../orchestrator_8c.html#a3c04138a5bfe5d72780bb7e82a18e627',1,'main(int argc, char **argv):&#160;orchestrator.c']]]
 ];

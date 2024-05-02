@@ -1,5 +1,5 @@
 var searchData=
 [
-  ['task_5fnr_87',['task_nr',['../structrequest.html#a96ceb98caf3f06e21c9d396cc75c2c03',1,'request']]],
-  ['type_88',['type',['../structrequest.html#ae8c6631a7b607ae96097d87c60b65c8e',1,'request']]]
+  ['task_5fnr_129',['task_nr',['../structrequest.html#af0f04cda8a4152adfd9a6c51e273a9e5',1,'request']]],
+  ['type_130',['type',['../structrequest.html#af89224dfd76f07868577d055782673f1',1,'request']]]
 ];

@@ -74,20 +74,20 @@ $(function() {
 <a href="task__nr_8h.html">Go to the documentation of this file.</a><div class="fragment"><div class="line"><a name="l00001"></a><span class="lineno">    1</span>&#160;<span class="preprocessor">#ifndef _TASK_NR_H_</span></div>
 <div class="line"><a name="l00002"></a><span class="lineno">    2</span>&#160;<span class="preprocessor">#define _TASK_NR_H_</span></div>
 <div class="line"><a name="l00003"></a><span class="lineno">    3</span>&#160; </div>
-<div class="line"><a name="l00004"></a><span class="lineno"><a class="line" href="task__nr_8h.html#aa3a0952244aff348acbe5898148ee069">    4</a></span>&#160;<span class="preprocessor">#define TASK_NR_FILE &quot;task_nr.txt&quot;</span></div>
-<div class="line"><a name="l00005"></a><span class="lineno">    5</span>&#160; </div>
-<div class="line"><a name="l00006"></a><span class="lineno">    6</span>&#160;<span class="keywordtype">int</span> <a class="code" href="task__nr_8h.html#a2f9859118d66e0d6a6912f8e6b6092d0">init_task_nr</a>(<span class="keywordtype">char</span> *output_dir);</div>
-<div class="line"><a name="l00007"></a><span class="lineno">    7</span>&#160;<span class="keywordtype">int</span> <a class="code" href="task__nr_8h.html#a8c036365e5319df7bd3299874a31c1ad">increment_task_nr</a>(<span class="keywordtype">char</span> *output_dir);</div>
-<div class="line"><a name="l00008"></a><span class="lineno">    8</span>&#160; </div>
-<div class="line"><a name="l00009"></a><span class="lineno">    9</span>&#160;<span class="preprocessor">#endif</span></div>
-<div class="ttc" id="atask__nr_8h_html_a2f9859118d66e0d6a6912f8e6b6092d0"><div class="ttname"><a href="task__nr_8h.html#a2f9859118d66e0d6a6912f8e6b6092d0">init_task_nr</a></div><div class="ttdeci">int init_task_nr(char *output_dir)</div><div class="ttdoc">Get the task number from the TASK_NR_FILE file. If the file does not exist, create it with the initia...</div><div class="ttdef"><b>Definition:</b> task_nr.c:16</div></div>
-<div class="ttc" id="atask__nr_8h_html_a8c036365e5319df7bd3299874a31c1ad"><div class="ttname"><a href="task__nr_8h.html#a8c036365e5319df7bd3299874a31c1ad">increment_task_nr</a></div><div class="ttdeci">int increment_task_nr(char *output_dir)</div><div class="ttdoc">Increment the task number in the TASK_NR_FILE file.</div><div class="ttdef"><b>Definition:</b> task_nr.c:71</div></div>
+<div class="line"><a name="l00005"></a><span class="lineno"><a class="line" href="task__nr_8h.html#a262cbbd48971df895c37434c9022a4ce">    5</a></span>&#160;<span class="preprocessor">#define TASK_NR_STRING_SIZE 8</span></div>
+<div class="line"><a name="l00006"></a><span class="lineno">    6</span>&#160; </div>
+<div class="line"><a name="l00007"></a><span class="lineno">    7</span>&#160;<span class="keywordtype">unsigned</span> <span class="keywordtype">int</span> <a class="code" href="task__nr_8h.html#acade4944550011e33781d7feb097cd86">load_task_nr</a>(<span class="keywordtype">char</span> *output_dir);</div>
+<div class="line"><a name="l00008"></a><span class="lineno">    8</span>&#160;<span class="keywordtype">unsigned</span> <span class="keywordtype">int</span> <a class="code" href="task__nr_8h.html#a2b92d71aa300221c997ed16e94e1b47c">save_task_nr</a>(<span class="keywordtype">unsigned</span> <span class="keywordtype">int</span> task_nr, <span class="keywordtype">char</span> *output_dir);</div>
+<div class="line"><a name="l00009"></a><span class="lineno">    9</span>&#160; </div>
+<div class="line"><a name="l00010"></a><span class="lineno">   10</span>&#160;<span class="preprocessor">#endif</span></div>
+<div class="ttc" id="atask__nr_8h_html_a2b92d71aa300221c997ed16e94e1b47c"><div class="ttname"><a href="task__nr_8h.html#a2b92d71aa300221c997ed16e94e1b47c">save_task_nr</a></div><div class="ttdeci">unsigned int save_task_nr(unsigned int task_nr, char *output_dir)</div><div class="ttdoc">Save the task number to the file in the output directory.</div><div class="ttdef"><b>Definition:</b> task_nr.c:85</div></div>
+<div class="ttc" id="atask__nr_8h_html_acade4944550011e33781d7feb097cd86"><div class="ttname"><a href="task__nr_8h.html#acade4944550011e33781d7feb097cd86">load_task_nr</a></div><div class="ttdeci">unsigned int load_task_nr(char *output_dir)</div><div class="ttdoc">Load the task number from the file in the output directory.</div><div class="ttdef"><b>Definition:</b> task_nr.c:25</div></div>
 </div><!-- fragment --></div><!-- contents -->
 <!-- start footer part -->
         <hr class="footer">
         <address class="footer">
             <small>
-                Generated on Sun Apr 28 2024 17:59:25 for <b>Orchestrator</b> by
+                Generated on Thu May 2 2024 18:34:12 for <b>Orchestrator</b> by
                 <a href="http://www.doxygen.org/index.html">
                     <img class="footer" src="doxygen.png" alt="doxygen" onerror="this.onerror=null;this.src='doxygen.svg';"/>
                 </a> 1.9.1. All rights reserved.

@@ -7,15 +7,19 @@
 #include <unistd.h>
 #include <fcntl.h>
 
+/** @brief The filename of the task number file. */
 #define TASK_NR_FILENAME "task_number"
 
 char* get_task_nr_filename(char *output_dir);
 
 /**
  * @brief Load the task number from the file in the output directory.
- * If the file does not exist, create it with the initial value 1.
- * Used by the orchestrator to load the task number when starting.
- * @param output_dir The output directory to write the task number file
+ *
+ * @details If the file does not exist, create it with the initial value 1.
+ *
+ * Used by the @ref orchestrator.c to load the task number
+ * when starting.
+ * @param output_dir The output directory to load the task number file
  * @return The task number, or 0 if an error occurs
  */
 unsigned int load_task_nr(char *output_dir) {
@@ -71,7 +75,9 @@ unsigned int load_task_nr(char *output_dir) {
 
 /**
  * @brief Save the task number to the file in the output directory.
- * Used by the orchestrator to save the task number before exiting.
+ *
+ * @details Used by the @ref orchestrator.c to save the task number
+ * before exiting.
  * @param task_nr The task number to save
  * @param output_dir The output directory to write the task number file
  * @return The task number, or 0 if an error occurs
@@ -106,10 +112,15 @@ unsigned int save_task_nr(unsigned int task_nr, char *output_dir) {
 
 /**
  * @brief Get the filename of the task number file in the output directory.
- * The task number filename is defined in the TASK_NR_FILENAME macro.
- * Used both by load_task_nr and save_task_nr as an auxiliary function.
- * Note: the caller is responsible for freeing the returned string.
- * @param output_dir The output directory to write the task number file
+ *
+ * @details The task number filename is defined in the @ref TASK_NR_FILENAME
+ * "TASK_NR_FILENAME" macro.
+ *
+ * Used both by @ref load_task_nr "load_task_nr" and
+ * @ref save_task_nr "save_task_nr" as an auxiliary function.
+ *
+ * **The caller is responsible for freeing the returned string by this function.**
+ * @param output_dir The output directory to append the task number filename
  * @return The filename of the task number file, or NULL if an error occurs
  */
 char* get_task_nr_filename(char *output_dir) {

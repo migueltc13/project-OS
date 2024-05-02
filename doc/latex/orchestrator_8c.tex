@@ -2,44 +2,373 @@
 \label{orchestrator_8c}\index{src/orchestrator.c@{src/orchestrator.c}}
 {\ttfamily \#include \char`\"{}../include/orchestrator.\+h\char`\"{}}\newline
 {\ttfamily \#include \char`\"{}../include/task\+\_\+nr.\+h\char`\"{}}\newline
-{\ttfamily \#include \char`\"{}../include/request.\+h\char`\"{}}\newline
 {\ttfamily \#include \char`\"{}../include/command.\+h\char`\"{}}\newline
 {\ttfamily \#include $<$stdio.\+h$>$}\newline
 {\ttfamily \#include $<$stdlib.\+h$>$}\newline
+{\ttfamily \#include $<$string.\+h$>$}\newline
 {\ttfamily \#include $<$unistd.\+h$>$}\newline
 {\ttfamily \#include $<$fcntl.\+h$>$}\newline
 {\ttfamily \#include $<$sys/stat.\+h$>$}\newline
-{\ttfamily \#include $<$sys/time.\+h$>$}\newline
-Include dependency graph for orchestrator.\+c\+:
-\nopagebreak
+Include dependency graph for orchestrator.\+c\+:\nopagebreak
 \begin{figure}[H]
 \begin{center}
 \leavevmode
 \includegraphics[width=350pt]{orchestrator_8c__incl}
 \end{center}
 \end{figure}
+\doxysubsection*{Macros}
+\begin{DoxyCompactItemize}
+\item 
+\#define \mbox{\hyperlink{orchestrator_8c_a67972eda1492b6dac2f752c3a5731e7d}{DEFAULT\+\_\+\+POLICY}}~\mbox{\hyperlink{orchestrator_8h_a8f305279bfbdda53600808829a4de17d}{SJF}}
+\begin{DoxyCompactList}\small\item\em Default scheduling policy. \end{DoxyCompactList}\item 
+\#define \mbox{\hyperlink{orchestrator_8c_ab3cce5fdf02c2817672b8e9f241fbdaa}{MAX\+\_\+\+SCHEDULED\+\_\+\+REQUESTS}}~1024
+\begin{DoxyCompactList}\small\item\em Max number of scheduled requests. \end{DoxyCompactList}\end{DoxyCompactItemize}
 \doxysubsection*{Functions}
 \begin{DoxyCompactItemize}
 \item 
-int \mbox{\hyperlink{orchestrator_8c_adf276128d48ce4b94c314092bc512d55}{add\+\_\+request}} (\mbox{\hyperlink{request_8h_a1abc891df97d2318f8fb4832a28ae63c}{Request}} $\ast$requests\mbox{[}$\,$\mbox{]}, int $\ast$N, \mbox{\hyperlink{request_8h_a1abc891df97d2318f8fb4832a28ae63c}{Request}} $\ast$r)
-\item 
-int \mbox{\hyperlink{orchestrator_8c_a66ab3dff8457488ea9e155c0f33197d1}{remove\+\_\+request}} (\mbox{\hyperlink{request_8h_a1abc891df97d2318f8fb4832a28ae63c}{Request}} $\ast$requests\mbox{[}$\,$\mbox{]}, int $\ast$N, \mbox{\hyperlink{request_8h_a1abc891df97d2318f8fb4832a28ae63c}{Request}} $\ast$r)
-\item 
-\mbox{\hyperlink{request_8h_a1abc891df97d2318f8fb4832a28ae63c}{Request}} $\ast$ \mbox{\hyperlink{orchestrator_8c_ae4cde9f2b12cfc7e862a1ba47e2e27bd}{select\+\_\+request}} (\mbox{\hyperlink{request_8h_a1abc891df97d2318f8fb4832a28ae63c}{Request}} $\ast$requests\mbox{[}$\,$\mbox{]}, int $\ast$N, int policy)
-\item 
 void \mbox{\hyperlink{orchestrator_8c_a8f9d7d40e26b268401b39971b76ce127}{orchestrator\+\_\+usage}} (char $\ast$name)
-\begin{DoxyCompactList}\small\item\em Print the usage of the orchestrator program. \end{DoxyCompactList}\item 
+\begin{DoxyCompactList}\small\item\em Print the usage of the orchestrator server executable. \end{DoxyCompactList}\item 
+int \mbox{\hyperlink{orchestrator_8c_a3627a291d53f61274605390ff944df32}{add\+\_\+request}} (\mbox{\hyperlink{request_8h_a1abc891df97d2318f8fb4832a28ae63c}{Request}} $\ast$requests\mbox{[}$\,$\mbox{]}, int $\ast$N, int max, \mbox{\hyperlink{request_8h_a1abc891df97d2318f8fb4832a28ae63c}{Request}} $\ast$r)
+\begin{DoxyCompactList}\small\item\em Add a request to the requests array. \end{DoxyCompactList}\item 
+int \mbox{\hyperlink{orchestrator_8c_a66ab3dff8457488ea9e155c0f33197d1}{remove\+\_\+request}} (\mbox{\hyperlink{request_8h_a1abc891df97d2318f8fb4832a28ae63c}{Request}} $\ast$requests\mbox{[}$\,$\mbox{]}, int $\ast$N, \mbox{\hyperlink{request_8h_a1abc891df97d2318f8fb4832a28ae63c}{Request}} $\ast$r)
+\begin{DoxyCompactList}\small\item\em Remove a request from the requests array. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{request_8h_a1abc891df97d2318f8fb4832a28ae63c}{Request}} $\ast$ \mbox{\hyperlink{orchestrator_8c_a516606ae6b0f07be66d2e72f75f4e89b}{select\+\_\+request}} (\mbox{\hyperlink{request_8h_a1abc891df97d2318f8fb4832a28ae63c}{Request}} $\ast$scheduled\mbox{[}$\,$\mbox{]}, int N, int policy)
+\begin{DoxyCompactList}\small\item\em Select a request from the requests array based on the scheduling policy. \end{DoxyCompactList}\item 
+int \mbox{\hyperlink{orchestrator_8c_ac4d92856ad4e907c14868ed1f7ff44bf}{handle\+\_\+execute}} (\mbox{\hyperlink{request_8h_a1abc891df97d2318f8fb4832a28ae63c}{Request}} $\ast$r, \mbox{\hyperlink{request_8h_a1abc891df97d2318f8fb4832a28ae63c}{Request}} $\ast$executing\mbox{[}$\,$\mbox{]}, int $\ast$N\+\_\+executing, \mbox{\hyperlink{request_8h_a1abc891df97d2318f8fb4832a28ae63c}{Request}} $\ast$scheduled\mbox{[}$\,$\mbox{]}, int $\ast$N\+\_\+scheduled, char $\ast$output\+\_\+dir, unsigned int tasks, unsigned int $\ast$task\+\_\+nr, struct timeval start\+\_\+time)
+\begin{DoxyCompactList}\small\item\em Handle the execute request sent by a client. \end{DoxyCompactList}\item 
+int \mbox{\hyperlink{orchestrator_8c_a12cf4e6bb84230934157efc1c7b37326}{handle\+\_\+status}} (\mbox{\hyperlink{request_8h_a1abc891df97d2318f8fb4832a28ae63c}{Request}} $\ast$r, \mbox{\hyperlink{request_8h_a1abc891df97d2318f8fb4832a28ae63c}{Request}} $\ast$executing\mbox{[}$\,$\mbox{]}, int N\+\_\+executing, \mbox{\hyperlink{request_8h_a1abc891df97d2318f8fb4832a28ae63c}{Request}} $\ast$scheduled\mbox{[}$\,$\mbox{]}, int N\+\_\+scheduled, char $\ast$output\+\_\+dir)
+\begin{DoxyCompactList}\small\item\em Handle the status request sent by a client. \end{DoxyCompactList}\item 
+int \mbox{\hyperlink{orchestrator_8c_ac762ba1a08298dc06ace6084b58963ea}{handle\+\_\+completed}} (\mbox{\hyperlink{request_8h_a1abc891df97d2318f8fb4832a28ae63c}{Request}} $\ast$r, \mbox{\hyperlink{request_8h_a1abc891df97d2318f8fb4832a28ae63c}{Request}} $\ast$executing\mbox{[}$\,$\mbox{]}, int $\ast$N\+\_\+executing, \mbox{\hyperlink{request_8h_a1abc891df97d2318f8fb4832a28ae63c}{Request}} $\ast$scheduled\mbox{[}$\,$\mbox{]}, int $\ast$N\+\_\+scheduled, char $\ast$output\+\_\+dir, int policy, struct timeval start\+\_\+time)
+\begin{DoxyCompactList}\small\item\em Handle the completed request sent by the parent process of the child process that executed the command. \end{DoxyCompactList}\item 
+int \mbox{\hyperlink{orchestrator_8c_a92b568074f1b5c1d6d982814e56af12f}{send\+\_\+status}} (char $\ast$client\+\_\+fifo, \mbox{\hyperlink{request_8h_a1abc891df97d2318f8fb4832a28ae63c}{Request}} $\ast$executing\mbox{[}$\,$\mbox{]}, int N\+\_\+executing, \mbox{\hyperlink{request_8h_a1abc891df97d2318f8fb4832a28ae63c}{Request}} $\ast$scheduled\mbox{[}$\,$\mbox{]}, int N\+\_\+scheduled, char $\ast$output\+\_\+dir)
+\begin{DoxyCompactList}\small\item\em Send the status of the executing, scheduled and completed requests to the client via the client FIFO that sent the status request. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{orchestrator_8c_aae029597704c5273943390688cb2d0ec}{clean\+\_\+up}} (\mbox{\hyperlink{request_8h_a1abc891df97d2318f8fb4832a28ae63c}{Request}} $\ast$executing\mbox{[}$\,$\mbox{]}, int N\+\_\+executing, \mbox{\hyperlink{request_8h_a1abc891df97d2318f8fb4832a28ae63c}{Request}} $\ast$scheduled\mbox{[}$\,$\mbox{]}, int N\+\_\+scheduled)
+\begin{DoxyCompactList}\small\item\em Free the memory allocated for the executing and scheduled requests. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{orchestrator_8c_a0ffc5219a04dffcd16480b6c51111b67}{clean\+\_\+up\+\_\+all}} (int fd, \mbox{\hyperlink{request_8h_a1abc891df97d2318f8fb4832a28ae63c}{Request}} $\ast$r, \mbox{\hyperlink{request_8h_a1abc891df97d2318f8fb4832a28ae63c}{Request}} $\ast$executing\mbox{[}$\,$\mbox{]}, int N\+\_\+executing, \mbox{\hyperlink{request_8h_a1abc891df97d2318f8fb4832a28ae63c}{Request}} $\ast$scheduled\mbox{[}$\,$\mbox{]}, int N\+\_\+scheduled)
+\begin{DoxyCompactList}\small\item\em Free the memory allocated for the executing and scheduled requests, close the server FIFO file descriptor, and free the memory allocated for the request. \end{DoxyCompactList}\item 
 int \mbox{\hyperlink{orchestrator_8c_a3c04138a5bfe5d72780bb7e82a18e627}{main}} (int argc, char $\ast$$\ast$argv)
-\begin{DoxyCompactList}\small\item\em Main function for the orchestrator program The orchestrator program is responsible for managing the execution of the parallel tasks. It receives the output directory, the number of parallel tasks, and the scheduling policy as arguments. This function is responsible for validating the arguments, parsing them and calling the appropriate functions to manage the parallel tasks. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\begin{DoxyCompactList}\small\item\em Main function for the orchestrator server program. \end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\doxysubsection{Macro Definition Documentation}
+\mbox{\Hypertarget{orchestrator_8c_a67972eda1492b6dac2f752c3a5731e7d}\label{orchestrator_8c_a67972eda1492b6dac2f752c3a5731e7d}} 
+\index{orchestrator.c@{orchestrator.c}!DEFAULT\_POLICY@{DEFAULT\_POLICY}}
+\index{DEFAULT\_POLICY@{DEFAULT\_POLICY}!orchestrator.c@{orchestrator.c}}
+\doxysubsubsection{\texorpdfstring{DEFAULT\_POLICY}{DEFAULT\_POLICY}}
+{\footnotesize\ttfamily \#define DEFAULT\+\_\+\+POLICY~\mbox{\hyperlink{orchestrator_8h_a8f305279bfbdda53600808829a4de17d}{SJF}}}
+
+
+
+Default scheduling policy. 
+
+\mbox{\Hypertarget{orchestrator_8c_ab3cce5fdf02c2817672b8e9f241fbdaa}\label{orchestrator_8c_ab3cce5fdf02c2817672b8e9f241fbdaa}} 
+\index{orchestrator.c@{orchestrator.c}!MAX\_SCHEDULED\_REQUESTS@{MAX\_SCHEDULED\_REQUESTS}}
+\index{MAX\_SCHEDULED\_REQUESTS@{MAX\_SCHEDULED\_REQUESTS}!orchestrator.c@{orchestrator.c}}
+\doxysubsubsection{\texorpdfstring{MAX\_SCHEDULED\_REQUESTS}{MAX\_SCHEDULED\_REQUESTS}}
+{\footnotesize\ttfamily \#define MAX\+\_\+\+SCHEDULED\+\_\+\+REQUESTS~1024}
+
+
+
+Max number of scheduled requests. 
+
 
 
 \doxysubsection{Function Documentation}
-\mbox{\Hypertarget{orchestrator_8c_adf276128d48ce4b94c314092bc512d55}\label{orchestrator_8c_adf276128d48ce4b94c314092bc512d55}} 
+\mbox{\Hypertarget{orchestrator_8c_a8f9d7d40e26b268401b39971b76ce127}\label{orchestrator_8c_a8f9d7d40e26b268401b39971b76ce127}} 
+\index{orchestrator.c@{orchestrator.c}!orchestrator\_usage@{orchestrator\_usage}}
+\index{orchestrator\_usage@{orchestrator\_usage}!orchestrator.c@{orchestrator.c}}
+\doxysubsubsection{\texorpdfstring{orchestrator\_usage()}{orchestrator\_usage()}}
+{\footnotesize\ttfamily void orchestrator\+\_\+usage (\begin{DoxyParamCaption}\item[{char $\ast$}]{name }\end{DoxyParamCaption})}
+
+
+
+Print the usage of the orchestrator server executable. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em name} & The name of the orchestrator server executable \\
+\hline
+\end{DoxyParams}
+\mbox{\Hypertarget{orchestrator_8c_a3627a291d53f61274605390ff944df32}\label{orchestrator_8c_a3627a291d53f61274605390ff944df32}} 
 \index{orchestrator.c@{orchestrator.c}!add\_request@{add\_request}}
 \index{add\_request@{add\_request}!orchestrator.c@{orchestrator.c}}
 \doxysubsubsection{\texorpdfstring{add\_request()}{add\_request()}}
-{\footnotesize\ttfamily int add\+\_\+request (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{request_8h_a1abc891df97d2318f8fb4832a28ae63c}{Request}} $\ast$}]{requests\mbox{[}$\,$\mbox{]},  }\item[{int $\ast$}]{N,  }\item[{\mbox{\hyperlink{request_8h_a1abc891df97d2318f8fb4832a28ae63c}{Request}} $\ast$}]{r }\end{DoxyParamCaption})}
+{\footnotesize\ttfamily int add\+\_\+request (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{request_8h_a1abc891df97d2318f8fb4832a28ae63c}{Request}} $\ast$}]{requests\mbox{[}$\,$\mbox{]},  }\item[{int $\ast$}]{N,  }\item[{int}]{max,  }\item[{\mbox{\hyperlink{request_8h_a1abc891df97d2318f8fb4832a28ae63c}{Request}} $\ast$}]{r }\end{DoxyParamCaption})}
 
+
+
+Add a request to the requests array. 
+
+If the array is full, the function will return -\/1.
+
+Used to add requests to the executing and scheduled arrays.
+
+
+\begin{DoxyParams}{Parameters}
+{\em requests} & The array of requests \\
+\hline
+{\em N} & The number of requests in the array \\
+\hline
+{\em max} & The max number of requests in the array \\
+\hline
+{\em r} & The request to add \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+0 if the request was added successfully, -\/1 otherwise 
+\end{DoxyReturn}
+\mbox{\Hypertarget{orchestrator_8c_a66ab3dff8457488ea9e155c0f33197d1}\label{orchestrator_8c_a66ab3dff8457488ea9e155c0f33197d1}} 
+\index{orchestrator.c@{orchestrator.c}!remove\_request@{remove\_request}}
+\index{remove\_request@{remove\_request}!orchestrator.c@{orchestrator.c}}
+\doxysubsubsection{\texorpdfstring{remove\_request()}{remove\_request()}}
+{\footnotesize\ttfamily int remove\+\_\+request (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{request_8h_a1abc891df97d2318f8fb4832a28ae63c}{Request}} $\ast$}]{requests\mbox{[}$\,$\mbox{]},  }\item[{int $\ast$}]{N,  }\item[{\mbox{\hyperlink{request_8h_a1abc891df97d2318f8fb4832a28ae63c}{Request}} $\ast$}]{r }\end{DoxyParamCaption})}
+
+
+
+Remove a request from the requests array. 
+
+If the request is not found in the array, the function will return -\/1.
+
+Used to remove requests from the executing and scheduled arrays.
+
+
+\begin{DoxyParams}{Parameters}
+{\em requests} & The array of requests \\
+\hline
+{\em N} & The number of requests in the array \\
+\hline
+{\em r} & The request to remove \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+0 if the request was removed successfully, -\/1 otherwise 
+\end{DoxyReturn}
+\mbox{\Hypertarget{orchestrator_8c_a516606ae6b0f07be66d2e72f75f4e89b}\label{orchestrator_8c_a516606ae6b0f07be66d2e72f75f4e89b}} 
+\index{orchestrator.c@{orchestrator.c}!select\_request@{select\_request}}
+\index{select\_request@{select\_request}!orchestrator.c@{orchestrator.c}}
+\doxysubsubsection{\texorpdfstring{select\_request()}{select\_request()}}
+{\footnotesize\ttfamily \mbox{\hyperlink{request_8h_a1abc891df97d2318f8fb4832a28ae63c}{Request}} $\ast$ select\+\_\+request (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{request_8h_a1abc891df97d2318f8fb4832a28ae63c}{Request}} $\ast$}]{scheduled\mbox{[}$\,$\mbox{]},  }\item[{int}]{N,  }\item[{int}]{policy }\end{DoxyParamCaption})}
+
+
+
+Select a request from the requests array based on the scheduling policy. 
+
+The function will return {\ttfamily NULL} if the array is empty.
+
+The function will return the first scheduled request if the scheduling policy is \mbox{\hyperlink{orchestrator_8h_a018a73a637d463c5eaf3db6e2462c498}{FCFS}}.
+
+The function will return the request with the smallest estimated time if the scheduling policy is \mbox{\hyperlink{orchestrator_8h_a8f305279bfbdda53600808829a4de17d}{SJF}}.
+
+The function will return the request with the highest priority if the scheduling policy is \mbox{\hyperlink{orchestrator_8h_af4565ab18ff1cc5db0e44ef213fdc112}{PES}}.
+
+
+\begin{DoxyParams}{Parameters}
+{\em requests} & The array of requests \\
+\hline
+{\em N} & The number of requests in the array \\
+\hline
+{\em policy} & The scheduling policy applied \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+The selected request 
+\end{DoxyReturn}
+\mbox{\Hypertarget{orchestrator_8c_ac4d92856ad4e907c14868ed1f7ff44bf}\label{orchestrator_8c_ac4d92856ad4e907c14868ed1f7ff44bf}} 
+\index{orchestrator.c@{orchestrator.c}!handle\_execute@{handle\_execute}}
+\index{handle\_execute@{handle\_execute}!orchestrator.c@{orchestrator.c}}
+\doxysubsubsection{\texorpdfstring{handle\_execute()}{handle\_execute()}}
+{\footnotesize\ttfamily int handle\+\_\+execute (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{request_8h_a1abc891df97d2318f8fb4832a28ae63c}{Request}} $\ast$}]{r,  }\item[{\mbox{\hyperlink{request_8h_a1abc891df97d2318f8fb4832a28ae63c}{Request}} $\ast$}]{executing\mbox{[}$\,$\mbox{]},  }\item[{int $\ast$}]{N\+\_\+executing,  }\item[{\mbox{\hyperlink{request_8h_a1abc891df97d2318f8fb4832a28ae63c}{Request}} $\ast$}]{scheduled\mbox{[}$\,$\mbox{]},  }\item[{int $\ast$}]{N\+\_\+scheduled,  }\item[{char $\ast$}]{output\+\_\+dir,  }\item[{unsigned int}]{tasks,  }\item[{unsigned int $\ast$}]{task\+\_\+nr,  }\item[{struct timeval}]{start\+\_\+time }\end{DoxyParamCaption})}
+
+
+
+Handle the execute request sent by a client. 
+
+The function will execute the request if the number of executing requests is less than the max number of parallel tasks, otherwise the request will be scheduled.
+
+The function will send a message to the client with the task number and the status of the request -\/ either executing or scheduled.
+
+It uses the function \mbox{\hyperlink{command_8c_a7c52b2573cda56b38259890b03be026e}{exec}} to execute the command, defined in \mbox{\hyperlink{command_8c}{command.\+c}}.
+
+
+\begin{DoxyParams}{Parameters}
+{\em r} & The request to execute \\
+\hline
+{\em executing} & The array of executing requests \\
+\hline
+{\em N\+\_\+executing} & The number of executing requests \\
+\hline
+{\em scheduled} & The array of scheduled requests \\
+\hline
+{\em N\+\_\+scheduled} & The number of scheduled requests \\
+\hline
+{\em output\+\_\+dir} & The output directory \\
+\hline
+{\em tasks} & The max number of parallel tasks \\
+\hline
+{\em task\+\_\+nr} & The task number \\
+\hline
+{\em start\+\_\+time} & The start time of the request \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+0 if the request was executed or scheduled successfully, -\/1 otherwise 
+\end{DoxyReturn}
+\mbox{\Hypertarget{orchestrator_8c_a12cf4e6bb84230934157efc1c7b37326}\label{orchestrator_8c_a12cf4e6bb84230934157efc1c7b37326}} 
+\index{orchestrator.c@{orchestrator.c}!handle\_status@{handle\_status}}
+\index{handle\_status@{handle\_status}!orchestrator.c@{orchestrator.c}}
+\doxysubsubsection{\texorpdfstring{handle\_status()}{handle\_status()}}
+{\footnotesize\ttfamily int handle\+\_\+status (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{request_8h_a1abc891df97d2318f8fb4832a28ae63c}{Request}} $\ast$}]{r,  }\item[{\mbox{\hyperlink{request_8h_a1abc891df97d2318f8fb4832a28ae63c}{Request}} $\ast$}]{executing\mbox{[}$\,$\mbox{]},  }\item[{int}]{N\+\_\+executing,  }\item[{\mbox{\hyperlink{request_8h_a1abc891df97d2318f8fb4832a28ae63c}{Request}} $\ast$}]{scheduled\mbox{[}$\,$\mbox{]},  }\item[{int}]{N\+\_\+scheduled,  }\item[{char $\ast$}]{output\+\_\+dir }\end{DoxyParamCaption})}
+
+
+
+Handle the status request sent by a client. 
+
+The function will send the status of the executing, scheduled and completed requests to the client via the client FIFO located in the request.
+
+This functions creates a process to send the status to the respective client, this way other clients can still send requests to the server and receive responses.
+
+It uses the history file (\mbox{\hyperlink{command_8h_a937f20aeca8cb1f294ad9b68340fb2d1}{HISTORY\+\_\+\+NAME}}) to get the completed requests, and the function \mbox{\hyperlink{orchestrator_8c_a92b568074f1b5c1d6d982814e56af12f}{send\+\_\+status}} to send the status to the client.
+
+
+\begin{DoxyParams}{Parameters}
+{\em r} & The request to handle \\
+\hline
+{\em executing} & The array of executing requests \\
+\hline
+{\em N\+\_\+executing} & The number of executing requests \\
+\hline
+{\em scheduled} & The array of scheduled requests \\
+\hline
+{\em N\+\_\+scheduled} & The number of scheduled requests \\
+\hline
+{\em output\+\_\+dir} & The output directory \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+0 if the status was sent successfully, -\/1 otherwise 
+\end{DoxyReturn}
+\mbox{\Hypertarget{orchestrator_8c_ac762ba1a08298dc06ace6084b58963ea}\label{orchestrator_8c_ac762ba1a08298dc06ace6084b58963ea}} 
+\index{orchestrator.c@{orchestrator.c}!handle\_completed@{handle\_completed}}
+\index{handle\_completed@{handle\_completed}!orchestrator.c@{orchestrator.c}}
+\doxysubsubsection{\texorpdfstring{handle\_completed()}{handle\_completed()}}
+{\footnotesize\ttfamily int handle\+\_\+completed (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{request_8h_a1abc891df97d2318f8fb4832a28ae63c}{Request}} $\ast$}]{r,  }\item[{\mbox{\hyperlink{request_8h_a1abc891df97d2318f8fb4832a28ae63c}{Request}} $\ast$}]{executing\mbox{[}$\,$\mbox{]},  }\item[{int $\ast$}]{N\+\_\+executing,  }\item[{\mbox{\hyperlink{request_8h_a1abc891df97d2318f8fb4832a28ae63c}{Request}} $\ast$}]{scheduled\mbox{[}$\,$\mbox{]},  }\item[{int $\ast$}]{N\+\_\+scheduled,  }\item[{char $\ast$}]{output\+\_\+dir,  }\item[{int}]{policy,  }\item[{struct timeval}]{start\+\_\+time }\end{DoxyParamCaption})}
+
+
+
+Handle the completed request sent by the parent process of the child process that executed the command. 
+
+The function will remove the request from the executing array and check for scheduled requests to run.
+
+If there are scheduled requests, the function will remove the request from the scheduled array, add it to the executing array, and execute the command.
+
+If there\textquotesingle{}s a available scheduled request, the function will send a message to the client with the task number and the status of the request -\/ either executing or scheduled.
+
+It uses the function \mbox{\hyperlink{command_8c_a7c52b2573cda56b38259890b03be026e}{exec}} to execute the command, defined in \mbox{\hyperlink{command_8c}{command.\+c}}, and the function \mbox{\hyperlink{orchestrator_8c_a516606ae6b0f07be66d2e72f75f4e89b}{select\+\_\+request}} to select the next scheduled request, if any exists, to execute.
+
+
+\begin{DoxyParams}{Parameters}
+{\em r} & The request to handle \\
+\hline
+{\em executing} & The array of executing requests \\
+\hline
+{\em N\+\_\+executing} & The number of executing requests \\
+\hline
+{\em scheduled} & The array of scheduled requests \\
+\hline
+{\em N\+\_\+scheduled} & The number of scheduled requests \\
+\hline
+{\em output\+\_\+dir} & The output directory \\
+\hline
+{\em policy} & The scheduling policy applied \\
+\hline
+{\em start\+\_\+time} & The start time of the request \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+0 if the request was handled successfully, -\/1 otherwise 
+\end{DoxyReturn}
+\mbox{\Hypertarget{orchestrator_8c_a92b568074f1b5c1d6d982814e56af12f}\label{orchestrator_8c_a92b568074f1b5c1d6d982814e56af12f}} 
+\index{orchestrator.c@{orchestrator.c}!send\_status@{send\_status}}
+\index{send\_status@{send\_status}!orchestrator.c@{orchestrator.c}}
+\doxysubsubsection{\texorpdfstring{send\_status()}{send\_status()}}
+{\footnotesize\ttfamily int send\+\_\+status (\begin{DoxyParamCaption}\item[{char $\ast$}]{client\+\_\+fifo,  }\item[{\mbox{\hyperlink{request_8h_a1abc891df97d2318f8fb4832a28ae63c}{Request}} $\ast$}]{executing\mbox{[}$\,$\mbox{]},  }\item[{int}]{N\+\_\+executing,  }\item[{\mbox{\hyperlink{request_8h_a1abc891df97d2318f8fb4832a28ae63c}{Request}} $\ast$}]{scheduled\mbox{[}$\,$\mbox{]},  }\item[{int}]{N\+\_\+scheduled,  }\item[{char $\ast$}]{output\+\_\+dir }\end{DoxyParamCaption})}
+
+
+
+Send the status of the executing, scheduled and completed requests to the client via the client FIFO that sent the status request. 
+
+The function is used by the \mbox{\hyperlink{orchestrator_8c_a12cf4e6bb84230934157efc1c7b37326}{handle\+\_\+status}} function as an auxiliary function to send the status to the client.
+
+\begin{DoxySeeAlso}{See also}
+\mbox{\hyperlink{orchestrator_8c_a12cf4e6bb84230934157efc1c7b37326}{handle\+\_\+status}}
+\end{DoxySeeAlso}
+
+\begin{DoxyParams}{Parameters}
+{\em client\+\_\+fifo} & The client FIFO name to send the status response to the client \\
+\hline
+{\em executing} & The array of executing requests \\
+\hline
+{\em N\+\_\+executing} & The number of executing requests \\
+\hline
+{\em scheduled} & The array of scheduled requests \\
+\hline
+{\em N\+\_\+scheduled} & The number of scheduled requests \\
+\hline
+{\em output\+\_\+dir} & The output directory to get the history file in in order to get and send the completed requests \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+0 if the status was sent successfully, -\/1 otherwise 
+\end{DoxyReturn}
+\mbox{\Hypertarget{orchestrator_8c_aae029597704c5273943390688cb2d0ec}\label{orchestrator_8c_aae029597704c5273943390688cb2d0ec}} 
+\index{orchestrator.c@{orchestrator.c}!clean\_up@{clean\_up}}
+\index{clean\_up@{clean\_up}!orchestrator.c@{orchestrator.c}}
+\doxysubsubsection{\texorpdfstring{clean\_up()}{clean\_up()}}
+{\footnotesize\ttfamily void clean\+\_\+up (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{request_8h_a1abc891df97d2318f8fb4832a28ae63c}{Request}} $\ast$}]{executing\mbox{[}$\,$\mbox{]},  }\item[{int}]{N\+\_\+executing,  }\item[{\mbox{\hyperlink{request_8h_a1abc891df97d2318f8fb4832a28ae63c}{Request}} $\ast$}]{scheduled\mbox{[}$\,$\mbox{]},  }\item[{int}]{N\+\_\+scheduled }\end{DoxyParamCaption})}
+
+
+
+Free the memory allocated for the executing and scheduled requests. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em executing} & The array of executing requests \\
+\hline
+{\em N\+\_\+executing} & The number of executing requests \\
+\hline
+{\em scheduled} & The array of scheduled requests \\
+\hline
+{\em N\+\_\+scheduled} & The number of scheduled requests \\
+\hline
+\end{DoxyParams}
+\mbox{\Hypertarget{orchestrator_8c_a0ffc5219a04dffcd16480b6c51111b67}\label{orchestrator_8c_a0ffc5219a04dffcd16480b6c51111b67}} 
+\index{orchestrator.c@{orchestrator.c}!clean\_up\_all@{clean\_up\_all}}
+\index{clean\_up\_all@{clean\_up\_all}!orchestrator.c@{orchestrator.c}}
+\doxysubsubsection{\texorpdfstring{clean\_up\_all()}{clean\_up\_all()}}
+{\footnotesize\ttfamily void clean\+\_\+up\+\_\+all (\begin{DoxyParamCaption}\item[{int}]{fd,  }\item[{\mbox{\hyperlink{request_8h_a1abc891df97d2318f8fb4832a28ae63c}{Request}} $\ast$}]{r,  }\item[{\mbox{\hyperlink{request_8h_a1abc891df97d2318f8fb4832a28ae63c}{Request}} $\ast$}]{executing\mbox{[}$\,$\mbox{]},  }\item[{int}]{N\+\_\+executing,  }\item[{\mbox{\hyperlink{request_8h_a1abc891df97d2318f8fb4832a28ae63c}{Request}} $\ast$}]{scheduled\mbox{[}$\,$\mbox{]},  }\item[{int}]{N\+\_\+scheduled }\end{DoxyParamCaption})}
+
+
+
+Free the memory allocated for the executing and scheduled requests, close the server FIFO file descriptor, and free the memory allocated for the request. 
+
+\begin{DoxySeeAlso}{See also}
+\mbox{\hyperlink{orchestrator_8c_aae029597704c5273943390688cb2d0ec}{clean\+\_\+up}}
+\end{DoxySeeAlso}
+
+\begin{DoxyParams}{Parameters}
+{\em fd} & The server FIFO file descriptor \\
+\hline
+{\em r} & The request to free \\
+\hline
+{\em executing} & The array of executing requests \\
+\hline
+{\em N\+\_\+executing} & The number of executing requests \\
+\hline
+{\em scheduled} & The array of scheduled requests \\
+\hline
+{\em N\+\_\+scheduled} & The number of scheduled requests \\
+\hline
+\end{DoxyParams}
 \mbox{\Hypertarget{orchestrator_8c_a3c04138a5bfe5d72780bb7e82a18e627}\label{orchestrator_8c_a3c04138a5bfe5d72780bb7e82a18e627}} 
 \index{orchestrator.c@{orchestrator.c}!main@{main}}
 \index{main@{main}!orchestrator.c@{orchestrator.c}}
@@ -48,7 +377,40 @@ int \mbox{\hyperlink{orchestrator_8c_a3c04138a5bfe5d72780bb7e82a18e627}{main}} (
 
 
 
-Main function for the orchestrator program The orchestrator program is responsible for managing the execution of the parallel tasks. It receives the output directory, the number of parallel tasks, and the scheduling policy as arguments. This function is responsible for validating the arguments, parsing them and calling the appropriate functions to manage the parallel tasks. 
+Main function for the orchestrator server program. 
+
+The orchestrator program is responsible of\+: \begin{DoxyItemize}
+\item {\bfseries{parsing the command-\/line interface arguments}}; \item {\bfseries{creating the server FIFO}} based on the \mbox{\hyperlink{orchestrator_8h_a52e236925828d1955a9ac01efdd8705d}{SERVER\+\_\+\+FIFO}} macro; \item {\bfseries{receiving and handling client requests}} sent via the server FIFO; \item {\bfseries{sending the appropriate responses}} to the clients via their respective FIFOs;\end{DoxyItemize}
+It receives the output directory, the number of parallel tasks, and, optionally, the scheduling policy as arguments.
+
+If the output directory doesn\textquotesingle{}t exist, it will be created.
+
+If the number of parallel tasks is not provided or is less than or equal to zero, the program will print an error message and exit.
+
+If the scheduling policy is not provided, the default policy is applied via the \mbox{\hyperlink{orchestrator_8c_a67972eda1492b6dac2f752c3a5731e7d}{DEFAULT\+\_\+\+POLICY}} macro.
+
+It\textquotesingle{}s responsable for executing or scheduling requests with type \mbox{\hyperlink{request_8h_a05e20d8bc0525f94757303dd5a905a69}{EXECUTE}} sent from the clients. If the max number of parallel tasks is reached, the request will be scheduled. Based on this action, the orchestrator program will send a response to the client with the task number and the status of the request -\/ either executing or scheduled.
+
+\begin{DoxySeeAlso}{See also}
+\mbox{\hyperlink{orchestrator_8c_ac4d92856ad4e907c14868ed1f7ff44bf}{handle\+\_\+execute}}
+\end{DoxySeeAlso}
+Once a command finnish his execution, the orchestrator program will receive a request with type \mbox{\hyperlink{request_8h_a22c88fdadb7d8f8417a92cdcc6232786}{COMPLETED}} sent from the parent process of the child process that executed command, and will execute next available scheduled request, if any exists, based on the scheduling policy applied.
+
+\begin{DoxySeeAlso}{See also}
+\mbox{\hyperlink{orchestrator_8c_ac762ba1a08298dc06ace6084b58963ea}{handle\+\_\+completed}}
+\end{DoxySeeAlso}
+The orchestrator program can also receive requests with type \mbox{\hyperlink{request_8h_a59279bee44f34d08b3cbf3a89fb0d8d9}{STATUS}} from the clients, to check the status of the executing, scheduled and completed requests. The response will be sent via the client FIFO.
+
+\begin{DoxySeeAlso}{See also}
+\mbox{\hyperlink{orchestrator_8c_a12cf4e6bb84230934157efc1c7b37326}{handle\+\_\+status}}
+\end{DoxySeeAlso}
+The orchestrator program can also receive requests with type \mbox{\hyperlink{request_8h_a9d385e974a49598d267af81de5a33838}{KILL}} from the clients, to shutdown the server.
+
+When the orchestrator program is shutting down, it will save the task number to a file in the output directory (see \mbox{\hyperlink{task__nr_8c_a2b92d71aa300221c997ed16e94e1b47c}{save\+\_\+task\+\_\+nr}}), close the open FIFOs file descriptors, and free the memory allocated for the executing and scheduled requests using the \mbox{\hyperlink{orchestrator_8c_aae029597704c5273943390688cb2d0ec}{clean\+\_\+up}} function.
+
+If any of the orchestrator components or called functions fail, the program will print an error message, clean up the memory and close file descriptors using the \mbox{\hyperlink{orchestrator_8c_a0ffc5219a04dffcd16480b6c51111b67}{clean\+\_\+up\+\_\+all}} function, and return 1.
+
+The orchestrator program will run until it receives a request with type \mbox{\hyperlink{request_8h_a9d385e974a49598d267af81de5a33838}{KILL}} from a client, or until it receives a signal to terminate or interrupt the program.
 
 
 \begin{DoxyParams}{Parameters}
@@ -58,32 +420,5 @@ Main function for the orchestrator program The orchestrator program is responsib
 \hline
 \end{DoxyParams}
 \begin{DoxyReturn}{Returns}
-0 if the program runs successfully 
+0 if the program runs successfully, 1 otherwise 
 \end{DoxyReturn}
-\mbox{\Hypertarget{orchestrator_8c_a8f9d7d40e26b268401b39971b76ce127}\label{orchestrator_8c_a8f9d7d40e26b268401b39971b76ce127}} 
-\index{orchestrator.c@{orchestrator.c}!orchestrator\_usage@{orchestrator\_usage}}
-\index{orchestrator\_usage@{orchestrator\_usage}!orchestrator.c@{orchestrator.c}}
-\doxysubsubsection{\texorpdfstring{orchestrator\_usage()}{orchestrator\_usage()}}
-{\footnotesize\ttfamily void orchestrator\+\_\+usage (\begin{DoxyParamCaption}\item[{char $\ast$}]{name }\end{DoxyParamCaption})}
-
-
-
-Print the usage of the orchestrator program. 
-
-
-\begin{DoxyParams}{Parameters}
-{\em name} & The name of the program \\
-\hline
-\end{DoxyParams}
-\mbox{\Hypertarget{orchestrator_8c_a66ab3dff8457488ea9e155c0f33197d1}\label{orchestrator_8c_a66ab3dff8457488ea9e155c0f33197d1}} 
-\index{orchestrator.c@{orchestrator.c}!remove\_request@{remove\_request}}
-\index{remove\_request@{remove\_request}!orchestrator.c@{orchestrator.c}}
-\doxysubsubsection{\texorpdfstring{remove\_request()}{remove\_request()}}
-{\footnotesize\ttfamily int remove\+\_\+request (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{request_8h_a1abc891df97d2318f8fb4832a28ae63c}{Request}} $\ast$}]{requests\mbox{[}$\,$\mbox{]},  }\item[{int $\ast$}]{N,  }\item[{\mbox{\hyperlink{request_8h_a1abc891df97d2318f8fb4832a28ae63c}{Request}} $\ast$}]{r }\end{DoxyParamCaption})}
-
-\mbox{\Hypertarget{orchestrator_8c_ae4cde9f2b12cfc7e862a1ba47e2e27bd}\label{orchestrator_8c_ae4cde9f2b12cfc7e862a1ba47e2e27bd}} 
-\index{orchestrator.c@{orchestrator.c}!select\_request@{select\_request}}
-\index{select\_request@{select\_request}!orchestrator.c@{orchestrator.c}}
-\doxysubsubsection{\texorpdfstring{select\_request()}{select\_request()}}
-{\footnotesize\ttfamily \mbox{\hyperlink{request_8h_a1abc891df97d2318f8fb4832a28ae63c}{Request}} $\ast$ select\+\_\+request (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{request_8h_a1abc891df97d2318f8fb4832a28ae63c}{Request}} $\ast$}]{requests\mbox{[}$\,$\mbox{]},  }\item[{int $\ast$}]{N,  }\item[{int}]{policy }\end{DoxyParamCaption})}
-

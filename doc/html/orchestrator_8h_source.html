@@ -74,17 +74,29 @@ $(function() {
 <a href="orchestrator_8h.html">Go to the documentation of this file.</a><div class="fragment"><div class="line"><a name="l00001"></a><span class="lineno">    1</span>&#160;<span class="preprocessor">#ifndef _ORCHESTRATOR_H_</span></div>
 <div class="line"><a name="l00002"></a><span class="lineno">    2</span>&#160;<span class="preprocessor">#define _ORCHESTRATOR_H_</span></div>
 <div class="line"><a name="l00003"></a><span class="lineno">    3</span>&#160; </div>
-<div class="line"><a name="l00004"></a><span class="lineno"><a class="line" href="orchestrator_8h.html#a52e236925828d1955a9ac01efdd8705d">    4</a></span>&#160;<span class="preprocessor">#define SERVER_FIFO &quot;tmp/server_fifo&quot;</span></div>
-<div class="line"><a name="l00005"></a><span class="lineno">    5</span>&#160; </div>
-<div class="line"><a name="l00006"></a><span class="lineno"><a class="line" href="orchestrator_8h.html#a8fc96cee4177a369a99de7026ebeba81">    6</a></span>&#160;<span class="preprocessor">#define MAX_REQUESTS 1024</span></div>
-<div class="line"><a name="l00007"></a><span class="lineno">    7</span>&#160; </div>
-<div class="line"><a name="l00008"></a><span class="lineno">    8</span>&#160;<span class="preprocessor">#endif</span></div>
+<div class="line"><a name="l00005"></a><span class="lineno"><a class="line" href="orchestrator_8h.html#a52e236925828d1955a9ac01efdd8705d">    5</a></span>&#160;<span class="preprocessor">#define SERVER_FIFO &quot;server_fifo&quot;</span></div>
+<div class="line"><a name="l00006"></a><span class="lineno">    6</span>&#160; </div>
+<div class="line"><a name="l00007"></a><span class="lineno">    7</span>&#160;<span class="comment">// Scheduling policies</span></div>
+<div class="line"><a name="l00008"></a><span class="lineno">    8</span>&#160; </div>
+<div class="line"><a name="l00010"></a><span class="lineno"><a class="line" href="orchestrator_8h.html#a018a73a637d463c5eaf3db6e2462c498">   10</a></span>&#160;<span class="preprocessor">#define FCFS 0</span></div>
+<div class="line"><a name="l00011"></a><span class="lineno">   11</span>&#160; </div>
+<div class="line"><a name="l00013"></a><span class="lineno"><a class="line" href="orchestrator_8h.html#a8f305279bfbdda53600808829a4de17d">   13</a></span>&#160;<span class="preprocessor">#define SJF  1</span></div>
+<div class="line"><a name="l00014"></a><span class="lineno">   14</span>&#160; </div>
+<div class="line"><a name="l00016"></a><span class="lineno"><a class="line" href="orchestrator_8h.html#af4565ab18ff1cc5db0e44ef213fdc112">   16</a></span>&#160;<span class="preprocessor">#define PES  2</span></div>
+<div class="line"><a name="l00017"></a><span class="lineno">   17</span>&#160; </div>
+<div class="line"><a name="l00018"></a><span class="lineno">   18</span>&#160;<span class="comment">// Macros for buffer sizes</span></div>
+<div class="line"><a name="l00019"></a><span class="lineno">   19</span>&#160; </div>
+<div class="line"><a name="l00021"></a><span class="lineno"><a class="line" href="orchestrator_8h.html#ab15dfcbb2b79df95324bc1343a6ee5cc">   21</a></span>&#160;<span class="preprocessor">#define EXEC_TIME_STRING_SIZE 16</span></div>
+<div class="line"><a name="l00022"></a><span class="lineno">   22</span>&#160; </div>
+<div class="line"><a name="l00025"></a><span class="lineno"><a class="line" href="orchestrator_8h.html#ab701aba5df7094f4ab50812ac9ec1db8">   25</a></span>&#160;<span class="preprocessor">#define EXECUTE_MSG_SIZE (24 + TASK_NR_STRING_SIZE)</span></div>
+<div class="line"><a name="l00026"></a><span class="lineno">   26</span>&#160; </div>
+<div class="line"><a name="l00027"></a><span class="lineno">   27</span>&#160;<span class="preprocessor">#endif</span></div>
 </div><!-- fragment --></div><!-- contents -->
 <!-- start footer part -->
         <hr class="footer">
         <address class="footer">
             <small>
-                Generated on Sun Apr 28 2024 17:59:25 for <b>Orchestrator</b> by
+                Generated on Thu May 2 2024 18:34:12 for <b>Orchestrator</b> by
                 <a href="http://www.doxygen.org/index.html">
                     <img class="footer" src="doxygen.png" alt="doxygen" onerror="this.onerror=null;this.src='doxygen.svg';"/>
                 </a> 1.9.1. All rights reserved.

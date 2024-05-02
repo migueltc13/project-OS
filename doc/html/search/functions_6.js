@@ -1,4 +1,4 @@
 var searchData=
 [
-  ['orchestrator_5fusage_75',['orchestrator_usage',['../orchestrator_8c.html#a8f9d7d40e26b268401b39971b76ce127',1,'orchestrator.c']]]
+  ['load_5ftask_5fnr_110',['load_task_nr',['../task__nr_8h.html#acade4944550011e33781d7feb097cd86',1,'load_task_nr(char *output_dir):&#160;task_nr.c'],['../task__nr_8c.html#acade4944550011e33781d7feb097cd86',1,'load_task_nr(char *output_dir):&#160;task_nr.c']]]
 ];
