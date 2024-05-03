@@ -23,6 +23,8 @@ Include dependency graph for command.\+c\+:\nopagebreak
 \item 
 \#define \mbox{\hyperlink{command_8c_a29b7451465deac204c5f7cb1f9c6e1fc}{MAX\+\_\+\+ARGS}}~\mbox{\hyperlink{request_8h_a11b2387a44dc0cf3642ddcbe0581276b}{MAX\+\_\+\+CMD\+\_\+\+SIZE}}
 \begin{DoxyCompactList}\small\item\em The max number of arguments in a command. \end{DoxyCompactList}\item 
+\#define \mbox{\hyperlink{command_8c_adaefa74c04b5ae5540704aaa5917184f}{ERROR\+\_\+\+MSG\+\_\+\+SIZE}}~\mbox{\hyperlink{request_8h_a11b2387a44dc0cf3642ddcbe0581276b}{MAX\+\_\+\+CMD\+\_\+\+SIZE}} + 100
+\begin{DoxyCompactList}\small\item\em The max size of the error message. \end{DoxyCompactList}\item 
 \#define \mbox{\hyperlink{command_8c_aac3a2c91b0e41aa91f485480817b7a02}{TASK\+\_\+\+PREFIX\+\_\+\+NAME}}~\char`\"{}task\char`\"{}
 \begin{DoxyCompactList}\small\item\em The prefix name for the task directories. \end{DoxyCompactList}\item 
 \#define \mbox{\hyperlink{command_8c_a2a9e71d817d8ed2fa28ce7c7174f403e}{OUTPUT\+\_\+\+NAME}}~\char`\"{}out\char`\"{}
@@ -34,12 +36,14 @@ Include dependency graph for command.\+c\+:\nopagebreak
 \doxysubsection*{Functions}
 \begin{DoxyCompactItemize}
 \item 
-char $\ast$$\ast$ \mbox{\hyperlink{command_8c_a28efbcce7b8419b2e14f06f068134bbf}{parse\+\_\+cmd}} (char $\ast$cmd, int $\ast$N)
+char $\ast$$\ast$ \mbox{\hyperlink{command_8c_a1c902d6f3597bd174b4da437f58181c1}{parse\+\_\+cmd\+\_\+pipes}} (char $\ast$cmd, int $\ast$N)
 \begin{DoxyCompactList}\small\item\em Parse a piped command into an array of single commands. \end{DoxyCompactList}\item 
-int \mbox{\hyperlink{command_8c_a4f9f0cf42417c697d2039b25b9337a9d}{exec\+\_\+command}} (char $\ast$arg)
-\item 
+char $\ast$$\ast$ \mbox{\hyperlink{command_8c_afcb166c07479038a015882c5cb6e9a24}{parse\+\_\+cmd}} (char $\ast$cmd)
+\begin{DoxyCompactList}\small\item\em Parse a command into an array of arguments. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{command_8c_ad16a1633214a99ca20cfeba39328ab44}{write\+\_\+error}} (char $\ast$cmd\+\_\+name)
+\begin{DoxyCompactList}\small\item\em Write an error message to stderr. \end{DoxyCompactList}\item 
 int \mbox{\hyperlink{command_8c_a7c52b2573cda56b38259890b03be026e}{exec}} (\mbox{\hyperlink{request_8h_a1abc891df97d2318f8fb4832a28ae63c}{Request}} $\ast$r, char $\ast$output\+\_\+dir, struct timeval start\+\_\+time)
-\end{DoxyCompactItemize}
+\begin{DoxyCompactList}\small\item\em Executes a command, single or piped, using process forking, it also handles the redirection of stdout and stderr to respective task files, as well as the writing of the execution time to a file, and the writing of the task number, command and execution time to the history file. \end{DoxyCompactList}\end{DoxyCompactItemize}
 
 
 \doxysubsection{Macro Definition Documentation}
@@ -52,6 +56,16 @@ int \mbox{\hyperlink{command_8c_a7c52b2573cda56b38259890b03be026e}{exec}} (\mbox
 
 
 The max number of arguments in a command. 
+
+\mbox{\Hypertarget{command_8c_adaefa74c04b5ae5540704aaa5917184f}\label{command_8c_adaefa74c04b5ae5540704aaa5917184f}} 
+\index{command.c@{command.c}!ERROR\_MSG\_SIZE@{ERROR\_MSG\_SIZE}}
+\index{ERROR\_MSG\_SIZE@{ERROR\_MSG\_SIZE}!command.c@{command.c}}
+\doxysubsubsection{\texorpdfstring{ERROR\_MSG\_SIZE}{ERROR\_MSG\_SIZE}}
+{\footnotesize\ttfamily \#define ERROR\+\_\+\+MSG\+\_\+\+SIZE~\mbox{\hyperlink{request_8h_a11b2387a44dc0cf3642ddcbe0581276b}{MAX\+\_\+\+CMD\+\_\+\+SIZE}} + 100}
+
+
+
+The max size of the error message. 
 
 \mbox{\Hypertarget{command_8c_aac3a2c91b0e41aa91f485480817b7a02}\label{command_8c_aac3a2c91b0e41aa91f485480817b7a02}} 
 \index{command.c@{command.c}!TASK\_PREFIX\_NAME@{TASK\_PREFIX\_NAME}}
@@ -96,11 +110,11 @@ The name of the time file.
 
 
 \doxysubsection{Function Documentation}
-\mbox{\Hypertarget{command_8c_a28efbcce7b8419b2e14f06f068134bbf}\label{command_8c_a28efbcce7b8419b2e14f06f068134bbf}} 
-\index{command.c@{command.c}!parse\_cmd@{parse\_cmd}}
-\index{parse\_cmd@{parse\_cmd}!command.c@{command.c}}
-\doxysubsubsection{\texorpdfstring{parse\_cmd()}{parse\_cmd()}}
-{\footnotesize\ttfamily char$\ast$$\ast$ parse\+\_\+cmd (\begin{DoxyParamCaption}\item[{char $\ast$}]{cmd,  }\item[{int $\ast$}]{N }\end{DoxyParamCaption})}
+\mbox{\Hypertarget{command_8c_a1c902d6f3597bd174b4da437f58181c1}\label{command_8c_a1c902d6f3597bd174b4da437f58181c1}} 
+\index{command.c@{command.c}!parse\_cmd\_pipes@{parse\_cmd\_pipes}}
+\index{parse\_cmd\_pipes@{parse\_cmd\_pipes}!command.c@{command.c}}
+\doxysubsubsection{\texorpdfstring{parse\_cmd\_pipes()}{parse\_cmd\_pipes()}}
+{\footnotesize\ttfamily char $\ast$$\ast$ parse\+\_\+cmd\+\_\+pipes (\begin{DoxyParamCaption}\item[{char $\ast$}]{cmd,  }\item[{int $\ast$}]{N }\end{DoxyParamCaption})}
 
 
 
@@ -120,9 +134,9 @@ Examples\+:
 \DoxyCodeLine{}
 \DoxyCodeLine{-\/ \textcolor{stringliteral}{"{}  ls -\/l |  cat  "{}} -\/> [\textcolor{stringliteral}{"{}ls -\/l"{}}, \textcolor{stringliteral}{"{}cat"{}}]}
 \DoxyCodeLine{}
-\DoxyCodeLine{-\/ \textcolor{stringliteral}{"{}echo \(\backslash\)"{}Hello  World\(\backslash\)"{} |cat    "{}} -\/> [\textcolor{stringliteral}{"{}echo \(\backslash\)"{}Hello  World\(\backslash\)"{}"{}}, \textcolor{stringliteral}{"{}cat"{}}]}
+\DoxyCodeLine{-\/ \textcolor{stringliteral}{"{}echo \(\backslash\)"{}Hello   World\(\backslash\)"{} |cat    "{}} -\/> [\textcolor{stringliteral}{"{}echo \(\backslash\)"{}Hello   World\(\backslash\)"{}"{}}, \textcolor{stringliteral}{"{}cat"{}}]}
 \DoxyCodeLine{}
-\DoxyCodeLine{-\/ \textcolor{stringliteral}{"{}echo \(\backslash\)"{}Hello\(\backslash\)\(\backslash\)nWorld\(\backslash\)"{} | cat\(\backslash\)\(\backslash\)n\(\backslash\)\(\backslash\)n"{}} -\/> [\textcolor{stringliteral}{"{}echo \(\backslash\)"{}HelloWorld\(\backslash\)"{}"{}}, \textcolor{stringliteral}{"{}cat"{}}]}
+\DoxyCodeLine{-\/ \textcolor{stringliteral}{"{}echo \(\backslash\)"{}Hello\(\backslash\)nWorld\(\backslash\)"{} | cat\(\backslash\)n\(\backslash\)n"{}} -\/> [\textcolor{stringliteral}{"{}echo \(\backslash\)"{}HelloWorld\(\backslash\)"{}"{}}, \textcolor{stringliteral}{"{}cat"{}}]}
 
 \end{DoxyCode}
 
@@ -139,29 +153,98 @@ Note\+: Uncomment the last for loop in this function to print the resulting arra
 \begin{DoxyReturn}{Returns}
 An array of strings, or NULL if an error occurred 
 \end{DoxyReturn}
-\mbox{\Hypertarget{command_8c_a4f9f0cf42417c697d2039b25b9337a9d}\label{command_8c_a4f9f0cf42417c697d2039b25b9337a9d}} 
-\index{command.c@{command.c}!exec\_command@{exec\_command}}
-\index{exec\_command@{exec\_command}!command.c@{command.c}}
-\doxysubsubsection{\texorpdfstring{exec\_command()}{exec\_command()}}
-{\footnotesize\ttfamily int exec\+\_\+command (\begin{DoxyParamCaption}\item[{char $\ast$}]{arg }\end{DoxyParamCaption})}
+\mbox{\Hypertarget{command_8c_afcb166c07479038a015882c5cb6e9a24}\label{command_8c_afcb166c07479038a015882c5cb6e9a24}} 
+\index{command.c@{command.c}!parse\_cmd@{parse\_cmd}}
+\index{parse\_cmd@{parse\_cmd}!command.c@{command.c}}
+\doxysubsubsection{\texorpdfstring{parse\_cmd()}{parse\_cmd()}}
+{\footnotesize\ttfamily char $\ast$$\ast$ parse\+\_\+cmd (\begin{DoxyParamCaption}\item[{char $\ast$}]{cmd }\end{DoxyParamCaption})}
 
+
+
+Parse a command into an array of arguments. 
+
+Used in the function \mbox{\hyperlink{command_8c_a7c52b2573cda56b38259890b03be026e}{exec}} to parse a command into an array of arguments.
+
+It also strips leading and trailing whitespaces from each argument, see the sencond and third example below.
+
+It also can handle quoted strings, as demonstrated in the third example.
+
+Examples\+: 
+\begin{DoxyCode}{0}
+\DoxyCodeLine{-\/ \textcolor{stringliteral}{"{}ls -\/l -\/a"{}} -\/> [\textcolor{stringliteral}{"{}ls"{}}, \textcolor{stringliteral}{"{}-\/l"{}}, \textcolor{stringliteral}{"{}-\/a"{}}, NULL]}
+\DoxyCodeLine{}
+\DoxyCodeLine{-\/ \textcolor{stringliteral}{"{}  ls -\/l    -\/a"{}} -\/> [\textcolor{stringliteral}{"{}ls"{}}, \textcolor{stringliteral}{"{}-\/l"{}}, \textcolor{stringliteral}{"{}-\/a"{}}, NULL]}
+\DoxyCodeLine{}
+\DoxyCodeLine{-\/ \textcolor{stringliteral}{"{}echo \(\backslash\)"{}Hello   World\(\backslash\)"{}"{}} -\/> [\textcolor{stringliteral}{"{}echo"{}}, \textcolor{stringliteral}{"{}Hello   World"{}}, NULL]}
+
+\end{DoxyCode}
+
+
+
+\begin{DoxyParams}{Parameters}
+{\em cmd} & The command to parse \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+An array of arguments, or NULL if an error occurred 
+\end{DoxyReturn}
+\mbox{\Hypertarget{command_8c_ad16a1633214a99ca20cfeba39328ab44}\label{command_8c_ad16a1633214a99ca20cfeba39328ab44}} 
+\index{command.c@{command.c}!write\_error@{write\_error}}
+\index{write\_error@{write\_error}!command.c@{command.c}}
+\doxysubsubsection{\texorpdfstring{write\_error()}{write\_error()}}
+{\footnotesize\ttfamily void write\+\_\+error (\begin{DoxyParamCaption}\item[{char $\ast$}]{cmd\+\_\+name }\end{DoxyParamCaption})}
+
+
+
+Write an error message to stderr. 
+
+Used in the function \mbox{\hyperlink{command_8c_a7c52b2573cda56b38259890b03be026e}{exec}} to write an error message to stderr when a command fails.
+
+It\textquotesingle{}s meant to be used after execvp fails, and the redirection of stderr to an error log file, via the dup2 function.
+
+It checks the errno to determine the type of error, being\+:
+\begin{DoxyItemize}
+\item ENOENT\+: command not found
+\item EACCES\+: permission denied
+\item EINVAL\+: invalid argument(s)
+\end{DoxyItemize}
+
+
+\begin{DoxyParams}{Parameters}
+{\em cmd\+\_\+name} & The name of the command that failed \\
+\hline
+\end{DoxyParams}
 \mbox{\Hypertarget{command_8c_a7c52b2573cda56b38259890b03be026e}\label{command_8c_a7c52b2573cda56b38259890b03be026e}} 
 \index{command.c@{command.c}!exec@{exec}}
 \index{exec@{exec}!command.c@{command.c}}
 \doxysubsubsection{\texorpdfstring{exec()}{exec()}}
 {\footnotesize\ttfamily int exec (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{request_8h_a1abc891df97d2318f8fb4832a28ae63c}{Request}} $\ast$}]{r,  }\item[{char $\ast$}]{output\+\_\+dir,  }\item[{struct timeval}]{start\+\_\+time }\end{DoxyParamCaption})}
 
-Execute a command
 
-TODO
+
+Executes a command, single or piped, using process forking, it also handles the redirection of stdout and stderr to respective task files, as well as the writing of the execution time to a file, and the writing of the task number, command and execution time to the history file. 
+
+This is the main function of the \mbox{\hyperlink{command_8c}{command.\+c}} module, used in \mbox{\hyperlink{orchestrator_8c}{orchestrator.\+c}} server to execute a command.
+
+First, all the necessary files are created, such as the output directory for the task files, such as the output file, the error file and the time file. Also opens the history file to write the task number, the command and the execution time.
+
+This file names are defined in the macros \mbox{\hyperlink{command_8c_a2a9e71d817d8ed2fa28ce7c7174f403e}{OUTPUT\+\_\+\+NAME}}, \mbox{\hyperlink{command_8c_a5c3d9acd67ec01c64586edc0046dbde6}{ERROR\+\_\+\+NAME}}, \mbox{\hyperlink{command_8c_a8ebe81095ed8d1416071e2403de02de9}{TIME\+\_\+\+NAME}} and \mbox{\hyperlink{command_8h_a937f20aeca8cb1f294ad9b68340fb2d1}{HISTORY\+\_\+\+NAME}}.
+
+It uses the fork system call to create a child process that will execute the command. The parent process will wait for the child process to finish. This fork call is inside another fork call so the parent process can wait for the child process to finish and send the request to the orchestrator as completed. This way the server can continue to receive and handle new requests while the child process is executing the command.
+
+The inner parent process, after waiting for the child process to finish executing the command, writes the total time since the request was received and the command finnished executing to the time file and the history file.
+
+It uses the \mbox{\hyperlink{command_8c_afcb166c07479038a015882c5cb6e9a24}{parse\+\_\+cmd}} function to parse the command into an array of arguments. It also uses the \mbox{\hyperlink{command_8c_a1c902d6f3597bd174b4da437f58181c1}{parse\+\_\+cmd\+\_\+pipes}} function in case that the command is piped.
+
+After the command is parsed is executed using the execvp system call. When execvp fails (e.\+g returns -\/1) it writes an error message to stderr using the \mbox{\hyperlink{command_8c_ad16a1633214a99ca20cfeba39328ab44}{write\+\_\+error}} function.
 
 
 \begin{DoxyParams}{Parameters}
 {\em r} & The request containing the command to execute, if the command is piped and the task number \\
 \hline
-{\em output\+\_\+dir} & The output directory to write the task results \\
+{\em output\+\_\+dir} & The output directory to create the task directory and respective task result files \\
 \hline
-{\em start\+\_\+time} & The time when the execute request was received \\
+{\em start\+\_\+time} & The time when the execute request was received to calculate the total time since the request was received and the command finnished executing \\
 \hline
 \end{DoxyParams}
 \begin{DoxyReturn}{Returns}

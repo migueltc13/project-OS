@@ -25,7 +25,7 @@ This graph shows which files directly or indirectly include this file\+:\nopageb
 \begin{DoxyCompactItemize}
 \item 
 int \mbox{\hyperlink{command_8h_a7c52b2573cda56b38259890b03be026e}{exec}} (\mbox{\hyperlink{request_8h_a1abc891df97d2318f8fb4832a28ae63c}{Request}} $\ast$r, char $\ast$output\+\_\+dir, struct timeval start\+\_\+time)
-\end{DoxyCompactItemize}
+\begin{DoxyCompactList}\small\item\em Executes a command, single or piped, using process forking, it also handles the redirection of stdout and stderr to respective task files, as well as the writing of the execution time to a file, and the writing of the task number, command and execution time to the history file. \end{DoxyCompactList}\end{DoxyCompactItemize}
 
 
 \doxysubsection{Macro Definition Documentation}
@@ -48,17 +48,31 @@ Name of the history file.
 \doxysubsubsection{\texorpdfstring{exec()}{exec()}}
 {\footnotesize\ttfamily int exec (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{request_8h_a1abc891df97d2318f8fb4832a28ae63c}{Request}} $\ast$}]{r,  }\item[{char $\ast$}]{output\+\_\+dir,  }\item[{struct timeval}]{start\+\_\+time }\end{DoxyParamCaption})}
 
-Execute a command
 
-TODO
+
+Executes a command, single or piped, using process forking, it also handles the redirection of stdout and stderr to respective task files, as well as the writing of the execution time to a file, and the writing of the task number, command and execution time to the history file. 
+
+This is the main function of the \mbox{\hyperlink{command_8c}{command.\+c}} module, used in \mbox{\hyperlink{orchestrator_8c}{orchestrator.\+c}} server to execute a command.
+
+First, all the necessary files are created, such as the output directory for the task files, such as the output file, the error file and the time file. Also opens the history file to write the task number, the command and the execution time.
+
+This file names are defined in the macros \mbox{\hyperlink{command_8c_a2a9e71d817d8ed2fa28ce7c7174f403e}{OUTPUT\+\_\+\+NAME}}, \mbox{\hyperlink{command_8c_a5c3d9acd67ec01c64586edc0046dbde6}{ERROR\+\_\+\+NAME}}, \mbox{\hyperlink{command_8c_a8ebe81095ed8d1416071e2403de02de9}{TIME\+\_\+\+NAME}} and \mbox{\hyperlink{command_8h_a937f20aeca8cb1f294ad9b68340fb2d1}{HISTORY\+\_\+\+NAME}}.
+
+It uses the fork system call to create a child process that will execute the command. The parent process will wait for the child process to finish. This fork call is inside another fork call so the parent process can wait for the child process to finish and send the request to the orchestrator as completed. This way the server can continue to receive and handle new requests while the child process is executing the command.
+
+The inner parent process, after waiting for the child process to finish executing the command, writes the total time since the request was received and the command finnished executing to the time file and the history file.
+
+It uses the \mbox{\hyperlink{command_8c_afcb166c07479038a015882c5cb6e9a24}{parse\+\_\+cmd}} function to parse the command into an array of arguments. It also uses the \mbox{\hyperlink{command_8c_a1c902d6f3597bd174b4da437f58181c1}{parse\+\_\+cmd\+\_\+pipes}} function in case that the command is piped.
+
+After the command is parsed is executed using the execvp system call. When execvp fails (e.\+g returns -\/1) it writes an error message to stderr using the \mbox{\hyperlink{command_8c_ad16a1633214a99ca20cfeba39328ab44}{write\+\_\+error}} function.
 
 
 \begin{DoxyParams}{Parameters}
 {\em r} & The request containing the command to execute, if the command is piped and the task number \\
 \hline
-{\em output\+\_\+dir} & The output directory to write the task results \\
+{\em output\+\_\+dir} & The output directory to create the task directory and respective task result files \\
 \hline
-{\em start\+\_\+time} & The time when the execute request was received \\
+{\em start\+\_\+time} & The time when the execute request was received to calculate the total time since the request was received and the command finnished executing \\
 \hline
 \end{DoxyParams}
 \begin{DoxyReturn}{Returns}

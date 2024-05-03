@@ -30,158 +30,58 @@
 /** @brief The name of the time file. **/
 #define TIME_NAME "time"
 
-/**
- * @brief Parse a piped command into an array of single commands.
- *
- * @details Used in the function @ref exec to parse a piped command
- * into an array of single commands.
- *
- * It also strips leading and trailing whitespaces from each command,
- * see the sencond and third example below.
- *
- * It also can handle quoted strings, as demonstrated in the third example.
- *
- * It can handle new lines as it's possible to have a command with
- * multiple lines, see the fourth example.
- *
- * Examples:
- * @code
- * - "ls -l | cat" -> ["ls -l", "cat"]
- *
- * - "  ls -l |  cat  " -> ["ls -l", "cat"]
- *
- * - "echo \"Hello   World\" |cat    " -> ["echo \"Hello   World\"", "cat"]
- *
- * - "echo \"Hello\\nWorld\" | cat\\n\\n" -> ["echo \"HelloWorld\"", "cat"]
- * @endcode
- *
- * Note: Uncomment the last for loop in this function to print the
- * resulting array of single commands.
- *
- * @param cmd The piped command to parse
- * @param N The number of commands in the array
- * @return An array of strings, or NULL if an error occurred
- */
-char** parse_cmd_pipes(char *cmd, int *N) {
-    // Count the number of pipes to determine the number of commands
-    *N = 1; // At least one command
-    for (char *c = cmd; *c != '\0'; c++) {
-        if (*c == '|') {
-            (*N)++;
-        }
-    }
+char** parse_cmd_pipes(char *cmd, int *N);
 
-    // Allocate memory for the array of strings
-    char **commands = malloc(*N * sizeof(char*));
-    if (commands == NULL) {
-        perror("Error: couldn't allocate memory for piped commands");
-        return NULL;
-    }
+char** parse_cmd(char* cmd);
 
-    // Tokenize the input command based on pipe character
-    char *token = strtok(cmd, "|");
-    int i = 0;
-    while (token != NULL) {
-        // Remove leading and trailing whitespaces from each command
-        while (*token == ' ' || *token == '\t' || *token == '\n') {
-            token++;
-        }
-        size_t len = strlen(token);
-        while (len > 0 && (token[len - 1] == ' ' || token[len - 1] == '\t' || token[len - 1] == '\n')) {
-            token[len - 1] = '\0';
-            len--;
-        }
-
-        // Allocate memory for each command string
-        commands[i] = malloc(len + 1);
-        if (commands[i] == NULL) {
-            perror("Error: couldn't allocate memory for piped command");
-            return NULL;
-        }
-
-        // Copy the token into the array
-        strcpy(commands[i], token);
-
-        // Get the next token
-        token = strtok(NULL, "|");
-        i++;
-    }
-
-    // print the array of single commands
-    /*
-    for (int j = 0; j < *N; j++) {
-        printf("Command %d: \"%s\"\n", j + 1, commands[j]);
-    }
-    */
-
-    return commands;
-}
-
-void write_error(char *cmd_name) {
-    char *msg = malloc(ERROR_MSG_SIZE);
-
-    // check errors using errno
-    if (errno == ENOENT) {
-        int result = snprintf(msg, ERROR_MSG_SIZE, "%s: not found\n", cmd_name);
-        if (result < 0 || result >= ERROR_MSG_SIZE) {
-            perror("Error: couldn't create error message with snprintf");
-        }
-        if (write(STDERR_FILENO, msg, strlen(msg)) == -1) {
-            perror("Error: couldn't write to stderr");
-        }
-    }
-    else if (errno == EACCES) {
-        int result = snprintf(msg, ERROR_MSG_SIZE, "%s: permission denied\n", cmd_name);
-        if (result < 0 || result >= ERROR_MSG_SIZE) {
-            perror("Error: couldn't create error message with snprintf");
-        }
-        if (write(STDERR_FILENO, msg, strlen(msg)) == -1) {
-            perror("Error: couldn't write to stderr");
-        }
-    }
-    else if (errno == EINVAL) {
-        perror("Error: invalid argument");
-        int result = snprintf(msg, ERROR_MSG_SIZE, "%s: invalid argument\n", cmd_name);
-        if (result < 0 || result >= ERROR_MSG_SIZE) {
-            perror("Error: couldn't create error message with snprintf");
-        }
-    }
-
-    free(msg);
-}
-
-char** parse_cmd(char* arg) {
-
-	char **exec_args = malloc(MAX_ARGS * sizeof(char*));
-
-	char *string;
-
-	char* command = strdup(arg);
-    if (command == NULL) {
-        perror("Error: couldn't allocate memory for command in parse_cmd");
-        return NULL;
-    }
-
-	string = strtok(command, " ");
-
-	int i = 0;
-	while (string != NULL) {
-		exec_args[i] = string;
-		string = strtok(NULL, " ");
-		i++;
-	}
-
-	exec_args[i] = NULL;
-    return exec_args;
-}
+void write_error(char *cmd_name);
 
 /**
- * Execute a command
- * @details TODO
+ * @brief Executes a command, single or piped, using process forking,
+ * it also handles the redirection of stdout and stderr to respective
+ * task files, as well as the writing of the execution time to a file,
+ * and the writing of the task number, command and execution time to
+ * the history file.
  *
- * @param r The request containing the command to execute, if the command is piped and the task number
- * @param output_dir The output directory to write the task results
+ * @details This is the main function of the @ref command.c
+ * module, used in @ref orchestrator.c server to execute a command.
+ *
+ * First, all the necessary files are created, such as the output
+ * directory for the task files, such as the output file,
+ * the error file and the time file. Also opens the history file
+ * to write the task number, the command and the execution time.
+ *
+ * This file names are defined in the macros @ref OUTPUT_NAME,
+ * @ref ERROR_NAME, @ref TIME_NAME and @ref HISTORY_NAME.
+ *
+ * It uses the fork system call to create a child process that will
+ * execute the command. The parent process will wait for the child
+ * process to finish. This fork call is inside another fork call
+ * so the parent process can wait for the child process to finish
+ * and send the request to the orchestrator as completed. This way
+ * the server can continue to receive and handle new requests while
+ * the child process is executing the command.
+ *
+ * The inner parent process, after waiting for the child process to
+ * finish executing the command, writes the total time since the
+ * request was received and the command finnished executing to the
+ * time file and the history file.
+ *
+ * It uses the @ref parse_cmd function to parse the command into an
+ * array of arguments. It also uses the @ref parse_cmd_pipes function
+ * in case that the command is piped.
+ *
+ * After the command is parsed is executed using the execvp system call.
+ * When execvp fails (e.g returns -1) it writes an error message to
+ * stderr using the @ref write_error function.
+ *
+ * @param r The request containing the command to execute,
+ * if the command is piped and the task number
+ * @param output_dir The output directory to create the task directory
+ * and respective task result files
  * @param start_time The time when the execute request was received
+ * to calculate the total time since the request was received
+ * and the command finnished executing
  * @return 0 if successful
  */
 int exec(Request *r, char *output_dir, struct timeval start_time) {
@@ -683,4 +583,191 @@ int exec(Request *r, char *output_dir, struct timeval start_time) {
     free(error_file);
     free(time_file);
     return 0;
+}
+
+/**
+ * @brief Parse a piped command into an array of single commands.
+ *
+ * @details Used in the function @ref exec to parse a piped command
+ * into an array of single commands.
+ *
+ * It also strips leading and trailing whitespaces from each command,
+ * see the sencond and third example below.
+ *
+ * It also can handle quoted strings, as demonstrated in the third example.
+ *
+ * It can handle new lines as it's possible to have a command with
+ * multiple lines, see the fourth example.
+ *
+ * Examples:
+ * @code
+ * - "ls -l | cat" -> ["ls -l", "cat"]
+ *
+ * - "  ls -l |  cat  " -> ["ls -l", "cat"]
+ *
+ * - "echo \"Hello   World\" |cat    " -> ["echo \"Hello   World\"", "cat"]
+ *
+ * - "echo \"Hello\nWorld\" | cat\n\n" -> ["echo \"HelloWorld\"", "cat"]
+ * @endcode
+ *
+ * Note: Uncomment the last for loop in this function to print the
+ * resulting array of single commands.
+ *
+ * @param cmd The piped command to parse
+ * @param N The number of commands in the array
+ * @return An array of strings, or NULL if an error occurred
+ */
+char** parse_cmd_pipes(char *cmd, int *N) {
+    // Count the number of pipes to determine the number of commands
+    *N = 1; // At least one command
+    for (char *c = cmd; *c != '\0'; c++) {
+        if (*c == '|') {
+            (*N)++;
+        }
+    }
+
+    // Allocate memory for the array of strings
+    char **commands = malloc(*N * sizeof(char*));
+    if (commands == NULL) {
+        perror("Error: couldn't allocate memory for piped commands");
+        return NULL;
+    }
+
+    // Tokenize the input command based on pipe character
+    char *token = strtok(cmd, "|");
+    int i = 0;
+    while (token != NULL) {
+        // Remove leading and trailing whitespaces from each command
+        while (*token == ' ' || *token == '\t' || *token == '\n') {
+            token++;
+        }
+        size_t len = strlen(token);
+        while (len > 0 && (token[len - 1] == ' ' || token[len - 1] == '\t' || token[len - 1] == '\n')) {
+            token[len - 1] = '\0';
+            len--;
+        }
+
+        // Allocate memory for each command string
+        commands[i] = malloc(len + 1);
+        if (commands[i] == NULL) {
+            perror("Error: couldn't allocate memory for piped command");
+            return NULL;
+        }
+
+        // Copy the token into the array
+        strcpy(commands[i], token);
+
+        // Get the next token
+        token = strtok(NULL, "|");
+        i++;
+    }
+
+    // print the array of single commands
+    /*
+    for (int j = 0; j < *N; j++) {
+        printf("Command %d: \"%s\"\n", j + 1, commands[j]);
+    }
+    */
+
+    return commands;
+}
+
+/**
+ * @brief Parse a command into an array of arguments.
+ *
+ * @details Used in the function @ref exec to parse a command
+ * into an array of arguments.
+ *
+ * It also strips leading and trailing whitespaces from each argument,
+ * see the sencond and third example below.
+ *
+ * It also can handle quoted strings, as demonstrated in the third example.
+ *
+ * Examples:
+ * @code
+ * - "ls -l -a" -> ["ls", "-l", "-a", NULL]
+ *
+ * - "  ls -l    -a" -> ["ls", "-l", "-a", NULL]
+ *
+ * - "echo \"Hello   World\"" -> ["echo", "Hello   World", NULL]
+ * @endcode
+ *
+ * @param cmd The command to parse
+ * @return An array of arguments, or NULL if an error occurred
+ */
+char** parse_cmd(char* cmd) {
+
+	char **exec_args = malloc(MAX_ARGS * sizeof(char*));
+
+	char *string;
+
+	char* command = strdup(cmd);
+    if (command == NULL) {
+        perror("Error: couldn't allocate memory for command in parse_cmd");
+        return NULL;
+    }
+
+	string = strtok(command, " ");
+
+	int i = 0;
+	while (string != NULL) {
+		exec_args[i] = string;
+		string = strtok(NULL, " ");
+		i++;
+	}
+
+	exec_args[i] = NULL;
+    return exec_args;
+}
+
+/**
+ * @brief Write an error message to stderr.
+ *
+ * @details Used in the function @ref exec to write an error
+ * message to stderr when a command fails.
+ *
+ * It's meant to be used after execvp fails, and the
+ * redirection of stderr to an error log file, via the dup2
+ * function.
+ *
+ * It checks the errno to determine the type of error, being:
+ * - ENOENT: command not found
+ *
+ * - EACCES: permission denied
+ *
+ * - EINVAL: invalid argument(s)
+ *
+ * @param cmd_name The name of the command that failed
+ */
+void write_error(char *cmd_name) {
+    char *msg = malloc(ERROR_MSG_SIZE);
+
+    // check errors using errno
+    if (errno == ENOENT) {
+        int result = snprintf(msg, ERROR_MSG_SIZE, "%s: not found\n", cmd_name);
+        if (result < 0 || result >= ERROR_MSG_SIZE) {
+            perror("Error: couldn't create error message with snprintf");
+        }
+        if (write(STDERR_FILENO, msg, strlen(msg)) == -1) {
+            perror("Error: couldn't write to stderr");
+        }
+    }
+    else if (errno == EACCES) {
+        int result = snprintf(msg, ERROR_MSG_SIZE, "%s: permission denied\n", cmd_name);
+        if (result < 0 || result >= ERROR_MSG_SIZE) {
+            perror("Error: couldn't create error message with snprintf");
+        }
+        if (write(STDERR_FILENO, msg, strlen(msg)) == -1) {
+            perror("Error: couldn't write to stderr");
+        }
+    }
+    else if (errno == EINVAL) {
+        perror("Error: invalid argument");
+        int result = snprintf(msg, ERROR_MSG_SIZE, "%s: invalid argument\n", cmd_name);
+        if (result < 0 || result >= ERROR_MSG_SIZE) {
+            perror("Error: couldn't create error message with snprintf");
+        }
+    }
+
+    free(msg);
 }
