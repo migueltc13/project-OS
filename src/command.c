@@ -46,32 +46,32 @@ void write_error(char *cmd_name);
  * @details This is the main function of the @ref command.c
  * module, used in @ref orchestrator.c server to execute a command.
  *
- * First, all the necessary files are created, such as the output
+ * First, all the necessary files are created, namely the output
  * directory for the task files, such as the output file,
  * the error file and the time file. Also opens the history file
  * to write the task number, the command and the execution time.
  *
- * This file names are defined in the macros @ref OUTPUT_NAME,
+ * This file's names are defined in the macros @ref OUTPUT_NAME,
  * @ref ERROR_NAME, @ref TIME_NAME and @ref HISTORY_NAME.
  *
  * It uses the fork system call to create a child process that will
  * execute the command. The parent process will wait for the child
  * process to finish. This fork call is inside another fork call
  * so the parent process can wait for the child process to finish
- * and send the request to the orchestrator as completed. This way
+ * and send the request to the orchestrator as completed. This way,
  * the server can continue to receive and handle new requests while
  * the child process is executing the command.
  *
  * The inner parent process, after waiting for the child process to
  * finish executing the command, writes the total time since the
- * request was received and the command finnished executing to the
+ * request was received and the command finished executing to the
  * time file and the history file.
  *
  * It uses the @ref parse_cmd function to parse the command into an
  * array of arguments. It also uses the @ref parse_cmd_pipes function
- * in case that the command is piped.
+ * in case the command is piped.
  *
- * After the command is parsed is executed using the execvp system call.
+ * After the command is parsed, it is executed using the execvp system call.
  * When execvp fails (e.g returns -1) it writes an error message to
  * stderr using the @ref write_error function.
  *
@@ -81,7 +81,7 @@ void write_error(char *cmd_name);
  * and respective task result files
  * @param start_time The time when the execute request was received
  * to calculate the total time since the request was received
- * and the command finnished executing
+ * and the command finished executing
  * @return 0 if successful
  */
 int exec(Request *r, char *output_dir, struct timeval start_time) {
