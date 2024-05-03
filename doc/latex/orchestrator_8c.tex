@@ -225,7 +225,7 @@ Handle the status request sent by a client.
 
 The function will send the status of the executing, scheduled and completed requests to the client via the client FIFO located in the request.
 
-This functions creates a process to send the status to the respective client, this way other clients can still send requests to the server and receive responses.
+This function creates a process to send the status to the respective client, this way, other clients can still send requests to the server and receive responses.
 
 It uses the history file (\mbox{\hyperlink{command_8h_a937f20aeca8cb1f294ad9b68340fb2d1}{HISTORY\+\_\+\+NAME}}) to get the completed requests, and the function \mbox{\hyperlink{orchestrator_8c_a92b568074f1b5c1d6d982814e56af12f}{send\+\_\+status}} to send the status to the client.
 
@@ -261,7 +261,7 @@ The function will remove the request from the executing array and check for sche
 
 If there are scheduled requests, the function will remove the request from the scheduled array, add it to the executing array, and execute the command.
 
-If there\textquotesingle{}s a available scheduled request, the function will send a message to the client with the task number and the status of the request -\/ either executing or scheduled.
+If there\textquotesingle{}s an available scheduled request, the function will send a message to the client with the task number and the status of the request -\/ either executing or scheduled.
 
 It uses the function \mbox{\hyperlink{command_8c_a7c52b2573cda56b38259890b03be026e}{exec}} to execute the command, defined in \mbox{\hyperlink{command_8c}{command.\+c}}, and the function \mbox{\hyperlink{orchestrator_8c_a516606ae6b0f07be66d2e72f75f4e89b}{select\+\_\+request}} to select the next scheduled request, if any exists, to execute.
 
@@ -389,12 +389,12 @@ If the number of parallel tasks is not provided or is less than or equal to zero
 
 If the scheduling policy is not provided, the default policy is applied via the \mbox{\hyperlink{orchestrator_8c_a67972eda1492b6dac2f752c3a5731e7d}{DEFAULT\+\_\+\+POLICY}} macro.
 
-It\textquotesingle{}s responsable for executing or scheduling requests with type \mbox{\hyperlink{request_8h_a05e20d8bc0525f94757303dd5a905a69}{EXECUTE}} sent from the clients. If the max number of parallel tasks is reached, the request will be scheduled. Based on this action, the orchestrator program will send a response to the client with the task number and the status of the request -\/ either executing or scheduled.
+It\textquotesingle{}s responsible for executing or scheduling requests with type \mbox{\hyperlink{request_8h_a05e20d8bc0525f94757303dd5a905a69}{EXECUTE}} sent from the clients. If the max number of parallel tasks is reached, the request will be scheduled. Based on this action, the orchestrator program will send a response to the client with the task number and the status of the request -\/ either executing or scheduled.
 
 \begin{DoxySeeAlso}{See also}
 \mbox{\hyperlink{orchestrator_8c_ac4d92856ad4e907c14868ed1f7ff44bf}{handle\+\_\+execute}}
 \end{DoxySeeAlso}
-Once a command finnish his execution, the orchestrator program will receive a request with type \mbox{\hyperlink{request_8h_a22c88fdadb7d8f8417a92cdcc6232786}{COMPLETED}} sent from the parent process of the child process that executed command, and will execute next available scheduled request, if any exists, based on the scheduling policy applied.
+Once a command finishes its execution, the orchestrator program will receive a request with type \mbox{\hyperlink{request_8h_a22c88fdadb7d8f8417a92cdcc6232786}{COMPLETED}} sent from the parent process of the child process that executed the command, and will execute next available scheduled request, if any exists, based on the scheduling policy applied.
 
 \begin{DoxySeeAlso}{See also}
 \mbox{\hyperlink{orchestrator_8c_ac762ba1a08298dc06ace6084b58963ea}{handle\+\_\+completed}}
