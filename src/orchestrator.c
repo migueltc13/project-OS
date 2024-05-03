@@ -76,7 +76,7 @@ void clean_up_all(int fd, Request *r,
  * If the scheduling policy is not provided, the default policy
  * is applied via the @ref DEFAULT_POLICY macro.
  *
- * It's responsable for executing or scheduling requests with type
+ * It's responsible for executing or scheduling requests with type
  * @ref EXECUTE sent from the clients. If the max number of parallel
  * tasks is reached, the request will be scheduled. Based on this
  * action, the orchestrator program will send a response to the client
@@ -85,9 +85,9 @@ void clean_up_all(int fd, Request *r,
  *
  * @see handle_execute
  *
- * Once a command finnish his execution, the orchestrator program
+ * Once a command finishes its execution, the orchestrator program
  * will receive a request with type @ref COMPLETED sent from the parent
- * process of the child process that executed command, and will execute
+ * process of the child process that executed the command, and will execute
  * next available scheduled request, if any exists, based on the
  * scheduling policy applied.
  *
@@ -580,8 +580,8 @@ int handle_execute(Request *r,
  * scheduled and completed requests to the client via the client
  * FIFO located in the request.
  *
- * This functions creates a process to send the status to the
- * respective client, this way other clients can still send
+ * This function creates a process to send the status to the
+ * respective client, this way, other clients can still send
  * requests to the server and receive responses.
  *
  * It uses the history file (@ref HISTORY_NAME) to get the
@@ -638,7 +638,7 @@ int handle_status(Request *r,
  * request from the scheduled array, add it to the executing array,
  * and execute the command.
  *
- * If there's a available scheduled request, the function will send
+ * If there's an available scheduled request, the function will send
  * a message to the client with the task number and the status of
  * the request - either executing or scheduled.
  *

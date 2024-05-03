@@ -19,7 +19,7 @@
  *
  * @var request::est_time
  * The estimated time or the priority of the request, based on the policy
- * being used int the @ref orchestrator.c server.
+ * being used in the @ref orchestrator.c server.
  *
  * @var request::command
  * The command to be executed or marked as completed.
@@ -181,7 +181,7 @@ void set_client_fifo(Request *r, char *client_fifo) {
  *
  * Based on the policy being used, it prints the estimated time or the priority.
  *
- * Is the policy is FCFS, it doesn't print either the estimated time or the priority.
+ * If the policy is FCFS, it doesn't print either the estimated time or the priority.
  * @param r The request to print
  * @param policy The policy being used
  */
