@@ -1,0 +1,123 @@
+%% Blue cover color
+\definecolor{titlepagecolor}{RGB}{60, 60, 60}
+
+%==========================================================================
+% COLORED BAR ON THE LEFT SIDE
+%==========================================================================
+
+\backgroundsetup{
+    scale=1,
+    angle=0,
+    opacity=1,
+    contents={
+        \begin{tikzpicture}[remember picture,overlay]
+            \path [fill=titlepagecolor] (-10.5,-15) rectangle ++ (5,30);
+            \node[color=white] at (-7,-12) {\bfseries {\fontsize{120}{60} \textsf{S}}};
+            \node[color=titlepagecolor] at (-4,-12) {\bfseries {\fontsize{120}{60} \textsf{O}}};
+        \end{tikzpicture}
+    }
+}
+
+%==========================================================================
+% TITLE PAGE INFO
+%==========================================================================
+
+%% Changes values in this field to show information in the cover and back cover about your team/project
+
+%% TITLE
+\title{Orquestrador de Tarefas}
+
+%% AUTHORS
+\author{
+    Flávia Alexandra Silva Araújo (A96587) \\
+  \quad
+    Miguel Torres Carvalho (A95485)
+}
+
+%% Date
+
+\date{\today}
+
+%% Course
+\newcommand{\Course}{Licenciatura em Engenharia Informática}
+
+%% Department
+\newcommand{\Department}{Escola de Engenharia}
+
+%% UniName
+\newcommand{\UniName}{Universidade do Minho}
+
+%% UniPic
+\newcommand{\UniPic}{\includegraphics[scale=0.09]{images/uminho.png}}
+
+%% University
+\newcommand{\University}{
+    \begin{flushleft}
+        \UniPic
+    \end{flushleft}
+    \textcolor{gray}{\small\textbf{\textsf{\UniName}}}\par
+    \textcolor{gray!80!white}{\small{\textsf{\Department}}}\par
+    \textcolor{gray!70!white}{\small{\textsf{\Course}}}
+}
+
+%% UC
+\newcommand{\UC}{
+    \begin{flushleft}
+        \par\textcolor{titlepagecolor}{  \LARGE\textbf{\textsf{Unidade Curricular de \\ Sistemas Operativos}}}
+    \end{flushleft}
+}
+
+%% School Year
+\newcommand{\SchoolYear}{
+    \small{\textsf{Ano Letivo de 2023/2024}}}
+
+
+%% Define new command to show title, author and date
+\makeatletter
+\let\Title\@title
+\let\Author\@author
+\let\Date\@date
+\makeatother
+
+%% MAKETEMPLATE
+\newcommand{\makecover}{
+
+%% Removes page number on footer
+\thispagestyle{empty}
+
+%% No indentation
+\setlength{\parindent}{0em}
+
+%% Put Background defined on \backgroundsetup, in this page
+\BgThispage
+
+%% Changing geometry to prevent overlay with text
+%% At the end of back cover, geometry is default with \restoregeometry
+\newgeometry{top=5cm,left=6cm,right=3cm,bottom=2cm}
+
+%% builds university info defined previously
+\University
+\vspace{1cm}
+%% builds curricular unity info defined previously
+\UC
+%% builds school year info defined previously
+\SchoolYear
+
+\vspace*{5cm}
+%% bigger space (i think its the default one) between paragraphs
+\setlength{\parskip}{1em}
+
+%% builds title info defined previously
+\par\textbf{\textsf{\huge\Title}}
+\vspace{1cm}
+%% builds author(s) info defined previously
+\par\Author
+
+\vspace{0.5cm}
+
+%% builds date info defined previously
+\par\Date
+\restoregeometry
+\pagebreak
+
+}

@@ -1,0 +1,269 @@
+\documentclass[a4paper,11pt]{scrreprt}
+    %% Used for changing geometry of the page
+    %% Cover page text cannot overlay cover sketching/style
+    %% https://ctan.org/pkg/geometry?lang=en
+\usepackage{geometry}
+    %% Changes language of some packages protocols
+    %% e.g., when captioning images: Figure 1. -> Figura 1.
+    %% https://ctan.org/pkg/babel?lang=en
+\usepackage[portuguese]{babel}
+    %% Used for special fonts
+    %% Cannot be compiled with pdflatex
+    %% https://ctan.org/pkg/fontspec?lang=en
+\usepackage{fontspec}
+    %% Arial FONT
+    \setmainfont{Arial}
+    %% More colors and color options
+    %% https://ctan.org/pkg/xcolor?lang=en
+    %% https://ctan.org/pkg/colortbl?lang=en
+\usepackage{xcolor,colortbl}
+    %% More tabular options, like dashed/dotted lines
+    %% https://ctan.org/pkg/arydshln?lang=en
+\usepackage{arydshln}
+    %% List of acronyms
+    %% https://ctan.org/pkg/nomencl?lang=en
+\usepackage[intoc]{nomencl}
+    %% Must be called to init nomencl environment
+    \makenomenclature
+    %% More images options/settings
+    %% https://ctan.org/pkg/graphicx?lang=en
+\usepackage{graphics}
+    %% Defining subdirectories to image path enviornment
+    %% \graphicspath{{sub1}{sub2}...{subN}}
+    \graphicspath{{images}}
+
+    %% used to handle cross-referencing commands in LaTeX to produce hypertext links in the document
+    %% https://ctan.org/pkg/hyperref?lang=en
+\usepackage{hyperref}
+    %% math environments
+    %% https://ctan.org/pkg/amsmath?lang=en
+    %% settings
+    \hypersetup{
+        colorlinks,
+        citecolor=black,
+        filecolor=black,
+        linkcolor=black,
+        urlcolor=black
+    }
+
+\usepackage{amsmath}
+    %% Defining backgrouns, used to make the cover
+    %% https://ctan.org/pkg/background?lang=en
+\usepackage[some]{background}
+    %% Used to make drawings or complex graphics
+    %% http://pgf.sourceforge.net/pgf_CVS.pdf
+\usepackage{tikz}
+    %% Tikz library to point operations ((x1,y1) + (x2,y2))
+    \usetikzlibrary{calc}
+
+%% code snippets
+\usepackage{listings}
+\usepackage{color}
+
+\definecolor{dkgreen}{rgb}{0,0.6,0}
+\definecolor{gray}{rgb}{0.5,0.5,0.5}
+\definecolor{mauve}{rgb}{0.58,0,0.82}
+
+\lstset{
+    frame=tb,
+    language=C,
+    aboveskip=3mm,
+    belowskip=3mm,
+    showstringspaces=false,
+    columns=flexible,
+    basicstyle={\small\ttfamily},
+    numbers=left,
+    numberstyle=\small\color{gray},
+    keywordstyle=\color{blue},
+    commentstyle=\color{dkgreen},
+    stringstyle=\color{mauve},
+    breaklines=true,
+    breakatwhitespace=true,
+    tabsize=3,
+    moredelim=**[is][\color{blue}]{@}{@}
+}
+
+%% further RelaX definitions
+%% \usepackage{stix}
+
+%% Defining sfdefault font and default font for document
+\renewcommand{\familydefault}{\sfdefault}
+
+%% For tables
+\usepackage{pbox}
+\usepackage{longtable}
+\usepackage{xcolor} % for coloring rows
+\usepackage{multirow}
+\usepackage{hhline}
+\usepackage{array}
+
+%==========================================================================
+% DOCUMENT
+%==========================================================================
+
+\begin{document}
+
+\pagenumbering{gobble}
+
+%% Costume made cover
+%% From there you can use \makecover command to build the cover
+\include{cover}
+
+% builds the cover
+\makecover
+
+%% smaller footer and header size
+\newgeometry{top=3cm,left=3cm,right=3cm,bottom=4cm}
+\savegeometry{default}
+
+%==========================================================================
+% BEGIN OPCIONAL DEDICATÓRIA
+%==========================================================================
+
+% \clearpage
+% \begin{center}
+%     \thispagestyle{empty}
+%     \vspace*{\fill}
+%
+%     $<<$/opcional Dedicatória$>>$
+%
+%     \vspace*{\fill}
+% \end{center}
+% \clearpage
+
+%==========================================================================
+% END OPCIONAL DEDICATÓRIA
+%==========================================================================
+
+%==========================================================================
+% BEGIN ABSTRACT PAGE
+%==========================================================================
+
+%% Abstract name: \Large font size, flushed left and paragraph skip before abstract content
+\renewenvironment{abstract}
+ {\par\noindent\textbf{\Large\abstractname}\par\bigskip}
+ {}
+
+\begin{flushleft}
+\begin{abstract}
+
+    \textcolor{red}{>> Atualizar o resumo do relatório de acordo com as mudanças na segunda parte do trabalho.}
+
+\end{abstract}
+\end{flushleft}
+
+\pagebreak
+
+%==========================================================================
+% END ABSTRACT PAGE
+%==========================================================================
+
+%==========================================================================
+% BEGIN INDEXES PAGES
+%==========================================================================
+
+%% Changes table of content name
+%% Portuguese babel default : “Conteúdo”
+%% Personally I prefer “índice”
+\renewcommand{\contentsname}{Índice}
+\renewcommand{\listfigurename}{Índice de Figuras}
+% \renewcommand{\listtablename}{Índice de Tabelas}
+
+\tableofcontents
+
+\pagebreak
+
+\listoffigures
+
+\pagebreak
+
+% \listoftables
+%
+% \pagebreak
+
+%==========================================================================
+% END INDEXES PAGES
+%==========================================================================
+
+%==========================================================================
+% BEGIN INTRODUCTION
+%==========================================================================
+
+%% Starting page numbering here
+\pagenumbering{arabic}
+
+\chapter{Definição do Sistema}
+    \section{Contexto de Aplicação}
+
+%==========================================================================
+% BEGIN CONCLUSÕES DE TRABALHO FUTURO
+%==========================================================================
+
+\newgeometry{top=2.5cm}
+\chapter{Conclusões e Trabalho Futuro}
+
+\loadgeometry{default}
+
+%==========================================================================
+% END CONCLUSÕES DE TRABALHO FUTURO
+%==========================================================================
+
+%==========================================================================
+% BEGIN BIBLIOGRAFIA
+%==========================================================================
+
+%% Changes biblibography name
+%% Portuguese babel default : “Bibliografia”
+%% Personally I prefer “Referências”
+% \renewcommand\bibname{Referências}
+
+%% https://www.overleaf.com/learn/latex/bibliography_management_with_bibtex
+
+% %% Add bibliografia to index
+% \addcontentsline{toc}{chapter}{Bibliografia}
+
+%==========================================================================
+% END BIBLIOGRAFIA
+%==========================================================================
+
+%==========================================================================
+% BEGIN LISTA DE SIGLAS E ACRÓNIMOS
+%==========================================================================
+
+%% Portuguese babel does not translate this environment
+% \renewcommand{\nomname}{Lista de Siglas e Acrónimos}
+
+%% Text that can be shown before acronyms list
+% \renewcommand{\nompreamble}{
+%     \textcolor{red}{
+%         <<Apresentar uma lista com todas as siglas e acrónimos utilizados durante a realização do trabalho. O formato base para esta lista deverá ser da forma como abaixo se apresenta.>>
+%     }
+% }
+
+%% acronyms
+% \nomenclature[01]{\textbf{SO}}{Sistemas Operativos}
+
+%% Show acronyms
+% \printnomenclature
+
+%==========================================================================
+% END LISTA DE SIGLAS E ACRÓNIMOS
+%==========================================================================
+
+%==========================================================================
+% BEGIN ANEXOS
+%==========================================================================
+%
+%% Why \addchap, instead of \chapter?
+%% \addchap has no numbering but appears in table of contents.
+\addchap{Anexos}
+
+    \addsec{
+        \href{Example}{\small [I] Example}
+        \label{anexo:1}
+    }
+
+%==========================================================================
+% END ANEXOS
+%==========================================================================
+\end{document}
