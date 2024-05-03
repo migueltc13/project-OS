@@ -37,12 +37,12 @@
  * into an array of single commands.
  *
  * It also strips leading and trailing whitespaces from each command,
- * see the sencond and third example below.
+ * as seen in the second and third example below.
  *
  * It also can handle quoted strings, as demonstrated in the third example.
  *
  * It can handle new lines as it's possible to have a command with
- * multiple lines, see the fourth example.
+ * multiple lines, as seen on the fourth example.
  *
  * Examples:
  * @code
@@ -179,7 +179,7 @@ char** parse_cmd(char* arg) {
  * Execute a command
  * @details TODO
  *
- * @param r The request containing the command to execute, if the command is piped and the task number
+ * @param r The request containing the command to execute, if the command is piped, and the task number
  * @param output_dir The output directory to write the task results
  * @param start_time The time when the execute request was received
  * @return 0 if successful

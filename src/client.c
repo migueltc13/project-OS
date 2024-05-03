@@ -27,7 +27,7 @@ void kill_usage(char *name);
  * The client program can execute a command, check the status of
  * the executing, scheduled and completed requests, or kill the server.
  *
- * It's responsable for parsing the arguments and sending the
+ * It's responsible for parsing the arguments and sending the
  * requests to the server program via the server FIFO.
  *
  * The status and execute options require the creation of a client
