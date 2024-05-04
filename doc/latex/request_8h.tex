@@ -168,6 +168,13 @@ Example of the creation of a status request\+:
 \end{DoxyCode}
 
 
+Example of the creation of a kill request\+: 
+\begin{DoxyCode}{0}
+\DoxyCodeLine{\mbox{\hyperlink{structrequest}{Request}} *kill\_request = \mbox{\hyperlink{request_8h_ab4cb76d84eca459d1b80c7b1a1741192}{create\_request}}(\mbox{\hyperlink{request_8h_a9d385e974a49598d267af81de5a33838}{KILL}}, 0, NULL, \textcolor{keyword}{false}, \textcolor{stringliteral}{"{}client-\/1234"{}});}
+
+\end{DoxyCode}
+
+
 {\bfseries{The caller is responsible for freeing the returned request by this function.}} 
 \begin{DoxyParams}{Parameters}
 {\em type} & the type of the request \\

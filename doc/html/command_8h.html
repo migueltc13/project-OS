@@ -164,17 +164,17 @@ Functions</h2></td></tr>
 
 <p>Executes a command, single or piped, using process forking, it also handles the redirection of stdout and stderr to respective task files, as well as the writing of the execution time to a file, and the writing of the task number, command and execution time to the history file. </p>
 <p>This is the main function of the <a class="el" href="command_8c.html">command.c</a> module, used in <a class="el" href="orchestrator_8c.html">orchestrator.c</a> server to execute a command.</p>
-<p>First, all the necessary files are created, such as the output directory for the task files, such as the output file, the error file and the time file. Also opens the history file to write the task number, the command and the execution time.</p>
-<p>This file names are defined in the macros <a class="el" href="command_8c.html#a2a9e71d817d8ed2fa28ce7c7174f403e">OUTPUT_NAME</a>, <a class="el" href="command_8c.html#a5c3d9acd67ec01c64586edc0046dbde6">ERROR_NAME</a>, <a class="el" href="command_8c.html#a8ebe81095ed8d1416071e2403de02de9">TIME_NAME</a> and <a class="el" href="command_8h.html#a937f20aeca8cb1f294ad9b68340fb2d1">HISTORY_NAME</a>.</p>
-<p>It uses the fork system call to create a child process that will execute the command. The parent process will wait for the child process to finish. This fork call is inside another fork call so the parent process can wait for the child process to finish and send the request to the orchestrator as completed. This way the server can continue to receive and handle new requests while the child process is executing the command.</p>
-<p>The inner parent process, after waiting for the child process to finish executing the command, writes the total time since the request was received and the command finnished executing to the time file and the history file.</p>
-<p>It uses the <a class="el" href="command_8c.html#afcb166c07479038a015882c5cb6e9a24">parse_cmd</a> function to parse the command into an array of arguments. It also uses the <a class="el" href="command_8c.html#a1c902d6f3597bd174b4da437f58181c1">parse_cmd_pipes</a> function in case that the command is piped.</p>
-<p>After the command is parsed is executed using the execvp system call. When execvp fails (e.g returns -1) it writes an error message to stderr using the <a class="el" href="command_8c.html#ad16a1633214a99ca20cfeba39328ab44">write_error</a> function.</p>
+<p>First, all the necessary files are created, namely the output directory for the task files, such as the output file, the error file and the time file. Also opens the history file to write the task number, the command and the execution time.</p>
+<p>This file's names are defined in the macros <a class="el" href="command_8c.html#a2a9e71d817d8ed2fa28ce7c7174f403e">OUTPUT_NAME</a>, <a class="el" href="command_8c.html#a5c3d9acd67ec01c64586edc0046dbde6">ERROR_NAME</a>, <a class="el" href="command_8c.html#a8ebe81095ed8d1416071e2403de02de9">TIME_NAME</a> and <a class="el" href="command_8h.html#a937f20aeca8cb1f294ad9b68340fb2d1">HISTORY_NAME</a>.</p>
+<p>It uses the fork system call to create a child process that will execute the command. The parent process will wait for the child process to finish. This fork call is inside another fork call so the parent process can wait for the child process to finish and send the request to the orchestrator as completed. This way, the server can continue to receive and handle new requests while the child process is executing the command.</p>
+<p>The inner parent process, after waiting for the child process to finish executing the command, writes the total time since the request was received and the command finished executing to the time file and the history file.</p>
+<p>It uses the <a class="el" href="command_8c.html#afcb166c07479038a015882c5cb6e9a24">parse_cmd</a> function to parse the command into an array of arguments. It also uses the <a class="el" href="command_8c.html#a1c902d6f3597bd174b4da437f58181c1">parse_cmd_pipes</a> function in case the command is piped.</p>
+<p>After the command is parsed, it is executed using the execvp system call. When execvp fails (e.g returns -1) it writes an error message to stderr using the <a class="el" href="command_8c.html#ad16a1633214a99ca20cfeba39328ab44">write_error</a> function.</p>
 <dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
     <tr><td class="paramname">r</td><td>The request containing the command to execute, if the command is piped and the task number </td></tr>
     <tr><td class="paramname">output_dir</td><td>The output directory to create the task directory and respective task result files </td></tr>
-    <tr><td class="paramname">start_time</td><td>The time when the execute request was received to calculate the total time since the request was received and the command finnished executing </td></tr>
+    <tr><td class="paramname">start_time</td><td>The time when the execute request was received to calculate the total time since the request was received and the command finished executing </td></tr>
   </table>
   </dd>
 </dl>
@@ -187,7 +187,7 @@ Functions</h2></td></tr>
         <hr class="footer">
         <address class="footer">
             <small>
-                Generated on Fri May 3 2024 23:59:28 for <b>Orchestrator</b> by
+                Generated on Sat May 4 2024 17:55:54 for <b>Orchestrator</b> by
                 <a href="http://www.doxygen.org/index.html">
                     <img class="footer" src="doxygen.png" alt="doxygen" onerror="this.onerror=null;this.src='doxygen.svg';"/>
                 </a> 1.9.1. All rights reserved.
