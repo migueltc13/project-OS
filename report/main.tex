@@ -193,6 +193,30 @@
     \section{Diagrama de Arquitetura do Serviço}
     \section{Descrição dos Módulos Desenvolvidos}
         \subsection{Orquestrador (\textit{orchestrator.c})}
+        O orquestrador é módulo principal do serviço, sendo responsável por:
+        \begin{itemize}
+            \item Fazer o \textit{parsing} dos argumentos da linha de comandos;
+            \item Criar o FIFO do servidor;
+            \item Receber os pedidos dos clientes enviados pelo FIFO do servidor e lidar com estes adequadamente;
+            \item Enviar as respostas dos pedidos dos clientes pelos seus respetivos FIFOs.
+        \end{itemize}
+        Este lida com os pedidos dos clientes tendo em conta a política de escalonamento definida previamente.
+
+        O orquestrador pode receber quatro tipos de pedidos:
+        \begin{itemize}
+            \item \textit{\textbf{EXECUTE}} - Pedido para executar um comando.
+            Se o número máximo de tarefas em paralelo for atingido, o orquestrador coloca o pedido em espera até que uma tarefa termine, enviando uma resposta ao cliente com o número da tarefa e o estado do pedido (em espera ou a executar).
+
+            \item \textit{\textbf{COMPLETED}} - Assim que um comando terminar a sua execução, o orquestrador recebe um pedido deste tipo enviado pelo processo-pai do processo-filho que executou o comando, e executará o próximo comando em espera - se existir.
+
+            \item \textit{\textbf{STATUS}} - Pedido para consultar o estado de uma tarefa.
+            O orquestrador envia uma resposta ao cliente com o estado da tarefa através do seu FIFO.
+
+            \item \textit{\textbf{KILL}} - Pedido para terminar o servidor.
+            Quando o orquestrador recebe este pedido, termina o programa, porém, antes de terminar, guarda o número do último pedido de \textit{execute} recebido num ficheiro, fecha os FIFOs e liberta a memória alocada para as tarefas em execução e em espera.
+            O orquestrador continua a correr até receber este pedido de um cliente, ou até receber um sinal do sistema operativo para interromper/terminar.
+        \end{itemize}
+
         \subsection{Cliente (\textit{client.c})}
         \subsection{Pedido (\textit{request.c})}
         \subsection{Comando (\textit{command.c})}
