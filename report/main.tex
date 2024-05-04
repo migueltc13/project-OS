@@ -113,7 +113,7 @@
 \makecover
 
 %% smaller footer and header size
-\newgeometry{top=3cm,left=3cm,right=3cm,bottom=4cm}
+\newgeometry{top=3cm,left=3cm,right=3cm,bottom=3cm}
 \savegeometry{default}
 
 %==========================================================================
@@ -200,16 +200,76 @@
         \subsection{Pedido (\textit{request.c})}
         \subsection{Comando (\textit{command.c})}
         \subsection{Número de Tarefa (\textit{task\_nr.c})}
-    \section{Diagrama de Comunicação entre Servidor e Cliente}
+    \section{Diagramas de Comunicação entre Servidor e Cliente}
+        \subsection{Execução e Agendamento de Tarefas}
+            \newgeometry{top=3cm,left=0.1cm,right=0.1cm,bottom=4cm}
+            \begin{figure}[!ht]
+                \centering
+                \includegraphics[scale=0.7]{diagrams/execute_schedule.png}
+                \caption{Diagrama de Comunicação para Execução e Agendamento de Tarefas}
+                \label{fig:3.1}
+            \end{figure}
+            \loadgeometry{default}
+        \subsection{Estado de Tarefas}
+            % \newgeometry{top=3cm,left=0.1cm,right=0.1cm,bottom=4cm}
+            % \begin{figure}[!ht]
+            %     \centering
+            %     \includegraphics[scale=0.7]{diagrams/task_state.png}
+            %     \caption{Diagrama de Comunicação para Estado de Tarefas}
+            %     \label{fig:3.2}
+            % \end{figure}
+            % \loadgeometry{default}
 
 \chapter{Argumentos da Interface de Linha de Comandos}
     \section{\textit{Orchestrator}}
     \section{\textit{Client}}
 
 \chapter{Avaliação de Políticas de Escalonamento}
+    No trabalho desenvolvido, foram implementadas três políticas de escalonamento de tarefas.
+    Estas serão aprofundadas nas secções seguintes, assim como as suas avaliações práticas.
+    Por favor consulte o anexo \nameref{anexo:2} para mais detalhes de como for realizada
+    a implementação destas políticas.
+
+    \textcolor{red}{>> Atualizar a introdução da avaliação de políticas de escalonamento.}
     \section{\textbf{FCFS} - \textit{First Come First Served}}
+        Nesta política, as tarefas são executadas por ordem de chegada, o que não é
+        eficiente em termos de tempo de espera e execução. No entanto, é uma política
+        simples e fácil de implementar.
+
+        \textcolor{red}{>> Escrever sobre a avaliação prática desta política + Imagem}
     \section{\textbf{SJF} - \textit{Shortest Job First}}
+        A política \textit{Shortest Job First} é uma política de escalonamento não preemptiva
+        que seleciona a tarefa com o menor tempo de execução, este tempo é passado como
+        argumento na opção \textit{execute} do cliente e repesenta uma estimativa do tempo
+        que a tarefa demorará a ser executada.
+
+        Esta política é eficiente em termos de tempo de espera e execução, mas pode levar
+        a situações de \textit{starvation}, que ocorrem quando tarefas com tempos de execução
+        maiores são sempre adiadas, e num caso extremo, quando surgem constantemente tarefas
+        com tempos de execução menores, estas de maior duração nunca serão executadas.
+
+        Existem várias maneiras de lidar com situações de \textit{starvation}, como por exemplo
+        a criação de uma especificação de tempo máximo de espera para cada tarefa, ou a
+        definicação de um numero máximo de tarefas que podem ser executadas antes de uma
+        tarefa com tempo de execução maior. Outra solução seria a implementação de uma
+        política de escalonamento preemptiva, que permitiria a interrupção de tarefas em
+        execução, para dar lugar a tarefas com tempos de execução menores.
+
+        \textcolor{red}{>> Escrever sobre a avaliação prática desta política + Imagem}
     \section{\textbf{PES} - \textit{Priority Escalonation Scheduling}}
+        De forma a evitar situações de \textit{starvation}, foi implementada a política
+        \textit{Priority Escalonation Scheduling}. Nesta, as tarefas são executadas
+        de acordo com a sua prioridade, que é definida pelo cliente na opção \textit{execute},
+        simliarmente como o tempo estimado que é passado como argumento na política \textit{SJF}.
+
+        As tarefas com maior prioridade são executadas primeiro, evitando
+        situações de \textit{starvation}. As prioridades ficam a critério do cliente,
+        possibilitando uma maior versatilidade na execução de tarefas, permitindo ao cliente
+        definir a prioridade adequada para cada tarefa que deseja executar. No entanto, esta
+        flexibilidade não garante a eficiência da execução das tarefas, caso estas não sejam
+        corretamente priorizadas.
+
+        \textcolor{red}{>> Escrever sobre a avaliação prática desta política + Imagem}
 
 \chapter{Testes Desenvolvidos}
 
@@ -218,8 +278,43 @@
 %==========================================================================
 
 \chapter{Conclusões}
-    TODO escrever sobre interrupções do servidor e como este poderia lidar
-    com estas
+    \textcolor{red}{TODO escrever sobre interrupções do servidor e como este
+    poderia lidar com estas}
+
+    Após o desenvolvimento deste serviço, foram cumpridos todos
+    os objetivos propostos no enunciado do trabalho, desde a implementação de
+    uma interface de linha de comandos tanto para o servidor, como para o cliente,
+    que permite a execução de tarefas do utilizador de forma assíncrona com a
+    possibilidade de encadeamento de programas com \textit{pipes} e a
+    consulta do estado das tarefas, assim como a implementação de um ficheiro
+    \textit{log} para guardar as tarefas executadas e a implementação de um
+    sistema com várias políticas de escalonamento e a avaliação prática destas.
+    Também foi desenvolvido um conjunto de testes que permitem verificar o correto
+    funcionamento do serviço.
+
+    Após a afirmação da possibilidade da terminação ou interrupção do servidor
+    pelo professor regente foi despertada a curiosidade de como o servidor
+    poderia lidar com estas situações.
+
+    Num estudo apronfundado desta unidade curricular, uma solução seria a
+    implementação de um sistema de interrupções no servidor, que permitiria
+    a este lidar com situações de terminação ou interrupção de forma mais
+    eficiente, utlizando os sinais do sistema operativo para lidar com estas
+    situações, evitando a perda de tarefas em execução e agendadas.
+
+    Para tal, seria necessário lidar com tarefas em execução, guardando
+    o estado destas em memória, e permitindo a sua correta terminação
+    ou interrupção, assim como para as tarefas em espera. Estas poderiam
+    ser guardadas numa fila de espera, que seria consultada sempre que
+    uma tarefa terminasse, permitindo a execução da próxima tarefa na
+    fila.
+
+    Em suma, o desenvolvimento deste serviço permitiu a aplicação prática
+    dos conhecimentos adquiridos ao longo do semestre, assim como a
+    exploração de novas funcionalidades e conceitos, que permitiram
+    a implementação de um serviço robusto e versátil, que permite a
+    execução de tarefas de forma assíncrona, com a possibilidade de
+    encadeamento de programas e a consulta do estado das tarefas.
 
 %==========================================================================
 % END CONCLUSÕES
@@ -275,9 +370,16 @@
 %% \addchap has no numbering but appears in table of contents.
 \addchap{Anexos}
 
+    Clique nos links abaixo para aceder aos anexos.
+
     \addsec{
-        \href{Example}{\small [I] Example}
+        \href{refman.pdf}{\small [I] Documentação do Código Desenvolvido}
         \label{anexo:1}
+    }
+
+    \addsec{
+        \href{Example}{\small [II] Implementação das Políticas de Escalonamento}
+        \label{anexo:2}
     }
 
 %==========================================================================
