@@ -1,6 +1,7 @@
 // TODO remove ../include/
 #include "../include/orchestrator.h"
 #include "../include/task_nr.h"
+#include "../include/request.h"
 #include "../include/command.h"
 
 #include <stdio.h>
