@@ -1,0 +1,131 @@
+\@ifundefined {etoctocstyle}{\let \etoc@startlocaltoc \@gobble \let \etoc@settocdepth \@gobble \let \etoc@depthtag \@gobble \let \etoc@setlocaltop \@gobble }{}
+\contentsline {chapter}{\numberline {1}Orchestrator}{1}{chapter.1}%
+\contentsline {section}{\numberline {1.1}Introduction}{1}{section.1.1}%
+\contentsline {section}{\numberline {1.2}Compilation}{1}{section.1.2}%
+\contentsline {subsection}{\numberline {1.2.1}Step 1\discretionary {\mbox {\scriptsize $\hookleftarrow $}}{}{}: make}{1}{subsection.1.2.1}%
+\contentsline {section}{\numberline {1.3}Running}{1}{section.1.3}%
+\contentsline {section}{\numberline {1.4}Authors}{1}{section.1.4}%
+\contentsline {chapter}{\numberline {2}Class Index}{3}{chapter.2}%
+\contentsline {section}{\numberline {2.1}Class List}{3}{section.2.1}%
+\contentsline {chapter}{\numberline {3}File Index}{5}{chapter.3}%
+\contentsline {section}{\numberline {3.1}File List}{5}{section.3.1}%
+\contentsline {chapter}{\numberline {4}Class Documentation}{7}{chapter.4}%
+\contentsline {section}{\numberline {4.1}request Struct Reference}{7}{section.4.1}%
+\contentsline {subsection}{\numberline {4.1.1}Detailed Description}{7}{subsection.4.1.1}%
+\contentsline {subsection}{\numberline {4.1.2}Member Data Documentation}{7}{subsection.4.1.2}%
+\contentsline {subsubsection}{\numberline {4.1.2.1}type}{7}{subsubsection.4.1.2.1}%
+\contentsline {subsubsection}{\numberline {4.1.2.2}est\_time}{8}{subsubsection.4.1.2.2}%
+\contentsline {subsubsection}{\numberline {4.1.2.3}command}{8}{subsubsection.4.1.2.3}%
+\contentsline {subsubsection}{\numberline {4.1.2.4}is\_piped}{8}{subsubsection.4.1.2.4}%
+\contentsline {subsubsection}{\numberline {4.1.2.5}task\_nr}{8}{subsubsection.4.1.2.5}%
+\contentsline {subsubsection}{\numberline {4.1.2.6}client\_fifo}{8}{subsubsection.4.1.2.6}%
+\contentsline {chapter}{\numberline {5}File Documentation}{9}{chapter.5}%
+\contentsline {section}{\numberline {5.1}doc/mainpage.dox File Reference}{9}{section.5.1}%
+\contentsline {section}{\numberline {5.2}include/client.h File Reference}{9}{section.5.2}%
+\contentsline {subsection}{\numberline {5.2.1}Macro Definition Documentation}{9}{subsection.5.2.1}%
+\contentsline {subsubsection}{\numberline {5.2.1.1}CLIENT\_FIFO\_SIZE}{9}{subsubsection.5.2.1.1}%
+\contentsline {section}{\numberline {5.3}include/command.h File Reference}{10}{section.5.3}%
+\contentsline {subsection}{\numberline {5.3.1}Macro Definition Documentation}{11}{subsection.5.3.1}%
+\contentsline {subsubsection}{\numberline {5.3.1.1}HISTORY\_NAME}{11}{subsubsection.5.3.1.1}%
+\contentsline {subsection}{\numberline {5.3.2}Function Documentation}{11}{subsection.5.3.2}%
+\contentsline {subsubsection}{\numberline {5.3.2.1}exec()}{11}{subsubsection.5.3.2.1}%
+\contentsline {section}{\numberline {5.4}include/orchestrator.h File Reference}{12}{section.5.4}%
+\contentsline {subsection}{\numberline {5.4.1}Macro Definition Documentation}{12}{subsection.5.4.1}%
+\contentsline {subsubsection}{\numberline {5.4.1.1}SERVER\_FIFO}{12}{subsubsection.5.4.1.1}%
+\contentsline {subsubsection}{\numberline {5.4.1.2}FCFS}{13}{subsubsection.5.4.1.2}%
+\contentsline {subsubsection}{\numberline {5.4.1.3}SJF}{13}{subsubsection.5.4.1.3}%
+\contentsline {subsubsection}{\numberline {5.4.1.4}PES}{13}{subsubsection.5.4.1.4}%
+\contentsline {subsubsection}{\numberline {5.4.1.5}EXEC\_TIME\_STRING\_SIZE}{13}{subsubsection.5.4.1.5}%
+\contentsline {subsubsection}{\numberline {5.4.1.6}EXECUTE\_MSG\_SIZE}{13}{subsubsection.5.4.1.6}%
+\contentsline {section}{\numberline {5.5}include/request.h File Reference}{14}{section.5.5}%
+\contentsline {subsection}{\numberline {5.5.1}Macro Definition Documentation}{15}{subsection.5.5.1}%
+\contentsline {subsubsection}{\numberline {5.5.1.1}EXECUTE}{15}{subsubsection.5.5.1.1}%
+\contentsline {subsubsection}{\numberline {5.5.1.2}STATUS}{16}{subsubsection.5.5.1.2}%
+\contentsline {subsubsection}{\numberline {5.5.1.3}COMPLETED}{16}{subsubsection.5.5.1.3}%
+\contentsline {subsubsection}{\numberline {5.5.1.4}KILL}{16}{subsubsection.5.5.1.4}%
+\contentsline {subsubsection}{\numberline {5.5.1.5}MAX\_CMD\_SIZE}{16}{subsubsection.5.5.1.5}%
+\contentsline {subsection}{\numberline {5.5.2}Typedef Documentation}{16}{subsection.5.5.2}%
+\contentsline {subsubsection}{\numberline {5.5.2.1}Request}{16}{subsubsection.5.5.2.1}%
+\contentsline {subsection}{\numberline {5.5.3}Function Documentation}{16}{subsection.5.5.3}%
+\contentsline {subsubsection}{\numberline {5.5.3.1}create\_request()}{16}{subsubsection.5.5.3.1}%
+\contentsline {subsubsection}{\numberline {5.5.3.2}get\_type()}{17}{subsubsection.5.5.3.2}%
+\contentsline {subsubsection}{\numberline {5.5.3.3}get\_est\_time()}{17}{subsubsection.5.5.3.3}%
+\contentsline {subsubsection}{\numberline {5.5.3.4}get\_command()}{18}{subsubsection.5.5.3.4}%
+\contentsline {subsubsection}{\numberline {5.5.3.5}get\_is\_piped()}{18}{subsubsection.5.5.3.5}%
+\contentsline {subsubsection}{\numberline {5.5.3.6}get\_task\_nr()}{18}{subsubsection.5.5.3.6}%
+\contentsline {subsubsection}{\numberline {5.5.3.7}get\_client\_fifo()}{20}{subsubsection.5.5.3.7}%
+\contentsline {subsubsection}{\numberline {5.5.3.8}get\_time()}{20}{subsubsection.5.5.3.8}%
+\contentsline {subsubsection}{\numberline {5.5.3.9}set\_type()}{20}{subsubsection.5.5.3.9}%
+\contentsline {subsubsection}{\numberline {5.5.3.10}set\_task\_nr()}{21}{subsubsection.5.5.3.10}%
+\contentsline {subsubsection}{\numberline {5.5.3.11}set\_client\_fifo()}{21}{subsubsection.5.5.3.11}%
+\contentsline {subsubsection}{\numberline {5.5.3.12}print\_request()}{21}{subsubsection.5.5.3.12}%
+\contentsline {subsubsection}{\numberline {5.5.3.13}type\_to\_string()}{22}{subsubsection.5.5.3.13}%
+\contentsline {subsubsection}{\numberline {5.5.3.14}sizeof\_request()}{22}{subsubsection.5.5.3.14}%
+\contentsline {subsubsection}{\numberline {5.5.3.15}clone\_request()}{22}{subsubsection.5.5.3.15}%
+\contentsline {section}{\numberline {5.6}include/task\discretionary {\mbox {\scriptsize $\hookleftarrow $}}{}{}\_\discretionary {\mbox {\scriptsize $\hookleftarrow $}}{}{}nr.h File Reference}{23}{section.5.6}%
+\contentsline {subsection}{\numberline {5.6.1}Macro Definition Documentation}{23}{subsection.5.6.1}%
+\contentsline {subsubsection}{\numberline {5.6.1.1}TASK\_NR\_STRING\_SIZE}{23}{subsubsection.5.6.1.1}%
+\contentsline {subsection}{\numberline {5.6.2}Function Documentation}{24}{subsection.5.6.2}%
+\contentsline {subsubsection}{\numberline {5.6.2.1}load\_task\_nr()}{24}{subsubsection.5.6.2.1}%
+\contentsline {subsubsection}{\numberline {5.6.2.2}save\_task\_nr()}{24}{subsubsection.5.6.2.2}%
+\contentsline {section}{\numberline {5.7}src/client.c File Reference}{24}{section.5.7}%
+\contentsline {subsection}{\numberline {5.7.1}Macro Definition Documentation}{25}{subsection.5.7.1}%
+\contentsline {subsubsection}{\numberline {5.7.1.1}BUF\_SIZE}{25}{subsubsection.5.7.1.1}%
+\contentsline {subsection}{\numberline {5.7.2}Function Documentation}{25}{subsection.5.7.2}%
+\contentsline {subsubsection}{\numberline {5.7.2.1}execute\_usage()}{25}{subsubsection.5.7.2.1}%
+\contentsline {subsubsection}{\numberline {5.7.2.2}status\_usage()}{26}{subsubsection.5.7.2.2}%
+\contentsline {subsubsection}{\numberline {5.7.2.3}kill\_usage()}{26}{subsubsection.5.7.2.3}%
+\contentsline {subsubsection}{\numberline {5.7.2.4}main()}{26}{subsubsection.5.7.2.4}%
+\contentsline {section}{\numberline {5.8}src/command.c File Reference}{27}{section.5.8}%
+\contentsline {subsection}{\numberline {5.8.1}Macro Definition Documentation}{28}{subsection.5.8.1}%
+\contentsline {subsubsection}{\numberline {5.8.1.1}MAX\_ARGS}{28}{subsubsection.5.8.1.1}%
+\contentsline {subsubsection}{\numberline {5.8.1.2}ERROR\_MSG\_SIZE}{28}{subsubsection.5.8.1.2}%
+\contentsline {subsubsection}{\numberline {5.8.1.3}TASK\_PREFIX\_NAME}{28}{subsubsection.5.8.1.3}%
+\contentsline {subsubsection}{\numberline {5.8.1.4}OUTPUT\_NAME}{28}{subsubsection.5.8.1.4}%
+\contentsline {subsubsection}{\numberline {5.8.1.5}ERROR\_NAME}{29}{subsubsection.5.8.1.5}%
+\contentsline {subsubsection}{\numberline {5.8.1.6}TIME\_NAME}{29}{subsubsection.5.8.1.6}%
+\contentsline {subsection}{\numberline {5.8.2}Function Documentation}{29}{subsection.5.8.2}%
+\contentsline {subsubsection}{\numberline {5.8.2.1}parse\_cmd\_pipes()}{29}{subsubsection.5.8.2.1}%
+\contentsline {subsubsection}{\numberline {5.8.2.2}parse\_cmd()}{30}{subsubsection.5.8.2.2}%
+\contentsline {subsubsection}{\numberline {5.8.2.3}write\_error()}{30}{subsubsection.5.8.2.3}%
+\contentsline {subsubsection}{\numberline {5.8.2.4}exec()}{31}{subsubsection.5.8.2.4}%
+\contentsline {section}{\numberline {5.9}src/orchestrator.c File Reference}{31}{section.5.9}%
+\contentsline {subsection}{\numberline {5.9.1}Macro Definition Documentation}{33}{subsection.5.9.1}%
+\contentsline {subsubsection}{\numberline {5.9.1.1}DEFAULT\_POLICY}{33}{subsubsection.5.9.1.1}%
+\contentsline {subsubsection}{\numberline {5.9.1.2}MAX\_SCHEDULED\_REQUESTS}{33}{subsubsection.5.9.1.2}%
+\contentsline {subsection}{\numberline {5.9.2}Function Documentation}{33}{subsection.5.9.2}%
+\contentsline {subsubsection}{\numberline {5.9.2.1}orchestrator\_usage()}{33}{subsubsection.5.9.2.1}%
+\contentsline {subsubsection}{\numberline {5.9.2.2}add\_request()}{33}{subsubsection.5.9.2.2}%
+\contentsline {subsubsection}{\numberline {5.9.2.3}remove\_request()}{34}{subsubsection.5.9.2.3}%
+\contentsline {subsubsection}{\numberline {5.9.2.4}select\_request()}{34}{subsubsection.5.9.2.4}%
+\contentsline {subsubsection}{\numberline {5.9.2.5}handle\_execute()}{35}{subsubsection.5.9.2.5}%
+\contentsline {subsubsection}{\numberline {5.9.2.6}handle\_status()}{36}{subsubsection.5.9.2.6}%
+\contentsline {subsubsection}{\numberline {5.9.2.7}handle\_completed()}{36}{subsubsection.5.9.2.7}%
+\contentsline {subsubsection}{\numberline {5.9.2.8}send\_status()}{37}{subsubsection.5.9.2.8}%
+\contentsline {subsubsection}{\numberline {5.9.2.9}clean\_up()}{38}{subsubsection.5.9.2.9}%
+\contentsline {subsubsection}{\numberline {5.9.2.10}clean\_up\_all()}{38}{subsubsection.5.9.2.10}%
+\contentsline {subsubsection}{\numberline {5.9.2.11}main()}{39}{subsubsection.5.9.2.11}%
+\contentsline {section}{\numberline {5.10}src/request.c File Reference}{40}{section.5.10}%
+\contentsline {subsection}{\numberline {5.10.1}Function Documentation}{41}{subsection.5.10.1}%
+\contentsline {subsubsection}{\numberline {5.10.1.1}create\_request()}{41}{subsubsection.5.10.1.1}%
+\contentsline {subsubsection}{\numberline {5.10.1.2}get\_type()}{42}{subsubsection.5.10.1.2}%
+\contentsline {subsubsection}{\numberline {5.10.1.3}get\_est\_time()}{42}{subsubsection.5.10.1.3}%
+\contentsline {subsubsection}{\numberline {5.10.1.4}get\_command()}{43}{subsubsection.5.10.1.4}%
+\contentsline {subsubsection}{\numberline {5.10.1.5}get\_is\_piped()}{43}{subsubsection.5.10.1.5}%
+\contentsline {subsubsection}{\numberline {5.10.1.6}get\_task\_nr()}{43}{subsubsection.5.10.1.6}%
+\contentsline {subsubsection}{\numberline {5.10.1.7}get\_client\_fifo()}{44}{subsubsection.5.10.1.7}%
+\contentsline {subsubsection}{\numberline {5.10.1.8}set\_type()}{44}{subsubsection.5.10.1.8}%
+\contentsline {subsubsection}{\numberline {5.10.1.9}set\_task\_nr()}{44}{subsubsection.5.10.1.9}%
+\contentsline {subsubsection}{\numberline {5.10.1.10}set\_client\_fifo()}{45}{subsubsection.5.10.1.10}%
+\contentsline {subsubsection}{\numberline {5.10.1.11}print\_request()}{45}{subsubsection.5.10.1.11}%
+\contentsline {subsubsection}{\numberline {5.10.1.12}type\_to\_string()}{45}{subsubsection.5.10.1.12}%
+\contentsline {subsubsection}{\numberline {5.10.1.13}sizeof\_request()}{46}{subsubsection.5.10.1.13}%
+\contentsline {subsubsection}{\numberline {5.10.1.14}clone\_request()}{46}{subsubsection.5.10.1.14}%
+\contentsline {section}{\numberline {5.11}src/task\discretionary {\mbox {\scriptsize $\hookleftarrow $}}{}{}\_\discretionary {\mbox {\scriptsize $\hookleftarrow $}}{}{}nr.c File Reference}{47}{section.5.11}%
+\contentsline {subsection}{\numberline {5.11.1}Macro Definition Documentation}{47}{subsection.5.11.1}%
+\contentsline {subsubsection}{\numberline {5.11.1.1}TASK\_NR\_FILENAME}{47}{subsubsection.5.11.1.1}%
+\contentsline {subsection}{\numberline {5.11.2}Function Documentation}{48}{subsection.5.11.2}%
+\contentsline {subsubsection}{\numberline {5.11.2.1}get\_task\_nr\_filename()}{48}{subsubsection.5.11.2.1}%
+\contentsline {subsubsection}{\numberline {5.11.2.2}load\_task\_nr()}{48}{subsubsection.5.11.2.2}%
+\contentsline {subsubsection}{\numberline {5.11.2.3}save\_task\_nr()}{49}{subsubsection.5.11.2.3}%
+\contentsline {chapter}{Index}{51}{section*.33}%
