@@ -1,4 +1,4 @@
-This is XeTeX, Version 3.141592653-2.6-0.999993 (TeX Live 2022/dev/Debian) (preloaded format=xelatex 2024.3.14)  4 MAY 2024 22:22
+This is XeTeX, Version 3.141592653-2.6-0.999993 (TeX Live 2022/dev/Debian) (preloaded format=xelatex 2024.3.14)  4 MAY 2024 22:29
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
@@ -1118,8 +1118,8 @@ File: bkm-dvipdfm.def 2020-11-06 v1.29 bookmark driver for dvipdfm (HO)
 * \@reversemarginfalse
 * (1in=72.27pt=25.4mm, 1cm=28.453pt)
 
-File: images/uminho.png Graphic file (type bmp)
-<images/uminho.png>
+File: images/eeum.png Graphic file (type bmp)
+<images/eeum.png>
  [1
 
 
@@ -1235,7 +1235,7 @@ Package rerunfilecheck Info: File `main.out' has not changed.
  ) 
 Here is how much of TeX's memory you used:
  28915 strings out of 478174
- 597337 string characters out of 5854282
+ 597321 string characters out of 5854282
  1223887 words of memory out of 5000000
  49018 multiletter control sequences out of 15000+600000
  473742 words of font info for 75 fonts, out of 8000000 for 9000
