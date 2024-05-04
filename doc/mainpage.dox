@@ -3,9 +3,8 @@
  * @section intro_sec Introduction
  * This task orchestrator service is implemented in C within the Operating Systems environment for the 2023/2024 academic year.
  *
- * Project description and requirements: [project.pdf](../../project.pdf)
- *
- * Project report: [report.pdf](../../report/report.pdf)
+ *   - [Description and Requirements](../../project.pdf)
+ *   - [Report](../../report/report.pdf)
  *
  * It is a service that allows the asynchronous execution of tasks, composed of two main components:
  *   - **Server**: Responsible for managing the tasks execution or scheduling and transmitting messages to clients.

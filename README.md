@@ -2,11 +2,9 @@
 
 A task orchestrator service implemented in C within Operating Systems environment in 2023/2024 academic year.
 
-Project description and requirements: [project.pdf](project.pdf)
-
-Project report: [report.pdf](report/report.pdf)
-
-Documentation: [docs](docs/html/index.html) **TODO display link instead**
+- [Description and Requirements](project.pdf)
+- [Report](report/report.pdf)
+- [Documentation](docs/html/index.html) **TODO display link instead**
 
 ## Description
 
