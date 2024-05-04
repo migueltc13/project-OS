@@ -1,12 +1,84 @@
-/*! @mainpage Orchestrator
+/*! @mainpage Task Orchestrator Service
  *
- * @section intro Introduction
+ * @section intro_sec Introduction
+ * This task orchestrator service is implemented in C within the Operating Systems environment for the 2023/2024 academic year.
  *
- * @section compile Compilation
+ * Project description and requirements: [project.pdf](../../project.pdf)
  *
- * @subsection step1 Step 1: make
+ * Project report: [report.pdf](../../report/report.pdf)
  *
- * @section run Running
+ * It is a service that allows the asynchronous execution of tasks, composed of two main components:
+ *   - **Server**: Responsible for managing the tasks execution or scheduling and transmitting messages to clients.
+ *   - **Client**: Has the ability to execute tasks and check their status.
  *
- * @section authors Authors
+ * @section sched_policies Scheduling Policies
+ * The service supports the following scheduling policies:
+ *   - **FCFS**: First Come First Served
+ *   - **SJF**: Shortest Job First
+ *   - **PES**: Priority Escalation Scheduling
+ *
+ * @section compile_sec Compilation
+ * To compile the project, run the following command:
+ * \code{.sh}
+ * make
+ * \endcode
+ * The `orchestrator` and `client` executables will be generated in the `bin` directory.
+ *
+ * @section usage_sec Usage
+ *
+ * @subsection orchestrator_usage Orchestrator Server Usage
+ * \code{.sh}
+ * bin/orchestrator <output_dir> <parallel_tasks> [sched_policy]
+ * \endcode
+ *   - output_dir: path to the directory where the output directories and files will be saved.
+ *   - parallel_tasks: number of tasks that can be executed in parallel.
+ *   - sched_policy: scheduling policy to be used. If not provided, the default policy is SJF.
+ *
+ * @subsection client_usage Client Usage
+ *
+ * @subsubsection exec_task Execute Task
+ * \code{.sh}
+ * bin/client execute <estimated_time|priority> <-u|-p> "<command>"
+ * \endcode
+ * Depending on the scheduling policy used in the orchestrator server, the estimated time or priority must be provided.
+ *   - estimated_time: estimated time for the task to complete.
+ *   - priority: priority of the task. The higher the value, the higher the priority.
+ *
+ * @subsubsection check_status Check Tasks Status
+ * \code{.sh}
+ * bin/client status
+ * \endcode
+ * This command will display all the executing, scheduled, and completed tasks.
+ * For completed tasks the elapsed time is also displayed.
+ *
+ * @subsubsection kill_server Kill Orchestrator Server
+ * \code{.sh}
+ * bin/client kill
+ * \endcode
+ * This command will send a message to the orchestrator server to shutdown.
+ *
+ * @section files_sec Output Files
+ * The output directory has the given structure:
+ * \verbatim
+ <output_dir>
+  ├── history
+  ├── task_number
+  ├── task1
+  │   ├── out
+  │   ├── err
+  │   └── time
+ ...
+  └── taskN
+      ├── out
+      ├── err
+      └── time
+\endverbatim
+ *
+ * @section test_sec Testing
+ * You can find a selection of test cases in the `tests` directory.
+ * These tests require the `orchestrator` to be running.
+ *
+ * @section authors_sec Authors
+ * - Flávia Araújo - [@flaviaraujo](https://github.com/flaviaraujo)
+ * - Miguel Carvalho - [@migueltc13](https://github.com/migueltc13)
  */
