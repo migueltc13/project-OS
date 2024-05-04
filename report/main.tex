@@ -169,17 +169,14 @@
 \renewcommand{\listfigurename}{Índice de Figuras}
 % \renewcommand{\listtablename}{Índice de Tabelas}
 
+\begin{minipage}{\textwidth}
 \tableofcontents
-
-\pagebreak
-
 \listoffigures
+\end{minipage}
 
-\pagebreak
-
+% \tableofcontents
+% \listoffigures
 % \listoftables
-%
-% \pagebreak
 
 %==========================================================================
 % END INDEXES PAGES
@@ -200,23 +197,32 @@
         \subsection{Pedido (\textit{request.c})}
         \subsection{Comando (\textit{command.c})}
         \subsection{Número de Tarefa (\textit{task\_nr.c})}
+
+    \clearpage
     \section{Diagramas de Comunicação entre Servidor e Cliente}
-        \subsection{Execução e Agendamento de Tarefas}
-            \newgeometry{top=3cm,left=0.1cm,right=0.1cm,bottom=4cm}
-            \begin{figure}[!ht]
-                \centering
-                \includegraphics[scale=0.7]{diagrams/execute_schedule.png}
-                \caption{Diagrama de Comunicação para Execução e Agendamento de Tarefas}
-                \label{fig:3.1}
-            \end{figure}
-            \loadgeometry{default}
-        \subsection{Estado de Tarefas}
+        \subsection{Execução de Tarefas (\textit{execute})}
+                \begin{figure}[!ht]
+                    \centering
+                    \includegraphics[width=\textwidth]{diagrams/execute_schedule.png}
+                    \caption{Diagrama de Comunicação para Execução de Tarefas}
+                    \label{fig:3.1}
+                \end{figure}
+        \subsection{Estado de Tarefas (\textit{status})}
             % \newgeometry{top=3cm,left=0.1cm,right=0.1cm,bottom=4cm}
             % \begin{figure}[!ht]
             %     \centering
             %     \includegraphics[scale=0.7]{diagrams/task_state.png}
             %     \caption{Diagrama de Comunicação para Estado de Tarefas}
             %     \label{fig:3.2}
+            % \end{figure}
+            % \loadgeometry{default}
+        \subsection{Terminação do Servidor (\textit{kill})}
+            % \newgeometry{top=3cm,left=0.1cm,right=0.1cm,bottom=4cm}
+            % \begin{figure}[!ht]
+            %     \centering
+            %     \includegraphics[scale=0.7]{diagrams/server_termination.png}
+            %     \caption{Diagrama de Comunicação para Terminação do Servidor}
+            %     \label{fig:3.3}
             % \end{figure}
             % \loadgeometry{default}
 
@@ -278,9 +284,6 @@
 %==========================================================================
 
 \chapter{Conclusões}
-    \textcolor{red}{TODO escrever sobre interrupções do servidor e como este
-    poderia lidar com estas}
-
     Após o desenvolvimento deste serviço, foram cumpridos todos
     os objetivos propostos no enunciado do trabalho, desde a implementação de
     uma interface de linha de comandos tanto para o servidor, como para o cliente,
@@ -375,10 +378,12 @@
         \label{anexo:1}
     }
 
+    \quad Para uma versão mais interativa da documentação do código desenvolvido, por favor consulte o
+    ficheiro \textbf{\textit{doc/html/index.html}} localizado na diretoria raiz do projeto com o seu
+    navegador de internet.
+
     \addsec{
-        \textcolor{blue}{
-            \href{anexos/example.pdf}{\small \textcolor{blue}{[II] Implementação das Políticas de Escalonamento}}
-        }
+        \href{anexos/example.pdf}{\small \textcolor{blue}{[II] Implementação das Políticas de Escalonamento}}
         \label{anexo:2}
     }
 
