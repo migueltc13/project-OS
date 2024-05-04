@@ -5,7 +5,7 @@
 		<meta http-equiv="X-UA-Compatible" content="IE=9"/>
 		<meta name="generator" content="Doxygen 1.9.1"/>
 		<meta name="viewport" content="width=device-width, initial-scale=1"/>
-		<title>Task Orchestrator: Orchestrator</title>
+		<title>Task Orchestrator: Task Orchestrator Service</title>
 		<link href="tabs.css" rel="stylesheet" type="text/css"/>
 		<script type="text/javascript" src="jquery.js"></script>
 		<script type="text/javascript" src="dynsections.js"></script>
@@ -64,26 +64,86 @@ $(function() {
 
 <div class="PageDoc"><div class="header">
   <div class="headertitle">
-<div class="title">Orchestrator </div>  </div>
+<div class="title">Task Orchestrator Service </div>  </div>
 </div><!--header-->
 <div class="contents">
-<div class="textblock"><h1><a class="anchor" id="intro"></a>
+<div class="textblock"><h1><a class="anchor" id="intro_sec"></a>
 Introduction</h1>
-<h1><a class="anchor" id="compile"></a>
+<p>This task orchestrator service is implemented in C within the Operating Systems environment for the 2023/2024 academic year.</p>
+<p>Project description and requirements: <a href="../../project.pdf">project.pdf</a></p>
+<p>Project report: <a href="../../report/report.pdf">report.pdf</a></p>
+<p>It is a service that allows the asynchronous execution of tasks, composed of two main components:</p><ul>
+<li><b>Server</b>: Responsible for managing the tasks execution or scheduling and transmitting messages to clients.</li>
+<li><b>Client</b>: Has the ability to execute tasks and check their status.</li>
+</ul>
+<h1><a class="anchor" id="sched_policies"></a>
+Scheduling Policies</h1>
+<p>The service supports the following scheduling policies:</p><ul>
+<li><b>FCFS</b>: First Come First Served</li>
+<li><b>SJF</b>: Shortest Job First</li>
+<li><b>PES</b>: Priority Escalation Scheduling</li>
+</ul>
+<h1><a class="anchor" id="compile_sec"></a>
 Compilation</h1>
-<h2><a class="anchor" id="step1"></a>
-Step 1: make</h2>
-<h1><a class="anchor" id="run"></a>
-Running</h1>
-<h1><a class="anchor" id="authors"></a>
+<p>To compile the project, run the following command: </p><div class="fragment"><div class="line">make</div>
+</div><!-- fragment --><p> The <code>orchestrator</code> and <code>client</code> executables will be generated in the <code>bin</code> directory.</p>
+<h1><a class="anchor" id="usage_sec"></a>
+Usage</h1>
+<h2><a class="anchor" id="orchestrator_usage"></a>
+Orchestrator Server Usage</h2>
+<div class="fragment"><div class="line">bin/orchestrator &lt;output_dir&gt; &lt;parallel_tasks&gt; [sched_policy]</div>
+</div><!-- fragment --><ul>
+<li>output_dir: path to the directory where the output directories and files will be saved.</li>
+<li>parallel_tasks: number of tasks that can be executed in parallel.</li>
+<li>sched_policy: scheduling policy to be used. If not provided, the default policy is SJF.</li>
+</ul>
+<h2><a class="anchor" id="client_usage"></a>
+Client Usage</h2>
+<h3><a class="anchor" id="exec_task"></a>
+Execute Task</h3>
+<div class="fragment"><div class="line">bin/client execute &lt;estimated_time|priority&gt; &lt;-u|-p&gt; &quot;&lt;command&gt;&quot;</div>
+</div><!-- fragment --><p> Depending on the scheduling policy used in the orchestrator server, the estimated time or priority must be provided.</p><ul>
+<li>estimated_time: estimated time for the task to complete.</li>
+<li>priority: priority of the task. The higher the value, the higher the priority.</li>
+</ul>
+<h3><a class="anchor" id="check_status"></a>
+Check Tasks Status</h3>
+<div class="fragment"><div class="line">bin/client status</div>
+</div><!-- fragment --><p> This command will display all the executing, scheduled, and completed tasks. For completed tasks the elapsed time is also displayed.</p>
+<h3><a class="anchor" id="kill_server"></a>
+Kill Orchestrator Server</h3>
+<div class="fragment"><div class="line">bin/client kill</div>
+</div><!-- fragment --><p> This command will send a message to the orchestrator server to shutdown.</p>
+<h1><a class="anchor" id="files_sec"></a>
+Output Files</h1>
+<p>The output directory has the given structure: </p><pre class="fragment"> &lt;output_dir&gt;
+  ├── history
+  ├── task_number
+  ├── task1
+  │   ├── out
+  │   ├── err
+  │   └── time
+ ...
+  └── taskN
+      ├── out
+      ├── err
+      └── time
+</pre><h1><a class="anchor" id="test_sec"></a>
+Testing</h1>
+<p>You can find a selection of test cases in the <code>tests</code> directory. These tests require the <code>orchestrator</code> to be running.</p>
+<h1><a class="anchor" id="authors_sec"></a>
 Authors</h1>
+<ul>
+<li>Flávia Araújo - <a href="https://github.com/flaviaraujo">@flaviaraujo</a></li>
+<li>Miguel Carvalho - <a href="https://github.com/migueltc13">@migueltc13</a> </li>
+</ul>
 </div></div><!-- PageDoc -->
 </div><!-- contents -->
 <!-- start footer part -->
         <hr class="footer">
         <address class="footer">
             <small>
-                Generated on Sat May 4 2024 22:52:01 for <b>Task Orchestrator</b> by
+                Generated on Sun May 5 2024 00:06:29 for <b>Task Orchestrator</b> by
                 <a href="http://www.doxygen.org/index.html">
                     <img class="footer" src="doxygen.png" alt="doxygen" onerror="this.onerror=null;this.src='doxygen.svg';"/>
                 </a> 1.9.1. All rights reserved.

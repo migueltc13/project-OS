@@ -1,5 +1,79 @@
-\hypertarget{index_intro}{}\doxysection{Introduction}\label{index_intro}
-\hypertarget{index_compile}{}\doxysection{Compilation}\label{index_compile}
-\hypertarget{index_step1}{}\doxysubsection{Step 1\+: make}\label{index_step1}
-\hypertarget{index_run}{}\doxysection{Running}\label{index_run}
-\hypertarget{index_authors}{}\doxysection{Authors}\label{index_authors}
+\hypertarget{index_intro_sec}{}\doxysection{Introduction}\label{index_intro_sec}
+This task orchestrator service is implemented in C within the Operating Systems environment for the 2023/2024 academic year.
+
+Project description and requirements\+: \href{../../project.pdf}{\texttt{ project.\+pdf}}
+
+Project report\+: \href{../../report/report.pdf}{\texttt{ report.\+pdf}}
+
+It is a service that allows the asynchronous execution of tasks, composed of two main components\+:
+\begin{DoxyItemize}
+\item {\bfseries{Server}}\+: Responsible for managing the tasks execution or scheduling and transmitting messages to clients.
+\item {\bfseries{Client}}\+: Has the ability to execute tasks and check their status.
+\end{DoxyItemize}\hypertarget{index_sched_policies}{}\doxysection{Scheduling Policies}\label{index_sched_policies}
+The service supports the following scheduling policies\+:
+\begin{DoxyItemize}
+\item {\bfseries{FCFS}}\+: First Come First Served
+\item {\bfseries{SJF}}\+: Shortest Job First
+\item {\bfseries{PES}}\+: Priority Escalation Scheduling
+\end{DoxyItemize}\hypertarget{index_compile_sec}{}\doxysection{Compilation}\label{index_compile_sec}
+To compile the project, run the following command\+: 
+\begin{DoxyCode}{0}
+\DoxyCodeLine{make}
+
+\end{DoxyCode}
+ The {\ttfamily orchestrator} and {\ttfamily client} executables will be generated in the {\ttfamily bin} directory.\hypertarget{index_usage_sec}{}\doxysection{Usage}\label{index_usage_sec}
+\hypertarget{index_orchestrator_usage}{}\doxysubsection{Orchestrator Server Usage}\label{index_orchestrator_usage}
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{bin/orchestrator <output\_dir> <parallel\_tasks> [sched\_policy]}
+
+\end{DoxyCode}
+
+\begin{DoxyItemize}
+\item output\+\_\+dir\+: path to the directory where the output directories and files will be saved.
+\item parallel\+\_\+tasks\+: number of tasks that can be executed in parallel.
+\item sched\+\_\+policy\+: scheduling policy to be used. If not provided, the default policy is SJF.
+\end{DoxyItemize}\hypertarget{index_client_usage}{}\doxysubsection{Client Usage}\label{index_client_usage}
+\hypertarget{index_exec_task}{}\doxysubsubsection{Execute Task}\label{index_exec_task}
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{bin/client execute <estimated\_time|priority> <-\/u|-\/p> "{}<command>"{}}
+
+\end{DoxyCode}
+ Depending on the scheduling policy used in the orchestrator server, the estimated time or priority must be provided.
+\begin{DoxyItemize}
+\item estimated\+\_\+time\+: estimated time for the task to complete.
+\item priority\+: priority of the task. The higher the value, the higher the priority.
+\end{DoxyItemize}\hypertarget{index_check_status}{}\doxysubsubsection{Check Tasks Status}\label{index_check_status}
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{bin/client status}
+
+\end{DoxyCode}
+ This command will display all the executing, scheduled, and completed tasks. For completed tasks the elapsed time is also displayed.\hypertarget{index_kill_server}{}\doxysubsubsection{Kill Orchestrator Server}\label{index_kill_server}
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{bin/client kill}
+
+\end{DoxyCode}
+ This command will send a message to the orchestrator server to shutdown.\hypertarget{index_files_sec}{}\doxysection{Output Files}\label{index_files_sec}
+The output directory has the given structure\+: \begin{DoxyVerb} <output_dir>
+  ├── history
+  ├── task_number
+  ├── task1
+  │   ├── out
+  │   ├── err
+  │   └── time
+ ...
+  └── taskN
+      ├── out
+      ├── err
+      └── time
+\end{DoxyVerb}
+\hypertarget{index_test_sec}{}\doxysection{Testing}\label{index_test_sec}
+You can find a selection of test cases in the {\ttfamily tests} directory. These tests require the {\ttfamily orchestrator} to be running.\hypertarget{index_authors_sec}{}\doxysection{Authors}\label{index_authors_sec}
+
+\begin{DoxyItemize}
+\item Flávia Araújo -\/ \href{https://github.com/flaviaraujo}{\texttt{ @flaviaraujo}}
+\item Miguel Carvalho -\/ \href{https://github.com/migueltc13}{\texttt{ @migueltc13}} 
+\end{DoxyItemize}
