@@ -1,0 +1,68 @@
+<mxfile host="app.diagrams.net" modified="2024-05-05T00:13:49.096Z" agent="Mozilla/5.0 (X11; Linux x86_64; rv:125.0) Gecko/20100101 Firefox/125.0" etag="ZMl2Be-55zZejWrs0xUF" version="24.3.1" type="device">
+  <diagram name="Page-1" id="whHoUh4HutGnMUqi3Y0A">
+    <mxGraphModel dx="709" dy="408" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="850" pageHeight="1100" math="0" shadow="0">
+      <root>
+        <mxCell id="0" />
+        <mxCell id="1" parent="0" />
+        <mxCell id="Ojha9GiamkL66VBzo4Yr-1" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;entryX=0;entryY=0.5;entryDx=0;entryDy=0;" edge="1" parent="1" source="OTiAG1ZagbwWr7k3xQRL-3" target="Ojha9GiamkL66VBzo4Yr-9">
+          <mxGeometry relative="1" as="geometry">
+            <mxPoint x="320" y="325.04999999999995" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="OTiAG1ZagbwWr7k3xQRL-3" value="Client #1" style="rounded=1;whiteSpace=wrap;html=1;" parent="1" vertex="1">
+          <mxGeometry x="130" y="305" width="90" height="40" as="geometry" />
+        </mxCell>
+        <mxCell id="OTiAG1ZagbwWr7k3xQRL-6" value="(1) Client sends a status request" style="text;html=1;align=center;verticalAlign=middle;whiteSpace=wrap;rounded=0;" parent="1" vertex="1">
+          <mxGeometry x="206" y="327.75" width="130" height="30" as="geometry" />
+        </mxCell>
+        <mxCell id="OTiAG1ZagbwWr7k3xQRL-9" value="&amp;lt;output_dir&amp;gt;" style="swimlane;fontStyle=0;childLayout=stackLayout;horizontal=1;startSize=30;horizontalStack=0;resizeParent=1;resizeParentMax=0;resizeLast=0;collapsible=1;marginBottom=0;whiteSpace=wrap;html=1;" parent="1" vertex="1">
+          <mxGeometry x="690" y="250" width="120" height="150" as="geometry" />
+        </mxCell>
+        <mxCell id="OTiAG1ZagbwWr7k3xQRL-10" value="task_number" style="text;strokeColor=none;fillColor=none;align=left;verticalAlign=middle;spacingLeft=4;spacingRight=4;overflow=hidden;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;rotatable=0;whiteSpace=wrap;html=1;" parent="OTiAG1ZagbwWr7k3xQRL-9" vertex="1">
+          <mxGeometry y="30" width="120" height="30" as="geometry" />
+        </mxCell>
+        <mxCell id="qVnQ6gSnVdwOvjy4rbDo-1" value="history" style="text;strokeColor=none;fillColor=none;align=left;verticalAlign=middle;spacingLeft=4;spacingRight=4;overflow=hidden;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;rotatable=0;whiteSpace=wrap;html=1;" parent="OTiAG1ZagbwWr7k3xQRL-9" vertex="1">
+          <mxGeometry y="60" width="120" height="30" as="geometry" />
+        </mxCell>
+        <mxCell id="OTiAG1ZagbwWr7k3xQRL-11" value="task1/" style="text;strokeColor=none;fillColor=none;align=left;verticalAlign=middle;spacingLeft=4;spacingRight=4;overflow=hidden;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;rotatable=0;whiteSpace=wrap;html=1;" parent="OTiAG1ZagbwWr7k3xQRL-9" vertex="1">
+          <mxGeometry y="90" width="120" height="30" as="geometry" />
+        </mxCell>
+        <mxCell id="OTiAG1ZagbwWr7k3xQRL-13" value="..." style="text;strokeColor=none;fillColor=none;align=left;verticalAlign=middle;spacingLeft=4;spacingRight=4;overflow=hidden;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;rotatable=0;whiteSpace=wrap;html=1;" parent="OTiAG1ZagbwWr7k3xQRL-9" vertex="1">
+          <mxGeometry y="120" width="120" height="30" as="geometry" />
+        </mxCell>
+        <mxCell id="OTiAG1ZagbwWr7k3xQRL-18" value="&lt;h1 align=&quot;left&quot; style=&quot;margin-top: 0px; font-size: 21px;&quot;&gt;Status&lt;br&gt;&lt;/h1&gt;&lt;div&gt;(1) The client uses the server FIFO to send the status request.&lt;/div&gt;&lt;div&gt;(2) Using a process to create and send the status response allows the server to keep receiving and handling requests.&lt;/div&gt;&lt;div&gt;(3) The status process reads the &quot;history&quot; file and writes directly to the respective client FIFO.&lt;/div&gt;&lt;div&gt;(4) The process created by the server writes the status response to the respective client FIFO.&lt;/div&gt;&lt;div&gt;The executing and scheduled requests are stored in the orchestrator memory,&lt;/div&gt;&lt;div&gt;and the completed ones in persistent memory in the &quot;history&quot; file.&lt;br&gt;&lt;/div&gt;&lt;p align=&quot;left&quot;&gt;&lt;/p&gt;" style="text;html=1;whiteSpace=wrap;overflow=hidden;rounded=0;align=left;" parent="1" vertex="1">
+          <mxGeometry x="130" y="136" width="630" height="140" as="geometry" />
+        </mxCell>
+        <mxCell id="Ojha9GiamkL66VBzo4Yr-12" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;exitX=0.5;exitY=1;exitDx=0;exitDy=0;entryX=0.5;entryY=1;entryDx=0;entryDy=0;" edge="1" parent="1" source="OTiAG1ZagbwWr7k3xQRL-29" target="OTiAG1ZagbwWr7k3xQRL-3">
+          <mxGeometry relative="1" as="geometry">
+            <Array as="points">
+              <mxPoint x="605" y="390" />
+              <mxPoint x="175" y="390" />
+            </Array>
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="Ojha9GiamkL66VBzo4Yr-15" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;exitX=1;exitY=0.5;exitDx=0;exitDy=0;entryX=0;entryY=0.5;entryDx=0;entryDy=0;" edge="1" parent="1" source="OTiAG1ZagbwWr7k3xQRL-29" target="qVnQ6gSnVdwOvjy4rbDo-1">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="OTiAG1ZagbwWr7k3xQRL-29" value="Status Process" style="rounded=0;whiteSpace=wrap;html=1;" parent="1" vertex="1">
+          <mxGeometry x="560" y="305" width="89" height="40" as="geometry" />
+        </mxCell>
+        <mxCell id="OTiAG1ZagbwWr7k3xQRL-36" value="(2) The server creates a process to create and send the status response" style="text;html=1;align=center;verticalAlign=middle;whiteSpace=wrap;rounded=0;" parent="1" vertex="1">
+          <mxGeometry x="412" y="334.75" width="140" height="30" as="geometry" />
+        </mxCell>
+        <mxCell id="Ojha9GiamkL66VBzo4Yr-10" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;exitX=1;exitY=0.5;exitDx=0;exitDy=0;entryX=0;entryY=0.5;entryDx=0;entryDy=0;" edge="1" parent="1" source="Ojha9GiamkL66VBzo4Yr-9" target="OTiAG1ZagbwWr7k3xQRL-29">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="Ojha9GiamkL66VBzo4Yr-9" value="Orchestrator&lt;br&gt;Server" style="rounded=1;whiteSpace=wrap;html=1;" vertex="1" parent="1">
+          <mxGeometry x="322" y="305" width="90" height="40" as="geometry" />
+        </mxCell>
+        <mxCell id="Ojha9GiamkL66VBzo4Yr-13" value="(3)" style="text;html=1;align=center;verticalAlign=middle;whiteSpace=wrap;rounded=0;" vertex="1" parent="1">
+          <mxGeometry x="654" y="335.75" width="30" as="geometry" />
+        </mxCell>
+        <mxCell id="Ojha9GiamkL66VBzo4Yr-14" value="(4)" style="text;html=1;align=center;verticalAlign=middle;whiteSpace=wrap;rounded=0;" vertex="1" parent="1">
+          <mxGeometry x="364" y="387" width="50" height="29.75" as="geometry" />
+        </mxCell>
+      </root>
+    </mxGraphModel>
+  </diagram>
+</mxfile>
