@@ -113,27 +113,8 @@
 \makecover
 
 %% smaller footer and header size
-\newgeometry{top=3cm,left=3cm,right=3cm,bottom=3cm}
+\newgeometry{top=2cm,left=3cm,right=3cm,bottom=3cm}
 \savegeometry{default}
-
-%==========================================================================
-% BEGIN OPCIONAL DEDICATÓRIA
-%==========================================================================
-
-% \clearpage
-% \begin{center}
-%     \thispagestyle{empty}
-%     \vspace*{\fill}
-%
-%     $<<$/opcional Dedicatória$>>$
-%
-%     \vspace*{\fill}
-% \end{center}
-% \clearpage
-
-%==========================================================================
-% END OPCIONAL DEDICATÓRIA
-%==========================================================================
 
 %==========================================================================
 % BEGIN ABSTRACT PAGE
@@ -191,6 +172,12 @@
 
 \chapter{Arquitetura do Serviço}
     \section{Diagrama de Arquitetura do Serviço}
+        \begin{figure}[!ht]
+            \centering
+            \includegraphics[scale=0.7]{diagrams/architecture.png}
+            \caption{Arquitetura do Serviço}
+            \label{fig:1.1}
+        \end{figure}
     \section{Descrição dos Módulos Desenvolvidos}
         \subsection{Orquestrador (\textit{orchestrator.c})}
         O \textit{orchestrator.c} é o módulo principal do serviço, sendo responsável por:
@@ -240,7 +227,6 @@
 
         De seguida, cria um processo-filho para executar o comando. O processo-pai aguardará que o seu processo-filho termine. Após a execução do comando pelo processo-filho, o processo-pai escreve o número da tarefa, o comando executado e o respetivo tempo de execução para o ficheiro de histórico. [CONTINUAR e falar do processo interior/exterior]
 
-
         \subsection{Número de Tarefa (\textit{task\_nr.c})}
         O módulo \textit{task\_nr.c} proporciona funções para salvar e carregar o número de tarefa do respetiivo ficheiro com a designação definida pela \textit{macro TASK\_NR\_FILENAME}, neste caso, "task number".
 
@@ -248,33 +234,28 @@
 
         Este módulo é utilizado pelo orquestrador na sua inicialização para carregar o número da tarefa, e no seu término para o salvar.
 
-    \clearpage
     \section{Diagramas de Comunicação entre Servidor e Cliente}
         \subsection{Execução de Tarefas (\textit{execute})}
                 \begin{figure}[!ht]
                     \centering
                     \includegraphics[width=\textwidth]{diagrams/execute.png}
                     \caption{Diagrama de Comunicação para Execução de Tarefas}
-                    \label{fig:3.1}
+                    \label{fig:1.2}
                 \end{figure}
         \subsection{Estado de Tarefas (\textit{status})}
-            % \newgeometry{top=3cm,left=0.1cm,right=0.1cm,bottom=4cm}
-            % \begin{figure}[!ht]
-            %     \centering
-            %     \includegraphics[scale=0.7]{diagrams/task_state.png}
-            %     \caption{Diagrama de Comunicação para Estado de Tarefas}
-            %     \label{fig:3.2}
-            % \end{figure}
-            % \loadgeometry{default}
+            \begin{figure}[!ht]
+                \centering
+                \includegraphics[width=\textwidth]{diagrams/status.png}
+                \caption{Diagrama de Comunicação para Estado de Tarefas}
+                \label{fig:1.3}
+            \end{figure}
         \subsection{Terminação do Servidor (\textit{kill})}
-            % \newgeometry{top=3cm,left=0.1cm,right=0.1cm,bottom=4cm}
             % \begin{figure}[!ht]
             %     \centering
-            %     \includegraphics[scale=0.7]{diagrams/server_termination.png}
+            %     \includegraphics[width=\textwidth]{diagrams/kill.png}
             %     \caption{Diagrama de Comunicação para Terminação do Servidor}
-            %     \label{fig:3.3}
+            %     \label{fig:1.4}
             % \end{figure}
-            % \loadgeometry{default}
 
 \chapter{Argumentos da Interface de Linha de Comandos}
     \section{\textit{Orchestrator}}
@@ -330,10 +311,10 @@
 \chapter{Testes Desenvolvidos}
 
 %==========================================================================
-% BEGIN CONCLUSÕES
+% BEGIN CONCLUSÃO
 %==========================================================================
 
-\chapter{Conclusões}
+\chapter{Conclusão}
     Após o desenvolvimento deste serviço, foram cumpridos todos
     os objetivos propostos no enunciado do trabalho, desde a implementação de
     uma interface de linha de comandos tanto para o servidor como para o cliente -
@@ -370,49 +351,7 @@
     encadeamento de programas e a consulta do estado das tarefas.
 
 %==========================================================================
-% END CONCLUSÕES
-%==========================================================================
-
-%==========================================================================
-% BEGIN BIBLIOGRAFIA
-%==========================================================================
-
-%% Changes biblibography name
-%% Portuguese babel default : “Bibliografia”
-%% Personally I prefer “Referências”
-% \renewcommand\bibname{Referências}
-
-%% https://www.overleaf.com/learn/latex/bibliography_management_with_bibtex
-
-% %% Add bibliografia to index
-% \addcontentsline{toc}{chapter}{Bibliografia}
-
-%==========================================================================
-% END BIBLIOGRAFIA
-%==========================================================================
-
-%==========================================================================
-% BEGIN LISTA DE SIGLAS E ACRÓNIMOS
-%==========================================================================
-
-%% Portuguese babel does not translate this environment
-% \renewcommand{\nomname}{Lista de Siglas e Acrónimos}
-
-%% Text that can be shown before acronyms list
-% \renewcommand{\nompreamble}{
-%     \textcolor{red}{
-%         <<Apresentar uma lista com todas as siglas e acrónimos utilizados durante a realização do trabalho. O formato base para esta lista deverá ser da forma como abaixo se apresenta.>>
-%     }
-% }
-
-%% acronyms
-% \nomenclature[01]{\textbf{SO}}{Sistemas Operativos}
-
-%% Show acronyms
-% \printnomenclature
-
-%==========================================================================
-% END LISTA DE SIGLAS E ACRÓNIMOS
+% END CONCLUSÃO
 %==========================================================================
 
 %==========================================================================

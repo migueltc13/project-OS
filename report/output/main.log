@@ -1,4 +1,4 @@
-This is XeTeX, Version 3.141592653-2.6-0.999993 (TeX Live 2022/dev/Debian) (preloaded format=xelatex 2024.3.14)  5 MAY 2024 00:44
+This is XeTeX, Version 3.141592653-2.6-0.999993 (TeX Live 2022/dev/Debian) (preloaded format=xelatex 2024.3.14)  5 MAY 2024 01:33
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
@@ -1134,14 +1134,14 @@ File: images/eeum.png Graphic file (type bmp)
 * layoutoffset:(h,v)=(0.0pt,0.0pt)
 * modes: 
 * h-part:(L,W,R)=(85.35826pt, 426.79135pt, 85.35826pt)
-* v-part:(T,H,B)=(85.35826pt, 674.33032pt, 85.35826pt)
+* v-part:(T,H,B)=(56.9055pt, 702.78308pt, 85.35826pt)
 * \paperwidth=597.50787pt
 * \paperheight=845.04684pt
 * \textwidth=426.79135pt
-* \textheight=674.33032pt
+* \textheight=702.78308pt
 * \oddsidemargin=13.08827pt
 * \evensidemargin=13.08827pt
-* \topmargin=-24.31174pt
+* \topmargin=-52.7645pt
 * \headheight=17.0pt
 * \headsep=20.40001pt
 * \topskip=11.0pt
@@ -1193,53 +1193,55 @@ Class scrreprt Warning: \float@addtolists detected!
 (scrreprt)              a package that still implements the
 (scrreprt)              deprecated \float@addtolist interface.
 
+File: diagrams/architecture.png Graphic file (type bmp)
+<diagrams/architecture.png>
 LaTeX Font Info:    Font shape `TU/lmss/bx/it' in size <12> not available
-(Font)              Font shape `TU/lmss/bx/sl' tried instead on input line 195.
+(Font)              Font shape `TU/lmss/bx/sl' tried instead on input line 182.
 
 LaTeX Font Info:    Font shape `TU/lmss/bx/it' in size <10> not available
-(Font)              Font shape `TU/lmss/bx/sl' tried instead on input line 207.
+(Font)              Font shape `TU/lmss/bx/sl' tried instead on input line 194.
 
 [2
 
 ] [3]
 File: diagrams/execute.png Graphic file (type bmp)
 <diagrams/execute.png>
- [4
-
-]
+File: diagrams/status.png Graphic file (type bmp)
+<diagrams/status.png>
+ [4] [5]
 chapter 2.
 LaTeX Font Info:    Font shape `TU/lmss/bx/it' in size <14.4> not available
-(Font)              Font shape `TU/lmss/bx/sl' tried instead on input line 280.
+(Font)              Font shape `TU/lmss/bx/sl' tried instead on input line 261.
 
-[5
+[6
 
 ]
 chapter 3.
-[6
+[7
 
-] [7]
+] [8]
 chapter 4.
-[8
-
-]
-chapter 5.
 [9
 
 ]
-chapter without number
+chapter 5.
 [10
+
+]
+chapter without number
+[11
 
 ] (output/main.aux (output/cover.aux))
 Package rerunfilecheck Info: File `main.out' has not changed.
 (rerunfilecheck)             Checksum: D41D8CD98F00B204E9800998ECF8427E;0.
  ) 
 Here is how much of TeX's memory you used:
- 28922 strings out of 478174
- 597345 string characters out of 5854282
- 1223885 words of memory out of 5000000
- 49025 multiletter control sequences out of 15000+600000
+ 28940 strings out of 478174
+ 597767 string characters out of 5854282
+ 1224886 words of memory out of 5000000
+ 49041 multiletter control sequences out of 15000+600000
  473742 words of font info for 75 fonts, out of 8000000 for 9000
  16 hyphenation exceptions out of 8191
  108i,13n,106p,10620b,1162s stack positions out of 5000i,500n,10000p,200000b,80000s
 
-Output written on output/main.pdf (12 pages).
+Output written on output/main.pdf (13 pages).
