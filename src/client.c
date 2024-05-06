@@ -13,11 +13,7 @@
 /** @brief The size of the buffer to read from the FIFO. */
 #define BUF_SIZE 4096
 
-void execute_usage(char *name);
-
-void status_usage(char *name);
-
-void kill_usage(char *name);
+void client_usage(char* name);
 
 /**
  * @brief The main function of the client program.
@@ -40,10 +36,7 @@ int main(int argc, char **argv) {
 
     // parse arguments
     if (argc < 2) {
-        printf("Usage:\n");
-        execute_usage(argv[0]);
-        status_usage(argv[0]);
-        kill_usage(argv[0]);
+        client_usage(argv[0]);
         return 0;
     }
 
@@ -71,8 +64,7 @@ int main(int argc, char **argv) {
     // parse execute option
     if (strcmp(argv[1], "execute") == 0) {
         if (argc < 5) {
-            printf("Usage: ");
-            execute_usage(argv[0]);
+            client_usage(argv[0]);
             free(client_fifo);
             (void) unlink(client_fifo);
             return 0;
@@ -81,8 +73,7 @@ int main(int argc, char **argv) {
         // parse time
         int time = atoi(argv[2]);
         if (time < 0) {
-            printf("Usage: ");
-            execute_usage(argv[0]);
+            client_usage(argv[0]);
             free(client_fifo);
             (void) unlink(client_fifo);
             return 0;
@@ -97,8 +88,7 @@ int main(int argc, char **argv) {
             is_pided = false;
         }
         else {
-            printf("Usage: ");
-            execute_usage(argv[0]);
+            client_usage(argv[0]);
             free(client_fifo);
             (void) unlink(client_fifo);
             return 0;
@@ -170,8 +160,7 @@ int main(int argc, char **argv) {
     // parse status option
     else if (strcmp(argv[1], "status") == 0) {
         if (argc != 2) {
-            printf("Usage: ");
-            status_usage(argv[0]);
+            client_usage(argv[0]);
             free(client_fifo);
             (void) unlink(client_fifo);
             return 0;
@@ -239,8 +228,7 @@ int main(int argc, char **argv) {
     }
     else if (strcmp(argv[1], "kill") == 0) {
         if (argc != 2) {
-            printf("Usage: ");
-            kill_usage(argv[0]);
+            client_usage(argv[0]);
             free(client_fifo);
             (void) unlink(client_fifo);
             return 0;
@@ -279,10 +267,7 @@ int main(int argc, char **argv) {
     }
     else {
         // invalid option
-        printf("Usage:\n");
-        execute_usage(argv[0]);
-        status_usage(argv[0]);
-        kill_usage(argv[0]);
+        client_usage(argv[0]);
     }
 
     (void) unlink(client_fifo);
@@ -291,25 +276,22 @@ int main(int argc, char **argv) {
 }
 
 /**
- * @brief Print usage for the execute option.
+ * @brief Print usage for the client program.
  * @param name the name of the client executable
  */
-void execute_usage(char *name) {
-    printf("%s execute <estimated_time|priority> <-u|-p> \"prog-a [args]\"\n", name);
-}
-
-/**
- * @brief Print usage for the status option.
- * @param name the name of the client executable
- */
-void status_usage(char *name) {
-    printf("%s status\n", name);
-}
-
-/**
- * @brief Print usage for the kill option.
- * @param name the name of the client executable
- */
-void kill_usage(char *name) {
-    printf("%s kill\n", name);
+void client_usage(char* name) {
+    printf("Usage: %s <option [args]>\n", name);
+    printf("\n");
+    printf("Options:\n");
+    printf("    execute <est_time|priority> <-u|-p> \"<command [args]>\"  Execute a command\n");
+    printf("        est_time  Estimated time of execution, in case scheduling policy is SJF\n");
+    printf("        priority  Priority of the task, in case scheduling policy is PES\n");
+    printf("        -u        Unpiped command\n");
+    printf("        -p        Piped command\n");
+    printf("        command   Command to execute. Maximum size: 300 bytes\n");
+    printf("    status                                                  Status of the tasks\n");
+    printf("    kill                                                    Terminate the server\n");
+    printf("\n");
+    printf("Note: The estimated time or priority is irrelevant if the scheduling policy is\n");
+    printf("    FCFS, but it must be provided as an argument.\n");
 }
