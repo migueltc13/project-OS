@@ -128,7 +128,7 @@
 \begin{flushleft}
 \begin{abstract}
 
-    \textcolor{red}{>> Atualizar o resumo do relatório de acordo com as mudanças na segunda parte do trabalho.}
+    \textcolor{red}{>> Atualizar o resumo}
 
 \end{abstract}
 \end{flushleft}
@@ -180,61 +180,128 @@
         \end{figure}
     \section{Descrição dos Módulos Desenvolvidos}
         \subsection{Orquestrador (\textit{orchestrator.c})}
-        O \textit{orchestrator.c} é o módulo principal do serviço, sendo responsável por:
-        \begin{itemize}
-            \item Fazer o \textit{parsing} dos argumentos da linha de comandos;
-            \item Criar o seu FIFO;
-            \item Receber os pedidos dos clientes enviados pelo seu FIFO e lidar com estes adequadamente;
-            \item Enviar as respostas dos pedidos dos clientes pelos seus respetivos FIFOs.
-        \end{itemize}
-        Este lida com os pedidos dos clientes tendo em conta a política de escalonamento definida previamente.
+            O \textit{orchestrator.c} é o módulo principal do serviço, sendo responsável por:
+            \begin{itemize}
+                \item Leitura e validação dos argumentos da linha de comandos;
+                \item Criar o seu \textit{FIFO} para receber pedidos dos clientes;
+                \item Lidar adequadamente com os pedidos recebidos dos clientes;
+                \item Caso o número máximo de tarefas em paralelo seja atingido,
+                    colocar os pedidos de execução em espera;
+                \item Caso necessário, enviar as respostas dos pedidos dos clientes pelos seus respetivos \textit{FIFOs}.
+            \end{itemize}
 
-        O orquestrador encarrega-se de quatro tipos de pedidos:
-        \begin{itemize}
-            \item \textit{\textbf{EXECUTE}} - Pedido para executar um comando.
-            Se o número máximo de tarefas em paralelo for atingido, o orquestrador coloca o pedido em espera até que uma tarefa termine, enviando uma resposta ao cliente com o número da tarefa e o estado do pedido (em espera ou a executar).
+            O orquestrador encarrega-se de quatro tipos de pedidos:
+            \begin{itemize}
+                \item \textit{\textbf{EXECUTE}} - Pedido para executar um comando.
+                    Se o número máximo de tarefas em paralelo for atingido,
+                    o orquestrador coloca o pedido em espera,
+                    de seguida envia uma resposta ao cliente com o número da tarefa
+                    e o estado do pedido ("a executar" ou "agendada").
 
-            \item \textit{\textbf{COMPLETED}} - Assim que um comando terminar a sua execução, o orquestrador recebe um pedido deste tipo enviado pelo processo-pai do processo-filho que executou o comando, e executará o próximo comando em espera - se existir.
+                \item \textit{\textbf{COMPLETED}} - Assim que um comando terminar a sua execução,
+                    o orquestrador recebe um pedido deste tipo enviado pelo processo-pai do processo-filho
+                    que executou o comando, e executará, com base na política de escalonamento utilizada,
+                    o próximo comando em espera, se algum existir.
 
-            \item \textit{\textbf{STATUS}} - Pedido para consultar o estado de um pedido.
-            O orquestrador envia uma resposta ao cliente com o estado do pedido através do seu FIFO.
+                \item \textit{\textbf{STATUS}} - Pedido para consultar o estado das tarefas.
+                    O orquestrador utiliza um processo para gerar e enviar a resposta ao cliente.
+                    Deste modo, o servidor pode continuar a receber e lidar com pedidos de outros
+                    clientes, sem interrupções.
 
-            \item \textit{\textbf{KILL}} - Pedido para terminar o servidor.
-            Quando o orquestrador recebe este pedido, termina o programa, porém, antes de terminar, guarda o número do último pedido de \textit{execute} recebido num ficheiro, fecha os FIFOs e liberta a memória alocada para as tarefas em execução e em espera.
-        \end{itemize}
-        O orquestrador continua a correr até receber o pedido \textit{kill} de um cliente, ou até receber um sinal do sistema operativo para interromper/terminar.
+                \item \textit{\textbf{KILL}} - Pedido para terminar o servidor.
+                    Quando o orquestrador recebe este pedido,
+                    termina a sua execução, porém, antes de terminar,
+                    guarda o número de tarefa atual,
+                    fecha os descritores de \textit{FIFOs} abertos,
+                    e liberta a memória alocada para as tarefas em execução e em espera.
+            \end{itemize}
+            O orquestrador continua a correr até receber o pedido \textit{kill} de um cliente,
+            ou até receber um sinal do sistema operativo para interromper/terminar.
+
+            Para uma ilustração mais detalhada da comunicação entre o servidor e o cliente,
+            por favor consulte os seguinte diagramas de comunicação nas figuras
+            \textit{\ref{fig:1.2}} e \textit{\ref{fig:1.3}}, do subcapítulo \textit{\nameref{sec:1.3}}.
 
         \subsection{Cliente (\textit{client.c})}
-        O módulo \textit{client.c} é responsável por:
-        \begin{itemize}
-            \item Executar comandos, verificar o \textit{status} de tarefas e/ou terminar o servidor;
-            \item Fazer \textit{parsing} dos argumentos e enviar os pedidos para o servidor do programa através do FIFO do servidor.
-        \end{itemize}
-        As opções de \textit{status} e \textit{execute} requerem a criação de um FIFO para o cliente receber a resposta do servidor.
-
+            O módulo \textit{client.c} é responsável por, após a leitura e validação dos argumentos da linha de comandos,
+            enviar pedidos - \textit{execute}, \textit{status} e \textit{kill} - para o \textit{FIFO} do
+            servidor \textit{orchestrator}, e por receber as respostas do servidor num \textit{FIFO} criado para o efeito,
+            no caso do pedido enviado ser do tipo \textit{execute} ou \textit{status}. O nome do \textit{FIFO} do cliente
+            é gerado através do seu PID, e é enviado no próprio pedido para o servidor.
         \subsection{Pedido (\textit{request.c})}
+            Neste módulo, é definida a estrutura de dados que representa um pedido, constituída por:
+            \begin{itemize}
+                \item \textbf{\textit{int type}} - Tipo do pedido
+                    (\textit{EXECUTE}, \textit{COMPLETED}, \textit{STATUS} ou \textit{KILL});
+                \item \textbf{\textit{int est\_time}} - Tempo estimado de execução da tarefa
+                    ou a prioridade da tarefa, dependendo da política de escalonamento;
+                \item \textbf{\textit{char command[MAX\_CMD\_SIZE]}} - Comando a executar, caso seja um pedido de execução;
+                \item \textbf{\textit{bool is\_piped}} - Indica se o comando é encadeado, caso seja um pedido de execução;
+                \item \textbf{\textit{unsigned int task\_nr}} - Número da tarefa, atribuído pelo orquestrador, caso seja um pedido de execução;
+                \item \textbf{\textit{char client\_fifo[CLIENT\_FIFO\_SIZE]}} - Nome do \textit{FIFO} do cliente,
+                    para onde o orquestrador enviará a resposta, caso seja um pedido de execução ou de estado.
+            \end{itemize}
+
+            Este módulo exibe garante o encapsulamento de dados, este é garantido através da definição da
+            \textit{struct request} dentro do ficheiro \textit{request.c}, e a sua manipulação é feita através
+            de funções definidas neste módulo, como por exemplo a função \textit{create\_request}, e as funções
+            de \textit{getters} e de \textit{setters}.
+
+            Também a oferece outra funções de utlidade, como a função de clonagem de pedidos, e impressão de pedidos,
+            utlizadas no orquestrador.
 
         \subsection{Comando (\textit{command.c})}
-        O módulo \textit{command.c} é responsável por:
-        \begin{itemize}
-            \item Executar comandos, \textit{single} ou \textit{piped}, utilizando \textit{process forking};
-            \item Lida com o redirecionamento do \textit{stdout} e \textit{stderr} para os respetivos ficheiros;
-            \item Encarrega-se da a escrita do tempo de execução das tarefas para ficheiro;
-            \item Lida com a escrita do número da tarefa, do comando executado e do respetivo tempo de execução para o ficheiro de histórico.
-        \end{itemize}
+            O módulo \textit{command.c} é chamado pelo orquestrador para executar os comandos enviados pelos clientes.
 
-        Primeiramente, todos os ficheiros necessários são criados - nomeadamente a diretoria de \textit{output} para os ficheiros necessários às tarefas, como o ficheiro de \textit{output}, o ficheiro de \textit{error} e o ficheiro de \textit{time}. Também abre o ficheiro de histórico para escrita do número de  tarefa, do comando executado e do respetivo tempo de execução.
+            Este módulo é responsável por:
+            \begin{itemize}
+                \item Executar comandos, \textit{single} ou \textit{piped}, utilizando \textit{process forking},
+                    fazendo o respetivo \textit{parsing} dos comandos;
+                \item Lida com o redirecionamento do \textit{stdout} e \textit{stderr} para os respetivos ficheiros;
+                \item Encarrega-se da a escrita do tempo de espera mais o de execução das tarefas para ficheiro;
+                \item Escreve o número da tarefa, o comando executado e o tempo total para o ficheiro de histórico.
+            \end{itemize}
 
-        De seguida, cria um processo-filho para executar o comando. O processo-pai aguardará que o seu processo-filho termine. Após a execução do comando pelo processo-filho, o processo-pai escreve o número da tarefa, o comando executado e o respetivo tempo de execução para o ficheiro de histórico. [CONTINUAR e falar do processo interior/exterior]
+            Primeiramente, todos os ficheiros necessários são criados - nomeadamente a diretoria de
+            \textit{output} para os ficheiros relativos a tarefa, como o ficheiro de \textit{output},
+            o de erros e o do tempo total.
+            Também prepara a abertura do ficheiro de histórico, onde serão escritos os dados como o número da tarefa,
+            o comando executado e o tempo total, após a execução do comando.
+
+            De seguida, é criado um processo utilizado para criar outro processo-filho que executará o comando.
+            O processo-pai aguardará que o seu processo-filho termine a execução do comando, e, após a sua execução,
+            escreverá o número da tarefa, o comando executado e o tempo total, em milissegundos, para o ficheiro de histórico,
+            e notifica o orquestrador que a tarefa foi concluída.
+
+            São criados dois processos para que o processo-pai interior possa esperar pela execução do comando,
+            sem bloquear a execução do orquestrador, permitindo a este continuar a lidar com outros pedidos de clientes.
+
+            O redirecionamento do \textit{stdout} e \textit{stderr} para os respetivos ficheiros é feito
+            através da utilização da função \textit{dup2}.
+
+            No encadeamento de comandos, o redirecionamento é feito de forma a que o \textit{stdout} do comando
+            anterior seja redirecionado para o \textit{stdin} do comando seguinte, e assim sucessivamente. Ao longo
+            da cadeia de comandos é feito o redirecionamento do \textit{stderr} para o ficheiro de erros, garantindo
+            a similaridade com o comportamento nativo da \textit{shell}. No último comando, o redirecionamento do
+            \textit{stdout} é feito para o ficheiro de \textit{output}.
 
         \subsection{Número de Tarefa (\textit{task\_nr.c})}
-        O módulo \textit{task\_nr.c} proporciona funções para salvar e carregar o número de tarefa do respetiivo ficheiro com a designação definida pela \textit{macro TASK\_NR\_FILENAME}, neste caso, "task number".
+            O módulo \textit{task\_nr.c} proporciona funções para salvar e carregar o número
+            de tarefa do respetiivo ficheiro com a designação definida pela
+            \textit{macro TASK\_NR\_FILENAME}, neste caso, "task number".
 
-        Se, ao carregar o ficheiro do número da tarefa, este não existir, o número da tarefa é inicializado a 1, caso contrário, o número da tarefa é incrementado em 1.
+            Se, ao carregar o ficheiro do número da tarefa, este não existir,
+            o número da tarefa é inicializado a 1,
+            caso contrário, o número da tarefa é incrementado em 1.
 
-        Este módulo é utilizado pelo orquestrador na sua inicialização para carregar o número da tarefa, e no seu término para o salvar.
+            Este módulo é utilizado pelo orquestrador na sua inicialização para carregar o
+            número da tarefa, e no seu término para o salvar.
 
+    \clearpage
     \section{Diagramas de Comunicação entre Servidor e Cliente}
+        \label{sec:1.3}
+        Nos seguintes três subcapítulos, são apresentados diagramas que ilustram a comunicação
+        entre o servidor e o cliente, consuante diferentes tipos de pedidos.
         \subsection{Execução de Tarefas (\textit{execute})}
                 \begin{figure}[!ht]
                     \centering
@@ -250,16 +317,17 @@
                 \label{fig:1.3}
             \end{figure}
         \subsection{Terminação do Servidor (\textit{kill})}
-            % \begin{figure}[!ht]
-            %     \centering
-            %     \includegraphics[width=\textwidth]{diagrams/kill.png}
-            %     \caption{Diagrama de Comunicação para Terminação do Servidor}
-            %     \label{fig:1.4}
-            % \end{figure}
+            Na terminação do servidor, o cliente envia um pedido \textit{kill} para o \textit{FIFO} do servidor.
+            De seguida o servidor guarda o número atual da tarefa de forma persistente,
+            fecha os descritores de \textit{FIFOs} abertos,
+            liberta a memória alocada para as tarefas em execução e em espera, e, por fim, termina a
+            sua execução.
 
+\begin{minipage}{\textwidth}
 \chapter{Argumentos da Interface de Linha de Comandos}
     \section{\textit{Orchestrator}}
     \section{\textit{Client}}
+\end{minipage}
 
 \chapter{Avaliação de Políticas de Escalonamento}
     No trabalho desenvolvido, foram implementadas três políticas de escalonamento de tarefas.

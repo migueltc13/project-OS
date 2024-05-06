@@ -1,4 +1,4 @@
-This is XeTeX, Version 3.141592653-2.6-0.999993 (TeX Live 2022/dev/Debian) (preloaded format=xelatex 2024.3.14)  5 MAY 2024 01:33
+This is XeTeX, Version 3.141592653-2.6-0.999993 (TeX Live 2022/dev/Debian) (preloaded format=xelatex 2024.3.14)  5 MAY 2024 15:11
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
@@ -1199,19 +1199,21 @@ LaTeX Font Info:    Font shape `TU/lmss/bx/it' in size <12> not available
 (Font)              Font shape `TU/lmss/bx/sl' tried instead on input line 182.
 
 LaTeX Font Info:    Font shape `TU/lmss/bx/it' in size <10> not available
-(Font)              Font shape `TU/lmss/bx/sl' tried instead on input line 194.
+(Font)              Font shape `TU/lmss/bx/sl' tried instead on input line 195.
 
 [2
 
-] [3]
+] [3] [4]
 File: diagrams/execute.png Graphic file (type bmp)
 <diagrams/execute.png>
 File: diagrams/status.png Graphic file (type bmp)
 <diagrams/status.png>
- [4] [5]
+ [5
+
+]
 chapter 2.
 LaTeX Font Info:    Font shape `TU/lmss/bx/it' in size <14.4> not available
-(Font)              Font shape `TU/lmss/bx/sl' tried instead on input line 261.
+(Font)              Font shape `TU/lmss/bx/sl' tried instead on input line 328.
 
 [6
 
@@ -1236,10 +1238,10 @@ Package rerunfilecheck Info: File `main.out' has not changed.
 (rerunfilecheck)             Checksum: D41D8CD98F00B204E9800998ECF8427E;0.
  ) 
 Here is how much of TeX's memory you used:
- 28940 strings out of 478174
- 597767 string characters out of 5854282
- 1224886 words of memory out of 5000000
- 49041 multiletter control sequences out of 15000+600000
+ 28944 strings out of 478174
+ 597824 string characters out of 5854282
+ 1225887 words of memory out of 5000000
+ 49045 multiletter control sequences out of 15000+600000
  473742 words of font info for 75 fonts, out of 8000000 for 9000
  16 hyphenation exceptions out of 8191
  108i,13n,106p,10620b,1162s stack positions out of 5000i,500n,10000p,200000b,80000s
