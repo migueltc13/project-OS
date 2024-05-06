@@ -1,4 +1,4 @@
 var searchData=
 [
-  ['load_5ftask_5fnr_111',['load_task_nr',['../task__nr_8h.html#acade4944550011e33781d7feb097cd86',1,'load_task_nr(char *output_dir):&#160;task_nr.c'],['../task__nr_8c.html#acade4944550011e33781d7feb097cd86',1,'load_task_nr(char *output_dir):&#160;task_nr.c']]]
+  ['main_109',['main',['../client_8c.html#a3c04138a5bfe5d72780bb7e82a18e627',1,'main(int argc, char **argv):&#160;client.c'],['../orchestrator_8c.html#a3c04138a5bfe5d72780bb7e82a18e627',1,'main(int argc, char **argv):&#160;orchestrator.c']]]
 ];

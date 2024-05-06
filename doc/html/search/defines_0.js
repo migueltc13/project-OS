@@ -1,4 +1,4 @@
 var searchData=
 [
-  ['buf_5fsize_135',['BUF_SIZE',['../client_8c.html#a6821bafc3c88dfb2e433a095df9940c6',1,'client.c']]]
+  ['buf_5fsize_131',['BUF_SIZE',['../client_8c.html#a6821bafc3c88dfb2e433a095df9940c6',1,'client.c']]]
 ];
