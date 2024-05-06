@@ -96,6 +96,18 @@
 \usepackage{multirow}
 \usepackage{hhline}
 \usepackage{array}
+\usepackage{diagbox}
+
+% Custom commands for policy evaluation
+\newcommand{\Exec}{
+    \cellcolor{green!40}
+}
+\newcommand{\Wait}{
+    \cellcolor{red!40}
+}
+\newcommand{\End}{
+    \cellcolor{gray!40}
+}
 
 %==========================================================================
 % DOCUMENT
@@ -148,16 +160,13 @@
 %% Personally I prefer “índice”
 \renewcommand{\contentsname}{Índice}
 \renewcommand{\listfigurename}{Índice de Figuras}
-% \renewcommand{\listtablename}{Índice de Tabelas}
+\renewcommand{\listtablename}{Índice de Tabelas}
 
 \begin{minipage}{\textwidth}
 \tableofcontents
 \listoffigures
+\listoftables
 \end{minipage}
-
-% \tableofcontents
-% \listoffigures
-% \listoftables
 
 %==========================================================================
 % END INDEXES PAGES
@@ -175,7 +184,7 @@
         \begin{figure}[!ht]
             \centering
             \includegraphics[scale=0.7]{diagrams/architecture.png}
-            \caption{Arquitetura do Serviço}
+            \caption{\small Arquitetura do Serviço}
             \label{fig:1.1}
         \end{figure}
     \section{Descrição dos Módulos Desenvolvidos}
@@ -306,14 +315,14 @@
                 \begin{figure}[!ht]
                     \centering
                     \includegraphics[width=\textwidth]{diagrams/execute.png}
-                    \caption{Diagrama de Comunicação para Execução de Tarefas}
+                    \caption{\small Diagrama de Comunicação para Execução de Tarefas}
                     \label{fig:1.2}
                 \end{figure}
         \subsection{Estado de Tarefas (\textit{status})}
             \begin{figure}[!ht]
                 \centering
                 \includegraphics[width=\textwidth]{diagrams/status.png}
-                \caption{Diagrama de Comunicação para Estado de Tarefas}
+                \caption{\small Diagrama de Comunicação para Estado de Tarefas}
                 \label{fig:1.3}
             \end{figure}
         \subsection{Terminação do Servidor (\textit{kill})}
@@ -352,19 +361,92 @@ Note: The estimated time or priority is irrelevant if the scheduling policy is F
 \end{lstlisting}
 \end{minipage}
 
+\newgeometry{top=1cm,left=3cm,right=3cm,bottom=3cm}
 \chapter{Avaliação de Políticas de Escalonamento}
     No trabalho desenvolvido, foram implementadas três políticas de escalonamento de tarefas.
     Estas serão aprofundadas nas secções seguintes, assim como as suas avaliações práticas.
     Por favor consulte o anexo \nameref{anexo:2} para mais detalhes de como foi realizada
     a implementação destas políticas.
 
-    \textcolor{red}{>> Atualizar a introdução da avaliação de políticas de escalonamento.}
+    Para garantir a utilização correta das políticas de escalonamento,
+    assume-se que, nos testes de avaliação, o tempo de execução das tarefas
+    não difere - de forma a não afetar a ordem fornecida pelos algoritmos
+    de escalonamento - dos tempos estimados fornecidos pelo cliente.
+    Se estes tempos diferirem desta forma, a eficiência máxima das políticas de escalonamento
+    não pode ser garantida, uma vez que a ordem de execução das tarefas pode ser alterada.
+
+    Nestas avaliações, assume-se que o número de tarefas em paralelo é 2,
+    que o tempo de resposta do servidor é 0 ms,
+    e são considerados os seguintes quatro comandos, em fila de espera,
+    com os respetivos tempos estimados e de execução:
+
+    \begin{table}[!ht]
+        \centering
+        \begin{tabular}{|c|c|c|c|c|c|}
+            \hline
+            \rowcolor{gray!20!white}
+            \textbf{Nr.} & \textbf{Comando} & \textbf{T. Estimado} & \textbf{T. Execução} \\
+            \hline
+            1 & \textit{ls -l | wc -l} & 100 &  90 \\
+            \hline
+            2 & \textit{echo "Hello World"} &  50 &  60 \\
+            \hline
+            3 & \textit{make bin/orchestrator} & 150 & 145 \\
+            \hline
+            4 & \textit{ps aux} &  80 &  85 \\
+            \hline
+        \end{tabular}
+        \caption{\small Comandos a Executar para Avaliação das Políticas de Escalonamento}
+    \end{table}
+
+    Fórmulas utilizadas para a avaliação das políticas de escalonamento:
+
+    \begin{minipage}{\textwidth}
+        \centering
+        $T_{\text{Total}} = T_{\text{Espera}} + T_{\text{Execução}}$
+        \quad e \quad
+        $T_{\text{Médio por tarefa}} = \frac{\sum_{i=1}^{n} T_{\text{Total}_{i}}}{n}$
+        \quad e \quad
+        $T_{\text{Total das tarefas}} = max_{i=1}^{n} T_{\text{Total}_{i}}$
+
+        \vspace{0.2cm}
+        onde $n$ é o número de tarefas e $T$ é o tempo em milissegundos.
+    \end{minipage}
+
     \section{\textbf{FCFS} - \textit{First Come First Served}}
         Nesta política, as tarefas são executadas por ordem de chegada, o que não é
         eficiente em termos de tempo de espera e execução. No entanto, é uma política
         simples e fácil de implementar.
 
-        \textcolor{red}{>> Escrever sobre a avaliação prática desta política + Imagem}
+        \begin{table}[!ht]
+            \centering
+            \begin{tabular}{|c|c|c|c|c|c|}
+                \hline
+                \textbf{T. Total (Estimado)} & \diagbox{\textbf{T. Total (Execução)}}{\textbf{Nr.}} & \textbf{1} & \textbf{2} & \textbf{3} & \textbf{4} \\
+                \hline
+                        0 &        0 & \Exec & \Exec & \Wait & \Wait \\
+                \hline
+                       50 &       60 & \Exec & \End  & \Exec & \Wait \\
+                \hline
+                      100 &       90 & \End  & \End  & \Exec & \Exec \\
+                \hline
+                100 +  80 & 90 +  85 & \End  & \End  & \Exec & \End  \\
+                \hline
+                 50 + 150 & 60 + 145 & \End  & \End  & \End  & \End  \\
+                \hline
+            \end{tabular}
+            \caption{\small Execução das Tarefas com a Política \textit{FCFS}}
+        \end{table}
+
+        \begin{minipage}{\textwidth}
+            \centering
+            $T_{\text{Médio por tarefa}} = \frac{60 + 90 + (90 + 85) + (60 + 145)}{4} = \frac{530}{4} = 132.5 \approx 133 \text{ ms}$
+
+            \vspace{0.2cm}
+            $T_{\text{Total das tarefas}} = max(60, 90, 90 + 85, 60 + 145) = 205 \text{ ms}$
+        \end{minipage}
+
+    \loadgeometry{default}
     \section{\textbf{SJF} - \textit{Shortest Job First}}
         A política \textit{Shortest Job First} é uma política de escalonamento não preemptiva
         que seleciona a tarefa com o menor tempo de execução. Este tempo é passado como
@@ -383,7 +465,42 @@ Note: The estimated time or priority is irrelevant if the scheduling policy is F
         política de escalonamento preemptiva, permitindo esta a interrupção de tarefas em
         execução para dar lugar a tarefas com tempos de execução menores.
 
-        \textcolor{red}{>> Escrever sobre a avaliação prática desta política + Imagem}
+        \begin{table}[!ht]
+            \centering
+            \begin{tabular}{|c|c|c|c|c|c|}
+                \hline
+                \textbf{T. Total (Estimado)} & \diagbox{\textbf{T. Total (Execução)}}{\textbf{Nr.}} & \textbf{1} & \textbf{2} & \textbf{3} & \textbf{4} \\
+                \hline
+                       0 &        0 & \Wait & \Exec & \Wait & \Exec \\
+                \hline
+                      50 &       60 & \Exec & \End  & \Wait & \Exec \\
+                \hline
+                      80 &       85 & \Exec & \End  & \Exec & \End  \\
+                \hline
+                50 + 100 & 60 +  90 & \End  & \End  & \Exec & \End  \\
+                \hline
+                80 + 150 & 85 + 145 & \End  & \End  & \End  & \End  \\
+                \hline
+            \end{tabular}
+            \caption{\small Execução das Tarefas com a Política \textit{SJF}}
+        \end{table}
+
+        \begin{minipage}{\textwidth}
+            \centering
+            $T_{\text{Médio por tarefa}} = \frac{60 + 85 + (60 + 90) + (85 + 145)}{4} = \frac{525}{4} = 131.25 \approx 131 \text{ ms}$
+
+            \vspace{0.2cm}
+            $T_{\text{Total das tarefas}} = max(60, 85, 60 + 90, 85 + 145) = 230 \text{ ms}$
+        \end{minipage}
+
+        A política \textit{SJF} garante um tempo médio por tarefa menor em relação à política \textit{FCFS},
+        com a exceção de quando a ordem de execução das tarefas não varia em relação à ordem de chegada,
+        tendo estes tempos iguais.
+
+        Podemos observar que, apesar da política \textit{SJF} ser mais demorada a executar
+        as tarefas na totalidade em relação à política \textit{FCFS}, esta consegue ser mais eficiente
+        em termos do tempo médio por tarefa, tendo assim um melhor aproveitamento do paralelismo.
+
     \section{\textbf{PES} - \textit{Priority Escalonation Scheduling}}
         De forma a evitar situações de \textit{starvation}, foi implementada a política
         \textit{Priority Escalonation Scheduling}. Nesta, as tarefas são executadas
@@ -397,9 +514,20 @@ Note: The estimated time or priority is irrelevant if the scheduling policy is F
         flexibilidade não garante a eficiência da execução das tarefas, caso estas não sejam
         corretamente priorizadas.
 
-        \textcolor{red}{>> Escrever sobre a avaliação prática desta política + Imagem}
+        Devido a esta política ser dependente da prioridade das tarefas, a sua eficiência
+        é variável, podendo ser menos eficiente que a política \textit{SJF} em situações
+        em que as prioridades das tarefas não são corretamente definidas. No entanto, esta
+        política sendo determinística, em situações em que as prioridades são corretamente
+        definidas, pode ser tão eficiente ou mais eficiente que a política \textit{SJF}.
 
+        Para atingir uma maior eficiência, era necessário a implementação de uma política
+        de escalonamento preemptiva, que permitisse a interrupção de tarefas em execução
+        para dar lugar a tarefas com prioridades mais altas ou com tempos de execução
+        menores.
+
+\begin{minipage}{\textwidth}
 \chapter{Testes Desenvolvidos}
+\end{minipage}
 
 %==========================================================================
 % BEGIN CONCLUSÃO
@@ -437,7 +565,7 @@ Note: The estimated time or priority is irrelevant if the scheduling policy is F
     Em suma, o desenvolvimento deste serviço permitiu a aplicação prática
     dos conhecimentos adquiridos ao longo do semestre, assim como a
     exploração de novas funcionalidades e conceitos, que proporcionaram
-    a implementação de um serviço robusto e versátil - serviço este que 
+    a implementação de um serviço robusto e versátil - serviço este que
     propicia a execução de tarefas de forma assíncrona, com a possibilidade de
     encadeamento de programas e a consulta do estado das tarefas.
 
