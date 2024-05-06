@@ -242,12 +242,12 @@
                     para onde o orquestrador enviará a resposta, caso seja um pedido de execução ou de estado.
             \end{itemize}
 
-            Este módulo exibe garante o encapsulamento de dados, este é garantido através da definição da
+            Este módulo garante o encapsulamento de dados, este é assegurado através da definição da
             \textit{struct request} dentro do ficheiro \textit{request.c}, e a sua manipulação é feita através
-            de funções definidas neste módulo, como por exemplo a função \textit{create\_request}, e as funções
+            de funções definidas neste módulo, como, por exemplo, a função \textit{create\_request}, e as funções
             de \textit{getters} e de \textit{setters}.
 
-            Também a oferece outra funções de utlidade, como a função de clonagem de pedidos, e impressão de pedidos,
+            Também oferece outras funções de utlidade, como a função de clonagem de pedidos, e impressão de pedidos,
             utlizadas no orquestrador.
 
         \subsection{Comando (\textit{command.c})}
@@ -258,12 +258,12 @@
                 \item Executar comandos, \textit{single} ou \textit{piped}, utilizando \textit{process forking},
                     fazendo o respetivo \textit{parsing} dos comandos;
                 \item Lida com o redirecionamento do \textit{stdout} e \textit{stderr} para os respetivos ficheiros;
-                \item Encarrega-se da a escrita do tempo de espera mais o de execução das tarefas para ficheiro;
+                \item Encarrega-se da escrita do tempo de espera, bem como o de execução das tarefas para ficheiro;
                 \item Escreve o número da tarefa, o comando executado e o tempo total para o ficheiro de histórico.
             \end{itemize}
 
             Primeiramente, todos os ficheiros necessários são criados - nomeadamente a diretoria de
-            \textit{output} para os ficheiros relativos a tarefa, como o ficheiro de \textit{output},
+            \textit{output} para os ficheiros relativos à tarefa, como o ficheiro de \textit{output},
             o de erros e o do tempo total.
             Também prepara a abertura do ficheiro de histórico, onde serão escritos os dados como o número da tarefa,
             o comando executado e o tempo total, após a execução do comando.
@@ -271,7 +271,7 @@
             De seguida, é criado um processo utilizado para criar outro processo-filho que executará o comando.
             O processo-pai aguardará que o seu processo-filho termine a execução do comando, e, após a sua execução,
             escreverá o número da tarefa, o comando executado e o tempo total, em milissegundos, para o ficheiro de histórico,
-            e notifica o orquestrador que a tarefa foi concluída.
+            e notificará o orquestrador que a tarefa foi concluída.
 
             São criados dois processos para que o processo-pai interior possa esperar pela execução do comando,
             sem bloquear a execução do orquestrador, permitindo a este continuar a lidar com outros pedidos de clientes.
@@ -281,13 +281,13 @@
 
             No encadeamento de comandos, o redirecionamento é feito de forma a que o \textit{stdout} do comando
             anterior seja redirecionado para o \textit{stdin} do comando seguinte, e assim sucessivamente. Ao longo
-            da cadeia de comandos é feito o redirecionamento do \textit{stderr} para o ficheiro de erros, garantindo
+            da cadeia de comandos, é feito o redirecionamento do \textit{stderr} para o ficheiro de erros, garantindo
             a similaridade com o comportamento nativo da \textit{shell}. No último comando, o redirecionamento do
             \textit{stdout} é feito para o ficheiro de \textit{output}.
 
         \subsection{Número de Tarefa (\textit{task\_nr.c})}
             O módulo \textit{task\_nr.c} proporciona funções para salvar e carregar o número
-            de tarefa do respetiivo ficheiro com a designação definida pela
+            de tarefa do respetivo ficheiro com a designação definida pela
             \textit{macro TASK\_NR\_FILENAME}, neste caso, "task number".
 
             Se, ao carregar o ficheiro do número da tarefa, este não existir,
@@ -301,7 +301,7 @@
     \section{Diagramas de Comunicação entre Servidor e Cliente}
         \label{sec:1.3}
         Nos seguintes três subcapítulos, são apresentados diagramas que ilustram a comunicação
-        entre o servidor e o cliente, consuante diferentes tipos de pedidos.
+        entre o servidor e o cliente, consoante diferentes tipos de pedidos.
         \subsection{Execução de Tarefas (\textit{execute})}
                 \begin{figure}[!ht]
                     \centering
