@@ -19,6 +19,8 @@
 
 void orchestrator_usage(char *name);
 
+char *policy_to_string(int policy);
+
 int add_request(Request *requests[], int *N, int max, Request *r);
 
 int remove_request(Request *requests[], int *N, Request *r);
@@ -180,7 +182,7 @@ int main(int argc, char **argv) {
         printf("Scheduling policy: %s\n", policy_buffer);
     }
     else {
-        printf("Using default scheduling policy: FCFS\n");
+        printf("Using default scheduling policy: %s\n", policy_to_string(policy));
     }
 
     // unlink the server FIFO if it exists
@@ -350,6 +352,25 @@ void orchestrator_usage(char *name) {
     printf("    <output_dir>      Directory to store task output and history files\n");
     printf("    <parallel_tasks>  Maximum number of tasks running in parallel\n");
     printf("    [sched_policy]    Scheduling policy (FCFS, SJF, PES) default: SJF\n");
+}
+
+/**
+ * @brief Convert the scheduling policy to a string.
+ *
+ * @param policy The scheduling policy
+ * @return The scheduling policy as a string
+ */
+char *policy_to_string(int policy) {
+    switch (policy) {
+        case FCFS:
+            return "FCFS";
+        case SJF:
+            return "SJF";
+        case PES:
+            return "PES";
+        default:
+            return "Unknown";
+    }
 }
 
 /**
