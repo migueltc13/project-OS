@@ -345,6 +345,10 @@ int main(int argc, char **argv) {
  */
 void orchestrator_usage(char *name) {
     printf("Usage: %s <output_dir> <parallel_tasks> [sched_policy]\n", name);
+    printf("\nOptions:\n");
+    printf("    <output_dir>      Directory to store task output and history files\n");
+    printf("    <parallel_tasks>  Maximum number of tasks running in parallel\n");
+    printf("    [sched_policy]    Scheduling policy (FCFS, SJF, PES) default: SJF\n");
 }
 
 /**
