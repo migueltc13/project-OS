@@ -330,23 +330,23 @@
 Usage: orchestrator <output_dir> <parallel_tasks> [sched_policy]
 
 Options:
-    <output_dir>        Directory to store task output and history files
-    <parallel_tasks>    Maximum number of tasks running in parallel
-    [sched_policy]      Scheduling policy (FCFS, SJF, PES) default: SJF
+    <output_dir>         Directory to store task output and history files
+    <parallel_tasks>     Maximum number of tasks running in parallel
+    [sched_policy]       Scheduling policy (FCFS, SJF, PES) default: SJF
 \end{lstlisting}
     \section{\textit{Client}}
 \begin{lstlisting}
 Usage: client <option [args]>
 
 Options:
-    execute <est_time|priority> <-u|-p> "<command [args]>"  Execute a command
+    execute <est_time|priority> <-u|-p> "<command [args]>"            Execute a command
         est_time    Estimated time of execution, in case scheduling policy is SJF
         priority    Priority of the task, in case scheduling policy is PES
         -u          Unpiped command
         -p          Piped command
         command     Command to execute. Maximum size: 300 bytes
-    status                                                           Status of the tasks
-    kill                                                             Terminate the server
+    status                                                            Status of the tasks
+    kill                                                              Terminate the server
 
 Note: The estimated time or priority is irrelevant if the scheduling policy is FCFS, but it must be provided as an argument.
 \end{lstlisting}
