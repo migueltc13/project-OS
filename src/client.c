@@ -247,7 +247,7 @@ int main(int argc, char **argv) {
         }
 
         // create kill request
-        Request *r = create_request(KILL, 0, "", false, client_fifo);
+        Request *r = create_request(KILL, 0, "", false, "");
         if (r == NULL) {
             perror("Error: couldn't create kill request");
             free(client_fifo);

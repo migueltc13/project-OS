@@ -65,7 +65,7 @@ struct request {
  *
  * Example of the creation of a kill request:
  * @code
- * Request *kill_request = create_request(KILL, 0, NULL, false, "client-1234");
+ * Request *kill_request = create_request(KILL, 0, NULL, false, "");
  * @endcode
  *
  * **The caller is responsible for freeing the returned request by this function.**
