@@ -209,7 +209,7 @@ Functions</h2></td></tr>
 <div class="ttc" id="astructrequest_html"><div class="ttname"><a href="structrequest.html">request</a></div><div class="ttdoc">The request struct.</div><div class="ttdef"><b>Definition:</b> request.c:36</div></div>
 </div><!-- fragment --><p>Example of the creation of a status request: </p><div class="fragment"><div class="line"><a class="code" href="structrequest.html">Request</a> *status_request = <a class="code" href="request_8h.html#ab4cb76d84eca459d1b80c7b1a1741192">create_request</a>(<a class="code" href="request_8h.html#a59279bee44f34d08b3cbf3a89fb0d8d9">STATUS</a>, 0, NULL, <span class="keyword">false</span>, <span class="stringliteral">&quot;client-1234&quot;</span>);</div>
 <div class="ttc" id="arequest_8h_html_a59279bee44f34d08b3cbf3a89fb0d8d9"><div class="ttname"><a href="request_8h.html#a59279bee44f34d08b3cbf3a89fb0d8d9">STATUS</a></div><div class="ttdeci">#define STATUS</div><div class="ttdoc">Status request code.</div><div class="ttdef"><b>Definition:</b> request.h:12</div></div>
-</div><!-- fragment --><p>Example of the creation of a kill request: </p><div class="fragment"><div class="line"><a class="code" href="structrequest.html">Request</a> *kill_request = <a class="code" href="request_8h.html#ab4cb76d84eca459d1b80c7b1a1741192">create_request</a>(<a class="code" href="request_8h.html#a9d385e974a49598d267af81de5a33838">KILL</a>, 0, NULL, <span class="keyword">false</span>, <span class="stringliteral">&quot;client-1234&quot;</span>);</div>
+</div><!-- fragment --><p>Example of the creation of a kill request: </p><div class="fragment"><div class="line"><a class="code" href="structrequest.html">Request</a> *kill_request = <a class="code" href="request_8h.html#ab4cb76d84eca459d1b80c7b1a1741192">create_request</a>(<a class="code" href="request_8h.html#a9d385e974a49598d267af81de5a33838">KILL</a>, 0, NULL, <span class="keyword">false</span>, <span class="stringliteral">&quot;&quot;</span>);</div>
 <div class="ttc" id="arequest_8h_html_a9d385e974a49598d267af81de5a33838"><div class="ttname"><a href="request_8h.html#a9d385e974a49598d267af81de5a33838">KILL</a></div><div class="ttdeci">#define KILL</div><div class="ttdoc">Kill request code.</div><div class="ttdef"><b>Definition:</b> request.h:18</div></div>
 </div><!-- fragment --><p><b>The caller is responsible for freeing the returned request by this function.</b> </p><dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
@@ -619,7 +619,7 @@ Functions</h2></td></tr>
         <hr class="footer">
         <address class="footer">
             <small>
-                Generated on Sun May 5 2024 00:10:39 for <b>Task Orchestrator</b> by
+                Generated on Sun May 5 2024 12:49:03 for <b>Task Orchestrator</b> by
                 <a href="http://www.doxygen.org/index.html">
                     <img class="footer" src="doxygen.png" alt="doxygen" onerror="this.onerror=null;this.src='doxygen.svg';"/>
                 </a> 1.9.1. All rights reserved.
