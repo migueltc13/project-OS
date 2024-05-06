@@ -119,6 +119,9 @@ Functions</h2></td></tr>
 <tr class="memitem:a8f9d7d40e26b268401b39971b76ce127"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="orchestrator_8c.html#a8f9d7d40e26b268401b39971b76ce127">orchestrator_usage</a> (char *name)</td></tr>
 <tr class="memdesc:a8f9d7d40e26b268401b39971b76ce127"><td class="mdescLeft">&#160;</td><td class="mdescRight">Print the usage of the orchestrator server executable.  <a href="orchestrator_8c.html#a8f9d7d40e26b268401b39971b76ce127">More...</a><br /></td></tr>
 <tr class="separator:a8f9d7d40e26b268401b39971b76ce127"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a6f474b6fdb25ba074b3db104520b7a67"><td class="memItemLeft" align="right" valign="top">char *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="orchestrator_8c.html#a6f474b6fdb25ba074b3db104520b7a67">policy_to_string</a> (int policy)</td></tr>
+<tr class="memdesc:a6f474b6fdb25ba074b3db104520b7a67"><td class="mdescLeft">&#160;</td><td class="mdescRight">Convert the scheduling policy to a string.  <a href="orchestrator_8c.html#a6f474b6fdb25ba074b3db104520b7a67">More...</a><br /></td></tr>
+<tr class="separator:a6f474b6fdb25ba074b3db104520b7a67"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a3627a291d53f61274605390ff944df32"><td class="memItemLeft" align="right" valign="top">int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="orchestrator_8c.html#a3627a291d53f61274605390ff944df32">add_request</a> (<a class="el" href="request_8h.html#a1abc891df97d2318f8fb4832a28ae63c">Request</a> *requests[], int *N, int max, <a class="el" href="request_8h.html#a1abc891df97d2318f8fb4832a28ae63c">Request</a> *r)</td></tr>
 <tr class="memdesc:a3627a291d53f61274605390ff944df32"><td class="mdescLeft">&#160;</td><td class="mdescRight">Add a request to the requests array.  <a href="orchestrator_8c.html#a3627a291d53f61274605390ff944df32">More...</a><br /></td></tr>
 <tr class="separator:a3627a291d53f61274605390ff944df32"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -207,6 +210,33 @@ Functions</h2></td></tr>
   </table>
   </dd>
 </dl>
+
+</div>
+</div>
+<a id="a6f474b6fdb25ba074b3db104520b7a67"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a6f474b6fdb25ba074b3db104520b7a67">&#9670;&nbsp;</a></span>policy_to_string()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">char * policy_to_string </td>
+          <td>(</td>
+          <td class="paramtype">int&#160;</td>
+          <td class="paramname"><em>policy</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Convert the scheduling policy to a string. </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">policy</td><td>The scheduling policy </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Returns</dt><dd>The scheduling policy as a string </dd></dl>
 
 </div>
 </div>
@@ -851,7 +881,7 @@ Functions</h2></td></tr>
         <hr class="footer">
         <address class="footer">
             <small>
-                Generated on Mon May 6 2024 16:08:12 for <b>Task Orchestrator</b> by
+                Generated on Mon May 6 2024 22:32:48 for <b>Task Orchestrator</b> by
                 <a href="http://www.doxygen.org/index.html">
                     <img class="footer" src="doxygen.png" alt="doxygen" onerror="this.onerror=null;this.src='doxygen.svg';"/>
                 </a> 1.9.1. All rights reserved.

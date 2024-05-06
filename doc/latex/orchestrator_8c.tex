@@ -29,6 +29,8 @@ Include dependency graph for orchestrator.\+c\+:\nopagebreak
 \item 
 void \mbox{\hyperlink{orchestrator_8c_a8f9d7d40e26b268401b39971b76ce127}{orchestrator\+\_\+usage}} (char $\ast$name)
 \begin{DoxyCompactList}\small\item\em Print the usage of the orchestrator server executable. \end{DoxyCompactList}\item 
+char $\ast$ \mbox{\hyperlink{orchestrator_8c_a6f474b6fdb25ba074b3db104520b7a67}{policy\+\_\+to\+\_\+string}} (int policy)
+\begin{DoxyCompactList}\small\item\em Convert the scheduling policy to a string. \end{DoxyCompactList}\item 
 int \mbox{\hyperlink{orchestrator_8c_a3627a291d53f61274605390ff944df32}{add\+\_\+request}} (\mbox{\hyperlink{request_8h_a1abc891df97d2318f8fb4832a28ae63c}{Request}} $\ast$requests\mbox{[}$\,$\mbox{]}, int $\ast$N, int max, \mbox{\hyperlink{request_8h_a1abc891df97d2318f8fb4832a28ae63c}{Request}} $\ast$r)
 \begin{DoxyCompactList}\small\item\em Add a request to the requests array. \end{DoxyCompactList}\item 
 int \mbox{\hyperlink{orchestrator_8c_a66ab3dff8457488ea9e155c0f33197d1}{remove\+\_\+request}} (\mbox{\hyperlink{request_8h_a1abc891df97d2318f8fb4832a28ae63c}{Request}} $\ast$requests\mbox{[}$\,$\mbox{]}, int $\ast$N, \mbox{\hyperlink{request_8h_a1abc891df97d2318f8fb4832a28ae63c}{Request}} $\ast$r)
@@ -90,6 +92,24 @@ Print the usage of the orchestrator server executable.
 {\em name} & The name of the orchestrator server executable \\
 \hline
 \end{DoxyParams}
+\mbox{\Hypertarget{orchestrator_8c_a6f474b6fdb25ba074b3db104520b7a67}\label{orchestrator_8c_a6f474b6fdb25ba074b3db104520b7a67}} 
+\index{orchestrator.c@{orchestrator.c}!policy\_to\_string@{policy\_to\_string}}
+\index{policy\_to\_string@{policy\_to\_string}!orchestrator.c@{orchestrator.c}}
+\doxysubsubsection{\texorpdfstring{policy\_to\_string()}{policy\_to\_string()}}
+{\footnotesize\ttfamily char $\ast$ policy\+\_\+to\+\_\+string (\begin{DoxyParamCaption}\item[{int}]{policy }\end{DoxyParamCaption})}
+
+
+
+Convert the scheduling policy to a string. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em policy} & The scheduling policy \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+The scheduling policy as a string 
+\end{DoxyReturn}
 \mbox{\Hypertarget{orchestrator_8c_a3627a291d53f61274605390ff944df32}\label{orchestrator_8c_a3627a291d53f61274605390ff944df32}} 
 \index{orchestrator.c@{orchestrator.c}!add\_request@{add\_request}}
 \index{add\_request@{add\_request}!orchestrator.c@{orchestrator.c}}
