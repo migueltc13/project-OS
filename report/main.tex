@@ -139,9 +139,25 @@
 
 \begin{flushleft}
 \begin{abstract}
+    No âmbito da unidade curricular de Sistemas Operativos,
+    foi proposto o desenvolvimento de um serviço de execução de tarefas assíncronas,
+    com a capacidade de encadear programas e consultar o estado das tarefas.
 
-    \textcolor{red}{>> Atualizar o resumo}
+    Este serviço é composto por um servidor, denominado \textit{orchestrator},
+    que recebe múltiplos pedidos de vários tipos dos clientes, e um \textit{client}, responsável
+    por enviar pedidos de execução de tarefas, por consultar o estado das mesmas e por terminar o servidor.
 
+    Ao longo deste trabalho, foram consolidados conceitos abordados na unidade curricular,
+    como a utilização de \textit{FIFOs} para a comunicação entre processos, servidor e cliente;
+    \textit{process forking} para a execução de comandos e consulta do estado das tarefas,
+    sem que haja bloqueio do servidor;
+    a utilização da função \textit{pipe} e redirecionamentos com a função \textit{dup2} para o encadeamento de comandos,
+    o redirecionamento de descriptores de ficheiros, de forma a registar o \textit{output} e os erros dos comandos;
+    além da implementação de várias políticas de escalonamento de tarefas.
+
+    Este documento descreve a um nível mais aprofundado a arquitetura do serviço desenvolvido,
+    os módulos implementados, os argumentos da interface de linha de comandos, a avaliação das
+    políticas de escalonamento implementadas e os testes realizados e as respectivas reflexões.
 \end{abstract}
 \end{flushleft}
 
