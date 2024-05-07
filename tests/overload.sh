@@ -1,4 +1,4 @@
-#!/bin/bash
+#!/bin/sh
 
 MAX=1024
 SLEEP=15
@@ -13,14 +13,14 @@ tasks=$2
 sched_policy=$3
 
 # Start clean
-make clean &> /dev/null && make &> /dev/null
+make clean > /dev/null 2>&1 && make > /dev/null 2>&1
 
 # Start the orchestrator
 bin/orchestrator "$output_dir" "$tasks" "$sched_policy" &
 
 # Start the overload, send max + tasks + 1 requests
 for _ in $(seq 1 $((MAX + tasks + 1))); do
-    bin/client execute 10000 -u "sleep 10" &
+    bin/client execute 10000 -u "sleep 10"
 done
 
 # print the number of requests

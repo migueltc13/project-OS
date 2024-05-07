@@ -1,4 +1,4 @@
-#!/bin/bash
+#!/bin/sh
 
 if [ $# -ne 3 ]; then
     echo "Usage: $0 <output_dir> <parallel_tasks> <sched_policy>"
@@ -10,7 +10,7 @@ tasks=$2
 sched_policy=$3
 
 # Start clean
-make clean &> /dev/null && make &> /dev/null
+make clean > /dev/null 2>&1 && make > /dev/null 2>&1
 
 # Start the orchestrator
 bin/orchestrator "$output_dir" "$tasks" "$sched_policy" &
