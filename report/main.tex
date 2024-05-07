@@ -501,9 +501,9 @@ Note: The estimated time or priority is irrelevant if the scheduling policy is F
         as tarefas na totalidade em relação à política \textit{FCFS}, esta consegue ser mais eficiente
         em termos do tempo médio por tarefa, tendo assim um melhor aproveitamento do paralelismo.
 
-    \section{\textbf{PES} - \textit{Priority Escalonation Scheduling}}
+    \section{\textbf{PES} - \textit{Priority Escalation Scheduling}}
         De forma a evitar situações de \textit{starvation}, foi implementada a política
-        \textit{Priority Escalonation Scheduling}. Nesta, as tarefas são executadas
+        \textit{Priority Escalation Scheduling}. Nesta, as tarefas são executadas
         de acordo com a sua prioridade, que é definida pelo cliente na opção \textit{execute},
         simliarmente como o tempo estimado que é passado como argumento na política \textit{SJF}.
 
@@ -514,6 +514,7 @@ Note: The estimated time or priority is irrelevant if the scheduling policy is F
         flexibilidade não garante a eficiência da execução das tarefas, caso estas não sejam
         corretamente priorizadas.
 
+        \clearpage
         Devido a esta política ser dependente da prioridade das tarefas, a sua eficiência
         é variável, podendo ser menos eficiente que a política \textit{SJF} em situações
         em que as prioridades das tarefas não são corretamente definidas. No entanto, esta
@@ -591,7 +592,7 @@ Note: The estimated time or priority is irrelevant if the scheduling policy is F
     navegador de internet.
 
     \addsec{
-        \href{anexos/example.pdf}{\small \textcolor{blue}{[II] Implementação das Políticas de Escalonamento}}
+        \href{anexos/example.pdf}{\small \textcolor{blue}{[II] Implementação das Políticas de Escalonamento TODO}}
         \label{anexo:2}
     }
 
