@@ -1,0 +1,8 @@
+1 -u cata
+1 -u /bin/ls -Y
+1 -u /tmp
+1 -u find /root
+1 -p echo hi |
+1 -p echi hi | ls   | cat
+1 -p echo hi | lsaa | cat
+1 -p echo hi | ls   | cata
