@@ -1,0 +1,5 @@
+1 -u ls -a -t -s -i /
+1 -u /bin/ls    -a -t  -s -i  /
+1 -u cat /etc/passwd
+1 -u xxd tmp/task_number
+2 -p ls /etc | sort | uniq|wc -l

@@ -6,8 +6,6 @@
 #
 # You must run the server before running this script:
 # bin/orchestrator <output_dir> <parallel_tasks> [sched_policy]
-#
-# Usage: ./cmds_invalid.sh <output_dir>
 
 # Colors
 G='\033[1;32m'  # Green
