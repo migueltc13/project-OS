@@ -26,56 +26,90 @@
  * @section usage_sec Usage
  *
  * @subsection orchestrator_usage Orchestrator Server Usage
- * \code{.sh}
- * bin/orchestrator <output_dir> <parallel_tasks> [sched_policy]
- * \endcode
- *   - output_dir: path to the directory where the output directories and files will be saved.
- *   - parallel_tasks: number of tasks that can be executed in parallel.
- *   - sched_policy: scheduling policy to be used. If not provided, the default policy is SJF.
+ * \verbatim
+Usage: bin/orchestrator <output_dir> <parallel_tasks> [sched_policy]
+
+Options:
+    <output_dir>      Directory to store task output and history files
+    <parallel_tasks>  Maximum number of tasks running in parallel
+    [sched_policy]    Scheduling policy (FCFS, SJF, PES) default: SJF
+\endverbatim
  *
  * @subsection client_usage Client Usage
  *
+ * \verbatim
+Usage: bin/client <option [args]>
+
+Options:
+    execute <est_time|priority> <-u|-p> "<command [args]>"  Execute a command
+        est_time  Estimated time of execution, in case scheduling policy is SJF
+        priority  Priority of the task, in case scheduling policy is PES
+        -u        Unpiped command
+        -p        Piped command
+        command   Command to execute. Maximum size: 300 bytes
+    status                                                  Status of the tasks
+    kill                                                    Terminate the server
+
+Note: The estimated time or priority is irrelevant if the scheduling policy is
+    FCFS, but it must be provided as an argument.
+\endverbatim
+ *
  * @subsubsection exec_task Execute Task
- * \code{.sh}
- * bin/client execute <estimated_time|priority> <-u|-p> "<command>"
- * \endcode
- * Depending on the scheduling policy used in the orchestrator server, the estimated time or priority must be provided.
- *   - estimated_time: estimated time for the task to complete.
- *   - priority: priority of the task. The higher the value, the higher the priority.
+ *
+ * \verbatim
+bin/client execute <est_time|priority> <-u|-p> "<command [args]>"
+\endverbatim
  *
  * @subsubsection check_status Check Tasks Status
- * \code{.sh}
- * bin/client status
- * \endcode
+ *
+ * \verbatim
+bin/client status
+\endverbatim
+ *
  * This command will display all the executing, scheduled, and completed tasks.
  * For completed tasks the elapsed time is also displayed.
  *
  * @subsubsection kill_server Kill Orchestrator Server
- * \code{.sh}
- * bin/client kill
- * \endcode
- * This command will send a message to the orchestrator server to shutdown.
+ *
+ * \verbatim
+bin/client kill
+\endverbatim
+ *
+ * This command will send a request to the orchestrator server to shutdown.
+ *
+ * This terminates all the scheduled tasks and the server itself.
+ *
+ * Executing tasks will still be able to finish, and the respective files will be saved in the output directory, as usual.
  *
  * @section files_sec Output Files
  * The output directory has the given structure:
  * \verbatim
- <output_dir>
-  ├── history
-  ├── task_number
-  ├── task1
-  │   ├── out
-  │   ├── err
-  │   └── time
- ...
-  └── taskN
-      ├── out
-      ├── err
-      └── time
+<output_dir>
+ ├── history
+ ├── task_number
+ ├── task1
+ │   ├── out
+ │   ├── err
+ │   └── time
+ ├── task2
+ │   ├── out
+ │   ├── err
+ │   └── time
+ │
+...
+ │
+ └── taskN
+     ├── out
+     ├── err
+     └── time
 \endverbatim
  *
  * @section test_sec Testing
  * You can find a selection of test cases in the `tests` directory.
- * These tests require the `orchestrator` to be running.
+ *
+ * This tests require the `orchestrator` to be running.
+ *
+ * Run then from the project root directory, so the scripts can find the client executable.
  *
  * @section authors_sec Authors
  * - Flávia Araújo - [@flaviaraujo](https://github.com/flaviaraujo)

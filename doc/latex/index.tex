@@ -25,55 +25,72 @@ To compile the project, run the following command\+:
 \end{DoxyCode}
  The {\ttfamily orchestrator} and {\ttfamily client} executables will be generated in the {\ttfamily bin} directory.\hypertarget{index_usage_sec}{}\doxysection{Usage}\label{index_usage_sec}
 \hypertarget{index_orchestrator_usage}{}\doxysubsection{Orchestrator Server Usage}\label{index_orchestrator_usage}
+\begin{DoxyVerb}Usage: bin/orchestrator <output_dir> <parallel_tasks> [sched_policy]
 
-\begin{DoxyCode}{0}
-\DoxyCodeLine{bin/orchestrator <output\_dir> <parallel\_tasks> [sched\_policy]}
+Options:
+    <output_dir>      Directory to store task output and history files
+    <parallel_tasks>  Maximum number of tasks running in parallel
+    [sched_policy]    Scheduling policy (FCFS, SJF, PES) default: SJF
+\end{DoxyVerb}
+\hypertarget{index_client_usage}{}\doxysubsection{Client Usage}\label{index_client_usage}
+\begin{DoxyVerb}Usage: bin/client <option [args]>
 
-\end{DoxyCode}
+Options:
+    execute <est_time|priority> <-u|-p> "<command [args]>"  Execute a command
+        est_time  Estimated time of execution, in case scheduling policy is SJF
+        priority  Priority of the task, in case scheduling policy is PES
+        -u        Unpiped command
+        -p        Piped command
+        command   Command to execute. Maximum size: 300 bytes
+    status                                                  Status of the tasks
+    kill                                                    Terminate the server
 
-\begin{DoxyItemize}
-\item output\+\_\+dir\+: path to the directory where the output directories and files will be saved.
-\item parallel\+\_\+tasks\+: number of tasks that can be executed in parallel.
-\item sched\+\_\+policy\+: scheduling policy to be used. If not provided, the default policy is SJF.
-\end{DoxyItemize}\hypertarget{index_client_usage}{}\doxysubsection{Client Usage}\label{index_client_usage}
+Note: The estimated time or priority is irrelevant if the scheduling policy is
+    FCFS, but it must be provided as an argument.
+\end{DoxyVerb}
 \hypertarget{index_exec_task}{}\doxysubsubsection{Execute Task}\label{index_exec_task}
+\begin{DoxyVerb}bin/client execute <est_time|priority> <-u|-p> "<command [args]>"
+\end{DoxyVerb}
+\hypertarget{index_check_status}{}\doxysubsubsection{Check Tasks Status}\label{index_check_status}
+\begin{DoxyVerb}bin/client status
+\end{DoxyVerb}
 
-\begin{DoxyCode}{0}
-\DoxyCodeLine{bin/client execute <estimated\_time|priority> <-\/u|-\/p> "{}<command>"{}}
 
-\end{DoxyCode}
- Depending on the scheduling policy used in the orchestrator server, the estimated time or priority must be provided.
-\begin{DoxyItemize}
-\item estimated\+\_\+time\+: estimated time for the task to complete.
-\item priority\+: priority of the task. The higher the value, the higher the priority.
-\end{DoxyItemize}\hypertarget{index_check_status}{}\doxysubsubsection{Check Tasks Status}\label{index_check_status}
+This command will display all the executing, scheduled, and completed tasks. For completed tasks the elapsed time is also displayed.\hypertarget{index_kill_server}{}\doxysubsubsection{Kill Orchestrator Server}\label{index_kill_server}
+\begin{DoxyVerb}bin/client kill
+\end{DoxyVerb}
 
-\begin{DoxyCode}{0}
-\DoxyCodeLine{bin/client status}
 
-\end{DoxyCode}
- This command will display all the executing, scheduled, and completed tasks. For completed tasks the elapsed time is also displayed.\hypertarget{index_kill_server}{}\doxysubsubsection{Kill Orchestrator Server}\label{index_kill_server}
+This command will send a request to the orchestrator server to shutdown.
 
-\begin{DoxyCode}{0}
-\DoxyCodeLine{bin/client kill}
+This terminates all the scheduled tasks and the server itself.
 
-\end{DoxyCode}
- This command will send a message to the orchestrator server to shutdown.\hypertarget{index_files_sec}{}\doxysection{Output Files}\label{index_files_sec}
-The output directory has the given structure\+: \begin{DoxyVerb} <output_dir>
-  ├── history
-  ├── task_number
-  ├── task1
-  │   ├── out
-  │   ├── err
-  │   └── time
- ...
-  └── taskN
-      ├── out
-      ├── err
-      └── time
+Executing tasks will still be able to finish, and the respective files will be saved in the output directory, as usual.\hypertarget{index_files_sec}{}\doxysection{Output Files}\label{index_files_sec}
+The output directory has the given structure\+: \begin{DoxyVerb}<output_dir>
+ ├── history
+ ├── task_number
+ ├── task1
+ │   ├── out
+ │   ├── err
+ │   └── time
+ ├── task2
+ │   ├── out
+ │   ├── err
+ │   └── time
+ │
+...
+ │
+ └── taskN
+     ├── out
+     ├── err
+     └── time
 \end{DoxyVerb}
 \hypertarget{index_test_sec}{}\doxysection{Testing}\label{index_test_sec}
-You can find a selection of test cases in the {\ttfamily tests} directory. These tests require the {\ttfamily orchestrator} to be running.\hypertarget{index_authors_sec}{}\doxysection{Authors}\label{index_authors_sec}
+You can find a selection of test cases in the {\ttfamily tests} directory.
+
+This tests require the {\ttfamily orchestrator} to be running.
+
+Run then from the project root directory, so the scripts can find the client executable.\hypertarget{index_authors_sec}{}\doxysection{Authors}\label{index_authors_sec}
 
 \begin{DoxyItemize}
 \item Flávia Araújo -\/ \href{https://github.com/flaviaraujo}{\texttt{ @flaviaraujo}}

@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.141592653-2.6-1.40.22 (TeX Live 2022/dev/Debian) (preloaded format=pdflatex 2024.3.14)  7 MAY 2024 10:35
+This is pdfTeX, Version 3.141592653-2.6-1.40.22 (TeX Live 2022/dev/Debian) (preloaded format=pdflatex 2024.3.14)  7 MAY 2024 14:23
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
@@ -894,15 +894,14 @@ LaTeX Font Info:    Font shape `T1/phv/b/n' will be
 (Font)              scaled to size 8.99994pt on input line 12.
 LaTeX Font Info:    Font shape `T1/phv/b/n' will be
 (Font)              scaled to size 10.79993pt on input line 27.
+LaTeX Font Info:    Font shape `T1/phv/m/n' will be
+(Font)              scaled to size 7.19995pt on input line 28.
 LaTeX Font Info:    Font shape `T1/phv/b/n' will be
-(Font)              scaled to size 6.29996pt on input line 45.
+(Font)              scaled to size 6.29996pt on input line 36.
  [1
 
 
 ]
-LaTeX Font Info:    Font shape `T1/phv/m/n' will be
-(Font)              scaled to size 7.19995pt on input line 62.
-
 
 ! LaTeX Error: Unicode character ├ (U+251C)
                not set up for use with LaTeX.
@@ -911,8 +910,8 @@ See the LaTeX manual or LaTeX Companion for explanation.
 Type  H <return>  for immediate help.
  ...                                              
                                                   
-l.63   ├── history
-                        
+l.70  ├── history
+                       
 ? 
 
 ! LaTeX Error: Unicode character ─ (U+2500)
@@ -922,8 +921,8 @@ See the LaTeX manual or LaTeX Companion for explanation.
 Type  H <return>  for immediate help.
  ...                                              
                                                   
-l.63   ├── history
-                        
+l.70  ├── history
+                       
 ? 
 
 ! LaTeX Error: Unicode character ─ (U+2500)
@@ -933,41 +932,8 @@ See the LaTeX manual or LaTeX Companion for explanation.
 Type  H <return>  for immediate help.
  ...                                              
                                                   
-l.63   ├── history
-                        
-? 
-
-! LaTeX Error: Unicode character ├ (U+251C)
-               not set up for use with LaTeX.
-
-See the LaTeX manual or LaTeX Companion for explanation.
-Type  H <return>  for immediate help.
- ...                                              
-                                                  
-l.64   ├── task_number
-                            
-? 
-
-! LaTeX Error: Unicode character ─ (U+2500)
-               not set up for use with LaTeX.
-
-See the LaTeX manual or LaTeX Companion for explanation.
-Type  H <return>  for immediate help.
- ...                                              
-                                                  
-l.64   ├── task_number
-                            
-? 
-
-! LaTeX Error: Unicode character ─ (U+2500)
-               not set up for use with LaTeX.
-
-See the LaTeX manual or LaTeX Companion for explanation.
-Type  H <return>  for immediate help.
- ...                                              
-                                                  
-l.64   ├── task_number
-                            
+l.70  ├── history
+                       
 ? 
 
 ! LaTeX Error: Unicode character ├ (U+251C)
@@ -977,8 +943,8 @@ See the LaTeX manual or LaTeX Companion for explanation.
 Type  H <return>  for immediate help.
  ...                                              
                                                   
-l.65   ├── task1
-                      
+l.71  ├── task_number
+                           
 ? 
 
 ! LaTeX Error: Unicode character ─ (U+2500)
@@ -988,8 +954,8 @@ See the LaTeX manual or LaTeX Companion for explanation.
 Type  H <return>  for immediate help.
  ...                                              
                                                   
-l.65   ├── task1
-                      
+l.71  ├── task_number
+                           
 ? 
 
 ! LaTeX Error: Unicode character ─ (U+2500)
@@ -999,8 +965,41 @@ See the LaTeX manual or LaTeX Companion for explanation.
 Type  H <return>  for immediate help.
  ...                                              
                                                   
-l.65   ├── task1
-                      
+l.71  ├── task_number
+                           
+? 
+
+! LaTeX Error: Unicode character ├ (U+251C)
+               not set up for use with LaTeX.
+
+See the LaTeX manual or LaTeX Companion for explanation.
+Type  H <return>  for immediate help.
+ ...                                              
+                                                  
+l.72  ├── task1
+                     
+? 
+
+! LaTeX Error: Unicode character ─ (U+2500)
+               not set up for use with LaTeX.
+
+See the LaTeX manual or LaTeX Companion for explanation.
+Type  H <return>  for immediate help.
+ ...                                              
+                                                  
+l.72  ├── task1
+                     
+? 
+
+! LaTeX Error: Unicode character ─ (U+2500)
+               not set up for use with LaTeX.
+
+See the LaTeX manual or LaTeX Companion for explanation.
+Type  H <return>  for immediate help.
+ ...                                              
+                                                  
+l.72  ├── task1
+                     
 ? 
 
 ! LaTeX Error: Unicode character │ (U+2502)
@@ -1010,8 +1009,8 @@ See the LaTeX manual or LaTeX Companion for explanation.
 Type  H <return>  for immediate help.
  ...                                              
                                                   
-l.66   │   ├── out
-                          
+l.73  │   ├── out
+                         
 ? 
 
 ! LaTeX Error: Unicode character ├ (U+251C)
@@ -1021,227 +1020,7 @@ See the LaTeX manual or LaTeX Companion for explanation.
 Type  H <return>  for immediate help.
  ...                                              
                                                   
-l.66   │   ├── out
-                          
-? 
-
-! LaTeX Error: Unicode character ─ (U+2500)
-               not set up for use with LaTeX.
-
-See the LaTeX manual or LaTeX Companion for explanation.
-Type  H <return>  for immediate help.
- ...                                              
-                                                  
-l.66   │   ├── out
-                          
-? 
-
-! LaTeX Error: Unicode character ─ (U+2500)
-               not set up for use with LaTeX.
-
-See the LaTeX manual or LaTeX Companion for explanation.
-Type  H <return>  for immediate help.
- ...                                              
-                                                  
-l.66   │   ├── out
-                          
-? 
-
-! LaTeX Error: Unicode character │ (U+2502)
-               not set up for use with LaTeX.
-
-See the LaTeX manual or LaTeX Companion for explanation.
-Type  H <return>  for immediate help.
- ...                                              
-                                                  
-l.67   │   ├── err
-                          
-? 
-
-! LaTeX Error: Unicode character ├ (U+251C)
-               not set up for use with LaTeX.
-
-See the LaTeX manual or LaTeX Companion for explanation.
-Type  H <return>  for immediate help.
- ...                                              
-                                                  
-l.67   │   ├── err
-                          
-? 
-
-! LaTeX Error: Unicode character ─ (U+2500)
-               not set up for use with LaTeX.
-
-See the LaTeX manual or LaTeX Companion for explanation.
-Type  H <return>  for immediate help.
- ...                                              
-                                                  
-l.67   │   ├── err
-                          
-? 
-
-! LaTeX Error: Unicode character ─ (U+2500)
-               not set up for use with LaTeX.
-
-See the LaTeX manual or LaTeX Companion for explanation.
-Type  H <return>  for immediate help.
- ...                                              
-                                                  
-l.67   │   ├── err
-                          
-? 
-
-! LaTeX Error: Unicode character │ (U+2502)
-               not set up for use with LaTeX.
-
-See the LaTeX manual or LaTeX Companion for explanation.
-Type  H <return>  for immediate help.
- ...                                              
-                                                  
-l.68   │   └── time
-                           
-? 
-
-! LaTeX Error: Unicode character └ (U+2514)
-               not set up for use with LaTeX.
-
-See the LaTeX manual or LaTeX Companion for explanation.
-Type  H <return>  for immediate help.
- ...                                              
-                                                  
-l.68   │   └── time
-                           
-? 
-
-! LaTeX Error: Unicode character ─ (U+2500)
-               not set up for use with LaTeX.
-
-See the LaTeX manual or LaTeX Companion for explanation.
-Type  H <return>  for immediate help.
- ...                                              
-                                                  
-l.68   │   └── time
-                           
-? 
-
-! LaTeX Error: Unicode character ─ (U+2500)
-               not set up for use with LaTeX.
-
-See the LaTeX manual or LaTeX Companion for explanation.
-Type  H <return>  for immediate help.
- ...                                              
-                                                  
-l.68   │   └── time
-                           
-? 
-
-! LaTeX Error: Unicode character └ (U+2514)
-               not set up for use with LaTeX.
-
-See the LaTeX manual or LaTeX Companion for explanation.
-Type  H <return>  for immediate help.
- ...                                              
-                                                  
-l.70   └── taskN
-                      
-? 
-
-! LaTeX Error: Unicode character ─ (U+2500)
-               not set up for use with LaTeX.
-
-See the LaTeX manual or LaTeX Companion for explanation.
-Type  H <return>  for immediate help.
- ...                                              
-                                                  
-l.70   └── taskN
-                      
-? 
-
-! LaTeX Error: Unicode character ─ (U+2500)
-               not set up for use with LaTeX.
-
-See the LaTeX manual or LaTeX Companion for explanation.
-Type  H <return>  for immediate help.
- ...                                              
-                                                  
-l.70   └── taskN
-                      
-? 
-
-! LaTeX Error: Unicode character ├ (U+251C)
-               not set up for use with LaTeX.
-
-See the LaTeX manual or LaTeX Companion for explanation.
-Type  H <return>  for immediate help.
- ...                                              
-                                                  
-l.71       ├── out
-                        
-? 
-
-! LaTeX Error: Unicode character ─ (U+2500)
-               not set up for use with LaTeX.
-
-See the LaTeX manual or LaTeX Companion for explanation.
-Type  H <return>  for immediate help.
- ...                                              
-                                                  
-l.71       ├── out
-                        
-? 
-
-! LaTeX Error: Unicode character ─ (U+2500)
-               not set up for use with LaTeX.
-
-See the LaTeX manual or LaTeX Companion for explanation.
-Type  H <return>  for immediate help.
- ...                                              
-                                                  
-l.71       ├── out
-                        
-? 
-
-! LaTeX Error: Unicode character ├ (U+251C)
-               not set up for use with LaTeX.
-
-See the LaTeX manual or LaTeX Companion for explanation.
-Type  H <return>  for immediate help.
- ...                                              
-                                                  
-l.72       ├── err
-                        
-? 
-
-! LaTeX Error: Unicode character ─ (U+2500)
-               not set up for use with LaTeX.
-
-See the LaTeX manual or LaTeX Companion for explanation.
-Type  H <return>  for immediate help.
- ...                                              
-                                                  
-l.72       ├── err
-                        
-? 
-
-! LaTeX Error: Unicode character ─ (U+2500)
-               not set up for use with LaTeX.
-
-See the LaTeX manual or LaTeX Companion for explanation.
-Type  H <return>  for immediate help.
- ...                                              
-                                                  
-l.72       ├── err
-                        
-? 
-
-! LaTeX Error: Unicode character └ (U+2514)
-               not set up for use with LaTeX.
-
-See the LaTeX manual or LaTeX Companion for explanation.
-Type  H <return>  for immediate help.
- ...                                              
-                                                  
-l.73       └── time
+l.73  │   ├── out
                          
 ? 
 
@@ -1252,7 +1031,7 @@ See the LaTeX manual or LaTeX Companion for explanation.
 Type  H <return>  for immediate help.
  ...                                              
                                                   
-l.73       └── time
+l.73  │   ├── out
                          
 ? 
 
@@ -1263,10 +1042,418 @@ See the LaTeX manual or LaTeX Companion for explanation.
 Type  H <return>  for immediate help.
  ...                                              
                                                   
-l.73       └── time
+l.73  │   ├── out
                          
 ? 
-[2]) [3] [4
+
+! LaTeX Error: Unicode character │ (U+2502)
+               not set up for use with LaTeX.
+
+See the LaTeX manual or LaTeX Companion for explanation.
+Type  H <return>  for immediate help.
+ ...                                              
+                                                  
+l.74  │   ├── err
+                         
+? 
+
+! LaTeX Error: Unicode character ├ (U+251C)
+               not set up for use with LaTeX.
+
+See the LaTeX manual or LaTeX Companion for explanation.
+Type  H <return>  for immediate help.
+ ...                                              
+                                                  
+l.74  │   ├── err
+                         
+? 
+
+! LaTeX Error: Unicode character ─ (U+2500)
+               not set up for use with LaTeX.
+
+See the LaTeX manual or LaTeX Companion for explanation.
+Type  H <return>  for immediate help.
+ ...                                              
+                                                  
+l.74  │   ├── err
+                         
+? 
+
+! LaTeX Error: Unicode character ─ (U+2500)
+               not set up for use with LaTeX.
+
+See the LaTeX manual or LaTeX Companion for explanation.
+Type  H <return>  for immediate help.
+ ...                                              
+                                                  
+l.74  │   ├── err
+                         
+? 
+
+! LaTeX Error: Unicode character │ (U+2502)
+               not set up for use with LaTeX.
+
+See the LaTeX manual or LaTeX Companion for explanation.
+Type  H <return>  for immediate help.
+ ...                                              
+                                                  
+l.75  │   └── time
+                          
+? 
+
+! LaTeX Error: Unicode character └ (U+2514)
+               not set up for use with LaTeX.
+
+See the LaTeX manual or LaTeX Companion for explanation.
+Type  H <return>  for immediate help.
+ ...                                              
+                                                  
+l.75  │   └── time
+                          
+? 
+
+! LaTeX Error: Unicode character ─ (U+2500)
+               not set up for use with LaTeX.
+
+See the LaTeX manual or LaTeX Companion for explanation.
+Type  H <return>  for immediate help.
+ ...                                              
+                                                  
+l.75  │   └── time
+                          
+? 
+
+! LaTeX Error: Unicode character ─ (U+2500)
+               not set up for use with LaTeX.
+
+See the LaTeX manual or LaTeX Companion for explanation.
+Type  H <return>  for immediate help.
+ ...                                              
+                                                  
+l.75  │   └── time
+                          
+? 
+
+! LaTeX Error: Unicode character ├ (U+251C)
+               not set up for use with LaTeX.
+
+See the LaTeX manual or LaTeX Companion for explanation.
+Type  H <return>  for immediate help.
+ ...                                              
+                                                  
+l.76  ├── task2
+                     
+? 
+
+! LaTeX Error: Unicode character ─ (U+2500)
+               not set up for use with LaTeX.
+
+See the LaTeX manual or LaTeX Companion for explanation.
+Type  H <return>  for immediate help.
+ ...                                              
+                                                  
+l.76  ├── task2
+                     
+? 
+
+! LaTeX Error: Unicode character ─ (U+2500)
+               not set up for use with LaTeX.
+
+See the LaTeX manual or LaTeX Companion for explanation.
+Type  H <return>  for immediate help.
+ ...                                              
+                                                  
+l.76  ├── task2
+                     
+? 
+
+! LaTeX Error: Unicode character │ (U+2502)
+               not set up for use with LaTeX.
+
+See the LaTeX manual or LaTeX Companion for explanation.
+Type  H <return>  for immediate help.
+ ...                                              
+                                                  
+l.77  │   ├── out
+                         
+? 
+
+! LaTeX Error: Unicode character ├ (U+251C)
+               not set up for use with LaTeX.
+
+See the LaTeX manual or LaTeX Companion for explanation.
+Type  H <return>  for immediate help.
+ ...                                              
+                                                  
+l.77  │   ├── out
+                         
+? 
+
+! LaTeX Error: Unicode character ─ (U+2500)
+               not set up for use with LaTeX.
+
+See the LaTeX manual or LaTeX Companion for explanation.
+Type  H <return>  for immediate help.
+ ...                                              
+                                                  
+l.77  │   ├── out
+                         
+? 
+
+! LaTeX Error: Unicode character ─ (U+2500)
+               not set up for use with LaTeX.
+
+See the LaTeX manual or LaTeX Companion for explanation.
+Type  H <return>  for immediate help.
+ ...                                              
+                                                  
+l.77  │   ├── out
+                         
+? 
+
+! LaTeX Error: Unicode character │ (U+2502)
+               not set up for use with LaTeX.
+
+See the LaTeX manual or LaTeX Companion for explanation.
+Type  H <return>  for immediate help.
+ ...                                              
+                                                  
+l.78  │   ├── err
+                         
+? 
+
+! LaTeX Error: Unicode character ├ (U+251C)
+               not set up for use with LaTeX.
+
+See the LaTeX manual or LaTeX Companion for explanation.
+Type  H <return>  for immediate help.
+ ...                                              
+                                                  
+l.78  │   ├── err
+                         
+? 
+
+! LaTeX Error: Unicode character ─ (U+2500)
+               not set up for use with LaTeX.
+
+See the LaTeX manual or LaTeX Companion for explanation.
+Type  H <return>  for immediate help.
+ ...                                              
+                                                  
+l.78  │   ├── err
+                         
+? 
+
+! LaTeX Error: Unicode character ─ (U+2500)
+               not set up for use with LaTeX.
+
+See the LaTeX manual or LaTeX Companion for explanation.
+Type  H <return>  for immediate help.
+ ...                                              
+                                                  
+l.78  │   ├── err
+                         
+? 
+
+! LaTeX Error: Unicode character │ (U+2502)
+               not set up for use with LaTeX.
+
+See the LaTeX manual or LaTeX Companion for explanation.
+Type  H <return>  for immediate help.
+ ...                                              
+                                                  
+l.79  │   └── time
+                          
+? 
+
+! LaTeX Error: Unicode character └ (U+2514)
+               not set up for use with LaTeX.
+
+See the LaTeX manual or LaTeX Companion for explanation.
+Type  H <return>  for immediate help.
+ ...                                              
+                                                  
+l.79  │   └── time
+                          
+? 
+
+! LaTeX Error: Unicode character ─ (U+2500)
+               not set up for use with LaTeX.
+
+See the LaTeX manual or LaTeX Companion for explanation.
+Type  H <return>  for immediate help.
+ ...                                              
+                                                  
+l.79  │   └── time
+                          
+? 
+
+! LaTeX Error: Unicode character ─ (U+2500)
+               not set up for use with LaTeX.
+
+See the LaTeX manual or LaTeX Companion for explanation.
+Type  H <return>  for immediate help.
+ ...                                              
+                                                  
+l.79  │   └── time
+                          
+? 
+
+! LaTeX Error: Unicode character │ (U+2502)
+               not set up for use with LaTeX.
+
+See the LaTeX manual or LaTeX Companion for explanation.
+Type  H <return>  for immediate help.
+ ...                                              
+                                                  
+l.80  │
+         
+? 
+[2]
+
+! LaTeX Error: Unicode character │ (U+2502)
+               not set up for use with LaTeX.
+
+See the LaTeX manual or LaTeX Companion for explanation.
+Type  H <return>  for immediate help.
+ ...                                              
+                                                  
+l.82  │
+         
+? 
+
+! LaTeX Error: Unicode character └ (U+2514)
+               not set up for use with LaTeX.
+
+See the LaTeX manual or LaTeX Companion for explanation.
+Type  H <return>  for immediate help.
+ ...                                              
+                                                  
+l.83  └── taskN
+                     
+? 
+
+! LaTeX Error: Unicode character ─ (U+2500)
+               not set up for use with LaTeX.
+
+See the LaTeX manual or LaTeX Companion for explanation.
+Type  H <return>  for immediate help.
+ ...                                              
+                                                  
+l.83  └── taskN
+                     
+? 
+
+! LaTeX Error: Unicode character ─ (U+2500)
+               not set up for use with LaTeX.
+
+See the LaTeX manual or LaTeX Companion for explanation.
+Type  H <return>  for immediate help.
+ ...                                              
+                                                  
+l.83  └── taskN
+                     
+? 
+
+! LaTeX Error: Unicode character ├ (U+251C)
+               not set up for use with LaTeX.
+
+See the LaTeX manual or LaTeX Companion for explanation.
+Type  H <return>  for immediate help.
+ ...                                              
+                                                  
+l.84      ├── out
+                       
+? 
+
+! LaTeX Error: Unicode character ─ (U+2500)
+               not set up for use with LaTeX.
+
+See the LaTeX manual or LaTeX Companion for explanation.
+Type  H <return>  for immediate help.
+ ...                                              
+                                                  
+l.84      ├── out
+                       
+? 
+
+! LaTeX Error: Unicode character ─ (U+2500)
+               not set up for use with LaTeX.
+
+See the LaTeX manual or LaTeX Companion for explanation.
+Type  H <return>  for immediate help.
+ ...                                              
+                                                  
+l.84      ├── out
+                       
+? 
+
+! LaTeX Error: Unicode character ├ (U+251C)
+               not set up for use with LaTeX.
+
+See the LaTeX manual or LaTeX Companion for explanation.
+Type  H <return>  for immediate help.
+ ...                                              
+                                                  
+l.85      ├── err
+                       
+? 
+
+! LaTeX Error: Unicode character ─ (U+2500)
+               not set up for use with LaTeX.
+
+See the LaTeX manual or LaTeX Companion for explanation.
+Type  H <return>  for immediate help.
+ ...                                              
+                                                  
+l.85      ├── err
+                       
+? 
+
+! LaTeX Error: Unicode character ─ (U+2500)
+               not set up for use with LaTeX.
+
+See the LaTeX manual or LaTeX Companion for explanation.
+Type  H <return>  for immediate help.
+ ...                                              
+                                                  
+l.85      ├── err
+                       
+? 
+
+! LaTeX Error: Unicode character └ (U+2514)
+               not set up for use with LaTeX.
+
+See the LaTeX manual or LaTeX Companion for explanation.
+Type  H <return>  for immediate help.
+ ...                                              
+                                                  
+l.86      └── time
+                        
+? 
+
+! LaTeX Error: Unicode character ─ (U+2500)
+               not set up for use with LaTeX.
+
+See the LaTeX manual or LaTeX Companion for explanation.
+Type  H <return>  for immediate help.
+ ...                                              
+                                                  
+l.86      └── time
+                        
+? 
+
+! LaTeX Error: Unicode character ─ (U+2500)
+               not set up for use with LaTeX.
+
+See the LaTeX manual or LaTeX Companion for explanation.
+Type  H <return>  for immediate help.
+ ...                                              
+                                                  
+l.86      └── time
+                        
+? 
+) [3] [4
 
 ]
 Chapter 2.
@@ -1927,7 +2114,7 @@ fb></usr/share/texlive/texmf-dist/fonts/type1/urw/helvetic/uhvb8a.pfb></usr/sha
 re/texlive/texmf-dist/fonts/type1/urw/helvetic/uhvb8ac.pfb></usr/share/texlive/
 texmf-dist/fonts/type1/urw/helvetic/uhvr8a.pfb></usr/share/texlive/texmf-dist/f
 onts/type1/urw/helvetic/uhvro8a.pfb>
-Output written on refman.pdf (54 pages, 332439 bytes).
+Output written on refman.pdf (54 pages, 332699 bytes).
 PDF statistics:
  1115 PDF objects out of 1200 (max. 8388607)
  985 compressed objects within 10 object streams

@@ -93,46 +93,66 @@ Compilation</h1>
 Usage</h1>
 <h2><a class="anchor" id="orchestrator_usage"></a>
 Orchestrator Server Usage</h2>
-<div class="fragment"><div class="line">bin/orchestrator &lt;output_dir&gt; &lt;parallel_tasks&gt; [sched_policy]</div>
-</div><!-- fragment --><ul>
-<li>output_dir: path to the directory where the output directories and files will be saved.</li>
-<li>parallel_tasks: number of tasks that can be executed in parallel.</li>
-<li>sched_policy: scheduling policy to be used. If not provided, the default policy is SJF.</li>
-</ul>
-<h2><a class="anchor" id="client_usage"></a>
+<pre class="fragment">Usage: bin/orchestrator &lt;output_dir&gt; &lt;parallel_tasks&gt; [sched_policy]
+
+Options:
+    &lt;output_dir&gt;      Directory to store task output and history files
+    &lt;parallel_tasks&gt;  Maximum number of tasks running in parallel
+    [sched_policy]    Scheduling policy (FCFS, SJF, PES) default: SJF
+</pre><h2><a class="anchor" id="client_usage"></a>
 Client Usage</h2>
-<h3><a class="anchor" id="exec_task"></a>
+<pre class="fragment">Usage: bin/client &lt;option [args]&gt;
+
+Options:
+    execute &lt;est_time|priority&gt; &lt;-u|-p&gt; "&lt;command [args]&gt;"  Execute a command
+        est_time  Estimated time of execution, in case scheduling policy is SJF
+        priority  Priority of the task, in case scheduling policy is PES
+        -u        Unpiped command
+        -p        Piped command
+        command   Command to execute. Maximum size: 300 bytes
+    status                                                  Status of the tasks
+    kill                                                    Terminate the server
+
+Note: The estimated time or priority is irrelevant if the scheduling policy is
+    FCFS, but it must be provided as an argument.
+</pre><h3><a class="anchor" id="exec_task"></a>
 Execute Task</h3>
-<div class="fragment"><div class="line">bin/client execute &lt;estimated_time|priority&gt; &lt;-u|-p&gt; &quot;&lt;command&gt;&quot;</div>
-</div><!-- fragment --><p> Depending on the scheduling policy used in the orchestrator server, the estimated time or priority must be provided.</p><ul>
-<li>estimated_time: estimated time for the task to complete.</li>
-<li>priority: priority of the task. The higher the value, the higher the priority.</li>
-</ul>
-<h3><a class="anchor" id="check_status"></a>
+<pre class="fragment">bin/client execute &lt;est_time|priority&gt; &lt;-u|-p&gt; "&lt;command [args]&gt;"
+</pre><h3><a class="anchor" id="check_status"></a>
 Check Tasks Status</h3>
-<div class="fragment"><div class="line">bin/client status</div>
-</div><!-- fragment --><p> This command will display all the executing, scheduled, and completed tasks. For completed tasks the elapsed time is also displayed.</p>
+<pre class="fragment">bin/client status
+</pre><p>This command will display all the executing, scheduled, and completed tasks. For completed tasks the elapsed time is also displayed.</p>
 <h3><a class="anchor" id="kill_server"></a>
 Kill Orchestrator Server</h3>
-<div class="fragment"><div class="line">bin/client kill</div>
-</div><!-- fragment --><p> This command will send a message to the orchestrator server to shutdown.</p>
+<pre class="fragment">bin/client kill
+</pre><p>This command will send a request to the orchestrator server to shutdown.</p>
+<p>This terminates all the scheduled tasks and the server itself.</p>
+<p>Executing tasks will still be able to finish, and the respective files will be saved in the output directory, as usual.</p>
 <h1><a class="anchor" id="files_sec"></a>
 Output Files</h1>
-<p>The output directory has the given structure: </p><pre class="fragment"> &lt;output_dir&gt;
-  ├── history
-  ├── task_number
-  ├── task1
-  │   ├── out
-  │   ├── err
-  │   └── time
- ...
-  └── taskN
-      ├── out
-      ├── err
-      └── time
+<p>The output directory has the given structure: </p><pre class="fragment">&lt;output_dir&gt;
+ ├── history
+ ├── task_number
+ ├── task1
+ │   ├── out
+ │   ├── err
+ │   └── time
+ ├── task2
+ │   ├── out
+ │   ├── err
+ │   └── time
+ │
+...
+ │
+ └── taskN
+     ├── out
+     ├── err
+     └── time
 </pre><h1><a class="anchor" id="test_sec"></a>
 Testing</h1>
-<p>You can find a selection of test cases in the <code>tests</code> directory. These tests require the <code>orchestrator</code> to be running.</p>
+<p>You can find a selection of test cases in the <code>tests</code> directory.</p>
+<p>This tests require the <code>orchestrator</code> to be running.</p>
+<p>Run then from the project root directory, so the scripts can find the client executable.</p>
 <h1><a class="anchor" id="authors_sec"></a>
 Authors</h1>
 <ul>
@@ -145,7 +165,7 @@ Authors</h1>
         <hr class="footer">
         <address class="footer">
             <small>
-                Generated on Tue May 7 2024 10:35:17 for <b>Task Orchestrator</b> by
+                Generated on Tue May 7 2024 14:23:31 for <b>Task Orchestrator</b> by
                 <a href="http://www.doxygen.org/index.html">
                     <img class="footer" src="doxygen.png" alt="doxygen" onerror="this.onerror=null;this.src='doxygen.svg';"/>
                 </a> 1.9.1. All rights reserved.
