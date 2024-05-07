@@ -1,4 +1,4 @@
-# Task Orchestrator
+# Task Orchestrator Service
 
 A task orchestrator service implemented in C within Operating Systems environment in 2023/2024 academic year.
 
@@ -36,38 +36,45 @@ The `orchestrator` and `client` executables will be generated in the `bin` direc
 
 ### Orchestrator Server Usage
 
-```sh
-bin/orchestrator <output_dir> <parallel_tasks> [sched_policy]
 ```
+Usage: bin/orchestrator <output_dir> <parallel_tasks> [sched_policy]
 
-- `output_dir`: path to the directory where the output directories and files will be saved.
-- `parallel_tasks`: number of tasks that can be executed in parallel.
-- `sched_policy`: scheduling policy to be used. If not provided, the default policy is SJF.
+Options:
+    <output_dir>      Directory to store task output and history files
+    <parallel_tasks>  Maximum number of tasks running in parallel
+    [sched_policy]    Scheduling policy (FCFS, SJF, PES) default: SJF
+```
 
 ### Client Usage
 
-#### Execute Task
+```
+Usage: bin/client <option [args]>
 
-```sh
-bin/client execute <estimated_time|priority> <-u|-p> "<command>"
+Options:
+    execute <est_time|priority> <-u|-p> "<command [args]>"  Execute a command
+        est_time  Estimated time of execution, in case scheduling policy is SJF
+        priority  Priority of the task, in case scheduling policy is PES
+        -u        Unpiped command
+        -p        Piped command
+        command   Command to execute. Maximum size: 300 bytes
+    status                                                  Status of the tasks
+    kill                                                    Terminate the server
+
+Note: The estimated time or priority is irrelevant if the scheduling policy is
+    FCFS, but it must be provided as an argument.
 ```
 
-The estimated time or priority must be provided,
-depending on the scheduling policy used in the orchestrator server.
+#### Execute Task
 
-- `estimated_time`: estimated time for the task to complete.
-- `priority`: priority of the task. The higher the value, the higher the priority.
-
-The `-u` flag is used to indicate that the command being executed is a single command.
-For executing pipelines, the `-p` flag must be used.
-
-- `command`: command to be executed, with its arguments, if any. Hard-coded maximum size of 300 characters.
+```
+bin/client execute <est_time|priority> <-u|-p> "<command [args]>"
+```
 
 #### Check Tasks Status
 
 Run the following command to check the status of the tasks:
 
-```sh
+```
 bin/client status
 ```
 
@@ -78,11 +85,11 @@ For completed tasks the elapsed time is also displayed.
 
 Shutdown the orchestrator server, with the following command:
 
-```sh
+```
 bin/client kill
 ```
 
-This command will send a message to the orchestrator server to shutdown.
+This command will send a request to the orchestrator server to shutdown.
 
 This terminates all the scheduled tasks and the server itself.
 
