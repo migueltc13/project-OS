@@ -325,8 +325,8 @@ Functions</h2></td></tr>
 </dl>
 <p>Example of the creation of an execute request: </p><div class="fragment"><div class="line"><a class="code" href="structrequest.html">Request</a> *execute_request = <a class="code" href="request_8h.html#ab4cb76d84eca459d1b80c7b1a1741192">create_request</a>(<a class="code" href="request_8h.html#a05e20d8bc0525f94757303dd5a905a69">EXECUTE</a>, 12, <span class="stringliteral">&quot;ls -l | cat&quot;</span>, <span class="keyword">true</span>, <span class="stringliteral">&quot;client-1234&quot;</span>);</div>
 <div class="ttc" id="arequest_8h_html_a05e20d8bc0525f94757303dd5a905a69"><div class="ttname"><a href="request_8h.html#a05e20d8bc0525f94757303dd5a905a69">EXECUTE</a></div><div class="ttdeci">#define EXECUTE</div><div class="ttdoc">Execute request code.</div><div class="ttdef"><b>Definition:</b> request.h:9</div></div>
-<div class="ttc" id="arequest_8h_html_ab4cb76d84eca459d1b80c7b1a1741192"><div class="ttname"><a href="request_8h.html#ab4cb76d84eca459d1b80c7b1a1741192">create_request</a></div><div class="ttdeci">Request * create_request(int type, int est_time, char *command, bool is_pipe, char *client_fifo)</div><div class="ttdoc">Creates a new request.</div><div class="ttdef"><b>Definition:</b> request.c:78</div></div>
-<div class="ttc" id="astructrequest_html"><div class="ttname"><a href="structrequest.html">request</a></div><div class="ttdoc">The request struct.</div><div class="ttdef"><b>Definition:</b> request.c:36</div></div>
+<div class="ttc" id="arequest_8h_html_ab4cb76d84eca459d1b80c7b1a1741192"><div class="ttname"><a href="request_8h.html#ab4cb76d84eca459d1b80c7b1a1741192">create_request</a></div><div class="ttdeci">Request * create_request(int type, int est_time, char *command, bool is_pipe, char *client_fifo)</div><div class="ttdoc">Creates a new request.</div><div class="ttdef"><b>Definition:</b> request.c:77</div></div>
+<div class="ttc" id="astructrequest_html"><div class="ttname"><a href="structrequest.html">request</a></div><div class="ttdoc">The request struct.</div><div class="ttdef"><b>Definition:</b> request.c:35</div></div>
 </div><!-- fragment --><p>Example of the creation of a status request: </p><div class="fragment"><div class="line"><a class="code" href="structrequest.html">Request</a> *status_request = <a class="code" href="request_8h.html#ab4cb76d84eca459d1b80c7b1a1741192">create_request</a>(<a class="code" href="request_8h.html#a59279bee44f34d08b3cbf3a89fb0d8d9">STATUS</a>, 0, NULL, <span class="keyword">false</span>, <span class="stringliteral">&quot;client-1234&quot;</span>);</div>
 <div class="ttc" id="arequest_8h_html_a59279bee44f34d08b3cbf3a89fb0d8d9"><div class="ttname"><a href="request_8h.html#a59279bee44f34d08b3cbf3a89fb0d8d9">STATUS</a></div><div class="ttdeci">#define STATUS</div><div class="ttdoc">Status request code.</div><div class="ttdef"><b>Definition:</b> request.h:12</div></div>
 </div><!-- fragment --><p>Example of the creation of a kill request: </p><div class="fragment"><div class="line"><a class="code" href="structrequest.html">Request</a> *kill_request = <a class="code" href="request_8h.html#ab4cb76d84eca459d1b80c7b1a1741192">create_request</a>(<a class="code" href="request_8h.html#a9d385e974a49598d267af81de5a33838">KILL</a>, 0, NULL, <span class="keyword">false</span>, <span class="stringliteral">&quot;&quot;</span>);</div>
@@ -757,7 +757,7 @@ Functions</h2></td></tr>
         <hr class="footer">
         <address class="footer">
             <small>
-                Generated on Tue May 7 2024 14:23:31 for <b>Task Orchestrator</b> by
+                Generated on Tue May 7 2024 16:38:19 for <b>Task Orchestrator</b> by
                 <a href="http://www.doxygen.org/index.html">
                     <img class="footer" src="doxygen.png" alt="doxygen" onerror="this.onerror=null;this.src='doxygen.svg';"/>
                 </a> 1.9.1. All rights reserved.
