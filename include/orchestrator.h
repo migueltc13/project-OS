@@ -12,7 +12,7 @@
 /** @brief Shortest Job First **/
 #define SJF  1
 
-/** @brief Priority Escalonation Scheduling **/
+/** @brief Priority Escalation Scheduling **/
 #define PES  2
 
 // Macros for buffer sizes
