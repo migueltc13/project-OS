@@ -1,7 +1,6 @@
-// TODO remove ../include/
-#include "../include/client.h" // CLIENT_FIFO_SIZE macro
-#include "../include/orchestrator.h"  // SERVER_FIFO macro
-#include "../include/request.h"
+#include "client.h" // CLIENT_FIFO_SIZE macro
+#include "orchestrator.h"  // SERVER_FIFO macro
+#include "request.h"
 
 #include <stdio.h>
 #include <stdlib.h>

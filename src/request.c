@@ -1,7 +1,6 @@
-// TODO remove ../include/
-#include "../include/request.h"
-#include "../include/client.h" // MAX_FIFO_SIZE macro
-#include "../include/orchestrator.h" // policy macros
+#include "request.h"
+#include "client.h" // MAX_FIFO_SIZE macro
+#include "orchestrator.h" // policy macros
 
 #include <stdio.h>
 #include <stdlib.h>

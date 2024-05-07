@@ -1,7 +1,6 @@
-// TODO remove ../include/
-#include "../include/command.h"
-#include "../include/orchestrator.h"
-#include "../include/task_nr.h"  // task number size macro
+#include "command.h"
+#include "orchestrator.h"
+#include "task_nr.h"  // task number size macro
 
 #include <stdio.h>
 #include <stdlib.h>
