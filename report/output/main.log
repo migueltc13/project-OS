@@ -1,4 +1,4 @@
-This is XeTeX, Version 3.141592653-2.6-0.999993 (TeX Live 2022/dev/Debian) (preloaded format=xelatex 2024.3.14)  7 MAY 2024 17:29
+This is XeTeX, Version 3.141592653-2.6-0.999993 (TeX Live 2022/dev/Debian) (preloaded format=xelatex 2024.3.14)  7 MAY 2024 17:36
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
@@ -1248,7 +1248,7 @@ File: diagrams/status.png Graphic file (type bmp)
 ]
 chapter 2.
 LaTeX Font Info:    Font shape `TU/lmss/bx/it' in size <14.4> not available
-(Font)              Font shape `TU/lmss/bx/sl' tried instead on input line 353.
+(Font)              Font shape `TU/lmss/bx/sl' tried instead on input line 354.
 
 [6
 
@@ -1288,7 +1288,7 @@ LaTeX Font Info:    Font shape `TU/lmss/bx/it' in size <14.4> not available
 
 chapter 3.
 LaTeX Font Info:    Font shape `TU/lmss/m/it' in size <10.95> not available
-(Font)              Font shape `TU/lmss/m/sl' tried instead on input line 406.
+(Font)              Font shape `TU/lmss/m/sl' tried instead on input line 407.
 [7
 
 
@@ -1297,7 +1297,7 @@ LaTeX Font Info:    Font shape `TU/lmss/m/it' in size <10.95> not available
 ]
 chapter 4.
 
-Underfull \hbox (badness 10000) in paragraph at lines 567--574
+Underfull \hbox (badness 10000) in paragraph at lines 568--575
 []\TU/lmss/m/n/10 Os testes \TU/lmss/bx/sl/10 cmds_valid.sh \TU/lmss/m/n/10 e \
 TU/lmss/bx/sl/10 cmds_invalid.sh \TU/lmss/m/n/10 utilizam os ficheiros \TU/lmss
 /bx/sl/10 cmds_valid.txt \TU/lmss/m/n/10 e

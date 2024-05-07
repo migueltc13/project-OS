@@ -305,7 +305,8 @@
             através da utilização da função \textit{dup2}.
 
             No encadeamento de comandos, o redirecionamento é feito de forma a que o \textit{stdout} do comando
-            anterior seja redirecionado para o \textit{stdin} do comando seguinte, e assim sucessivamente. Ao longo
+            anterior seja redirecionado para o \textit{stdin} do comando seguinte, e assim sucessivamente,
+            até ao último comando, exclusivamente. Ao longo
             da cadeia de comandos, é feito o redirecionamento do \textit{stderr} para o ficheiro de erros, garantindo
             a similaridade com o comportamento nativo da \textit{shell}. No último comando, o redirecionamento do
             \textit{stdout} é feito para o ficheiro de \textit{output}.
