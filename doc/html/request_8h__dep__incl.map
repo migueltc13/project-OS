@@ -1,8 +1,8 @@
 <map id="include/request.h" name="include/request.h">
-<area shape="rect" id="node1" title=" " alt="" coords="182,5,303,32"/>
-<area shape="rect" id="node2" href="$command_8h.html" title=" " alt="" coords="30,80,165,107"/>
-<area shape="rect" id="node4" href="$orchestrator_8c.html" title=" " alt="" coords="141,155,264,181"/>
-<area shape="rect" id="node5" href="$client_8c.html" title=" " alt="" coords="241,80,327,107"/>
-<area shape="rect" id="node6" href="$request_8c.html" title=" " alt="" coords="352,80,451,107"/>
+<area shape="rect" id="node1" title=" " alt="" coords="206,5,327,32"/>
+<area shape="rect" id="node2" href="$command_8h.html" title=" " alt="" coords="65,80,199,107"/>
+<area shape="rect" id="node5" href="$client_8c.html" title=" " alt="" coords="223,80,310,107"/>
+<area shape="rect" id="node6" href="$request_8c.html" title=" " alt="" coords="335,80,433,107"/>
 <area shape="rect" id="node3" href="$command_8c.html" title=" " alt="" coords="5,155,117,181"/>
+<area shape="rect" id="node4" href="$orchestrator_8c.html" title=" " alt="" coords="141,155,264,181"/>
 </map>

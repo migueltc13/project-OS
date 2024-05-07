@@ -118,8 +118,8 @@
 \indexentry{MAX\_SCHEDULED\_REQUESTS@{MAX\_SCHEDULED\_REQUESTS}!orchestrator.c@{orchestrator.c}|hyperpage}{34}
 \indexentry{orchestrator.c@{orchestrator.c}!orchestrator\_usage@{orchestrator\_usage}|hyperpage}{34}
 \indexentry{orchestrator\_usage@{orchestrator\_usage}!orchestrator.c@{orchestrator.c}|hyperpage}{34}
-\indexentry{orchestrator.c@{orchestrator.c}!policy\_to\_string@{policy\_to\_string}|hyperpage}{35}
-\indexentry{policy\_to\_string@{policy\_to\_string}!orchestrator.c@{orchestrator.c}|hyperpage}{35}
+\indexentry{orchestrator.c@{orchestrator.c}!policy\_to\_string@{policy\_to\_string}|hyperpage}{34}
+\indexentry{policy\_to\_string@{policy\_to\_string}!orchestrator.c@{orchestrator.c}|hyperpage}{34}
 \indexentry{orchestrator.c@{orchestrator.c}!add\_request@{add\_request}|hyperpage}{35}
 \indexentry{add\_request@{add\_request}!orchestrator.c@{orchestrator.c}|hyperpage}{35}
 \indexentry{orchestrator.c@{orchestrator.c}!remove\_request@{remove\_request}|hyperpage}{35}
