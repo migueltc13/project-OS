@@ -5,9 +5,9 @@ if [ $# -ne 3 ]; then
     exit 1
 fi
 
-export output_dir=$1
-export tasks=$2
-export sched_policy=$3
+output_dir=$1
+tasks=$2
+sched_policy=$3
 
 # Start clean
 make clean &> /dev/null && make &> /dev/null
