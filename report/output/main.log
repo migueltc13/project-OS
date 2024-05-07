@@ -1,4 +1,4 @@
-This is XeTeX, Version 3.141592653-2.6-0.999993 (TeX Live 2022/dev/Debian) (preloaded format=xelatex 2024.3.14)  7 MAY 2024 14:34
+This is XeTeX, Version 3.141592653-2.6-0.999993 (TeX Live 2022/dev/Debian) (preloaded format=xelatex 2024.3.14)  7 MAY 2024 16:08
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
@@ -1297,6 +1297,13 @@ LaTeX Font Info:    Font shape `TU/lmss/m/it' in size <10.95> not available
 
 ]
 chapter 4.
+
+Underfull \hbox (badness 10000) in paragraph at lines 551--558
+[]\TU/lmss/m/n/10 Os testes \TU/lmss/bx/sl/10 cmds_valid.sh \TU/lmss/m/n/10 e \
+TU/lmss/bx/sl/10 cmds_invalid.sh \TU/lmss/m/n/10 utilizam os ficheiros \TU/lmss
+/bx/sl/10 cmds_valid.txt \TU/lmss/m/n/10 e
+ []
+
 [9
 
 

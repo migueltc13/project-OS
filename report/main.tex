@@ -528,6 +528,51 @@ Note: The estimated time or priority is irrelevant if the scheduling policy is F
 
 \begin{minipage}{\textwidth}
 \chapter{Testes Desenvolvidos}
+    A testagem do serviço é fundamental para garantir o seu correto funcionamento.
+
+    \vspace{1em}
+
+    Para agilizar este processo, para além da testagem manual,
+    foram desenvolvidos os seguintes testes automáticos:
+
+    \begin{itemize}
+        \item \textbf{\textit{task\_output\_and\_error.sh}} - Testa a escrita correta dos ficheiros
+            de \textit{output}, de erros e do ficheiro de tempo total;
+        \item \textbf{\textit{overload.sh}} - Testa o servidor de forma a superar a sua capacidade máxima;
+        \item \textbf{\textit{policies.sh}} - Testa as três políticas de escalonamento implementadas;
+        \item \textbf{\textit{cmds\_valid.sh}} - Testa a execução de comandos válidos, tanto únicos como
+            em \textit{pipe}, em modo \textit{batch};
+        \item \textbf{\textit{cmds\_invalid.sh}} - Testa a execução de comandos inválidos, tanto únicos
+            como em \textit{pipe}, em modo \textit{batch};
+    \end{itemize}
+
+    \vspace{1em}
+
+    Os testes \textbf{\textit{cmds\_valid.sh}} e \textbf{\textit{cmds\_invalid.sh}} utilizam os ficheiros
+    \textbf{\textit{cmds\_valid.txt}} e \textbf{\textit{cmds\_invalid.txt}}, respetivamente, para a definição
+    dos comandos a executar, estes são importantes no processo de testagem,
+    pois comparam o comportamento da execução de comandos pelo servidor
+    com o comportamento nativo da \textit{shell}, e estes permitiram à equipa de trabalho
+    garantir a correta execução destes comandos e a sua similaridade com o comportamento
+    nativo da \textit{shell}.
+
+    \vspace{1em}
+
+    O teste \textbf{\textit{policies.sh}} e, também, o \textbf{\textit{overload.sh}} são testes que permitem
+    avaliar o comportamento do servidor com diferentes configurações de paralelização,
+    garantindo avaliar o funcionamento correto do paralelismo do servidor, assim como a implementação
+    correta e eficiência das políticas de escalonamento.
+
+    \vspace{1em}
+
+    Assim, concluímos o funcionamento correto do serviço após a execução deste conjunto de testes,
+    para diferentes configurações de paralelização do servidor, assim como para diferentes
+    usagens do cliente.
+
+    \vspace{1em}
+
+    Os \textit{scripts shell} de testagem estão localizados na diretoria \textbf{tests/}
+    na raiz do projeto.
 \end{minipage}
 
 %==========================================================================
@@ -589,7 +634,7 @@ Note: The estimated time or priority is irrelevant if the scheduling policy is F
 
     \quad Para uma versão mais interativa da documentação do código desenvolvido, por favor consulte o
     ficheiro \textbf{\textit{doc/html/index.html}} localizado na diretoria raiz do projeto com o seu
-    navegador de internet.
+    navegador de internet. TODO
 
     \addsec{
         \href{anexos/policies.pdf}{\small \textcolor{blue}{[II] Implementação das Políticas de Escalonamento}}
