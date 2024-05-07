@@ -2,6 +2,8 @@
 # Used to test the output contents of the orchestrator server
 # writes both to stdout and stderr, also calculates the elapsed
 # time in milliseconds
+#
+# Usage: bin/client execute 1005 -u "tests/task_output.sh"
 
 # Start time
 start=$(date +%s.%N)
