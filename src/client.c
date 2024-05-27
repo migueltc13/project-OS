@@ -64,8 +64,8 @@ int main(int argc, char **argv) {
     if (strcmp(argv[1], "execute") == 0) {
         if (argc < 5) {
             client_usage(argv[0]);
-            free(client_fifo);
             (void) unlink(client_fifo);
+            free(client_fifo);
             return 0;
         }
 
@@ -73,8 +73,8 @@ int main(int argc, char **argv) {
         int time = atoi(argv[2]);
         if (time < 0) {
             client_usage(argv[0]);
-            free(client_fifo);
             (void) unlink(client_fifo);
+            free(client_fifo);
             return 0;
         }
 
@@ -88,8 +88,8 @@ int main(int argc, char **argv) {
         }
         else {
             client_usage(argv[0]);
-            free(client_fifo);
             (void) unlink(client_fifo);
+            free(client_fifo);
             return 0;
         }
 
@@ -100,8 +100,8 @@ int main(int argc, char **argv) {
         Request *r = create_request(EXECUTE, time, command, is_pided, client_fifo);
         if (r == NULL) {
             perror("Error: couldn't create status request");
-            free(client_fifo);
             (void) unlink(client_fifo);
+            free(client_fifo);
             return 1;
         }
 
@@ -110,8 +110,8 @@ int main(int argc, char **argv) {
         if (fd == -1) {
             perror("Error: couldn't open server FIFO");
             free(r);
-            free(client_fifo);
             (void) unlink(client_fifo);
+            free(client_fifo);
             return 1;
         }
 
@@ -119,8 +119,8 @@ int main(int argc, char **argv) {
             perror("Error: couldn't write to server FIFO");
             (void) close(fd);
             free(r);
-            free(client_fifo);
             (void) unlink(client_fifo);
+            free(client_fifo);
             return 1;
         }
 
@@ -131,8 +131,8 @@ int main(int argc, char **argv) {
         if (fd_client == -1) {
             perror("Error: couldn't open client FIFO");
             free(r);
-            free(client_fifo);
             (void) unlink(client_fifo);
+            free(client_fifo);
             return 1;
         }
 
@@ -145,8 +145,8 @@ int main(int argc, char **argv) {
                 perror("Error: couldn't write to stdout");
                 (void) close(fd_client);
                 free(r);
-                free(client_fifo);
                 (void) unlink(client_fifo);
+                free(client_fifo);
                 return 1;
             }
         }
@@ -160,8 +160,8 @@ int main(int argc, char **argv) {
     else if (strcmp(argv[1], "status") == 0) {
         if (argc != 2) {
             client_usage(argv[0]);
-            free(client_fifo);
             (void) unlink(client_fifo);
+            free(client_fifo);
             return 0;
         }
 
@@ -169,8 +169,8 @@ int main(int argc, char **argv) {
         Request *r = create_request(STATUS, 0, "", false, client_fifo);
         if (r == NULL) {
             perror("Error: couldn't create status request");
-            free(client_fifo);
             (void) unlink(client_fifo);
+            free(client_fifo);
             return 1;
         }
 
@@ -182,8 +182,8 @@ int main(int argc, char **argv) {
         if (fd_server == -1) {
             perror("Error: couldn't open server FIFO");
             free(r);
-            free(client_fifo);
             (void) unlink(client_fifo);
+            free(client_fifo);
             return 1;
         }
 
@@ -191,8 +191,8 @@ int main(int argc, char **argv) {
             perror("Error: couldn't write to server FIFO");
             (void) close(fd_server);
             free(r);
-            free(client_fifo);
             (void) unlink(client_fifo);
+            free(client_fifo);
             return 1;
         }
 
@@ -203,8 +203,8 @@ int main(int argc, char **argv) {
         if (fd_client == -1) {
             perror("Error: couldn't open client FIFO");
             free(r);
-            free(client_fifo);
             (void) unlink(client_fifo);
+            free(client_fifo);
             return 1;
         }
 
@@ -216,8 +216,8 @@ int main(int argc, char **argv) {
                 perror("Error: couldn't write to stdout");
                 (void) close(fd_client);
                 free(r);
-                free(client_fifo);
                 (void) unlink(client_fifo);
+                free(client_fifo);
                 return 1;
             }
         }
@@ -228,8 +228,8 @@ int main(int argc, char **argv) {
     else if (strcmp(argv[1], "kill") == 0) {
         if (argc != 2) {
             client_usage(argv[0]);
-            free(client_fifo);
             (void) unlink(client_fifo);
+            free(client_fifo);
             return 0;
         }
 
@@ -237,8 +237,8 @@ int main(int argc, char **argv) {
         Request *r = create_request(KILL, 0, "", false, "");
         if (r == NULL) {
             perror("Error: couldn't create kill request");
-            free(client_fifo);
             (void) unlink(client_fifo);
+            free(client_fifo);
             return 1;
         }
 
@@ -247,8 +247,8 @@ int main(int argc, char **argv) {
         if (fd == -1) {
             perror("Error: couldn't open server FIFO");
             free(r);
-            free(client_fifo);
             (void) unlink(client_fifo);
+            free(client_fifo);
             return 1;
         }
 
@@ -256,8 +256,8 @@ int main(int argc, char **argv) {
             perror("Error: couldn't write to server FIFO");
             (void) close(fd);
             free(r);
-            free(client_fifo);
             (void) unlink(client_fifo);
+            free(client_fifo);
             return 1;
         }
 
