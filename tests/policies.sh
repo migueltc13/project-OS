@@ -1,4 +1,4 @@
-#!/bin/sh
+#!/bin/bash
 
 if [ $# -ne 3 ]; then
     echo "Usage: $0 <output_dir> <parallel_tasks> <sched_policy>"
@@ -16,8 +16,8 @@ make clean > /dev/null 2>&1 && make > /dev/null 2>&1
 bin/orchestrator "$output_dir" "$tasks" "$sched_policy" &
 
 # Fill the execution queue
-for _ in $(seq 1 "$tasks"); do
-    cmd="echo fill | sleep 2"
+for i in $(seq 1 "$tasks"); do
+    cmd="echo fill | sleep $((2 + i))"
     bin/client execute 2000 -p "$cmd"
 done
 
@@ -25,7 +25,7 @@ done
 sleep_time=1
 for _ in $(seq 1 "$tasks"); do
     # random sleep time between 1 and 4 seconds
-    random=$((1 + RANDOM % 4))
+    random=$((2 + RANDOM % 4))
     cmd="sleep $random"
     echo "Testing: bin/client execute $((random * 1000)) -u \"$cmd\""
     bin/client execute $((random * 1000)) -u "$cmd"
@@ -38,8 +38,8 @@ sleep "$sleep_time"
 # Get the status of the tasks
 bin/client status
 
-# Sleep for 1 second to allow the orchestrator to show the status
-sleep 1
+# Sleep for 2 second to allow the orchestrator to show the status
+sleep 2
 
 # Kill the orchestrator
 bin/client kill
