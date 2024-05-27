@@ -181,7 +181,7 @@ int exec(Request *r, char *output_dir, struct timeval start_time) {
         return -1;
     }
 
-    // open execution time file
+    // open total time file
     int time_file_size = strlen(task_dir) + strlen(TIME_NAME) + 2; // +2 for '/' and '\0'
     char *time_file = malloc(time_file_size);
     if (time_file == NULL) {
