@@ -4,7 +4,7 @@ A task orchestrator service implemented in C within Operating Systems environmen
 
 - [Description and Requirements](project.pdf)
 - [Report](report/report.pdf)
-- [Documentation](docs/html/index.html) **TODO display link instead**
+- [Documentation](https://migueltc13.github.io/project-OS/)
 
 ## Description
 
