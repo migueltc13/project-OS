@@ -130,5 +130,11 @@ Run then from the project root directory, so the scripts can find the client exe
 
 ## Authors
 
-- Flávia Araújo - [@flaviaraujo](https://github.com/flaviaraujo)
-- Miguel Carvalho - [@migueltc13](https://github.com/migueltc13)
+This **Task Orchestrator Service** was developed by the following team of students:
+
+- [Flávia Araújo](https://github.com/flaviaraujo)
+- [Miguel Carvalho](https://github.com/migueltc13)
+
+![Contributors](https://contrib.rocks/image?repo=migueltc13/project-OS)
+
+#### Final Grade: 18
